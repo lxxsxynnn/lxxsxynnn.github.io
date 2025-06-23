@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>부트캠프 on Soyeon&#39;s Dev Log</title>
+        <link>http://localhost:1313/tags/%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/</link>
+        <description>Recent content in 부트캠프 on Soyeon&#39;s Dev Log</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>ko</language>
+        <lastBuildDate>Mon, 23 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>1주차 회고</title>
+        <link>http://localhost:1313/posts/week1-retrospective/</link>
+        <pubDate>Mon, 23 Jun 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/week1-retrospective/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;img src=&#34;http://localhost:1313/images/IMG_5618.jpeg&#34; alt=&#34;alt text&#34; style=&#34;width:50%;&#34; /&gt;
+&lt;h2 id=&#34;이번-주-키워드&#34;&gt;이번 주 키워드
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;변수&lt;/strong&gt;, &lt;strong&gt;설계&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;변수란&#34;&gt;변수란?
+&lt;/h3&gt;&lt;p&gt;자바에서 변수는 &lt;strong&gt;타입 + 이름&lt;/strong&gt;으로 구성&lt;br&gt;
+이 변수를 통해 &lt;strong&gt;쓰기(= 연산자)&lt;/strong&gt;, &lt;strong&gt;읽기(변수명)&lt;/strong&gt; 등의 작업을 수행 가능&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;변수를 사용하는 이유?&lt;/strong&gt;&lt;br&gt;
+→ &lt;strong&gt;컴파일러가 코드를 분석하고 오류를 사전에 잡을 수 있도록 하기 위해서&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;컴파일러는 다음과 같은 작업을 수행:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;문법 체크&lt;/li&gt;
+&lt;li&gt;최적화&lt;/li&gt;
+&lt;li&gt;번역 (&lt;code&gt;.java&lt;/code&gt; → &lt;code&gt;.class&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;📌 즉, &lt;strong&gt;코드가 완벽하지 않아도&lt;/strong&gt; 컴파일러가 이를 어느 정도 보완해줌&lt;/p&gt;&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;변수의-종류&#34;&gt;변수의 종류
+&lt;/h3&gt;&lt;p&gt;자바의 변수는 크게 두 가지:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;기본형(primitive)&lt;/strong&gt;: 하나의 요소&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;참조형(reference)&lt;/strong&gt;: 여러 개의 요소(집합)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;참조형은 0~n개의 요소를 담는 &lt;strong&gt;집합&lt;/strong&gt;이며,&lt;br&gt;
+이 집합을 만들기 위해서는 기준을 가지고 그룹화를 수행&lt;br&gt;
+➡️ 이것이 바로 &lt;strong&gt;설계&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;설계란&#34;&gt;설계란?
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;관련 있는 것끼리 하나의 집합으로 묶고 집합들 간의 관계를 정의&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;설계를 하면 좋은 점:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;복잡도가 낮아지고&lt;/li&gt;
+&lt;li&gt;관리가 쉬워지며&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;더 복잡한 프로그램을 구현할 수 있게 됨&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;연산&#34;&gt;연산
+&lt;/h3&gt;&lt;p&gt;연산이란 &lt;strong&gt;데이터를 계산하는 것&lt;/strong&gt;입니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;같은 타입끼리만 연산 가능&lt;/li&gt;
+&lt;li&gt;반드시 &lt;strong&gt;결과를 반환&lt;/strong&gt;해야 함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;연산자에서 중요한 3요소:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;우선순위&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;결합법칙&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;산술 변환&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;둘 중 큰 타입으로 자동 변환&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;int&lt;/code&gt;보다 작은 타입끼리 연산 시 → &lt;strong&gt;&lt;code&gt;int&lt;/code&gt;로 변환 후 연산&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;연습문제-정리&#34;&gt;연습문제 정리
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;long&lt;/code&gt;형 변수에 정수값 저장 시 &lt;code&gt;L&lt;/code&gt;을 붙이지 않으면 기본적으로 &lt;code&gt;int&lt;/code&gt;로 인식&lt;br&gt;
+→ &lt;code&gt;int&lt;/code&gt; 범위 초과 시 컴파일 에러 발생&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;&#39;+&#39;&lt;/code&gt; 연산자는&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;둘 다 숫자 → &lt;strong&gt;덧셈&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;하나라도 String → &lt;strong&gt;문자열 이어붙이기&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;char + char&lt;/code&gt; / &lt;code&gt;char + 숫자&lt;/code&gt; → &lt;strong&gt;int 반환&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;단, &lt;code&gt;++&lt;/code&gt;, &lt;code&gt;--&lt;/code&gt; 같은 증감 연산자는 &lt;strong&gt;형변환 없이&lt;/strong&gt; &lt;code&gt;char&lt;/code&gt;로 반환&lt;/p&gt;&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;자바는 C처럼 &lt;code&gt;0 = false&lt;/code&gt;, &lt;code&gt;1 = true&lt;/code&gt;를 인정하지 않음&lt;br&gt;
+→ &lt;code&gt;boolean&lt;/code&gt;에는 반드시 &lt;strong&gt;&lt;code&gt;true&lt;/code&gt; / &lt;code&gt;false&lt;/code&gt;&lt;/strong&gt; 를 사용해야 함&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;char&lt;/code&gt;는 요소형 → 반드시 문자를 지정해야 함&lt;br&gt;
+→ &lt;code&gt;&#39; &#39;&lt;/code&gt; (공백만 있는 문자) 사용 불가&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;자바에서의-var&#34;&gt;자바에서의 &lt;code&gt;var&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;Java 10부터 도입된 문법으로, &lt;strong&gt;로컬 변수의 타입을 컴파일러가 자동 추론&lt;/strong&gt;&lt;br&gt;
+(컴파일 타임에 정적으로 결정, 런타임에 동적으로 바뀌지 않음)&lt;br&gt;
+적절한 상황에 사용하면 &lt;strong&gt;코드의 가독성과 간결성&lt;/strong&gt;이 좋아짐&lt;/p&gt;
+&lt;h4 id=&#34;1-타입이-너무-길어서-코드가-지저분할-때&#34;&gt;1. 타입이 너무 길어서 코드가 지저분할 때
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// before&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Map&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;String, List&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Integer&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; map &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; HashMap&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;gt;&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// after&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; map &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; HashMap&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;String, List&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Integer&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;2-우측-표현식으로-타입이-분명히-드러날-때&#34;&gt;2. 우측 표현식으로 타입이 분명히 드러날 때
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; name &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Soyeon&amp;#34;&lt;/span&gt;;      &lt;span style=&#34;color:#75715e&#34;&gt;// String&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; count &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 123;          &lt;span style=&#34;color:#75715e&#34;&gt;// int&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; list &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; List.&lt;span style=&#34;color:#a6e22e&#34;&gt;of&lt;/span&gt;(1, 2); &lt;span style=&#34;color:#75715e&#34;&gt;// List&amp;lt;Integer&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;3-for-each-루프에서-반복-변수&#34;&gt;3. for-each 루프에서 반복 변수
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; item : items) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    System.&lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;println&lt;/span&gt;(item);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;📌 주의:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;var는 명시적인 타입 지정이 아닌 추론이기 때문에, 복잡한 표현식에서는 오히려 가독성을 해칠 수 있음&lt;/li&gt;
+&lt;li&gt;클래스 필드, 메서드 매개변수, 리턴 타입에는 사용할 수 없음 (오직 로컬 변수에만 사용 가능)&lt;/li&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;→ 사람이 읽을 수 있을 만큼만 추론을 맡기고 그렇지 않으면 명시적으로 타입을 작성하자!&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;마무리&#34;&gt;마무리
+&lt;/h2&gt;&lt;p&gt;java 기초 부분은 어느 정도 안다고 생각했는데 연습문제를 풀어보니&lt;br&gt;
+컴파일러가 있어서 아무 생각 없이 코드를 작성하던 부분이 많았다는 것을 느꼈다.&lt;br&gt;
+예습 복습을 하면서 기초를 탄탄히 다져야겠다!&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

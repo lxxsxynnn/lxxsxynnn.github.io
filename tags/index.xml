@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Tags on Soyeon&#39;s Dev Log</title>
+        <link>http://localhost:1313/tags/</link>
+        <description>Recent content in Tags on Soyeon&#39;s Dev Log</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>ko</language>
+        <lastBuildDate>Mon, 23 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>부트캠프</title>
+        <link>http://localhost:1313/tags/%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/</link>
+        <pubDate>Mon, 23 Jun 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/tags/%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>패스트캠퍼스</title>
+        <link>http://localhost:1313/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4/</link>
+        <pubDate>Mon, 23 Jun 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>패스트캠퍼스데브캠프</title>
+        <link>http://localhost:1313/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4%EB%8D%B0%EB%B8%8C%EC%BA%A0%ED%94%84/</link>
+        <pubDate>Mon, 23 Jun 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4%EB%8D%B0%EB%B8%8C%EC%BA%A0%ED%94%84/</guid>
+        <description></description>
+        </item>
+        
+    </channel>
+</rss>
