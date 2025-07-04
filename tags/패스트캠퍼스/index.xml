@@ -6,7 +6,232 @@
         <description>Recent content in 패스트캠퍼스 on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Fri, 27 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 04 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 3주차</title>
+        <link>http://localhost:1313/posts/week3-retrospective/</link>
+        <pubDate>Fri, 04 Jul 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/week3-retrospective/</guid>
+        <description>&lt;h1 id=&#34;이번-주-키워드&#34;&gt;이번 주 키워드
+&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;예외 처리&lt;/strong&gt;, java.lang 패키지, 유용한 자바 클래스&lt;/p&gt;
+&lt;h2 id=&#34;프로그램-오류와-예외&#34;&gt;프로그램 오류와 예외
+&lt;/h2&gt;&lt;h3 id=&#34;프로그램-오류란&#34;&gt;프로그램 오류란?
+&lt;/h3&gt;&lt;p&gt;프로그램 실행 중 오작동을 하거나 비정상적으로 종료되게 하는 원인
+발생 시점에 따라 아래와 같이 구분됨&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;컴파일 에러&lt;/strong&gt;: 코드 작성 중 컴파일러가 잡아내는 문법 오류&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;런타임 에러&lt;/strong&gt;: 실행 중 발생하는 오류 (예: 0으로 나누기, 배열 인덱스 초과)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;논리적 에러&lt;/strong&gt;: 실행은 되지만, 의도와 다르게 동작하는 오류&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;에러와-예외&#34;&gt;에러와 예외
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;에러(Error)&lt;/strong&gt;: 프로그램 코드로 수습할 수 없는 심각한 오류 (예: OutOfMemoryError)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;예외(Exception)&lt;/strong&gt;: 코드로 수습 가능한 비교적 덜 심각한 오류&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;실행 중 발생하는 에러와 예외는 모두 &lt;code&gt;Throwable&lt;/code&gt;의 하위 클래스&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Throwable
+ ├─ Error         // 시스템 오류, 복구 불가
+ └─ Exception     // 예외 상황, 복구 가능
+      ├─ RuntimeException (개발자 실수)
+      └─ 기타 Exception (사용자 실수 등)
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;예외-처리&#34;&gt;예외 처리
+&lt;/h2&gt;&lt;h3 id=&#34;예외-처리란&#34;&gt;예외 처리란?
+&lt;/h3&gt;&lt;p&gt;프로그램 실행 중 발생할 수 있는 예기치 못한 예외에 대비한 코드를 작성하는 것
+예외 발생으로 인한 프로그램의 갑작스런 종료를 막고 &lt;strong&gt;정상적인 실행 상태&lt;/strong&gt;를 유지하기 위함&lt;/p&gt;
+&lt;p&gt;예외 처리의 기본은 &lt;strong&gt;로깅&lt;/strong&gt;
+(에러가 발생했을 때 상태와 원인을 기록하여 추후 원인 분석 및 유지보수에 활용)&lt;/p&gt;
+&lt;h3 id=&#34;예외-처리-방법&#34;&gt;예외 처리 방법
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;try-catch&lt;/strong&gt;: 직접 예외를 처리&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;throws&lt;/strong&gt;: 예외를 호출자에게 전달&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;예외 은폐&lt;/strong&gt;: 예외를 일부러 무시(권장하지 않음)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;예외 되던지기(rethrow)&lt;/strong&gt;: catch에서 예외를 다시 던짐&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;try-catch-기본-구조&#34;&gt;try-catch 기본 구조
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// 예외가 발생할 수 있는 코드&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;} &lt;span style=&#34;color:#66d9ef&#34;&gt;catch&lt;/span&gt; (ExceptionType e) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// 예외 처리 코드&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;} &lt;span style=&#34;color:#66d9ef&#34;&gt;finally&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// 항상 실행되는 코드 (리소스 반환 등)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;예시&#34;&gt;예시
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Example&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;(String&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; args) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; number &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 100;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 0;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 0; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; 10; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; number &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;)(Math.&lt;span style=&#34;color:#a6e22e&#34;&gt;random&lt;/span&gt;() &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; 10);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                System.&lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;println&lt;/span&gt;(result);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            } &lt;span style=&#34;color:#66d9ef&#34;&gt;catch&lt;/span&gt; (ArithmeticException e) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                System.&lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;multi-catch-java-7&#34;&gt;multi-catch (Java 7+)
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// ...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;} &lt;span style=&#34;color:#66d9ef&#34;&gt;catch&lt;/span&gt; (IOException &lt;span style=&#34;color:#f92672&#34;&gt;|&lt;/span&gt; SQLException e) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    e.&lt;span style=&#34;color:#a6e22e&#34;&gt;printStackTrace&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;조상-자손 관계 예외는 묶을 수 없음&lt;/li&gt;
+&lt;li&gt;멀티 catch 블록 내에서는 공통 조상 타입의 멤버만 사용 가능&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;예외-발생시키기-throw&#34;&gt;예외 발생시키기 (&lt;code&gt;throw&lt;/code&gt;)
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;throw&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; Exception(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;강제 예외 발생&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;예외의-종류&#34;&gt;예외의 종류
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Checked Exception&lt;/strong&gt;: 컴파일러가 예외 처리를 강제 (예: IOException)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Unchecked Exception&lt;/strong&gt;: RuntimeException 및 그 자손, 컴파일러가 체크하지 않음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;메서드에서-예외-선언-throws&#34;&gt;메서드에서 예외 선언 (&lt;code&gt;throws&lt;/code&gt;)
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;readFile&lt;/span&gt;() &lt;span style=&#34;color:#66d9ef&#34;&gt;throws&lt;/span&gt; IOException {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// 파일 읽기 코드&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;finally-블록&#34;&gt;finally 블록
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;예외 발생 여부와 관계없이 항상 실행&lt;/li&gt;
+&lt;li&gt;주로 리소스 반환, 파일 닫기 등에 사용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;try-with-resources-java-7&#34;&gt;try-with-resources (Java 7+)
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt; (BufferedReader br &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; BufferedReader(&lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; FileReader(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;file.txt&amp;#34;&lt;/span&gt;))) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// 파일 읽기&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;} &lt;span style=&#34;color:#66d9ef&#34;&gt;catch&lt;/span&gt;(IOException e) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    e.&lt;span style=&#34;color:#a6e22e&#34;&gt;printStackTrace&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;AutoCloseable 구현 객체는 자동으로 close() 호출&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;예외-되던지기rethrow&#34;&gt;예외 되던지기(rethrow)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;catch 블록에서 예외를 다시 던져 호출자에게 전달&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;사용자-정의-예외&#34;&gt;사용자 정의 예외
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;Exception을 상속받아 직접 정의 가능&lt;/li&gt;
+&lt;li&gt;기존 예외로 충분하다면 가급적 표준 예외 사용 권장&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;예외-연결-chained-exception&#34;&gt;예외 연결 (Chained Exception)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;예외를 더 큰 단위로 묶어 처리 가능&lt;/li&gt;
+&lt;li&gt;catch 블록을 단순화할 수 있음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;javalang-패키지-주요-클래스&#34;&gt;java.lang 패키지 주요 클래스
+&lt;/h2&gt;&lt;h3 id=&#34;object-클래스&#34;&gt;Object 클래스
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;모든 자바 클래스의 최상위 조상&lt;/li&gt;
+&lt;li&gt;주요 메서드:
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;equals(Object obj)&lt;/code&gt;: 객체 내용 비교 (오버라이딩 가능)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hashCode()&lt;/code&gt;: 해시코드 반환, 컬렉션에서 사용&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;clone()&lt;/code&gt;: 객체 복제 (Cloneable 구현 필요)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;getClass()&lt;/code&gt;: 클래스 정보 반환&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;string-클래스&#34;&gt;String 클래스
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Immutable&lt;/strong&gt;: 한 번 생성되면 변경 불가&lt;/li&gt;
+&lt;li&gt;문자열 리터럴은 상수 풀에서 관리되어 같은 문자열은 같은 객체 참조&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;주요-메서드특징&#34;&gt;주요 메서드/특징
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;trim()&lt;/code&gt;: 아스키 공백만 제거&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;strip()&lt;/code&gt;: 유니코드 공백도 제거&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;join()&lt;/code&gt;, &lt;code&gt;StringJoiner&lt;/code&gt;: 구분자를 넣어 문자열 결합&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;getBytes(String charsetName)&lt;/code&gt;: 인코딩 변환&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;format()&lt;/code&gt;, &lt;code&gt;formatted()&lt;/code&gt;: 형식화된 문자열 생성&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;valueOf()&lt;/code&gt;: 기본형 → String 변환&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;parse자료형()&lt;/code&gt;: String → 기본형 변환&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;stringbuffer와-stringbuilder&#34;&gt;StringBuffer와 StringBuilder
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;StringBuffer&lt;/strong&gt;: 스레드 안전, 동기화 지원&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;StringBuilder&lt;/strong&gt;: 동기화 미지원, 더 빠름&lt;/li&gt;
+&lt;li&gt;equals() 오버라이딩 X → 내용 비교시 String으로 변환 후 비교&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;math-클래스&#34;&gt;Math 클래스
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;산술 연산 보조 메서드 제공 (&lt;code&gt;addExact&lt;/code&gt;, &lt;code&gt;subtractExact&lt;/code&gt; 등)&lt;/li&gt;
+&lt;li&gt;오버플로우 체크 가능&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;StrictMath&lt;/strong&gt;: 플랫폼에 상관없이 일관된 결과 보장&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;래퍼wrapper-클래스&#34;&gt;래퍼(Wrapper) 클래스
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;기본형 값을 객체로 다룰 때 사용 (&lt;code&gt;Integer&lt;/code&gt;, &lt;code&gt;Double&lt;/code&gt;, &lt;code&gt;Boolean&lt;/code&gt; 등)&lt;/li&gt;
+&lt;li&gt;오토박싱/언박싱 지원&lt;/li&gt;
+&lt;li&gt;-128~127 범위는 캐시로 재사용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;javautil-주요-클래스&#34;&gt;java.util 주요 클래스
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;클래스&lt;/th&gt;
+          &lt;th&gt;용도&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;Objects&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;null 체크, 객체 비교 등 유틸리티 메서드 제공&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;Random&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;난수 생성, seed 지정 가능&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;regex&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;정규 표현식 지원, 텍스트 검색 및 치환&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;Scanner&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;콘솔/파일 입력을 편리하게 받을 때 사용&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;StringTokenizer&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;문자열을 여러 구분자로 토큰화 (split과 차이)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;BigInteger&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;매우 큰 정수 연산 지원&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;BigDecimal&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;고정소수점 연산, 금융 계산 등 정밀한 소수점 연산에 사용&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;날짜와-시간&#34;&gt;날짜와 시간
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Java 8 이전&lt;/strong&gt;: &lt;code&gt;Date&lt;/code&gt;, &lt;code&gt;Calendar&lt;/code&gt; 클래스 사용 (불변 객체 아님, 복잡함)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Java 8 이후&lt;/strong&gt;: &lt;code&gt;java.time&lt;/code&gt; 패키지 도입
+&lt;ul&gt;
+&lt;li&gt;불변 객체, 명확한 API 제공&lt;/li&gt;
+&lt;li&gt;날짜, 시간, 기간, 포맷팅, 파싱 등 다양한 기능 지원&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;날짜시간-계산의-기본&#34;&gt;날짜/시간 계산의 기본
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;시분초 → 초로 변환, 계산 후 다시 시분초로 변환&lt;/li&gt;
+&lt;li&gt;년월일 → 일로 변환, 계산 후 다시 년월일로 변환&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;마무리&#34;&gt;마무리
+&lt;/h2&gt;&lt;p&gt;이번 주에는 자바의 예외 처리와 java.lang, java.util 패키지의 주요 클래스를 집중적으로 학습했다.&lt;/p&gt;
+&lt;p&gt;프로젝트를 진행할 때마다 시간에 쫓겨 예외 처리나 테스트 코드 작성에 소홀했던 경험이 많았는데,
+실무에서는 로깅과 예외 처리, 그리고 테스트 코드의 중요성을 다시 한 번 깨달았다.&lt;/p&gt;
+&lt;p&gt;실제로 전 직장에서 개발팀에 로그를 요청해 업무에 활용한 경험이 있었고,
+이 과정에서 로그가 안정적이고 유지보수하기 쉬운 코드를 작성하는 데 큰 도움이 될 뿐만 아니라,
+서비스 운영 중 발생하는 문제를 신속하게 해결하는 데도 매우 유용하다는 점을 체감했다.
+이러한 경험을 바탕으로 앞으로는 기능 구현뿐만 아니라 예외 처리와 테스트 코드 작성에도 더욱 신경 써야겠다고 다짐했다.&lt;/p&gt;
+&lt;p&gt;앞으로는 꼼꼼하게 예외 처리와 테스트 코드를 챙기는 습관을 들여
+더 신뢰받는 개발자가 되고자 한다.&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>[커널아카데미] 백엔드 개발 부트캠프 13기 2주차</title>
         <link>http://localhost:1313/posts/week2-retrospective/</link>
         <pubDate>Fri, 27 Jun 2025 00:00:00 +0000</pubDate>
