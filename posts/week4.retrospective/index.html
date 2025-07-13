@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 이번 주 키워드 컬렉션 프레임워크 모던 자바 기능 쓰레드 1. 컬렉션 프레임워크 컬렉션: 여러 객체(데이터)를 모아 놓은 것\n프레임워크: 표준화, 정형화된 체계적인 프로그래밍 방식\n핵심 인터페이스\nList: 순서 O, 중복 O Set: 순서 X, 중복 X Map: key-value 구조, 순서 X, 키 중복 X, 값 중복 O List 중복 허용, 저장 순서 유지 주요 메서드: get(int index), remove(int index), set(int index, Object obj) ArrayList\n저장 순서 유지, 중복 허용 remove 시 요소 이동 및 size 감소 장점: 데이터 읽기 속도 빠름(O(1)), 구조 간단 단점: 크기 변경 불가, 비순차적 추가/삭제 느림 LinkedList\n">
+<title>[커널아카데미] 백엔드 개발 부트캠프 13기 3주차</title>
+
+<link rel='canonical' href='http://localhost:1313/posts/week4.retrospective/'>
+
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="[커널아카데미] 백엔드 개발 부트캠프 13기 3주차">
+<meta property='og:description' content=" 이번 주 키워드 컬렉션 프레임워크 모던 자바 기능 쓰레드 1. 컬렉션 프레임워크 컬렉션: 여러 객체(데이터)를 모아 놓은 것\n프레임워크: 표준화, 정형화된 체계적인 프로그래밍 방식\n핵심 인터페이스\nList: 순서 O, 중복 O Set: 순서 X, 중복 X Map: key-value 구조, 순서 X, 키 중복 X, 값 중복 O List 중복 허용, 저장 순서 유지 주요 메서드: get(int index), remove(int index), set(int index, Object obj) ArrayList\n저장 순서 유지, 중복 허용 remove 시 요소 이동 및 size 감소 장점: 데이터 읽기 속도 빠름(O(1)), 구조 간단 단점: 크기 변경 불가, 비순차적 추가/삭제 느림 LinkedList\n">
+<meta property='og:url' content='http://localhost:1313/posts/week4.retrospective/'>
+<meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='패스트캠퍼스' /><meta property='article:tag' content='커널아카데미' /><meta property='article:tag' content='백엔드개발부트캠프' /><meta property='article:tag' content='국비지원교육' /><meta property='article:tag' content='내일배움카드' /><meta property='article:tag' content='KDT' /><meta property='article:published_time' content='2025-07-11T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-07-11T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="[커널아카데미] 백엔드 개발 부트캠프 13기 3주차">
+<meta name="twitter:description" content=" 이번 주 키워드 컬렉션 프레임워크 모던 자바 기능 쓰레드 1. 컬렉션 프레임워크 컬렉션: 여러 객체(데이터)를 모아 놓은 것\n프레임워크: 표준화, 정형화된 체계적인 프로그래밍 방식\n핵심 인터페이스\nList: 순서 O, 중복 O Set: 순서 X, 중복 X Map: key-value 구조, 순서 X, 키 중복 X, 값 중복 O List 중복 허용, 저장 순서 유지 주요 메서드: get(int index), remove(int index), set(int index, Object obj) ArrayList\n저장 순서 유지, 중복 허용 remove 시 요소 이동 및 size 감소 장점: 데이터 읽기 속도 빠름(O(1)), 구조 간단 단점: 크기 변경 불가, 비순차적 추가/삭제 느림 LinkedList\n"><link rel="alternate" type="application/json" href="http://localhost:1313/posts/week4.retrospective/index.json">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/../assets/avatar_hu_6c8b5d6cd0da96b6.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Soyeon&#39;s Dev Log</a></h1>
+            <h2 class="site-description">백엔드 개발자 지망생의 기록</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>다크 모드</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%EA%B3%B5%EB%B6%80/" >
+                공부
+            </a>
+        
+            <a href="/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/" >
+                주간회고
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/week4.retrospective/">[커널아카데미] 백엔드 개발 부트캠프 13기 3주차</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-07-11</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <div style="margin: 0 40px;">
+<h1 id="이번-주-키워드">이번 주 키워드
+</h1><ul>
+<li>컬렉션 프레임워크</li>
+<li>모던 자바 기능</li>
+<li>쓰레드</li>
+</ul>
+<hr>
+<h2 id="1-컬렉션-프레임워크">1. 컬렉션 프레임워크
+</h2><p>컬렉션: 여러 객체(데이터)를 모아 놓은 것<br>
+프레임워크: 표준화, 정형화된 체계적인 프로그래밍 방식</p>
+<p><strong>핵심 인터페이스</strong></p>
+<ul>
+<li><strong>List</strong>: 순서 O, 중복 O</li>
+<li><strong>Set</strong>: 순서 X, 중복 X</li>
+<li><strong>Map</strong>: key-value 구조, 순서 X, 키 중복 X, 값 중복 O</li>
+</ul>
+<h3 id="list">List
+</h3><ul>
+<li>중복 허용, 저장 순서 유지</li>
+<li>주요 메서드: <code>get(int index)</code>, <code>remove(int index)</code>, <code>set(int index, Object obj)</code></li>
+</ul>
+<p><strong>ArrayList</strong></p>
+<ul>
+<li>저장 순서 유지, 중복 허용</li>
+<li>remove 시 요소 이동 및 size 감소</li>
+<li><strong>장점</strong>: 데이터 읽기 속도 빠름(O(1)), 구조 간단</li>
+<li><strong>단점</strong>: 크기 변경 불가, 비순차적 추가/삭제 느림</li>
+</ul>
+<p><strong>LinkedList</strong></p>
+<ul>
+<li>추가/삭제 빠름(연결만 변경)</li>
+<li>순서 O, 중복 허용, 조회는 O(n)</li>
+<li>단방향 → Double Linked List, Double Circular Linked List로 개선</li>
+</ul>
+<p><strong>결론</strong></p>
+<ul>
+<li>순차적 추가/삭제: ArrayList &gt; LinkedList</li>
+<li>중간 데이터 추가/삭제: ArrayList LinkedList</li>
+</ul>
+<p><strong>Stack &amp; Queue</strong></p>
+<ul>
+<li><strong>Stack</strong>: LIFO, 배열 적합, 객체 생성 가능</li>
+<li><strong>Queue</strong>: FIFO, LinkedList 적합, 구현체 필요</li>
+</ul>
+<p><strong>PriorityQueue</strong></p>
+<ul>
+<li>우선순위 높은 요소부터 꺼냄</li>
+<li>null 저장 불가, 내부적으로 힙 구조 사용</li>
+</ul>
+<p><strong>Deque</strong></p>
+<ul>
+<li>양쪽 끝에 추가/삭제 가능</li>
+<li>구현체: ArrayDeque, LinkedList 등</li>
+</ul>
+<h2 id="컬렉션-요소-접근">컬렉션 요소 접근
+</h2><p><strong>Iterator &amp; Iterable</strong></p>
+<ul>
+<li>
+<p><strong>Iterator</strong>: 컬렉션 요소를 하나씩 접근</p>
+</li>
+<li>
+<p><strong>Iterable</strong>: Iterator 반환 메서드 정의</p>
+</li>
+<li>
+<p>Map은 keySet(), entrySet() 등으로 Set 형태로 변환 후 iterator 사용</p>
+</li>
+<li>
+<p><strong>Enumeration</strong>: Iterator의 구버전</p>
+</li>
+<li>
+<p><strong>ListIterator</strong>: 양방향, List 구현체만 사용 가능</p>
+</li>
+</ul>
+<p><strong>Arrays 유틸리티</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>메서드</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>copyOf(), copyOfRange()</td>
+          <td>배열 복사</td>
+      </tr>
+      <tr>
+          <td>fill(), setAll()</td>
+          <td>배열 채우기</td>
+      </tr>
+      <tr>
+          <td>sort(), binarySearch()</td>
+          <td>배열 정렬/검색 (정렬 후 검색해야 정확)</td>
+      </tr>
+      <tr>
+          <td>toString(), equals(), compare(), mismatch()</td>
+          <td>배열 출력/비교/정렬/불일치 인덱스 반환</td>
+      </tr>
+      <tr>
+          <td>asList()</td>
+          <td>배열을 List로 변환</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>Comparator &amp; Comparable</strong></p>
+<ul>
+<li><strong>Comparable</strong>: 기본 정렬 기준(오름차순)
+<pre tabindex="0"><code>public interface Comparable {
+    int compareTo(T o);
+}
+</code></pre></li>
+<li><strong>Comparator</strong>: 별도 정렬 기준 제공(내림차순 등)
+<pre tabindex="0"><code>public interface Comparator {
+    int compare(T o1, T o2);
+    boolean equals(Object obj);
+}
+</code></pre></li>
+</ul>
+<h3 id="set">Set
+</h3><p><strong>HashSet</strong></p>
+<ul>
+<li>중복 저장 불가, 저장 순서 없음</li>
+<li>필요시 LinkedHashSet 사용</li>
+<li>add() 시 hashCode(), equals()로 중복 판별</li>
+</ul>
+<p><strong>TreeSet</strong></p>
+<ul>
+<li>이진 탐색 트리 구조, 중복 불가, 순서 없음</li>
+<li>정렬/검색/범위검색에 성능 우수</li>
+<li>Comparable 구현 or Comparator 제공 필요</li>
+<li>In-Order 순회로 정렬 결과 얻음</li>
+</ul>
+<h3 id="map">Map
+</h3><p><strong>HashMap</strong></p>
+<p>(구버전: HashTable)</p>
+<ul>
+<li>Hashing 기법(배열+LinkedList 장점)</li>
+<li>저장 순서 없음(LinkedHashMap 필요시 사용)</li>
+<li>키는 유일, 값 중복 가능, null 허용</li>
+</ul>
+<p><strong>TreeMap</strong></p>
+<ul>
+<li>이진 검색 트리 구조, 검색/정렬에 적합</li>
+<li>범위검색/정렬 필요시 사용</li>
+</ul>
+<p><strong>Properties</strong></p>
+<ul>
+<li>String key-value 저장, Hashtable 상속</li>
+<li>저장 순서 없음, Enumeration 사용</li>
+<li>환경설정 파일 등에서 사용, 파일 입출력 지원</li>
+</ul>
+<h2 id="collections-클래스">Collections 클래스
+</h2><ul>
+<li><strong>동기화 컬렉션</strong>: <code>Collections.synchronizedXXX()</code></li>
+<li><strong>변경 불가 컬렉션</strong>: <code>Collections.unmodifiableXXX()</code></li>
+<li><strong>한 종류 객체만 저장</strong>: <code>Collections.checkedXXX()</code></li>
+<li><strong>싱글톤 컬렉션</strong>: <code>Collections.singletonXXX()</code></li>
+</ul>
+<hr>
+<h1 id="2-모던-자바-기능">2. 모던 자바 기능
+</h1><p><strong>제너릭스 (Generics)</strong></p>
+<ul>
+<li>다양한 타입의 객체를 다루는 메서드/컬렉션에서 컴파일 시 타입 체크</li>
+<li>타입 안정성, 형변환 생략 가능</li>
+</ul>
+<p><strong>선언 및 사용법</strong></p>
+<pre tabindex="0"><code>Box appleBox = new Box();
+Box fruitBox = new Box();
+</code></pre><ul>
+<li>static 멤버에는 타입 변수 사용 불가</li>
+<li>제너릭 배열 생성 불가(참조 변수 선언은 가능)</li>
+<li>JDK 7+에서는 생성자 타입 생략 가능: <code>new ArrayList&lt;&gt;()</code></li>
+</ul>
+<p><strong>제한된 제너릭</strong></p>
+<ul>
+<li><code>extends</code>: 특정 타입의 자손만 허용</li>
+<li>인터페이스도 extends, 다중 제한은 <code>&amp;</code>로 구분</li>
+</ul>
+<p><strong>와일드카드</strong></p>
+<ul>
+<li><code>&lt;? extends T&gt;</code>: 상한 제한(자손만 허용)</li>
+<li><code>&lt;? super T&gt;</code>: 하한 제한(조상만 허용)</li>
+<li><code>&lt;?&gt;</code>: 제한 없음, <code>&lt;? extends Object&gt;</code> 와 동일</li>
+</ul>
+<p><strong>제너릭 메서드</strong></p>
+<ul>
+<li>메서드의 선언부에 제너릭 타입이 선언된 메서드</li>
+<li>반환타입 바로 앞에 선언</li>
+<li>제너릭 클래스가 아닌 클래스에도 정의 가능</li>
+</ul>
+<p><strong>형변환과 타입 제거</strong></p>
+<ul>
+<li>제너릭 ↔ 원시타입: 형변환 가능(경고 발생)</li>
+<li>제너릭 타입 간 형변환 불가</li>
+<li>컴파일 시 타입 체크 후 제너릭 정보 제거(타입 소거)</li>
+</ul>
+<h2 id="열거형-enum">열거형 (Enum)
+</h2><ul>
+<li>관련 상수를 편리하게 선언, 값 비교(<code>==</code>)와 타입 체크 모두 가능</li>
+<li>객체 개수 제한(생성자 private)</li>
+</ul>
+<p><strong>선언 및 사용법</strong></p>
+<pre tabindex="0"><code>enum Direction { EAST, SOUTH, WEST, NORTH }
+</code></pre><ul>
+<li>비교: <code>==</code> 또는 <code>compareTo()</code></li>
+<li>JDK 21+: switch문 조건식에 사용, 모든 case 처리 필요</li>
+</ul>
+<p><strong>주요 메서드</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>메서드</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>getDeclaringClass()</td>
+          <td>열거형의 Class 객체 반환</td>
+      </tr>
+      <tr>
+          <td>name()</td>
+          <td>상수 이름 반환</td>
+      </tr>
+      <tr>
+          <td>ordinal()</td>
+          <td>정의 순서(0부터) 반환</td>
+      </tr>
+      <tr>
+          <td>valueOf(Class, String)</td>
+          <td>이름으로 상수 반환</td>
+      </tr>
+      <tr>
+          <td>values()</td>
+          <td>모든 상수 배열 반환</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>멤버 추가</strong></p>
+<pre tabindex="0"><code>enum Direction {
+    EAST(1), SOUTH(5), WEST(-1), NORTH(10);
+    private final int value;
+    Direction(int value) { this.value = value; }
+    public int getValue() { return value; }
+}
+</code></pre><h2 id="애너테이션-annotation">애너테이션 (Annotation)
+</h2><ul>
+<li>프로그램에 메타데이터(부가 정보) 제공</li>
+</ul>
+<p><strong>표준 애너테이션</strong></p>
+<ul>
+<li><code>@Override</code>, <code>@SuppressWarnings</code>, <code>@FunctionalInterface</code></li>
+</ul>
+<p><strong>메타 애너테이션</strong></p>
+<ul>
+<li><code>@Target</code>, <code>@Retention</code>, <code>@Native</code></li>
+</ul>
+<h2 id="record-레코드">Record (레코드)
+</h2><ul>
+<li>불변 데이터 클래스를 간편하게 작성(JDK 16~)</li>
+</ul>
+<pre tabindex="0"><code>record Point(int x, int y) {}
+</code></pre><ul>
+<li>모든 레코드는 <code>java.lang.Record</code> 상속(final, 다른 클래스 상속 불가)</li>
+<li>내부 변수/초기화 블럭 추가 불가, 내부 레코드는 항상 static</li>
+</ul>
+<h2 id="실드-클래스-sealed-class">실드 클래스 (Sealed Class)
+</h2><ul>
+<li>상속 가능한 자식 클래스를 명시적으로 제한(JDK 17~)</li>
+</ul>
+<pre tabindex="0"><code>sealed class Shape permits Circle, Rectangle {}
+final class Circle extends Shape {}
+non-sealed class Rectangle extends Shape {}
+</code></pre><ul>
+<li>자식은 final, sealed, non-sealed 중 하나여야 함</li>
+</ul>
+<h2 id="모듈-시스템-module-system">모듈 시스템 (Module System)
+</h2><ul>
+<li>패키지의 상위 집합, JDK 9+ 도입</li>
+<li><code>module-info.java</code>로 모듈의 이름, 의존성, 공개 패키지 등 정의</li>
+</ul>
+<pre tabindex="0"><code>module org.example.myModule {
+    requires java.desktop;
+    exports org.example.pkgA;
+}
+</code></pre><ul>
+<li>모듈 이름은 전역적으로 유일해야 함</li>
+<li>전이적 의존성(<code>requires transitive</code>) 지원</li>
+<li>순환 의존성 금지</li>
+</ul>
+<p><strong>자동 모듈 &amp; 이름 없는 모듈</strong></p>
+<ul>
+<li>모듈 설명자 없는 jar → 자동 모듈</li>
+<li>이름 없는 모듈은 모든 모듈에 의존, 모든 패키지 노출</li>
+</ul>
+<hr>
+<h1 id="3-쓰레드">3. 쓰레드
+</h1><p><strong>프로세스와 쓰레드</strong></p>
+<ul>
+<li><strong>프로세스</strong>: 실행 중인 프로그램(독립적 작업 단위)</li>
+<li><strong>쓰레드</strong>: 프로세스 내에서 실행되는 작업 흐름의 단위</li>
+</ul>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>구분</th>
+          <th>프로세스(Process)</th>
+          <th>쓰레드(Thread)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>정의</td>
+          <td>실행 중인 프로그램(독립적 작업 단위)</td>
+          <td>프로세스 내 실행 흐름(작업 단위)</td>
+      </tr>
+      <tr>
+          <td>메모리</td>
+          <td>독립적(코드, 데이터, 힙, 스택 모두 별도)</td>
+          <td>코드/데이터/힙 공유, 스택만 독립</td>
+      </tr>
+      <tr>
+          <td>자원</td>
+          <td>자체 소유, 다른 프로세스와 공유 불가</td>
+          <td>같은 프로세스 내에서 자원 공유</td>
+      </tr>
+      <tr>
+          <td>통신</td>
+          <td>IPC 등 별도 방식 필요</td>
+          <td>간단(공유 변수 등)</td>
+      </tr>
+      <tr>
+          <td>오버헤드</td>
+          <td>크고 무거움</td>
+          <td>가볍고 빠름</td>
+      </tr>
+      <tr>
+          <td>안정성</td>
+          <td>하나 종료돼도 다른 프로세스 영향 없음</td>
+          <td>하나 오류 시 전체 프로세스 영향 가능</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>멀티태스킹 vs 멀티쓰레딩</strong></p>
+<ul>
+<li><strong>멀티태스킹</strong>: 여러 프로세스가 동시에 실행</li>
+<li><strong>멀티쓰레딩</strong>: 하나의 프로세스 내 여러 쓰레드가 동시에 작업 수행</li>
+</ul>
+<p><strong>장점</strong></p>
+<ul>
+<li>CPU 사용률 및 자원 효율성 향상</li>
+<li>사용자 응답성 향상</li>
+<li>코드 분리로 간결해짐</li>
+</ul>
+<p><strong>단점</strong></p>
+<ul>
+<li>자원 공유로 인한 동기화, 교착상태(Deadlock) 등 문제 발생 가능</li>
+</ul>
+<h2 id="쓰레드의-구현과-실행">쓰레드의 구현과 실행
+</h2><p><strong>구현 방법</strong></p>
+<ol>
+<li>
+<p><strong>Thread 클래스 상속</strong></p>
+<pre tabindex="0"><code>class MyThread extends Thread {
+    public void run() {
+        System.out.println(getName());
+    }
+}
+MyThread t = new MyThread();
+t.start();
+</code></pre><ul>
+<li>단점: 다른 클래스 상속 불가</li>
+</ul>
+</li>
+<li>
+<p><strong>Runnable 인터페이스 구현</strong></p>
+<pre tabindex="0"><code>class MyRunnable implements Runnable {
+    public void run() {
+        System.out.println(Thread.currentThread().getName());
+    }
+}
+Thread t = new Thread(new MyRunnable());
+t.start();
+</code></pre><ul>
+<li>장점: 재사용성, 코드 일관성, 다른 클래스 상속 가능</li>
+</ul>
+</li>
+</ol>
+<p><strong>실행</strong></p>
+<ul>
+<li>반드시 <code>start()</code> 호출 → 새로운 쓰레드가 생성되어 run() 실행</li>
+<li>한 번 종료된 쓰레드는 재실행 불가(새 객체 필요)</li>
+</ul>
+<p><strong>start()와 run()의 차이</strong></p>
+<ul>
+<li><code>run()</code>: 단순 메서드 호출(새 쓰레드 생성 X)</li>
+<li><code>start()</code>: 새로운 쓰레드 생성, 호출 스택 생성 후 run() 호출</li>
+</ul>
+<blockquote>
+<p>실행 중인 사용자 쓰레드가 하나도 없으면 프로그램 종료</p></blockquote>
+<p><strong>싱글쓰레드와 멀티쓰레드</strong></p>
+<ul>
+<li><strong>싱글쓰레드</strong>: 한 작업이 끝난 후 다른 작업 시작</li>
+<li><strong>멀티쓰레드</strong>: 여러 작업을 번갈아가며 처리, 동시에 실행되는 것처럼 보임</li>
+</ul>
+<p><strong>병행(Concurrency) vs 병렬(Parallelism)</strong></p>
+<ul>
+<li><strong>병행</strong>: 여러 쓰레드가 여러 작업을 동시에 진행</li>
+<li><strong>병렬</strong>: 하나의 작업을 여러 쓰레드가 나눠서 처리</li>
+</ul>
+<p><strong>쓰레드의 우선순위</strong></p>
+<ul>
+<li>1~10 범위의 priority 멤버변수로 우선순위 지정</li>
+<li>높을수록 더 많은 작업 시간 할당</li>
+<li>시각적/응답성 작업은 우선순위 높게 설정</li>
+<li>우선순위는 부모 쓰레드로부터 상속</li>
+</ul>
+<p><strong>쓰레드 그룹</strong></p>
+<ul>
+<li>관련 쓰레드를 그룹으로 관리</li>
+<li>그룹 내 다른 그룹 포함 가능(계층 구조)</li>
+<li>모든 쓰레드는 반드시 쓰레드 그룹에 포함</li>
+<li>기본적으로 main 쓰레드 그룹의 하위 그룹</li>
+</ul>
+<p><strong>데몬 쓰레드</strong></p>
+<ul>
+<li>보조 작업(예: 가비지 컬렉터) 담당</li>
+<li>무한루프+조건문으로 대기하다가 작업 수행</li>
+<li>데몬 쓰레드가 생성한 쓰레드도 자동으로 데몬</li>
+<li>사용자 쓰레드가 모두 종료되면 데몬도 자동 종료</li>
+</ul>
+<p><strong>쓰레드 실행 제어</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>메서드</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>static void sleep()</code></td>
+          <td>지정 시간 동안 쓰레드 일시 정지</td>
+      </tr>
+      <tr>
+          <td><code>void join()</code></td>
+          <td>지정 시간 동안 쓰레드가 실행되도록 함</td>
+      </tr>
+      <tr>
+          <td><code>interrupt()</code></td>
+          <td>쓰레드 작업 취소(정지 요청, sleep/join 상태 깨움)</td>
+      </tr>
+      <tr>
+          <td><code>static void yield()</code></td>
+          <td>실행 시간 양보, 실행 대기 상태로 전환</td>
+      </tr>
+  </tbody>
+</table></div>
+<blockquote>
+<p>resume(), stop(), suspend()는 데드락 위험으로 deprecated</p></blockquote>
+<p><strong>쓰레드의 상태</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>상태</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>NEW</td>
+          <td>생성, start() 미호출</td>
+      </tr>
+      <tr>
+          <td>RUNNABLE</td>
+          <td>실행 중 또는 실행 가능</td>
+      </tr>
+      <tr>
+          <td>BLOCKED</td>
+          <td>동기화 블록에 의해 일시 정지(lock 대기)</td>
+      </tr>
+      <tr>
+          <td>WAITING</td>
+          <td>실행 가능하지 않은 일시 정지(조건 대기 등)</td>
+      </tr>
+      <tr>
+          <td>TIMED_WAITING</td>
+          <td>지정 시간 동안 일시 정지</td>
+      </tr>
+      <tr>
+          <td>TERMINATED</td>
+          <td>작업 종료</td>
+      </tr>
+  </tbody>
+</table></div>
+<br>
+<h2 id="마무리">마무리
+</h2><p>낯선 개념들이 많아서 아직 정리가 덜 된 것 같지만<br>
+한 번에 이해하려는 게 오히려 욕심인 거 같기도&hellip;?</p>
+<p>익숙해질 때까지 자주 들여다봐야 할 것 같다.</p>
+<p><br><br></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4/">패스트캠퍼스</a>
+        
+            <a href="/tags/%EC%BB%A4%EB%84%90%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8/">커널아카데미</a>
+        
+            <a href="/tags/%EB%B0%B1%EC%97%94%EB%93%9C%EA%B0%9C%EB%B0%9C%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/">백엔드개발부트캠프</a>
+        
+            <a href="/tags/%EA%B5%AD%EB%B9%84%EC%A7%80%EC%9B%90%EA%B5%90%EC%9C%A1/">국비지원교육</a>
+        
+            <a href="/tags/%EB%82%B4%EC%9D%BC%EB%B0%B0%EC%9B%80%EC%B9%B4%EB%93%9C/">내일배움카드</a>
+        
+            <a href="/tags/kdt/">KDT</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">관련 글</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/week3-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 3주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week2-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 2주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week1-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 1주차]</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Soyeon&#39;s Dev Log
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.748d0acf3bd5d18477b5028b83b70ecfa20eb15aefdff97697a330a2202721bf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
