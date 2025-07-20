@@ -6,7 +6,328 @@
         <description>Recent content on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Fri, 11 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 20 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 5주차</title>
+        <link>http://localhost:1313/posts/week5-retrospective/</link>
+        <pubDate>Sun, 20 Jul 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/week5-retrospective/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h2 id=&#34;이번-주-키워드&#34;&gt;이번 주 키워드
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;쓰레드(Thread)&lt;/li&gt;
+&lt;li&gt;람다&lt;/li&gt;
+&lt;li&gt;스트림&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;쓰레드thread&#34;&gt;쓰레드(Thread)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;프로세스(Process)&lt;/strong&gt;: 실행 중인 프로그램&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;쓰레드(Thread)&lt;/strong&gt;: 프로세스 내에서 실제 작업을 수행하는 최소 단위&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;멀티쓰레딩&lt;/strong&gt;: 하나의 프로세스에서 여러 쓰레드가 병렬로 작업, 효율성과 응답성 향상&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;멀티쓰레딩의-장점과-단점&#34;&gt;멀티쓰레딩의 장점과 단점
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;장점&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;CPU 사용률 증가&lt;/li&gt;
+&lt;li&gt;자원 활용 효율적&lt;/li&gt;
+&lt;li&gt;사용자 응답성 증가&lt;/li&gt;
+&lt;li&gt;코드 모듈화, 관리 용이&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;단점&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;자원 공유 시 동기화 문제&lt;/li&gt;
+&lt;li&gt;교착상태(Deadlock) 위험&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;교착상태: 여러 쓰레드가 서로 필요한 자원을 점유하며 서로 대기, 작업이 중단된 상태&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;쓰레드-구현-방식&#34;&gt;쓰레드 구현 방식
+&lt;/h2&gt;&lt;h3 id=&#34;1-thread-클래스-상속-template-method-pattern&#34;&gt;1. Thread 클래스 상속 (Template Method Pattern)
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyThread&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;extends&lt;/span&gt; Thread {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;run&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        System.&lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;println&lt;/span&gt;(getName());
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;MyThread myThread &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; MyThread();
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;단점: 다른 클래스 상속 불가&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-runnable-인터페이스-구현-strategy-pattern&#34;&gt;2. Runnable 인터페이스 구현 (Strategy Pattern)
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyRunnable&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;implements&lt;/span&gt; Runnable {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;run&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        System.&lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;println&lt;/span&gt;(Thread.&lt;span style=&#34;color:#a6e22e&#34;&gt;currentThread&lt;/span&gt;().&lt;span style=&#34;color:#a6e22e&#34;&gt;getName&lt;/span&gt;());
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Runnable r &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; MyRunnable();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Thread t &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; Thread(r);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;장점: 코드 재사용성, 일관성 우수&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;쓰레드-실행&#34;&gt;쓰레드 실행
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;반드시 &lt;code&gt;start()&lt;/code&gt; 호출 → 새로운 쓰레드 생성&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;run()&lt;/code&gt;만 호출 시 일반 메서드 실행&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;쓰레드-실행-제어&#34;&gt;쓰레드 실행 제어
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;메서드&lt;/th&gt;
+          &lt;th&gt;설명&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;sleep(long ms)&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;지정 시간만큼 쓰레드 일시정지&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;join()&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;지정 쓰레드 작업 완료까지 대기&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;interrupt()&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;일시정지 중인 쓰레드를 깨움&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;yield()&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;CPU를 다른 동등 우선순위 쓰레드에게 양보&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;resume()&lt;/code&gt;, &lt;code&gt;suspend()&lt;/code&gt;, &lt;code&gt;stop()&lt;/code&gt;은 데드락 등 안전 이슈로 사용 불가(Deprecated)[3][5].&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;쓰레드-상태&#34;&gt;쓰레드 상태
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;상태&lt;/th&gt;
+          &lt;th&gt;설명&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;NEW&lt;/td&gt;
+          &lt;td&gt;쓰레드 생성, 아직 &lt;code&gt;start()&lt;/code&gt; 호출 전&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RUNNABLE&lt;/td&gt;
+          &lt;td&gt;실행 중 혹은 실행 대기&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;BLOCKED&lt;/td&gt;
+          &lt;td&gt;락 획득 대기 중&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;WAITING&lt;/td&gt;
+          &lt;td&gt;무한 대기&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;TIMED_WAITING&lt;/td&gt;
+          &lt;td&gt;지정된 시간 대기&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;TERMINATED&lt;/td&gt;
+          &lt;td&gt;실행 종료&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;쓰레드의-동기화&#34;&gt;쓰레드의 동기화
+&lt;/h2&gt;&lt;p&gt;멀티쓰레드 환경에서 &lt;strong&gt;공유 자원&lt;/strong&gt; 접근 시 데이터 일관성을 보장하기 위해 동기화 필요&lt;/p&gt;
+&lt;h3 id=&#34;임계-영역--락lock&#34;&gt;임계 영역 &amp;amp; 락(Lock)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;임계 영역&lt;/strong&gt;: 동시에 하나의 쓰레드만 실행할 수 있는 코드 영역&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Lock&lt;/strong&gt;: 객체에 대한 접근을 제한하여 데이터 일관성 보장&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;synchronized&#34;&gt;synchronized
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;메서드 전체 동기화&lt;/strong&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;synchronized&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;method&lt;/span&gt;() { ... }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;블록 동기화&lt;/strong&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;synchronized&lt;/span&gt;(참조변수) { ... }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;객체별로 하나의 Lock 보유&lt;/li&gt;
+&lt;li&gt;가능한 한 임계 영역 최소화 (블록 단위)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;wait--notify&#34;&gt;wait() / notify()
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;wait()&lt;/strong&gt;: 락을 반납하고 대기&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;notify()/notifyAll()&lt;/strong&gt;: 대기 중인 쓰레드 깨움&lt;/li&gt;
+&lt;li&gt;Object 메서드이므로 동기화 블록/메서드 내에서만 사용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;명시적-lock과-condition&#34;&gt;명시적 Lock과 Condition
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Lock 클래스&lt;/strong&gt;: java.util.concurrent.locks
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ReentrantLock&lt;/code&gt;, &lt;code&gt;ReentrantReadWriteLock&lt;/code&gt;, &lt;code&gt;StampedLock&lt;/code&gt; 등&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;조건 변수(Condition)&lt;/strong&gt;: 선별적인 알림, 기아(starvation) 해소&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;lock.&lt;span style=&#34;color:#a6e22e&#34;&gt;lock&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// 임계 영역&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;} &lt;span style=&#34;color:#66d9ef&#34;&gt;finally&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    lock.&lt;span style=&#34;color:#a6e22e&#34;&gt;unlock&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;락은 수동 해제 필요(&lt;code&gt;finally&lt;/code&gt;로 처리)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;volatile&#34;&gt;volatile
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;변수의 값을 각 쓰레드 캐시에 저장하지 않고 &lt;strong&gt;항상 메모리에서 읽음&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;변수의 원자성만 보장, 동기화 대용 불가&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;fork--join-프레임워크&#34;&gt;fork &amp;amp; join 프레임워크
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;JDK7 도입, 작업을 작은 단위로 나눠 병렬 수행&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RecursiveAction&lt;/code&gt;: 반환값 없음&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RecursiveTask&lt;/code&gt;: 반환값 있음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;작업 분할&lt;/strong&gt; → &lt;strong&gt;work stealing&lt;/strong&gt; (작업 훔치기)로 부하 분산&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;가상-쓰레드virtual-thread&#34;&gt;가상 쓰레드(Virtual Thread)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;적은 자원으로 &lt;strong&gt;수십~수천만 개&lt;/strong&gt; 생성 가능&lt;/li&gt;
+&lt;li&gt;항상 &lt;strong&gt;데몬 쓰레드&lt;/strong&gt;, 우선순위 고정(5)&lt;/li&gt;
+&lt;li&gt;ThreadLocal 사용 주의, 풀링 금지&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;구분&lt;/th&gt;
+          &lt;th&gt;플랫폼 쓰레드&lt;/th&gt;
+          &lt;th&gt;가상 쓰레드&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;스케줄러&lt;/td&gt;
+          &lt;td&gt;OS&lt;/td&gt;
+          &lt;td&gt;JDK&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;생성수&lt;/td&gt;
+          &lt;td&gt;수십만 개&lt;/td&gt;
+          &lt;td&gt;수천만 개&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;호출 스택&lt;/td&gt;
+          &lt;td&gt;2MB (고정)&lt;/td&gt;
+          &lt;td&gt;4KB 이상 (가변)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;생성 시간&lt;/td&gt;
+          &lt;td&gt;40us&lt;/td&gt;
+          &lt;td&gt;0.4us&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;컨텍스트 스위칭&lt;/td&gt;
+          &lt;td&gt;10us&lt;/td&gt;
+          &lt;td&gt;1us&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;컨티뉴에이션, 스택 청크&lt;/strong&gt; 기반으로 경량 동작&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;executor--executorservice&#34;&gt;Executor &amp;amp; ExecutorService
+&lt;/h2&gt;&lt;h3 id=&#34;executor-패턴&#34;&gt;Executor 패턴
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;작업 실행 추상화&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;threadfactory&#34;&gt;ThreadFactory
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;생성과 실행 분리, 객체 재사용에 유리&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;executorservice&#34;&gt;ExecutorService
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;다양한 쓰레드 풀 제공
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;SingleThreadExecutor&lt;/strong&gt;: 하나의 쓰레드가 모든 작업 처리&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;newThreadPerTaskExecutor&lt;/strong&gt;: 작업마다 플랫폼 쓰레드 생성(재사용 X)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;newVirtualThreadPerTaskExecutor&lt;/strong&gt;: 작업마다 가상 쓰레드 생성(재사용 X)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;future&#34;&gt;Future
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;비동기 작업 결과 조회/통제 객체&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;get()&lt;/code&gt;: 결과 반환(블록), &lt;code&gt;cancel()&lt;/code&gt;: 작업 취소&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;completablefuture&#34;&gt;CompletableFuture
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;여러 비동기 작업을 연결하거나 조합할 때 활용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;람다와-스트림-함수형-프로그래밍-맛보기&#34;&gt;람다와 스트림 (함수형 프로그래밍 맛보기)
+&lt;/h2&gt;&lt;h3 id=&#34;람다식&#34;&gt;람다식
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;익명 함수, 메서드를 간결히 표현&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(매개변수) -&amp;gt; {실행문}&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;함수형-인터페이스&#34;&gt;함수형 인터페이스
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;추상 메서드 1개만 선언&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@FunctionalInterface&lt;/code&gt;로 컴파일러 안전성 확보&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@FunctionalInterface&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyFunction&lt;/span&gt;{ &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;myMethod&lt;/span&gt;(); }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;스트림stream&#34;&gt;스트림(Stream)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;데이터 소스&lt;/strong&gt;(컬렉션, 배열 등)를 복잡한 반복문 없이 다루는 방법&lt;/li&gt;
+&lt;li&gt;연산은 대부분 &lt;strong&gt;파이프라인&lt;/strong&gt; 형태&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;스트림-특징&#34;&gt;스트림 특징
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;데이터 원본 불변&lt;/li&gt;
+&lt;li&gt;일회성&lt;/li&gt;
+&lt;li&gt;내부반복&lt;/li&gt;
+&lt;li&gt;중간/최종 연산 분리&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;스트림-연산-종류&#34;&gt;스트림 연산 종류
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;중간 연산&lt;/strong&gt;: filter, map, sorted 등 (0~여러 번)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;최종 연산&lt;/strong&gt;: forEach, reduce, collect 등 (0~1번)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;collect-vs-reduce&#34;&gt;collect() vs reduce()
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;collect()&lt;/code&gt; : 그룹별 집계·추출(분할, 그룹화)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;reduce()&lt;/code&gt; : 누적 합산&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;병렬-스트림&#34;&gt;병렬 스트림
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;여러 CPU 코어 사용, 요소 순서 보장 X&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;optional&#34;&gt;Optional
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;null 안전하게 다루기 위한 컨테이너&lt;/li&gt;
+&lt;li&gt;null 반환 대신 Optional 객체 반환&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;참고사항:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;멀티쓰레딩/가상쓰레드 설계시 동기화·Deadlock 예방·디버깅 용이성 필수 고려&lt;/li&gt;
+&lt;li&gt;비동기, 동시성 제어시 ExecutorService·CompletableFuture 활용&lt;/li&gt;
+&lt;li&gt;함수형 코드 작성시 함수형 인터페이스와 람다 적극 활용&lt;/li&gt;
+&lt;li&gt;대량 데이터 처리시 Stream과 Optional 적극 활용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;마무리&#34;&gt;마무리
+&lt;/h2&gt;&lt;p&gt;이번 주는 쓰레드, 동기화, 가상 쓰레드 같은 핵심 개념을 한 번에 완벽하게 이해하기가 쉽지 않았던 한 주였다.&lt;br&gt;
+개념만 읽을 때는 헷갈리는 부분도 많았지만, 직접 다양한 예제 코드를 작성해보면서 조금씩 감을 잡아야겠다.&lt;/p&gt;
+&lt;p&gt;또, 가상 쓰레드(virtual thread)나 ExecutorService, 람다와 스트림 같은 최신 트렌드까지 폭넓게 다루다 보니&lt;br&gt;
+한 번에 다 흡수하긴 어렵다는 생각도 들었다.&lt;br&gt;
+하지만 이런 내용이 최신 Java에서 왜 중요한지, 앞으로 개발하면서 어떻게 활용할 수 있을지 궁금해지는 계기가 되었다.&lt;/p&gt;
+&lt;p&gt;앞으로는 각 개념별로 작은 예시를 직접 더 많이 만들어보고, 잘 정리해서 내 것으로 만들어야 할 것 같다.&lt;br&gt;
+어렵고 멀게만 느껴졌던 동시성, 함수형 프로그래밍에도 점점 익숙해질 수 있도록 꾸준히 연습해야겠다.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>[커널아카데미] 백엔드 개발 부트캠프 13기 4주차</title>
         <link>http://localhost:1313/posts/week4-retrospective/</link>
         <pubDate>Fri, 11 Jul 2025 00:00:00 +0000</pubDate>

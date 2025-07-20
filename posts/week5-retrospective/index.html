@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 이번 주 키워드 쓰레드(Thread) 람다 스트림 쓰레드(Thread) 프로세스(Process): 실행 중인 프로그램 쓰레드(Thread): 프로세스 내에서 실제 작업을 수행하는 최소 단위 멀티쓰레딩: 하나의 프로세스에서 여러 쓰레드가 병렬로 작업, 효율성과 응답성 향상 멀티쓰레딩의 장점과 단점 장점 CPU 사용률 증가 자원 활용 효율적 사용자 응답성 증가 코드 모듈화, 관리 용이 단점 자원 공유 시 동기화 문제 교착상태(Deadlock) 위험 교착상태: 여러 쓰레드가 서로 필요한 자원을 점유하며 서로 대기, 작업이 중단된 상태\n">
+<title>[커널아카데미] 백엔드 개발 부트캠프 13기 5주차</title>
+
+<link rel='canonical' href='http://localhost:1313/posts/week5-retrospective/'>
+
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="[커널아카데미] 백엔드 개발 부트캠프 13기 5주차">
+<meta property='og:description' content=" 이번 주 키워드 쓰레드(Thread) 람다 스트림 쓰레드(Thread) 프로세스(Process): 실행 중인 프로그램 쓰레드(Thread): 프로세스 내에서 실제 작업을 수행하는 최소 단위 멀티쓰레딩: 하나의 프로세스에서 여러 쓰레드가 병렬로 작업, 효율성과 응답성 향상 멀티쓰레딩의 장점과 단점 장점 CPU 사용률 증가 자원 활용 효율적 사용자 응답성 증가 코드 모듈화, 관리 용이 단점 자원 공유 시 동기화 문제 교착상태(Deadlock) 위험 교착상태: 여러 쓰레드가 서로 필요한 자원을 점유하며 서로 대기, 작업이 중단된 상태\n">
+<meta property='og:url' content='http://localhost:1313/posts/week5-retrospective/'>
+<meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='패스트캠퍼스' /><meta property='article:tag' content='커널아카데미' /><meta property='article:tag' content='백엔드개발부트캠프' /><meta property='article:tag' content='국비지원교육' /><meta property='article:tag' content='내일배움카드' /><meta property='article:tag' content='KDT' /><meta property='article:published_time' content='2025-07-20T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-07-20T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="[커널아카데미] 백엔드 개발 부트캠프 13기 5주차">
+<meta name="twitter:description" content=" 이번 주 키워드 쓰레드(Thread) 람다 스트림 쓰레드(Thread) 프로세스(Process): 실행 중인 프로그램 쓰레드(Thread): 프로세스 내에서 실제 작업을 수행하는 최소 단위 멀티쓰레딩: 하나의 프로세스에서 여러 쓰레드가 병렬로 작업, 효율성과 응답성 향상 멀티쓰레딩의 장점과 단점 장점 CPU 사용률 증가 자원 활용 효율적 사용자 응답성 증가 코드 모듈화, 관리 용이 단점 자원 공유 시 동기화 문제 교착상태(Deadlock) 위험 교착상태: 여러 쓰레드가 서로 필요한 자원을 점유하며 서로 대기, 작업이 중단된 상태\n"><link rel="alternate" type="application/json" href="http://localhost:1313/posts/week5-retrospective/index.json">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/../assets/avatar_hu_6c8b5d6cd0da96b6.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Soyeon&#39;s Dev Log</a></h1>
+            <h2 class="site-description">백엔드 개발자 지망생의 기록</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>다크 모드</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%EA%B3%B5%EB%B6%80/" >
+                공부
+            </a>
+        
+            <a href="/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/" >
+                주간회고
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/week5-retrospective/">[커널아카데미] 백엔드 개발 부트캠프 13기 5주차</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-07-20</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <div style="margin: 0 40px;">
+<h2 id="이번-주-키워드">이번 주 키워드
+</h2><ul>
+<li>쓰레드(Thread)</li>
+<li>람다</li>
+<li>스트림</li>
+</ul>
+<hr>
+<h2 id="쓰레드thread">쓰레드(Thread)
+</h2><ul>
+<li><strong>프로세스(Process)</strong>: 실행 중인 프로그램</li>
+<li><strong>쓰레드(Thread)</strong>: 프로세스 내에서 실제 작업을 수행하는 최소 단위</li>
+<li><strong>멀티쓰레딩</strong>: 하나의 프로세스에서 여러 쓰레드가 병렬로 작업, 효율성과 응답성 향상</li>
+</ul>
+<h3 id="멀티쓰레딩의-장점과-단점">멀티쓰레딩의 장점과 단점
+</h3><ul>
+<li><strong>장점</strong>
+<ul>
+<li>CPU 사용률 증가</li>
+<li>자원 활용 효율적</li>
+<li>사용자 응답성 증가</li>
+<li>코드 모듈화, 관리 용이</li>
+</ul>
+</li>
+<li><strong>단점</strong>
+<ul>
+<li>자원 공유 시 동기화 문제</li>
+<li>교착상태(Deadlock) 위험</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>교착상태: 여러 쓰레드가 서로 필요한 자원을 점유하며 서로 대기, 작업이 중단된 상태</p></blockquote>
+<h2 id="쓰레드-구현-방식">쓰레드 구현 방식
+</h2><h3 id="1-thread-클래스-상속-template-method-pattern">1. Thread 클래스 상속 (Template Method Pattern)
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyThread</span> <span style="color:#66d9ef">extends</span> Thread {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(getName());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>MyThread myThread <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MyThread();
+</span></span></code></pre></div><ul>
+<li>단점: 다른 클래스 상속 불가</li>
+</ul>
+<h3 id="2-runnable-인터페이스-구현-strategy-pattern">2. Runnable 인터페이스 구현 (Strategy Pattern)
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyRunnable</span> <span style="color:#66d9ef">implements</span> Runnable {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span>() {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(Thread.<span style="color:#a6e22e">currentThread</span>().<span style="color:#a6e22e">getName</span>());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>Runnable r <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MyRunnable();
+</span></span><span style="display:flex;"><span>Thread t <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread(r);
+</span></span></code></pre></div><ul>
+<li>장점: 코드 재사용성, 일관성 우수</li>
+</ul>
+<h3 id="쓰레드-실행">쓰레드 실행
+</h3><ul>
+<li>반드시 <code>start()</code> 호출 → 새로운 쓰레드 생성</li>
+<li><code>run()</code>만 호출 시 일반 메서드 실행</li>
+</ul>
+<h2 id="쓰레드-실행-제어">쓰레드 실행 제어
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>메서드</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>sleep(long ms)</code></td>
+          <td>지정 시간만큼 쓰레드 일시정지</td>
+      </tr>
+      <tr>
+          <td><code>join()</code></td>
+          <td>지정 쓰레드 작업 완료까지 대기</td>
+      </tr>
+      <tr>
+          <td><code>interrupt()</code></td>
+          <td>일시정지 중인 쓰레드를 깨움</td>
+      </tr>
+      <tr>
+          <td><code>yield()</code></td>
+          <td>CPU를 다른 동등 우선순위 쓰레드에게 양보</td>
+      </tr>
+  </tbody>
+</table></div>
+<blockquote>
+<p><code>resume()</code>, <code>suspend()</code>, <code>stop()</code>은 데드락 등 안전 이슈로 사용 불가(Deprecated)[3][5].</p></blockquote>
+<h3 id="쓰레드-상태">쓰레드 상태
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>상태</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>NEW</td>
+          <td>쓰레드 생성, 아직 <code>start()</code> 호출 전</td>
+      </tr>
+      <tr>
+          <td>RUNNABLE</td>
+          <td>실행 중 혹은 실행 대기</td>
+      </tr>
+      <tr>
+          <td>BLOCKED</td>
+          <td>락 획득 대기 중</td>
+      </tr>
+      <tr>
+          <td>WAITING</td>
+          <td>무한 대기</td>
+      </tr>
+      <tr>
+          <td>TIMED_WAITING</td>
+          <td>지정된 시간 대기</td>
+      </tr>
+      <tr>
+          <td>TERMINATED</td>
+          <td>실행 종료</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="쓰레드의-동기화">쓰레드의 동기화
+</h2><p>멀티쓰레드 환경에서 <strong>공유 자원</strong> 접근 시 데이터 일관성을 보장하기 위해 동기화 필요</p>
+<h3 id="임계-영역--락lock">임계 영역 &amp; 락(Lock)
+</h3><ul>
+<li><strong>임계 영역</strong>: 동시에 하나의 쓰레드만 실행할 수 있는 코드 영역</li>
+<li><strong>Lock</strong>: 객체에 대한 접근을 제한하여 데이터 일관성 보장</li>
+</ul>
+<h3 id="synchronized">synchronized
+</h3><ol>
+<li><strong>메서드 전체 동기화</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">synchronized</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">method</span>() { ... }
+</span></span></code></pre></div></li>
+<li><strong>블록 동기화</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">synchronized</span>(참조변수) { ... }
+</span></span></code></pre></div></li>
+</ol>
+<ul>
+<li>객체별로 하나의 Lock 보유</li>
+<li>가능한 한 임계 영역 최소화 (블록 단위)</li>
+</ul>
+<h3 id="wait--notify">wait() / notify()
+</h3><ul>
+<li><strong>wait()</strong>: 락을 반납하고 대기</li>
+<li><strong>notify()/notifyAll()</strong>: 대기 중인 쓰레드 깨움</li>
+<li>Object 메서드이므로 동기화 블록/메서드 내에서만 사용</li>
+</ul>
+<h2 id="명시적-lock과-condition">명시적 Lock과 Condition
+</h2><ul>
+<li><strong>Lock 클래스</strong>: java.util.concurrent.locks
+<ul>
+<li><code>ReentrantLock</code>, <code>ReentrantReadWriteLock</code>, <code>StampedLock</code> 등</li>
+</ul>
+</li>
+<li><strong>조건 변수(Condition)</strong>: 선별적인 알림, 기아(starvation) 해소</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>lock.<span style="color:#a6e22e">lock</span>();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 임계 영역</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">finally</span> {
+</span></span><span style="display:flex;"><span>    lock.<span style="color:#a6e22e">unlock</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>락은 수동 해제 필요(<code>finally</code>로 처리)</li>
+</ul>
+<h3 id="volatile">volatile
+</h3><ul>
+<li>변수의 값을 각 쓰레드 캐시에 저장하지 않고 <strong>항상 메모리에서 읽음</strong></li>
+<li>변수의 원자성만 보장, 동기화 대용 불가</li>
+</ul>
+<h2 id="fork--join-프레임워크">fork &amp; join 프레임워크
+</h2><ul>
+<li>JDK7 도입, 작업을 작은 단위로 나눠 병렬 수행</li>
+<li><code>RecursiveAction</code>: 반환값 없음</li>
+<li><code>RecursiveTask</code>: 반환값 있음</li>
+<li><strong>작업 분할</strong> → <strong>work stealing</strong> (작업 훔치기)로 부하 분산</li>
+</ul>
+<h2 id="가상-쓰레드virtual-thread">가상 쓰레드(Virtual Thread)
+</h2><ul>
+<li>적은 자원으로 <strong>수십~수천만 개</strong> 생성 가능</li>
+<li>항상 <strong>데몬 쓰레드</strong>, 우선순위 고정(5)</li>
+<li>ThreadLocal 사용 주의, 풀링 금지</li>
+</ul>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>구분</th>
+          <th>플랫폼 쓰레드</th>
+          <th>가상 쓰레드</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>스케줄러</td>
+          <td>OS</td>
+          <td>JDK</td>
+      </tr>
+      <tr>
+          <td>생성수</td>
+          <td>수십만 개</td>
+          <td>수천만 개</td>
+      </tr>
+      <tr>
+          <td>호출 스택</td>
+          <td>2MB (고정)</td>
+          <td>4KB 이상 (가변)</td>
+      </tr>
+      <tr>
+          <td>생성 시간</td>
+          <td>40us</td>
+          <td>0.4us</td>
+      </tr>
+      <tr>
+          <td>컨텍스트 스위칭</td>
+          <td>10us</td>
+          <td>1us</td>
+      </tr>
+  </tbody>
+</table></div>
+<ul>
+<li><strong>컨티뉴에이션, 스택 청크</strong> 기반으로 경량 동작</li>
+</ul>
+<h2 id="executor--executorservice">Executor &amp; ExecutorService
+</h2><h3 id="executor-패턴">Executor 패턴
+</h3><ul>
+<li>작업 실행 추상화</li>
+</ul>
+<h3 id="threadfactory">ThreadFactory
+</h3><ul>
+<li>생성과 실행 분리, 객체 재사용에 유리</li>
+</ul>
+<h3 id="executorservice">ExecutorService
+</h3><ul>
+<li>다양한 쓰레드 풀 제공
+<ul>
+<li><strong>SingleThreadExecutor</strong>: 하나의 쓰레드가 모든 작업 처리</li>
+<li><strong>newThreadPerTaskExecutor</strong>: 작업마다 플랫폼 쓰레드 생성(재사용 X)</li>
+<li><strong>newVirtualThreadPerTaskExecutor</strong>: 작업마다 가상 쓰레드 생성(재사용 X)</li>
+</ul>
+</li>
+</ul>
+<h4 id="future">Future
+</h4><ul>
+<li>비동기 작업 결과 조회/통제 객체</li>
+<li><code>get()</code>: 결과 반환(블록), <code>cancel()</code>: 작업 취소</li>
+</ul>
+<h4 id="completablefuture">CompletableFuture
+</h4><ul>
+<li>여러 비동기 작업을 연결하거나 조합할 때 활용</li>
+</ul>
+<h2 id="람다와-스트림-함수형-프로그래밍-맛보기">람다와 스트림 (함수형 프로그래밍 맛보기)
+</h2><h3 id="람다식">람다식
+</h3><ul>
+<li>익명 함수, 메서드를 간결히 표현</li>
+<li><code>(매개변수) -&gt; {실행문}</code></li>
+</ul>
+<h4 id="함수형-인터페이스">함수형 인터페이스
+</h4><ul>
+<li>추상 메서드 1개만 선언</li>
+<li><code>@FunctionalInterface</code>로 컴파일러 안전성 확보</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#a6e22e">@FunctionalInterface</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">MyFunction</span>{ <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">myMethod</span>(); }
+</span></span></code></pre></div><h3 id="스트림stream">스트림(Stream)
+</h3><ul>
+<li><strong>데이터 소스</strong>(컬렉션, 배열 등)를 복잡한 반복문 없이 다루는 방법</li>
+<li>연산은 대부분 <strong>파이프라인</strong> 형태</li>
+</ul>
+<h4 id="스트림-특징">스트림 특징
+</h4><ul>
+<li>데이터 원본 불변</li>
+<li>일회성</li>
+<li>내부반복</li>
+<li>중간/최종 연산 분리</li>
+</ul>
+<h4 id="스트림-연산-종류">스트림 연산 종류
+</h4><ul>
+<li><strong>중간 연산</strong>: filter, map, sorted 등 (0~여러 번)</li>
+<li><strong>최종 연산</strong>: forEach, reduce, collect 등 (0~1번)</li>
+</ul>
+<h4 id="collect-vs-reduce">collect() vs reduce()
+</h4><ul>
+<li><code>collect()</code> : 그룹별 집계·추출(분할, 그룹화)</li>
+<li><code>reduce()</code> : 누적 합산</li>
+</ul>
+<h4 id="병렬-스트림">병렬 스트림
+</h4><ul>
+<li>여러 CPU 코어 사용, 요소 순서 보장 X</li>
+</ul>
+<h4 id="optional">Optional
+</h4><ul>
+<li>null 안전하게 다루기 위한 컨테이너</li>
+<li>null 반환 대신 Optional 객체 반환</li>
+</ul>
+<p><strong>참고사항:</strong></p>
+<ul>
+<li>멀티쓰레딩/가상쓰레드 설계시 동기화·Deadlock 예방·디버깅 용이성 필수 고려</li>
+<li>비동기, 동시성 제어시 ExecutorService·CompletableFuture 활용</li>
+<li>함수형 코드 작성시 함수형 인터페이스와 람다 적극 활용</li>
+<li>대량 데이터 처리시 Stream과 Optional 적극 활용</li>
+</ul>
+<h2 id="마무리">마무리
+</h2><p>이번 주는 쓰레드, 동기화, 가상 쓰레드 같은 핵심 개념을 한 번에 완벽하게 이해하기가 쉽지 않았던 한 주였다.<br>
+개념만 읽을 때는 헷갈리는 부분도 많았지만, 직접 다양한 예제 코드를 작성해보면서 조금씩 감을 잡아야겠다.</p>
+<p>또, 가상 쓰레드(virtual thread)나 ExecutorService, 람다와 스트림 같은 최신 트렌드까지 폭넓게 다루다 보니<br>
+한 번에 다 흡수하긴 어렵다는 생각도 들었다.<br>
+하지만 이런 내용이 최신 Java에서 왜 중요한지, 앞으로 개발하면서 어떻게 활용할 수 있을지 궁금해지는 계기가 되었다.</p>
+<p>앞으로는 각 개념별로 작은 예시를 직접 더 많이 만들어보고, 잘 정리해서 내 것으로 만들어야 할 것 같다.<br>
+어렵고 멀게만 느껴졌던 동시성, 함수형 프로그래밍에도 점점 익숙해질 수 있도록 꾸준히 연습해야겠다.</p>
+<p><br><br></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4/">패스트캠퍼스</a>
+        
+            <a href="/tags/%EC%BB%A4%EB%84%90%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8/">커널아카데미</a>
+        
+            <a href="/tags/%EB%B0%B1%EC%97%94%EB%93%9C%EA%B0%9C%EB%B0%9C%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/">백엔드개발부트캠프</a>
+        
+            <a href="/tags/%EA%B5%AD%EB%B9%84%EC%A7%80%EC%9B%90%EA%B5%90%EC%9C%A1/">국비지원교육</a>
+        
+            <a href="/tags/%EB%82%B4%EC%9D%BC%EB%B0%B0%EC%9B%80%EC%B9%B4%EB%93%9C/">내일배움카드</a>
+        
+            <a href="/tags/kdt/">KDT</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">관련 글</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/week4-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 4주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week3-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 3주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week2-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 2주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week1-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 1주차]</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Soyeon&#39;s Dev Log
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.748d0acf3bd5d18477b5028b83b70ecfa20eb15aefdff97697a330a2202721bf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
