@@ -6,446 +6,211 @@
         <description>Recent content in KDT on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Fri, 11 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/kdt/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 4주차</title>
-        <link>http://localhost:1313/posts/week4-retrospective/</link>
-        <pubDate>Fri, 11 Jul 2025 00:00:00 +0000</pubDate>
+        <lastBuildDate>Sun, 27 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/kdt/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 6주차</title>
+        <link>http://localhost:1313/posts/week6-retrospective/</link>
+        <pubDate>Sun, 27 Jul 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/posts/week4-retrospective/</guid>
+        <guid>http://localhost:1313/posts/week6-retrospective/</guid>
+        <description>&lt;h2 id=&#34;이번-주-키워드&#34;&gt;이번 주 키워드
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;SQL 기초&lt;/li&gt;
+&lt;li&gt;함수와 서브쿼리&lt;/li&gt;
+&lt;li&gt;JOIN, PIVOT, RANK&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;sql-기초&#34;&gt;SQL 기초
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;SQL은 DB 서버에게 명령을 내리는 질의 언어&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SQL*PLUS&lt;/strong&gt;: Oracle에서 SQL/PLSQL 실행 환경 제공&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PL/SQL&lt;/strong&gt;: Oracle의 절차형 확장 언어(프로그램 로직 추가)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;테이블의 구성요소&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;PK(Primary Key)&lt;/strong&gt;: Not Null + Unique, 테이블의 유일성 보장&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;FK(Foreign Key)&lt;/strong&gt;: 다른 테이블 PK를 참조, 무결성 유지&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;INDEX&lt;/strong&gt;: 검색 속도 향상, 인덱스 사용 시 O(log n)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;dml-data-manipulation-language&#34;&gt;DML (Data Manipulation Language)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;INSERT&lt;/strong&gt;: 한 행 입력&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;UPDATE / DELETE&lt;/strong&gt;: 한 번에 1~여러 행 데이터 수정/삭제 가능&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SELECT&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;산술식, computed column(연산 컬럼)&lt;/li&gt;
+&lt;li&gt;칼럼 연결: &lt;code&gt;name || &#39; &#39; || title as &amp;quot;직원명&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;중복 제거: &lt;code&gt;SELECT DISTINCT&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;WHERE 절: 범위/조건 지정, IN/LIKE/%, _ 등 패턴매칭
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;%&lt;/code&gt;: 0개 이상 문자, &lt;code&gt;_&lt;/code&gt;: 1개 문자&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;함수-function&#34;&gt;함수 (Function)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;문자형 함수&lt;/strong&gt;: UPPER, LOWER, INITCAP, CONCAT, SUBSTR, LENGTH, LPAD/RPAD, LTRIM/RTRIM, TRANSLATE, REPLACE&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;숫자형 함수&lt;/strong&gt;: ROUND, TRUNC, MOD, POWER, SQRT, SIGN, CHR&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;날짜형 함수&lt;/strong&gt;: SYSDATE, LAST_DAY, MONTHS_BETWEEN, ADD_MONTHS, ROUND/TRUNC 날짜 단위&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;변환 함수&lt;/strong&gt;: TO_CHAR, TO_NUMBER, TO_DATE&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;집계(그룹) 함수&lt;/strong&gt;: COUNT, AVG, SUM, MIN, MAX, STDDEV, VARIANCE&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;group-by와-subgroup&#34;&gt;GROUP BY와 Subgroup
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;GROUP BY 시 SELECT에 그룹 함수, 그룹 컬럼만 허용&lt;/li&gt;
+&lt;li&gt;WHERE → ROWNUM → ORDER BY 순서로 처리됨&lt;/li&gt;
+&lt;li&gt;그룹 세분화 가능: GROUP BY 여러 조건 지정&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;join&#34;&gt;JOIN
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;EQUIJOIN&lt;/strong&gt;: 동등 조인 (PK=FK)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;NON-EQUIJOIN&lt;/strong&gt;: 등급, 누적합 등 정확히 일치하지 않는 값끼리 조인&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;OUTER JOIN&lt;/strong&gt;: 매칭되지 않아도 표시 (부서 없는 직원 등)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SELF JOIN&lt;/strong&gt;: 테이블 자체를 서로 연결(상사-사원)&lt;/li&gt;
+&lt;li&gt;집합 연산: UNION, UNION ALL, INTERSECT, MINUS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;subquery-서브쿼리&#34;&gt;SubQuery (서브쿼리)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;쿼리 내부의 쿼리: 서브쿼리 → 메인쿼리 순으로 실행&lt;/li&gt;
+&lt;li&gt;WHERE, HAVING, 컬럼 등에 활용
+&lt;ul&gt;
+&lt;li&gt;단일 행/다중 행 비교 연산자 (=, IN, ANY, ALL, EXISTS 등)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;인라인 뷰&lt;/strong&gt;: FROM절에 서브쿼리 사용으로 효율적 검색&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;제약조건-constraint&#34;&gt;제약조건 (Constraint)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;컬럼 레벨 / 테이블 레벨&lt;/strong&gt; 모두 선언 가능&lt;/li&gt;
+&lt;li&gt;NOT NULL, UNIQUE, PRIMARY KEY, FOREIGN KEY, CHECK&lt;/li&gt;
+&lt;li&gt;데이터의 무결성을 각 단계(입력, 수정, 삭제)에서 보장&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;트랜잭션과-딕셔너리&#34;&gt;트랜잭션과 딕셔너리
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;트랜잭션&lt;/strong&gt;: SQL 문장 묶음, COMMIT/ROLLBACK&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;딕셔너리(데이터 사전)&lt;/strong&gt;: USER* / ALL* / DBA_ 등의 메타정보, V$(성능·락 정보), DICTIONARY 뷰&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;ddl-dcl&#34;&gt;DDL, DCL
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;DDL (Data Definition Language)&lt;/strong&gt;: 테이블 등 구조 생성·변경, 자동 커밋, 롤백 불가&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DCL (Data Control Language)&lt;/strong&gt;: 권한(ROLE) 부여/회수 - GRANT, REVOKE&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;객체object&#34;&gt;객체(Object)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;시퀀스(Sequence)&lt;/strong&gt;: 자동 번호(Unique Number) 발생, 여러 객체에서 공유 가능
+&lt;ul&gt;
+&lt;li&gt;START WITH, NEXTVAL, CURRVAL&lt;/li&gt;
+&lt;li&gt;생성 후 ALTER로 일부 속성만 변경 가능, 값은 자동 유효성 검사&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;인덱스(Index)&lt;/strong&gt;: B*Tree 기반, PK/UNIQUE는 Unique Index 자동 생성
+&lt;ul&gt;
+&lt;li&gt;데이터 적고 조회 비율 높으면 효과적(10~15% 이하)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;뷰(View)&lt;/strong&gt;: 복잡한 쿼리 결과를 간단히 재활용, 보안 및 접근 제한&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;시노님(Synonym)&lt;/strong&gt;: 다른 오브젝트에 별명 부여&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;프로그램 유닛&lt;/strong&gt;: 프로시저, 함수, 트리거, 패키지 등&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;고급-sql-기능&#34;&gt;고급 SQL 기능
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;NVL&lt;/strong&gt;: NULL → 다른 값 치환&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DECODE&lt;/strong&gt;: IF/ELSE처럼 조건에 따라 값 반환&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CASE&lt;/strong&gt;: 복잡한 조건 처리 가능&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PIVOT&lt;/strong&gt;: 행→열 전환(피벗 테이블 작성)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ROLLUP/CUBE&lt;/strong&gt;: 그룹별 합계(소계) 계산&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RANK&lt;/strong&gt;: 행별(그룹별) 순위&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;의사컬럼(Pseudo Column)&lt;/strong&gt;: ROWNUM(순번), ROWID(물리주소), 인덱스 사용 여부 등&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;트리거trigger&#34;&gt;트리거(Trigger)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;테이블에 특정한 DML(INSERT/UPDATE/DELETE) 명령이 발생시 자동 실행&lt;/li&gt;
+&lt;li&gt;타이밍(BEFORE/AFTER), 범위(STATEMENT/ROW)로 구분&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;옵티마이저&#34;&gt;옵티마이저
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;SQL을 가장 효율적으로 실행하도록 실행계획(컴파일) 결정&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;마무리&#34;&gt;마무리
+&lt;/h4&gt;&lt;p&gt;이번 주 학습을 통해 DDL, DML 등 자주 사용하는 SQL 문법에만 익숙해진 나머지,&lt;br&gt;
+실제로는 다양한 DB 개념들을 많이 잊고 있었다는 점을 다시 한 번 실감했다.&lt;br&gt;
+프로젝트나 실무에서 데이터 조작과 테이블 구조 관리에만 신경 쓰다 보면,&lt;br&gt;
+DB 설계나 튜닝에 있어서 정말 중요한 핵심 원리들이 뒷전으로 밀려나는 경우가 많은 것 같다.&lt;/p&gt;
+&lt;p&gt;특히 좋은 DB 설계와 효율적인 성능 튜닝을 위해서는 단지 SQL 쿼리문만 잘 쓰는 것에서 한 걸음 더 나아가,&lt;br&gt;
+제약조건이나 인덱스 구조, 트랜잭션 처리, 뷰·시퀀스 같은 객체의 특성과 역할을 확실히 이해하고 있어야 함을 느꼈다.&lt;br&gt;
+이번 기회를 통해 오래된 개념들도 제대로 복습하고, 단편적인 쿼리 작성 실력만 키우는 게 아니라&lt;br&gt;
+실무에 바로 적용 가능한 탄탄한 DB 설계 능력까지 함께 키워야겠다고 다짐했다.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 5주차</title>
+        <link>http://localhost:1313/posts/week5-retrospective/</link>
+        <pubDate>Sun, 20 Jul 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/week5-retrospective/</guid>
         <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
-&lt;h1 id=&#34;이번-주-키워드&#34;&gt;이번 주 키워드
-&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;컬렉션 프레임워크&lt;/li&gt;
-&lt;li&gt;모던 자바 기능&lt;/li&gt;
-&lt;li&gt;쓰레드&lt;/li&gt;
+&lt;h2 id=&#34;이번-주-키워드&#34;&gt;이번 주 키워드
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;쓰레드(Thread)&lt;/li&gt;
+&lt;li&gt;람다&lt;/li&gt;
+&lt;li&gt;스트림&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;1-컬렉션-프레임워크&#34;&gt;1. 컬렉션 프레임워크
-&lt;/h2&gt;&lt;p&gt;컬렉션: 여러 객체(데이터)를 모아 놓은 것&lt;br&gt;
-프레임워크: 표준화, 정형화된 체계적인 프로그래밍 방식&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;핵심 인터페이스&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;List&lt;/strong&gt;: 순서 O, 중복 O&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Set&lt;/strong&gt;: 순서 X, 중복 X&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Map&lt;/strong&gt;: key-value 구조, 순서 X, 키 중복 X, 값 중복 O&lt;/li&gt;
+&lt;h2 id=&#34;쓰레드thread&#34;&gt;쓰레드(Thread)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;프로세스(Process)&lt;/strong&gt;: 실행 중인 프로그램&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;쓰레드(Thread)&lt;/strong&gt;: 프로세스 내에서 실제 작업을 수행하는 최소 단위&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;멀티쓰레딩&lt;/strong&gt;: 하나의 프로세스에서 여러 쓰레드가 병렬로 작업, 효율성과 응답성 향상&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;list&#34;&gt;List
+&lt;h3 id=&#34;멀티쓰레딩의-장점과-단점&#34;&gt;멀티쓰레딩의 장점과 단점
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;중복 허용, 저장 순서 유지&lt;/li&gt;
-&lt;li&gt;주요 메서드: &lt;code&gt;get(int index)&lt;/code&gt;, &lt;code&gt;remove(int index)&lt;/code&gt;, &lt;code&gt;set(int index, Object obj)&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;ArrayList&lt;/strong&gt;&lt;/p&gt;
+&lt;li&gt;&lt;strong&gt;장점&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;저장 순서 유지, 중복 허용&lt;/li&gt;
-&lt;li&gt;remove 시 요소 이동 및 size 감소&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;장점&lt;/strong&gt;: 데이터 읽기 속도 빠름(O(1)), 구조 간단&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;단점&lt;/strong&gt;: 크기 변경 불가, 비순차적 추가/삭제 느림&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;LinkedList&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;추가/삭제 빠름(연결만 변경)&lt;/li&gt;
-&lt;li&gt;순서 O, 중복 허용, 조회는 O(n)&lt;/li&gt;
-&lt;li&gt;단방향 → Double Linked List, Double Circular Linked List로 개선&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;결론&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;순차적 추가/삭제: ArrayList &amp;gt; LinkedList&lt;/li&gt;
-&lt;li&gt;중간 데이터 추가/삭제: ArrayList LinkedList&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Stack &amp;amp; Queue&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Stack&lt;/strong&gt;: LIFO, 배열 적합, 객체 생성 가능&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Queue&lt;/strong&gt;: FIFO, LinkedList 적합, 구현체 필요&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;PriorityQueue&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;우선순위 높은 요소부터 꺼냄&lt;/li&gt;
-&lt;li&gt;null 저장 불가, 내부적으로 힙 구조 사용&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Deque&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;양쪽 끝에 추가/삭제 가능&lt;/li&gt;
-&lt;li&gt;구현체: ArrayDeque, LinkedList 등&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;컬렉션-요소-접근&#34;&gt;컬렉션 요소 접근
-&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Iterator &amp;amp; Iterable&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Iterator&lt;/strong&gt;: 컬렉션 요소를 하나씩 접근&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Iterable&lt;/strong&gt;: Iterator 반환 메서드 정의&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Map은 keySet(), entrySet() 등으로 Set 형태로 변환 후 iterator 사용&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Enumeration&lt;/strong&gt;: Iterator의 구버전&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;ListIterator&lt;/strong&gt;: 양방향, List 구현체만 사용 가능&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Arrays 유틸리티&lt;/strong&gt;&lt;/p&gt;
-&lt;table&gt;
-  &lt;thead&gt;
-      &lt;tr&gt;
-          &lt;th&gt;메서드&lt;/th&gt;
-          &lt;th&gt;설명&lt;/th&gt;
-      &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-      &lt;tr&gt;
-          &lt;td&gt;copyOf(), copyOfRange()&lt;/td&gt;
-          &lt;td&gt;배열 복사&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;fill(), setAll()&lt;/td&gt;
-          &lt;td&gt;배열 채우기&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;sort(), binarySearch()&lt;/td&gt;
-          &lt;td&gt;배열 정렬/검색 (정렬 후 검색해야 정확)&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;toString(), equals(), compare(), mismatch()&lt;/td&gt;
-          &lt;td&gt;배열 출력/비교/정렬/불일치 인덱스 반환&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;asList()&lt;/td&gt;
-          &lt;td&gt;배열을 List로 변환&lt;/td&gt;
-      &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;strong&gt;Comparator &amp;amp; Comparable&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Comparable&lt;/strong&gt;: 기본 정렬 기준(오름차순)
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;public interface Comparable {
-    int compareTo(T o);
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Comparator&lt;/strong&gt;: 별도 정렬 기준 제공(내림차순 등)
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;public interface Comparator {
-    int compare(T o1, T o2);
-    boolean equals(Object obj);
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;set&#34;&gt;Set
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;HashSet&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;중복 저장 불가, 저장 순서 없음&lt;/li&gt;
-&lt;li&gt;필요시 LinkedHashSet 사용&lt;/li&gt;
-&lt;li&gt;add() 시 hashCode(), equals()로 중복 판별&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;TreeSet&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;이진 탐색 트리 구조, 중복 불가, 순서 없음&lt;/li&gt;
-&lt;li&gt;정렬/검색/범위검색에 성능 우수&lt;/li&gt;
-&lt;li&gt;Comparable 구현 or Comparator 제공 필요&lt;/li&gt;
-&lt;li&gt;In-Order 순회로 정렬 결과 얻음&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;map&#34;&gt;Map
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;HashMap&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;(구버전: HashTable)&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Hashing 기법(배열+LinkedList 장점)&lt;/li&gt;
-&lt;li&gt;저장 순서 없음(LinkedHashMap 필요시 사용)&lt;/li&gt;
-&lt;li&gt;키는 유일, 값 중복 가능, null 허용&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;TreeMap&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;이진 검색 트리 구조, 검색/정렬에 적합&lt;/li&gt;
-&lt;li&gt;범위검색/정렬 필요시 사용&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Properties&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;String key-value 저장, Hashtable 상속&lt;/li&gt;
-&lt;li&gt;저장 순서 없음, Enumeration 사용&lt;/li&gt;
-&lt;li&gt;환경설정 파일 등에서 사용, 파일 입출력 지원&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;collections-클래스&#34;&gt;Collections 클래스
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;동기화 컬렉션&lt;/strong&gt;: &lt;code&gt;Collections.synchronizedXXX()&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;변경 불가 컬렉션&lt;/strong&gt;: &lt;code&gt;Collections.unmodifiableXXX()&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;한 종류 객체만 저장&lt;/strong&gt;: &lt;code&gt;Collections.checkedXXX()&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;싱글톤 컬렉션&lt;/strong&gt;: &lt;code&gt;Collections.singletonXXX()&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h1 id=&#34;2-모던-자바-기능&#34;&gt;2. 모던 자바 기능
-&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;제너릭스 (Generics)&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;다양한 타입의 객체를 다루는 메서드/컬렉션에서 컴파일 시 타입 체크&lt;/li&gt;
-&lt;li&gt;타입 안정성, 형변환 생략 가능&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;선언 및 사용법&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Box appleBox = new Box();
-Box fruitBox = new Box();
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;static 멤버에는 타입 변수 사용 불가&lt;/li&gt;
-&lt;li&gt;제너릭 배열 생성 불가(참조 변수 선언은 가능)&lt;/li&gt;
-&lt;li&gt;JDK 7+에서는 생성자 타입 생략 가능: &lt;code&gt;new ArrayList&amp;lt;&amp;gt;()&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;제한된 제너릭&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;extends&lt;/code&gt;: 특정 타입의 자손만 허용&lt;/li&gt;
-&lt;li&gt;인터페이스도 extends, 다중 제한은 &lt;code&gt;&amp;amp;&lt;/code&gt;로 구분&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;와일드카드&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;&amp;lt;? extends T&amp;gt;&lt;/code&gt;: 상한 제한(자손만 허용)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;lt;? super T&amp;gt;&lt;/code&gt;: 하한 제한(조상만 허용)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;lt;?&amp;gt;&lt;/code&gt;: 제한 없음, &lt;code&gt;&amp;lt;? extends Object&amp;gt;&lt;/code&gt; 와 동일&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;제너릭 메서드&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;메서드의 선언부에 제너릭 타입이 선언된 메서드&lt;/li&gt;
-&lt;li&gt;반환타입 바로 앞에 선언&lt;/li&gt;
-&lt;li&gt;제너릭 클래스가 아닌 클래스에도 정의 가능&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;형변환과 타입 제거&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;제너릭 ↔ 원시타입: 형변환 가능(경고 발생)&lt;/li&gt;
-&lt;li&gt;제너릭 타입 간 형변환 불가&lt;/li&gt;
-&lt;li&gt;컴파일 시 타입 체크 후 제너릭 정보 제거(타입 소거)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;열거형-enum&#34;&gt;열거형 (Enum)
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;관련 상수를 편리하게 선언, 값 비교(&lt;code&gt;==&lt;/code&gt;)와 타입 체크 모두 가능&lt;/li&gt;
-&lt;li&gt;객체 개수 제한(생성자 private)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;선언 및 사용법&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;enum Direction { EAST, SOUTH, WEST, NORTH }
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;비교: &lt;code&gt;==&lt;/code&gt; 또는 &lt;code&gt;compareTo()&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;JDK 21+: switch문 조건식에 사용, 모든 case 처리 필요&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;주요 메서드&lt;/strong&gt;&lt;/p&gt;
-&lt;table&gt;
-  &lt;thead&gt;
-      &lt;tr&gt;
-          &lt;th&gt;메서드&lt;/th&gt;
-          &lt;th&gt;설명&lt;/th&gt;
-      &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-      &lt;tr&gt;
-          &lt;td&gt;getDeclaringClass()&lt;/td&gt;
-          &lt;td&gt;열거형의 Class 객체 반환&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;name()&lt;/td&gt;
-          &lt;td&gt;상수 이름 반환&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;ordinal()&lt;/td&gt;
-          &lt;td&gt;정의 순서(0부터) 반환&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;valueOf(Class, String)&lt;/td&gt;
-          &lt;td&gt;이름으로 상수 반환&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;values()&lt;/td&gt;
-          &lt;td&gt;모든 상수 배열 반환&lt;/td&gt;
-      &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;strong&gt;멤버 추가&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;enum Direction {
-    EAST(1), SOUTH(5), WEST(-1), NORTH(10);
-    private final int value;
-    Direction(int value) { this.value = value; }
-    public int getValue() { return value; }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;애너테이션-annotation&#34;&gt;애너테이션 (Annotation)
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;프로그램에 메타데이터(부가 정보) 제공&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;표준 애너테이션&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;@Override&lt;/code&gt;, &lt;code&gt;@SuppressWarnings&lt;/code&gt;, &lt;code&gt;@FunctionalInterface&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;메타 애너테이션&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;@Target&lt;/code&gt;, &lt;code&gt;@Retention&lt;/code&gt;, &lt;code&gt;@Native&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;record-레코드&#34;&gt;Record (레코드)
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;불변 데이터 클래스를 간편하게 작성(JDK 16~)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;record Point(int x, int y) {}
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;모든 레코드는 &lt;code&gt;java.lang.Record&lt;/code&gt; 상속(final, 다른 클래스 상속 불가)&lt;/li&gt;
-&lt;li&gt;내부 변수/초기화 블럭 추가 불가, 내부 레코드는 항상 static&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;실드-클래스-sealed-class&#34;&gt;실드 클래스 (Sealed Class)
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;상속 가능한 자식 클래스를 명시적으로 제한(JDK 17~)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sealed class Shape permits Circle, Rectangle {}
-final class Circle extends Shape {}
-non-sealed class Rectangle extends Shape {}
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;자식은 final, sealed, non-sealed 중 하나여야 함&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;모듈-시스템-module-system&#34;&gt;모듈 시스템 (Module System)
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;패키지의 상위 집합, JDK 9+ 도입&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;module-info.java&lt;/code&gt;로 모듈의 이름, 의존성, 공개 패키지 등 정의&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;module org.example.myModule {
-    requires java.desktop;
-    exports org.example.pkgA;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;모듈 이름은 전역적으로 유일해야 함&lt;/li&gt;
-&lt;li&gt;전이적 의존성(&lt;code&gt;requires transitive&lt;/code&gt;) 지원&lt;/li&gt;
-&lt;li&gt;순환 의존성 금지&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;자동 모듈 &amp;amp; 이름 없는 모듈&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;모듈 설명자 없는 jar → 자동 모듈&lt;/li&gt;
-&lt;li&gt;이름 없는 모듈은 모든 모듈에 의존, 모든 패키지 노출&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h1 id=&#34;3-쓰레드&#34;&gt;3. 쓰레드
-&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;프로세스와 쓰레드&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;프로세스&lt;/strong&gt;: 실행 중인 프로그램(독립적 작업 단위)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;쓰레드&lt;/strong&gt;: 프로세스 내에서 실행되는 작업 흐름의 단위&lt;/li&gt;
-&lt;/ul&gt;
-&lt;table&gt;
-  &lt;thead&gt;
-      &lt;tr&gt;
-          &lt;th&gt;구분&lt;/th&gt;
-          &lt;th&gt;프로세스(Process)&lt;/th&gt;
-          &lt;th&gt;쓰레드(Thread)&lt;/th&gt;
-      &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-      &lt;tr&gt;
-          &lt;td&gt;정의&lt;/td&gt;
-          &lt;td&gt;실행 중인 프로그램(독립적 작업 단위)&lt;/td&gt;
-          &lt;td&gt;프로세스 내 실행 흐름(작업 단위)&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;메모리&lt;/td&gt;
-          &lt;td&gt;독립적(코드, 데이터, 힙, 스택 모두 별도)&lt;/td&gt;
-          &lt;td&gt;코드/데이터/힙 공유, 스택만 독립&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;자원&lt;/td&gt;
-          &lt;td&gt;자체 소유, 다른 프로세스와 공유 불가&lt;/td&gt;
-          &lt;td&gt;같은 프로세스 내에서 자원 공유&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;통신&lt;/td&gt;
-          &lt;td&gt;IPC 등 별도 방식 필요&lt;/td&gt;
-          &lt;td&gt;간단(공유 변수 등)&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;오버헤드&lt;/td&gt;
-          &lt;td&gt;크고 무거움&lt;/td&gt;
-          &lt;td&gt;가볍고 빠름&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;안정성&lt;/td&gt;
-          &lt;td&gt;하나 종료돼도 다른 프로세스 영향 없음&lt;/td&gt;
-          &lt;td&gt;하나 오류 시 전체 프로세스 영향 가능&lt;/td&gt;
-      &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;strong&gt;멀티태스킹 vs 멀티쓰레딩&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;멀티태스킹&lt;/strong&gt;: 여러 프로세스가 동시에 실행&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;멀티쓰레딩&lt;/strong&gt;: 하나의 프로세스 내 여러 쓰레드가 동시에 작업 수행&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;장점&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;CPU 사용률 및 자원 효율성 향상&lt;/li&gt;
-&lt;li&gt;사용자 응답성 향상&lt;/li&gt;
-&lt;li&gt;코드 분리로 간결해짐&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;단점&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;자원 공유로 인한 동기화, 교착상태(Deadlock) 등 문제 발생 가능&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;쓰레드의-구현과-실행&#34;&gt;쓰레드의 구현과 실행
-&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;구현 방법&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Thread 클래스 상속&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;class MyThread extends Thread {
-    public void run() {
-        System.out.println(getName());
-    }
-}
-MyThread t = new MyThread();
-t.start();
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;단점: 다른 클래스 상속 불가&lt;/li&gt;
+&lt;li&gt;CPU 사용률 증가&lt;/li&gt;
+&lt;li&gt;자원 활용 효율적&lt;/li&gt;
+&lt;li&gt;사용자 응답성 증가&lt;/li&gt;
+&lt;li&gt;코드 모듈화, 관리 용이&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Runnable 인터페이스 구현&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;class MyRunnable implements Runnable {
-    public void run() {
-        System.out.println(Thread.currentThread().getName());
-    }
-}
-Thread t = new Thread(new MyRunnable());
-t.start();
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;장점: 재사용성, 코드 일관성, 다른 클래스 상속 가능&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;단점&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;자원 공유 시 동기화 문제&lt;/li&gt;
+&lt;li&gt;교착상태(Deadlock) 위험&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;실행&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;반드시 &lt;code&gt;start()&lt;/code&gt; 호출 → 새로운 쓰레드가 생성되어 run() 실행&lt;/li&gt;
-&lt;li&gt;한 번 종료된 쓰레드는 재실행 불가(새 객체 필요)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;start()와 run()의 차이&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;run()&lt;/code&gt;: 단순 메서드 호출(새 쓰레드 생성 X)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;start()&lt;/code&gt;: 새로운 쓰레드 생성, 호출 스택 생성 후 run() 호출&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;실행 중인 사용자 쓰레드가 하나도 없으면 프로그램 종료&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;싱글쓰레드와 멀티쓰레드&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;싱글쓰레드&lt;/strong&gt;: 한 작업이 끝난 후 다른 작업 시작&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;멀티쓰레드&lt;/strong&gt;: 여러 작업을 번갈아가며 처리, 동시에 실행되는 것처럼 보임&lt;/li&gt;
+&lt;p&gt;교착상태: 여러 쓰레드가 서로 필요한 자원을 점유하며 서로 대기, 작업이 중단된 상태&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h2 id=&#34;쓰레드-구현-방식&#34;&gt;쓰레드 구현 방식
+&lt;/h2&gt;&lt;h3 id=&#34;1-thread-클래스-상속-template-method-pattern&#34;&gt;1. Thread 클래스 상속 (Template Method Pattern)
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyThread&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;extends&lt;/span&gt; Thread {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;run&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        System.&lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;println&lt;/span&gt;(getName());
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;MyThread myThread &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; MyThread();
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;단점: 다른 클래스 상속 불가&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;병행(Concurrency) vs 병렬(Parallelism)&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;병행&lt;/strong&gt;: 여러 쓰레드가 여러 작업을 동시에 진행&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;병렬&lt;/strong&gt;: 하나의 작업을 여러 쓰레드가 나눠서 처리&lt;/li&gt;
+&lt;h3 id=&#34;2-runnable-인터페이스-구현-strategy-pattern&#34;&gt;2. Runnable 인터페이스 구현 (Strategy Pattern)
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyRunnable&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;implements&lt;/span&gt; Runnable {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;run&lt;/span&gt;() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        System.&lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;println&lt;/span&gt;(Thread.&lt;span style=&#34;color:#a6e22e&#34;&gt;currentThread&lt;/span&gt;().&lt;span style=&#34;color:#a6e22e&#34;&gt;getName&lt;/span&gt;());
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Runnable r &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; MyRunnable();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Thread t &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; Thread(r);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;장점: 코드 재사용성, 일관성 우수&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;쓰레드의 우선순위&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;1~10 범위의 priority 멤버변수로 우선순위 지정&lt;/li&gt;
-&lt;li&gt;높을수록 더 많은 작업 시간 할당&lt;/li&gt;
-&lt;li&gt;시각적/응답성 작업은 우선순위 높게 설정&lt;/li&gt;
-&lt;li&gt;우선순위는 부모 쓰레드로부터 상속&lt;/li&gt;
+&lt;h3 id=&#34;쓰레드-실행&#34;&gt;쓰레드 실행
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;반드시 &lt;code&gt;start()&lt;/code&gt; 호출 → 새로운 쓰레드 생성&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;run()&lt;/code&gt;만 호출 시 일반 메서드 실행&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;쓰레드 그룹&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;관련 쓰레드를 그룹으로 관리&lt;/li&gt;
-&lt;li&gt;그룹 내 다른 그룹 포함 가능(계층 구조)&lt;/li&gt;
-&lt;li&gt;모든 쓰레드는 반드시 쓰레드 그룹에 포함&lt;/li&gt;
-&lt;li&gt;기본적으로 main 쓰레드 그룹의 하위 그룹&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;데몬 쓰레드&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;보조 작업(예: 가비지 컬렉터) 담당&lt;/li&gt;
-&lt;li&gt;무한루프+조건문으로 대기하다가 작업 수행&lt;/li&gt;
-&lt;li&gt;데몬 쓰레드가 생성한 쓰레드도 자동으로 데몬&lt;/li&gt;
-&lt;li&gt;사용자 쓰레드가 모두 종료되면 데몬도 자동 종료&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;쓰레드 실행 제어&lt;/strong&gt;&lt;/p&gt;
-&lt;table&gt;
+&lt;h2 id=&#34;쓰레드-실행-제어&#34;&gt;쓰레드 실행 제어
+&lt;/h2&gt;&lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
           &lt;th&gt;메서드&lt;/th&gt;
@@ -454,27 +219,27 @@ t.start();
   &lt;/thead&gt;
   &lt;tbody&gt;
       &lt;tr&gt;
-          &lt;td&gt;&lt;code&gt;static void sleep()&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;지정 시간 동안 쓰레드 일시 정지&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;sleep(long ms)&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;지정 시간만큼 쓰레드 일시정지&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td&gt;&lt;code&gt;void join()&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;지정 시간 동안 쓰레드가 실행되도록 함&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;join()&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;지정 쓰레드 작업 완료까지 대기&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td&gt;&lt;code&gt;interrupt()&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;쓰레드 작업 취소(정지 요청, sleep/join 상태 깨움)&lt;/td&gt;
+          &lt;td&gt;일시정지 중인 쓰레드를 깨움&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td&gt;&lt;code&gt;static void yield()&lt;/code&gt;&lt;/td&gt;
-          &lt;td&gt;실행 시간 양보, 실행 대기 상태로 전환&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;yield()&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;CPU를 다른 동등 우선순위 쓰레드에게 양보&lt;/td&gt;
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;resume(), stop(), suspend()는 데드락 위험으로 deprecated&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;쓰레드의 상태&lt;/strong&gt;&lt;/p&gt;
-&lt;table&gt;
+&lt;p&gt;&lt;code&gt;resume()&lt;/code&gt;, &lt;code&gt;suspend()&lt;/code&gt;, &lt;code&gt;stop()&lt;/code&gt;은 데드락 등 안전 이슈로 사용 불가(Deprecated)[3][5].&lt;/p&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;쓰레드-상태&#34;&gt;쓰레드 상태
+&lt;/h3&gt;&lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
           &lt;th&gt;상태&lt;/th&gt;
@@ -484,44 +249,227 @@ t.start();
   &lt;tbody&gt;
       &lt;tr&gt;
           &lt;td&gt;NEW&lt;/td&gt;
-          &lt;td&gt;생성, start() 미호출&lt;/td&gt;
+          &lt;td&gt;쓰레드 생성, 아직 &lt;code&gt;start()&lt;/code&gt; 호출 전&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td&gt;RUNNABLE&lt;/td&gt;
-          &lt;td&gt;실행 중 또는 실행 가능&lt;/td&gt;
+          &lt;td&gt;실행 중 혹은 실행 대기&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td&gt;BLOCKED&lt;/td&gt;
-          &lt;td&gt;동기화 블록에 의해 일시 정지(lock 대기)&lt;/td&gt;
+          &lt;td&gt;락 획득 대기 중&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td&gt;WAITING&lt;/td&gt;
-          &lt;td&gt;실행 가능하지 않은 일시 정지(조건 대기 등)&lt;/td&gt;
+          &lt;td&gt;무한 대기&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td&gt;TIMED_WAITING&lt;/td&gt;
-          &lt;td&gt;지정 시간 동안 일시 정지&lt;/td&gt;
+          &lt;td&gt;지정된 시간 대기&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td&gt;TERMINATED&lt;/td&gt;
-          &lt;td&gt;작업 종료&lt;/td&gt;
+          &lt;td&gt;실행 종료&lt;/td&gt;
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;br&gt;
+&lt;h2 id=&#34;쓰레드의-동기화&#34;&gt;쓰레드의 동기화
+&lt;/h2&gt;&lt;p&gt;멀티쓰레드 환경에서 &lt;strong&gt;공유 자원&lt;/strong&gt; 접근 시 데이터 일관성을 보장하기 위해 동기화 필요&lt;/p&gt;
+&lt;h3 id=&#34;임계-영역--락lock&#34;&gt;임계 영역 &amp;amp; 락(Lock)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;임계 영역&lt;/strong&gt;: 동시에 하나의 쓰레드만 실행할 수 있는 코드 영역&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Lock&lt;/strong&gt;: 객체에 대한 접근을 제한하여 데이터 일관성 보장&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;synchronized&#34;&gt;synchronized
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;메서드 전체 동기화&lt;/strong&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;synchronized&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;method&lt;/span&gt;() { ... }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;블록 동기화&lt;/strong&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;synchronized&lt;/span&gt;(참조변수) { ... }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;객체별로 하나의 Lock 보유&lt;/li&gt;
+&lt;li&gt;가능한 한 임계 영역 최소화 (블록 단위)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;wait--notify&#34;&gt;wait() / notify()
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;wait()&lt;/strong&gt;: 락을 반납하고 대기&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;notify()/notifyAll()&lt;/strong&gt;: 대기 중인 쓰레드 깨움&lt;/li&gt;
+&lt;li&gt;Object 메서드이므로 동기화 블록/메서드 내에서만 사용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;명시적-lock과-condition&#34;&gt;명시적 Lock과 Condition
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Lock 클래스&lt;/strong&gt;: java.util.concurrent.locks
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ReentrantLock&lt;/code&gt;, &lt;code&gt;ReentrantReadWriteLock&lt;/code&gt;, &lt;code&gt;StampedLock&lt;/code&gt; 등&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;조건 변수(Condition)&lt;/strong&gt;: 선별적인 알림, 기아(starvation) 해소&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;lock.&lt;span style=&#34;color:#a6e22e&#34;&gt;lock&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// 임계 영역&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;} &lt;span style=&#34;color:#66d9ef&#34;&gt;finally&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    lock.&lt;span style=&#34;color:#a6e22e&#34;&gt;unlock&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;락은 수동 해제 필요(&lt;code&gt;finally&lt;/code&gt;로 처리)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;volatile&#34;&gt;volatile
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;변수의 값을 각 쓰레드 캐시에 저장하지 않고 &lt;strong&gt;항상 메모리에서 읽음&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;변수의 원자성만 보장, 동기화 대용 불가&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;fork--join-프레임워크&#34;&gt;fork &amp;amp; join 프레임워크
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;JDK7 도입, 작업을 작은 단위로 나눠 병렬 수행&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RecursiveAction&lt;/code&gt;: 반환값 없음&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RecursiveTask&lt;/code&gt;: 반환값 있음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;작업 분할&lt;/strong&gt; → &lt;strong&gt;work stealing&lt;/strong&gt; (작업 훔치기)로 부하 분산&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;가상-쓰레드virtual-thread&#34;&gt;가상 쓰레드(Virtual Thread)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;적은 자원으로 &lt;strong&gt;수십~수천만 개&lt;/strong&gt; 생성 가능&lt;/li&gt;
+&lt;li&gt;항상 &lt;strong&gt;데몬 쓰레드&lt;/strong&gt;, 우선순위 고정(5)&lt;/li&gt;
+&lt;li&gt;ThreadLocal 사용 주의, 풀링 금지&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;구분&lt;/th&gt;
+          &lt;th&gt;플랫폼 쓰레드&lt;/th&gt;
+          &lt;th&gt;가상 쓰레드&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;스케줄러&lt;/td&gt;
+          &lt;td&gt;OS&lt;/td&gt;
+          &lt;td&gt;JDK&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;생성수&lt;/td&gt;
+          &lt;td&gt;수십만 개&lt;/td&gt;
+          &lt;td&gt;수천만 개&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;호출 스택&lt;/td&gt;
+          &lt;td&gt;2MB (고정)&lt;/td&gt;
+          &lt;td&gt;4KB 이상 (가변)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;생성 시간&lt;/td&gt;
+          &lt;td&gt;40us&lt;/td&gt;
+          &lt;td&gt;0.4us&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;컨텍스트 스위칭&lt;/td&gt;
+          &lt;td&gt;10us&lt;/td&gt;
+          &lt;td&gt;1us&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;컨티뉴에이션, 스택 청크&lt;/strong&gt; 기반으로 경량 동작&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;executor--executorservice&#34;&gt;Executor &amp;amp; ExecutorService
+&lt;/h2&gt;&lt;h3 id=&#34;executor-패턴&#34;&gt;Executor 패턴
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;작업 실행 추상화&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;threadfactory&#34;&gt;ThreadFactory
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;생성과 실행 분리, 객체 재사용에 유리&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;executorservice&#34;&gt;ExecutorService
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;다양한 쓰레드 풀 제공
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;SingleThreadExecutor&lt;/strong&gt;: 하나의 쓰레드가 모든 작업 처리&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;newThreadPerTaskExecutor&lt;/strong&gt;: 작업마다 플랫폼 쓰레드 생성(재사용 X)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;newVirtualThreadPerTaskExecutor&lt;/strong&gt;: 작업마다 가상 쓰레드 생성(재사용 X)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;future&#34;&gt;Future
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;비동기 작업 결과 조회/통제 객체&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;get()&lt;/code&gt;: 결과 반환(블록), &lt;code&gt;cancel()&lt;/code&gt;: 작업 취소&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;completablefuture&#34;&gt;CompletableFuture
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;여러 비동기 작업을 연결하거나 조합할 때 활용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;람다와-스트림-함수형-프로그래밍-맛보기&#34;&gt;람다와 스트림 (함수형 프로그래밍 맛보기)
+&lt;/h2&gt;&lt;h3 id=&#34;람다식&#34;&gt;람다식
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;익명 함수, 메서드를 간결히 표현&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(매개변수) -&amp;gt; {실행문}&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;함수형-인터페이스&#34;&gt;함수형 인터페이스
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;추상 메서드 1개만 선언&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@FunctionalInterface&lt;/code&gt;로 컴파일러 안전성 확보&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@FunctionalInterface&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;MyFunction&lt;/span&gt;{ &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;myMethod&lt;/span&gt;(); }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;스트림stream&#34;&gt;스트림(Stream)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;데이터 소스&lt;/strong&gt;(컬렉션, 배열 등)를 복잡한 반복문 없이 다루는 방법&lt;/li&gt;
+&lt;li&gt;연산은 대부분 &lt;strong&gt;파이프라인&lt;/strong&gt; 형태&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;스트림-특징&#34;&gt;스트림 특징
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;데이터 원본 불변&lt;/li&gt;
+&lt;li&gt;일회성&lt;/li&gt;
+&lt;li&gt;내부반복&lt;/li&gt;
+&lt;li&gt;중간/최종 연산 분리&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;스트림-연산-종류&#34;&gt;스트림 연산 종류
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;중간 연산&lt;/strong&gt;: filter, map, sorted 등 (0~여러 번)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;최종 연산&lt;/strong&gt;: forEach, reduce, collect 등 (0~1번)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;collect-vs-reduce&#34;&gt;collect() vs reduce()
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;collect()&lt;/code&gt; : 그룹별 집계·추출(분할, 그룹화)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;reduce()&lt;/code&gt; : 누적 합산&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;병렬-스트림&#34;&gt;병렬 스트림
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;여러 CPU 코어 사용, 요소 순서 보장 X&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;optional&#34;&gt;Optional
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;null 안전하게 다루기 위한 컨테이너&lt;/li&gt;
+&lt;li&gt;null 반환 대신 Optional 객체 반환&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;참고사항:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;멀티쓰레딩/가상쓰레드 설계시 동기화·Deadlock 예방·디버깅 용이성 필수 고려&lt;/li&gt;
+&lt;li&gt;비동기, 동시성 제어시 ExecutorService·CompletableFuture 활용&lt;/li&gt;
+&lt;li&gt;함수형 코드 작성시 함수형 인터페이스와 람다 적극 활용&lt;/li&gt;
+&lt;li&gt;대량 데이터 처리시 Stream과 Optional 적극 활용&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;마무리&#34;&gt;마무리
-&lt;/h2&gt;&lt;p&gt;낯선 개념들이 많아서 아직 정리가 덜 된 것 같지만&lt;br&gt;
-한 번에 이해하려는 게 오히려 욕심인 거 같기도&amp;hellip;?&lt;/p&gt;
-&lt;p&gt;익숙해질 때까지 자주 들여다봐야 할 것 같다.&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;이번 주는 쓰레드, 동기화, 가상 쓰레드 같은 핵심 개념을 한 번에 완벽하게 이해하기가 쉽지 않았던 한 주였다.&lt;br&gt;
+개념만 읽을 때는 헷갈리는 부분도 많았지만, 직접 다양한 예제 코드를 작성해보면서 조금씩 감을 잡아야겠다.&lt;/p&gt;
+&lt;p&gt;또, 가상 쓰레드(virtual thread)나 ExecutorService, 람다와 스트림 같은 최신 트렌드까지 폭넓게 다루다 보니&lt;br&gt;
+한 번에 다 흡수하긴 어렵다는 생각도 들었다.&lt;br&gt;
+하지만 이런 내용이 최신 Java에서 왜 중요한지, 앞으로 개발하면서 어떻게 활용할 수 있을지 궁금해지는 계기가 되었다.&lt;/p&gt;
+&lt;p&gt;앞으로는 각 개념별로 작은 예시를 직접 더 많이 만들어보고, 잘 정리해서 내 것으로 만들어야 할 것 같다.&lt;br&gt;
+어렵고 멀게만 느껴졌던 동시성, 함수형 프로그래밍에도 점점 익숙해질 수 있도록 꾸준히 연습해야겠다.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
         <title>[커널아카데미] 백엔드 개발 부트캠프 13기 4주차</title>
-        <link>http://localhost:1313/posts/week5-retrospective/</link>
+        <link>http://localhost:1313/posts/week4-retrospective/</link>
         <pubDate>Fri, 11 Jul 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/posts/week5-retrospective/</guid>
+        <guid>http://localhost:1313/posts/week4-retrospective/</guid>
         <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
 &lt;h1 id=&#34;이번-주-키워드&#34;&gt;이번 주 키워드
 &lt;/h1&gt;&lt;ul&gt;

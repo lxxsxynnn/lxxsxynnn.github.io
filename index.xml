@@ -6,7 +6,145 @@
         <description>Recent content on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Sun, 20 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 27 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 6주차</title>
+        <link>http://localhost:1313/posts/week6-retrospective/</link>
+        <pubDate>Sun, 27 Jul 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/week6-retrospective/</guid>
+        <description>&lt;h2 id=&#34;이번-주-키워드&#34;&gt;이번 주 키워드
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;SQL 기초&lt;/li&gt;
+&lt;li&gt;함수와 서브쿼리&lt;/li&gt;
+&lt;li&gt;JOIN, PIVOT, RANK&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;sql-기초&#34;&gt;SQL 기초
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;SQL은 DB 서버에게 명령을 내리는 질의 언어&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SQL*PLUS&lt;/strong&gt;: Oracle에서 SQL/PLSQL 실행 환경 제공&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PL/SQL&lt;/strong&gt;: Oracle의 절차형 확장 언어(프로그램 로직 추가)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;테이블의 구성요소&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;PK(Primary Key)&lt;/strong&gt;: Not Null + Unique, 테이블의 유일성 보장&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;FK(Foreign Key)&lt;/strong&gt;: 다른 테이블 PK를 참조, 무결성 유지&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;INDEX&lt;/strong&gt;: 검색 속도 향상, 인덱스 사용 시 O(log n)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;dml-data-manipulation-language&#34;&gt;DML (Data Manipulation Language)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;INSERT&lt;/strong&gt;: 한 행 입력&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;UPDATE / DELETE&lt;/strong&gt;: 한 번에 1~여러 행 데이터 수정/삭제 가능&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SELECT&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;산술식, computed column(연산 컬럼)&lt;/li&gt;
+&lt;li&gt;칼럼 연결: &lt;code&gt;name || &#39; &#39; || title as &amp;quot;직원명&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;중복 제거: &lt;code&gt;SELECT DISTINCT&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;WHERE 절: 범위/조건 지정, IN/LIKE/%, _ 등 패턴매칭
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;%&lt;/code&gt;: 0개 이상 문자, &lt;code&gt;_&lt;/code&gt;: 1개 문자&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;함수-function&#34;&gt;함수 (Function)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;문자형 함수&lt;/strong&gt;: UPPER, LOWER, INITCAP, CONCAT, SUBSTR, LENGTH, LPAD/RPAD, LTRIM/RTRIM, TRANSLATE, REPLACE&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;숫자형 함수&lt;/strong&gt;: ROUND, TRUNC, MOD, POWER, SQRT, SIGN, CHR&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;날짜형 함수&lt;/strong&gt;: SYSDATE, LAST_DAY, MONTHS_BETWEEN, ADD_MONTHS, ROUND/TRUNC 날짜 단위&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;변환 함수&lt;/strong&gt;: TO_CHAR, TO_NUMBER, TO_DATE&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;집계(그룹) 함수&lt;/strong&gt;: COUNT, AVG, SUM, MIN, MAX, STDDEV, VARIANCE&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;group-by와-subgroup&#34;&gt;GROUP BY와 Subgroup
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;GROUP BY 시 SELECT에 그룹 함수, 그룹 컬럼만 허용&lt;/li&gt;
+&lt;li&gt;WHERE → ROWNUM → ORDER BY 순서로 처리됨&lt;/li&gt;
+&lt;li&gt;그룹 세분화 가능: GROUP BY 여러 조건 지정&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;join&#34;&gt;JOIN
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;EQUIJOIN&lt;/strong&gt;: 동등 조인 (PK=FK)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;NON-EQUIJOIN&lt;/strong&gt;: 등급, 누적합 등 정확히 일치하지 않는 값끼리 조인&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;OUTER JOIN&lt;/strong&gt;: 매칭되지 않아도 표시 (부서 없는 직원 등)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SELF JOIN&lt;/strong&gt;: 테이블 자체를 서로 연결(상사-사원)&lt;/li&gt;
+&lt;li&gt;집합 연산: UNION, UNION ALL, INTERSECT, MINUS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;subquery-서브쿼리&#34;&gt;SubQuery (서브쿼리)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;쿼리 내부의 쿼리: 서브쿼리 → 메인쿼리 순으로 실행&lt;/li&gt;
+&lt;li&gt;WHERE, HAVING, 컬럼 등에 활용
+&lt;ul&gt;
+&lt;li&gt;단일 행/다중 행 비교 연산자 (=, IN, ANY, ALL, EXISTS 등)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;인라인 뷰&lt;/strong&gt;: FROM절에 서브쿼리 사용으로 효율적 검색&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;제약조건-constraint&#34;&gt;제약조건 (Constraint)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;컬럼 레벨 / 테이블 레벨&lt;/strong&gt; 모두 선언 가능&lt;/li&gt;
+&lt;li&gt;NOT NULL, UNIQUE, PRIMARY KEY, FOREIGN KEY, CHECK&lt;/li&gt;
+&lt;li&gt;데이터의 무결성을 각 단계(입력, 수정, 삭제)에서 보장&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;트랜잭션과-딕셔너리&#34;&gt;트랜잭션과 딕셔너리
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;트랜잭션&lt;/strong&gt;: SQL 문장 묶음, COMMIT/ROLLBACK&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;딕셔너리(데이터 사전)&lt;/strong&gt;: USER* / ALL* / DBA_ 등의 메타정보, V$(성능·락 정보), DICTIONARY 뷰&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;ddl-dcl&#34;&gt;DDL, DCL
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;DDL (Data Definition Language)&lt;/strong&gt;: 테이블 등 구조 생성·변경, 자동 커밋, 롤백 불가&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DCL (Data Control Language)&lt;/strong&gt;: 권한(ROLE) 부여/회수 - GRANT, REVOKE&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;객체object&#34;&gt;객체(Object)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;시퀀스(Sequence)&lt;/strong&gt;: 자동 번호(Unique Number) 발생, 여러 객체에서 공유 가능
+&lt;ul&gt;
+&lt;li&gt;START WITH, NEXTVAL, CURRVAL&lt;/li&gt;
+&lt;li&gt;생성 후 ALTER로 일부 속성만 변경 가능, 값은 자동 유효성 검사&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;인덱스(Index)&lt;/strong&gt;: B*Tree 기반, PK/UNIQUE는 Unique Index 자동 생성
+&lt;ul&gt;
+&lt;li&gt;데이터 적고 조회 비율 높으면 효과적(10~15% 이하)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;뷰(View)&lt;/strong&gt;: 복잡한 쿼리 결과를 간단히 재활용, 보안 및 접근 제한&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;시노님(Synonym)&lt;/strong&gt;: 다른 오브젝트에 별명 부여&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;프로그램 유닛&lt;/strong&gt;: 프로시저, 함수, 트리거, 패키지 등&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;고급-sql-기능&#34;&gt;고급 SQL 기능
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;NVL&lt;/strong&gt;: NULL → 다른 값 치환&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DECODE&lt;/strong&gt;: IF/ELSE처럼 조건에 따라 값 반환&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CASE&lt;/strong&gt;: 복잡한 조건 처리 가능&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PIVOT&lt;/strong&gt;: 행→열 전환(피벗 테이블 작성)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ROLLUP/CUBE&lt;/strong&gt;: 그룹별 합계(소계) 계산&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RANK&lt;/strong&gt;: 행별(그룹별) 순위&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;의사컬럼(Pseudo Column)&lt;/strong&gt;: ROWNUM(순번), ROWID(물리주소), 인덱스 사용 여부 등&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;트리거trigger&#34;&gt;트리거(Trigger)
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;테이블에 특정한 DML(INSERT/UPDATE/DELETE) 명령이 발생시 자동 실행&lt;/li&gt;
+&lt;li&gt;타이밍(BEFORE/AFTER), 범위(STATEMENT/ROW)로 구분&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;옵티마이저&#34;&gt;옵티마이저
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;SQL을 가장 효율적으로 실행하도록 실행계획(컴파일) 결정&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;마무리&#34;&gt;마무리
+&lt;/h4&gt;&lt;p&gt;이번 주 학습을 통해 DDL, DML 등 자주 사용하는 SQL 문법에만 익숙해진 나머지,&lt;br&gt;
+실제로는 다양한 DB 개념들을 많이 잊고 있었다는 점을 다시 한 번 실감했다.&lt;br&gt;
+프로젝트나 실무에서 데이터 조작과 테이블 구조 관리에만 신경 쓰다 보면,&lt;br&gt;
+DB 설계나 튜닝에 있어서 정말 중요한 핵심 원리들이 뒷전으로 밀려나는 경우가 많은 것 같다.&lt;/p&gt;
+&lt;p&gt;특히 좋은 DB 설계와 효율적인 성능 튜닝을 위해서는 단지 SQL 쿼리문만 잘 쓰는 것에서 한 걸음 더 나아가,&lt;br&gt;
+제약조건이나 인덱스 구조, 트랜잭션 처리, 뷰·시퀀스 같은 객체의 특성과 역할을 확실히 이해하고 있어야 함을 느꼈다.&lt;br&gt;
+이번 기회를 통해 오래된 개념들도 제대로 복습하고, 단편적인 쿼리 작성 실력만 키우는 게 아니라&lt;br&gt;
+실무에 바로 적용 가능한 탄탄한 DB 설계 능력까지 함께 키워야겠다고 다짐했다.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>[커널아카데미] 백엔드 개발 부트캠프 13기 5주차</title>
         <link>http://localhost:1313/posts/week5-retrospective/</link>
         <pubDate>Sun, 20 Jul 2025 00:00:00 +0000</pubDate>

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="이번 주 키워드 SQL 기초 함수와 서브쿼리 JOIN, PIVOT, RANK SQL 기초 SQL은 DB 서버에게 명령을 내리는 질의 언어 SQL*PLUS: Oracle에서 SQL/PLSQL 실행 환경 제공 PL/SQL: Oracle의 절차형 확장 언어(프로그램 로직 추가) 테이블의 구성요소 PK(Primary Key): Not Null + Unique, 테이블의 유일성 보장 FK(Foreign Key): 다른 테이블 PK를 참조, 무결성 유지 INDEX: 검색 속도 향상, 인덱스 사용 시 O(log n) DML (Data Manipulation Language) INSERT: 한 행 입력 UPDATE / DELETE: 한 번에 1~여러 행 데이터 수정/삭제 가능 SELECT: 산술식, computed column(연산 컬럼) 칼럼 연결: name || ' ' || title as &quot;직원명&quot; 중복 제거: SELECT DISTINCT WHERE 절: 범위/조건 지정, IN/LIKE/%, _ 등 패턴매칭 %: 0개 이상 문자, _: 1개 문자 함수 (Function) 문자형 함수: UPPER, LOWER, INITCAP, CONCAT, SUBSTR, LENGTH, LPAD/RPAD, LTRIM/RTRIM, TRANSLATE, REPLACE 숫자형 함수: ROUND, TRUNC, MOD, POWER, SQRT, SIGN, CHR 날짜형 함수: SYSDATE, LAST_DAY, MONTHS_BETWEEN, ADD_MONTHS, ROUND/TRUNC 날짜 단위 변환 함수: TO_CHAR, TO_NUMBER, TO_DATE 집계(그룹) 함수: COUNT, AVG, SUM, MIN, MAX, STDDEV, VARIANCE GROUP BY와 Subgroup GROUP BY 시 SELECT에 그룹 함수, 그룹 컬럼만 허용 WHERE → ROWNUM → ORDER BY 순서로 처리됨 그룹 세분화 가능: GROUP BY 여러 조건 지정 JOIN EQUIJOIN: 동등 조인 (PK=FK) NON-EQUIJOIN: 등급, 누적합 등 정확히 일치하지 않는 값끼리 조인 OUTER JOIN: 매칭되지 않아도 표시 (부서 없는 직원 등) SELF JOIN: 테이블 자체를 서로 연결(상사-사원) 집합 연산: UNION, UNION ALL, INTERSECT, MINUS SubQuery (서브쿼리) 쿼리 내부의 쿼리: 서브쿼리 → 메인쿼리 순으로 실행 WHERE, HAVING, 컬럼 등에 활용 단일 행/다중 행 비교 연산자 (=, IN, ANY, ALL, EXISTS 등) 인라인 뷰: FROM절에 서브쿼리 사용으로 효율적 검색 제약조건 (Constraint) 컬럼 레벨 / 테이블 레벨 모두 선언 가능 NOT NULL, UNIQUE, PRIMARY KEY, FOREIGN KEY, CHECK 데이터의 무결성을 각 단계(입력, 수정, 삭제)에서 보장 트랜잭션과 딕셔너리 트랜잭션: SQL 문장 묶음, COMMIT/ROLLBACK 딕셔너리(데이터 사전): USER* / ALL* / DBA_ 등의 메타정보, V$(성능·락 정보), DICTIONARY 뷰 DDL, DCL DDL (Data Definition Language): 테이블 등 구조 생성·변경, 자동 커밋, 롤백 불가 DCL (Data Control Language): 권한(ROLE) 부여/회수 - GRANT, REVOKE 객체(Object) 시퀀스(Sequence): 자동 번호(Unique Number) 발생, 여러 객체에서 공유 가능 START WITH, NEXTVAL, CURRVAL 생성 후 ALTER로 일부 속성만 변경 가능, 값은 자동 유효성 검사 인덱스(Index): B*Tree 기반, PK/UNIQUE는 Unique Index 자동 생성 데이터 적고 조회 비율 높으면 효과적(10~15% 이하) 뷰(View): 복잡한 쿼리 결과를 간단히 재활용, 보안 및 접근 제한 시노님(Synonym): 다른 오브젝트에 별명 부여 프로그램 유닛: 프로시저, 함수, 트리거, 패키지 등 고급 SQL 기능 NVL: NULL → 다른 값 치환 DECODE: IF/ELSE처럼 조건에 따라 값 반환 CASE: 복잡한 조건 처리 가능 PIVOT: 행→열 전환(피벗 테이블 작성) ROLLUP/CUBE: 그룹별 합계(소계) 계산 RANK: 행별(그룹별) 순위 의사컬럼(Pseudo Column): ROWNUM(순번), ROWID(물리주소), 인덱스 사용 여부 등 트리거(Trigger) 테이블에 특정한 DML(INSERT/UPDATE/DELETE) 명령이 발생시 자동 실행 타이밍(BEFORE/AFTER), 범위(STATEMENT/ROW)로 구분 옵티마이저 SQL을 가장 효율적으로 실행하도록 실행계획(컴파일) 결정 마무리 이번 주 학습을 통해 DDL, DML 등 자주 사용하는 SQL 문법에만 익숙해진 나머지,\n실제로는 다양한 DB 개념들을 많이 잊고 있었다는 점을 다시 한 번 실감했다.\n프로젝트나 실무에서 데이터 조작과 테이블 구조 관리에만 신경 쓰다 보면,\nDB 설계나 튜닝에 있어서 정말 중요한 핵심 원리들이 뒷전으로 밀려나는 경우가 많은 것 같다.\n">
+<title>[커널아카데미] 백엔드 개발 부트캠프 13기 6주차</title>
+
+<link rel='canonical' href='http://localhost:1313/posts/week6-retrospective/'>
+
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="[커널아카데미] 백엔드 개발 부트캠프 13기 6주차">
+<meta property='og:description' content="이번 주 키워드 SQL 기초 함수와 서브쿼리 JOIN, PIVOT, RANK SQL 기초 SQL은 DB 서버에게 명령을 내리는 질의 언어 SQL*PLUS: Oracle에서 SQL/PLSQL 실행 환경 제공 PL/SQL: Oracle의 절차형 확장 언어(프로그램 로직 추가) 테이블의 구성요소 PK(Primary Key): Not Null + Unique, 테이블의 유일성 보장 FK(Foreign Key): 다른 테이블 PK를 참조, 무결성 유지 INDEX: 검색 속도 향상, 인덱스 사용 시 O(log n) DML (Data Manipulation Language) INSERT: 한 행 입력 UPDATE / DELETE: 한 번에 1~여러 행 데이터 수정/삭제 가능 SELECT: 산술식, computed column(연산 컬럼) 칼럼 연결: name || ' ' || title as &quot;직원명&quot; 중복 제거: SELECT DISTINCT WHERE 절: 범위/조건 지정, IN/LIKE/%, _ 등 패턴매칭 %: 0개 이상 문자, _: 1개 문자 함수 (Function) 문자형 함수: UPPER, LOWER, INITCAP, CONCAT, SUBSTR, LENGTH, LPAD/RPAD, LTRIM/RTRIM, TRANSLATE, REPLACE 숫자형 함수: ROUND, TRUNC, MOD, POWER, SQRT, SIGN, CHR 날짜형 함수: SYSDATE, LAST_DAY, MONTHS_BETWEEN, ADD_MONTHS, ROUND/TRUNC 날짜 단위 변환 함수: TO_CHAR, TO_NUMBER, TO_DATE 집계(그룹) 함수: COUNT, AVG, SUM, MIN, MAX, STDDEV, VARIANCE GROUP BY와 Subgroup GROUP BY 시 SELECT에 그룹 함수, 그룹 컬럼만 허용 WHERE → ROWNUM → ORDER BY 순서로 처리됨 그룹 세분화 가능: GROUP BY 여러 조건 지정 JOIN EQUIJOIN: 동등 조인 (PK=FK) NON-EQUIJOIN: 등급, 누적합 등 정확히 일치하지 않는 값끼리 조인 OUTER JOIN: 매칭되지 않아도 표시 (부서 없는 직원 등) SELF JOIN: 테이블 자체를 서로 연결(상사-사원) 집합 연산: UNION, UNION ALL, INTERSECT, MINUS SubQuery (서브쿼리) 쿼리 내부의 쿼리: 서브쿼리 → 메인쿼리 순으로 실행 WHERE, HAVING, 컬럼 등에 활용 단일 행/다중 행 비교 연산자 (=, IN, ANY, ALL, EXISTS 등) 인라인 뷰: FROM절에 서브쿼리 사용으로 효율적 검색 제약조건 (Constraint) 컬럼 레벨 / 테이블 레벨 모두 선언 가능 NOT NULL, UNIQUE, PRIMARY KEY, FOREIGN KEY, CHECK 데이터의 무결성을 각 단계(입력, 수정, 삭제)에서 보장 트랜잭션과 딕셔너리 트랜잭션: SQL 문장 묶음, COMMIT/ROLLBACK 딕셔너리(데이터 사전): USER* / ALL* / DBA_ 등의 메타정보, V$(성능·락 정보), DICTIONARY 뷰 DDL, DCL DDL (Data Definition Language): 테이블 등 구조 생성·변경, 자동 커밋, 롤백 불가 DCL (Data Control Language): 권한(ROLE) 부여/회수 - GRANT, REVOKE 객체(Object) 시퀀스(Sequence): 자동 번호(Unique Number) 발생, 여러 객체에서 공유 가능 START WITH, NEXTVAL, CURRVAL 생성 후 ALTER로 일부 속성만 변경 가능, 값은 자동 유효성 검사 인덱스(Index): B*Tree 기반, PK/UNIQUE는 Unique Index 자동 생성 데이터 적고 조회 비율 높으면 효과적(10~15% 이하) 뷰(View): 복잡한 쿼리 결과를 간단히 재활용, 보안 및 접근 제한 시노님(Synonym): 다른 오브젝트에 별명 부여 프로그램 유닛: 프로시저, 함수, 트리거, 패키지 등 고급 SQL 기능 NVL: NULL → 다른 값 치환 DECODE: IF/ELSE처럼 조건에 따라 값 반환 CASE: 복잡한 조건 처리 가능 PIVOT: 행→열 전환(피벗 테이블 작성) ROLLUP/CUBE: 그룹별 합계(소계) 계산 RANK: 행별(그룹별) 순위 의사컬럼(Pseudo Column): ROWNUM(순번), ROWID(물리주소), 인덱스 사용 여부 등 트리거(Trigger) 테이블에 특정한 DML(INSERT/UPDATE/DELETE) 명령이 발생시 자동 실행 타이밍(BEFORE/AFTER), 범위(STATEMENT/ROW)로 구분 옵티마이저 SQL을 가장 효율적으로 실행하도록 실행계획(컴파일) 결정 마무리 이번 주 학습을 통해 DDL, DML 등 자주 사용하는 SQL 문법에만 익숙해진 나머지,\n실제로는 다양한 DB 개념들을 많이 잊고 있었다는 점을 다시 한 번 실감했다.\n프로젝트나 실무에서 데이터 조작과 테이블 구조 관리에만 신경 쓰다 보면,\nDB 설계나 튜닝에 있어서 정말 중요한 핵심 원리들이 뒷전으로 밀려나는 경우가 많은 것 같다.\n">
+<meta property='og:url' content='http://localhost:1313/posts/week6-retrospective/'>
+<meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='패스트캠퍼스' /><meta property='article:tag' content='커널아카데미' /><meta property='article:tag' content='백엔드개발부트캠프' /><meta property='article:tag' content='국비지원교육' /><meta property='article:tag' content='내일배움카드' /><meta property='article:tag' content='KDT' /><meta property='article:published_time' content='2025-07-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-07-27T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="[커널아카데미] 백엔드 개발 부트캠프 13기 6주차">
+<meta name="twitter:description" content="이번 주 키워드 SQL 기초 함수와 서브쿼리 JOIN, PIVOT, RANK SQL 기초 SQL은 DB 서버에게 명령을 내리는 질의 언어 SQL*PLUS: Oracle에서 SQL/PLSQL 실행 환경 제공 PL/SQL: Oracle의 절차형 확장 언어(프로그램 로직 추가) 테이블의 구성요소 PK(Primary Key): Not Null + Unique, 테이블의 유일성 보장 FK(Foreign Key): 다른 테이블 PK를 참조, 무결성 유지 INDEX: 검색 속도 향상, 인덱스 사용 시 O(log n) DML (Data Manipulation Language) INSERT: 한 행 입력 UPDATE / DELETE: 한 번에 1~여러 행 데이터 수정/삭제 가능 SELECT: 산술식, computed column(연산 컬럼) 칼럼 연결: name || ' ' || title as &quot;직원명&quot; 중복 제거: SELECT DISTINCT WHERE 절: 범위/조건 지정, IN/LIKE/%, _ 등 패턴매칭 %: 0개 이상 문자, _: 1개 문자 함수 (Function) 문자형 함수: UPPER, LOWER, INITCAP, CONCAT, SUBSTR, LENGTH, LPAD/RPAD, LTRIM/RTRIM, TRANSLATE, REPLACE 숫자형 함수: ROUND, TRUNC, MOD, POWER, SQRT, SIGN, CHR 날짜형 함수: SYSDATE, LAST_DAY, MONTHS_BETWEEN, ADD_MONTHS, ROUND/TRUNC 날짜 단위 변환 함수: TO_CHAR, TO_NUMBER, TO_DATE 집계(그룹) 함수: COUNT, AVG, SUM, MIN, MAX, STDDEV, VARIANCE GROUP BY와 Subgroup GROUP BY 시 SELECT에 그룹 함수, 그룹 컬럼만 허용 WHERE → ROWNUM → ORDER BY 순서로 처리됨 그룹 세분화 가능: GROUP BY 여러 조건 지정 JOIN EQUIJOIN: 동등 조인 (PK=FK) NON-EQUIJOIN: 등급, 누적합 등 정확히 일치하지 않는 값끼리 조인 OUTER JOIN: 매칭되지 않아도 표시 (부서 없는 직원 등) SELF JOIN: 테이블 자체를 서로 연결(상사-사원) 집합 연산: UNION, UNION ALL, INTERSECT, MINUS SubQuery (서브쿼리) 쿼리 내부의 쿼리: 서브쿼리 → 메인쿼리 순으로 실행 WHERE, HAVING, 컬럼 등에 활용 단일 행/다중 행 비교 연산자 (=, IN, ANY, ALL, EXISTS 등) 인라인 뷰: FROM절에 서브쿼리 사용으로 효율적 검색 제약조건 (Constraint) 컬럼 레벨 / 테이블 레벨 모두 선언 가능 NOT NULL, UNIQUE, PRIMARY KEY, FOREIGN KEY, CHECK 데이터의 무결성을 각 단계(입력, 수정, 삭제)에서 보장 트랜잭션과 딕셔너리 트랜잭션: SQL 문장 묶음, COMMIT/ROLLBACK 딕셔너리(데이터 사전): USER* / ALL* / DBA_ 등의 메타정보, V$(성능·락 정보), DICTIONARY 뷰 DDL, DCL DDL (Data Definition Language): 테이블 등 구조 생성·변경, 자동 커밋, 롤백 불가 DCL (Data Control Language): 권한(ROLE) 부여/회수 - GRANT, REVOKE 객체(Object) 시퀀스(Sequence): 자동 번호(Unique Number) 발생, 여러 객체에서 공유 가능 START WITH, NEXTVAL, CURRVAL 생성 후 ALTER로 일부 속성만 변경 가능, 값은 자동 유효성 검사 인덱스(Index): B*Tree 기반, PK/UNIQUE는 Unique Index 자동 생성 데이터 적고 조회 비율 높으면 효과적(10~15% 이하) 뷰(View): 복잡한 쿼리 결과를 간단히 재활용, 보안 및 접근 제한 시노님(Synonym): 다른 오브젝트에 별명 부여 프로그램 유닛: 프로시저, 함수, 트리거, 패키지 등 고급 SQL 기능 NVL: NULL → 다른 값 치환 DECODE: IF/ELSE처럼 조건에 따라 값 반환 CASE: 복잡한 조건 처리 가능 PIVOT: 행→열 전환(피벗 테이블 작성) ROLLUP/CUBE: 그룹별 합계(소계) 계산 RANK: 행별(그룹별) 순위 의사컬럼(Pseudo Column): ROWNUM(순번), ROWID(물리주소), 인덱스 사용 여부 등 트리거(Trigger) 테이블에 특정한 DML(INSERT/UPDATE/DELETE) 명령이 발생시 자동 실행 타이밍(BEFORE/AFTER), 범위(STATEMENT/ROW)로 구분 옵티마이저 SQL을 가장 효율적으로 실행하도록 실행계획(컴파일) 결정 마무리 이번 주 학습을 통해 DDL, DML 등 자주 사용하는 SQL 문법에만 익숙해진 나머지,\n실제로는 다양한 DB 개념들을 많이 잊고 있었다는 점을 다시 한 번 실감했다.\n프로젝트나 실무에서 데이터 조작과 테이블 구조 관리에만 신경 쓰다 보면,\nDB 설계나 튜닝에 있어서 정말 중요한 핵심 원리들이 뒷전으로 밀려나는 경우가 많은 것 같다.\n"><link rel="alternate" type="application/json" href="http://localhost:1313/posts/week6-retrospective/index.json">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/../assets/avatar_hu_6c8b5d6cd0da96b6.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Soyeon&#39;s Dev Log</a></h1>
+            <h2 class="site-description">백엔드 개발자 지망생의 기록</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>다크 모드</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%EA%B3%B5%EB%B6%80/" >
+                공부
+            </a>
+        
+            <a href="/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/" >
+                주간회고
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/week6-retrospective/">[커널아카데미] 백엔드 개발 부트캠프 13기 6주차</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-07-27</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="이번-주-키워드">이번 주 키워드
+</h2><ul>
+<li>SQL 기초</li>
+<li>함수와 서브쿼리</li>
+<li>JOIN, PIVOT, RANK</li>
+</ul>
+<h2 id="sql-기초">SQL 기초
+</h2><ul>
+<li><strong>SQL은 DB 서버에게 명령을 내리는 질의 언어</strong></li>
+<li><strong>SQL*PLUS</strong>: Oracle에서 SQL/PLSQL 실행 환경 제공</li>
+<li><strong>PL/SQL</strong>: Oracle의 절차형 확장 언어(프로그램 로직 추가)</li>
+<li><strong>테이블의 구성요소</strong>
+<ul>
+<li><strong>PK(Primary Key)</strong>: Not Null + Unique, 테이블의 유일성 보장</li>
+<li><strong>FK(Foreign Key)</strong>: 다른 테이블 PK를 참조, 무결성 유지</li>
+<li><strong>INDEX</strong>: 검색 속도 향상, 인덱스 사용 시 O(log n)</li>
+</ul>
+</li>
+</ul>
+<h2 id="dml-data-manipulation-language">DML (Data Manipulation Language)
+</h2><ul>
+<li><strong>INSERT</strong>: 한 행 입력</li>
+<li><strong>UPDATE / DELETE</strong>: 한 번에 1~여러 행 데이터 수정/삭제 가능</li>
+<li><strong>SELECT</strong>:
+<ul>
+<li>산술식, computed column(연산 컬럼)</li>
+<li>칼럼 연결: <code>name || ' ' || title as &quot;직원명&quot;</code></li>
+<li>중복 제거: <code>SELECT DISTINCT</code></li>
+<li>WHERE 절: 범위/조건 지정, IN/LIKE/%, _ 등 패턴매칭
+<ul>
+<li><code>%</code>: 0개 이상 문자, <code>_</code>: 1개 문자</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="함수-function">함수 (Function)
+</h2><ul>
+<li><strong>문자형 함수</strong>: UPPER, LOWER, INITCAP, CONCAT, SUBSTR, LENGTH, LPAD/RPAD, LTRIM/RTRIM, TRANSLATE, REPLACE</li>
+<li><strong>숫자형 함수</strong>: ROUND, TRUNC, MOD, POWER, SQRT, SIGN, CHR</li>
+<li><strong>날짜형 함수</strong>: SYSDATE, LAST_DAY, MONTHS_BETWEEN, ADD_MONTHS, ROUND/TRUNC 날짜 단위</li>
+<li><strong>변환 함수</strong>: TO_CHAR, TO_NUMBER, TO_DATE</li>
+<li><strong>집계(그룹) 함수</strong>: COUNT, AVG, SUM, MIN, MAX, STDDEV, VARIANCE</li>
+</ul>
+<h2 id="group-by와-subgroup">GROUP BY와 Subgroup
+</h2><ul>
+<li>GROUP BY 시 SELECT에 그룹 함수, 그룹 컬럼만 허용</li>
+<li>WHERE → ROWNUM → ORDER BY 순서로 처리됨</li>
+<li>그룹 세분화 가능: GROUP BY 여러 조건 지정</li>
+</ul>
+<h2 id="join">JOIN
+</h2><ul>
+<li><strong>EQUIJOIN</strong>: 동등 조인 (PK=FK)</li>
+<li><strong>NON-EQUIJOIN</strong>: 등급, 누적합 등 정확히 일치하지 않는 값끼리 조인</li>
+<li><strong>OUTER JOIN</strong>: 매칭되지 않아도 표시 (부서 없는 직원 등)</li>
+<li><strong>SELF JOIN</strong>: 테이블 자체를 서로 연결(상사-사원)</li>
+<li>집합 연산: UNION, UNION ALL, INTERSECT, MINUS</li>
+</ul>
+<h2 id="subquery-서브쿼리">SubQuery (서브쿼리)
+</h2><ul>
+<li>쿼리 내부의 쿼리: 서브쿼리 → 메인쿼리 순으로 실행</li>
+<li>WHERE, HAVING, 컬럼 등에 활용
+<ul>
+<li>단일 행/다중 행 비교 연산자 (=, IN, ANY, ALL, EXISTS 등)</li>
+</ul>
+</li>
+<li><strong>인라인 뷰</strong>: FROM절에 서브쿼리 사용으로 효율적 검색</li>
+</ul>
+<h2 id="제약조건-constraint">제약조건 (Constraint)
+</h2><ul>
+<li><strong>컬럼 레벨 / 테이블 레벨</strong> 모두 선언 가능</li>
+<li>NOT NULL, UNIQUE, PRIMARY KEY, FOREIGN KEY, CHECK</li>
+<li>데이터의 무결성을 각 단계(입력, 수정, 삭제)에서 보장</li>
+</ul>
+<h2 id="트랜잭션과-딕셔너리">트랜잭션과 딕셔너리
+</h2><ul>
+<li><strong>트랜잭션</strong>: SQL 문장 묶음, COMMIT/ROLLBACK</li>
+<li><strong>딕셔너리(데이터 사전)</strong>: USER* / ALL* / DBA_ 등의 메타정보, V$(성능·락 정보), DICTIONARY 뷰</li>
+</ul>
+<h2 id="ddl-dcl">DDL, DCL
+</h2><ul>
+<li><strong>DDL (Data Definition Language)</strong>: 테이블 등 구조 생성·변경, 자동 커밋, 롤백 불가</li>
+<li><strong>DCL (Data Control Language)</strong>: 권한(ROLE) 부여/회수 - GRANT, REVOKE</li>
+</ul>
+<h2 id="객체object">객체(Object)
+</h2><ul>
+<li><strong>시퀀스(Sequence)</strong>: 자동 번호(Unique Number) 발생, 여러 객체에서 공유 가능
+<ul>
+<li>START WITH, NEXTVAL, CURRVAL</li>
+<li>생성 후 ALTER로 일부 속성만 변경 가능, 값은 자동 유효성 검사</li>
+</ul>
+</li>
+<li><strong>인덱스(Index)</strong>: B*Tree 기반, PK/UNIQUE는 Unique Index 자동 생성
+<ul>
+<li>데이터 적고 조회 비율 높으면 효과적(10~15% 이하)</li>
+</ul>
+</li>
+<li><strong>뷰(View)</strong>: 복잡한 쿼리 결과를 간단히 재활용, 보안 및 접근 제한</li>
+<li><strong>시노님(Synonym)</strong>: 다른 오브젝트에 별명 부여</li>
+<li><strong>프로그램 유닛</strong>: 프로시저, 함수, 트리거, 패키지 등</li>
+</ul>
+<h2 id="고급-sql-기능">고급 SQL 기능
+</h2><ul>
+<li><strong>NVL</strong>: NULL → 다른 값 치환</li>
+<li><strong>DECODE</strong>: IF/ELSE처럼 조건에 따라 값 반환</li>
+<li><strong>CASE</strong>: 복잡한 조건 처리 가능</li>
+<li><strong>PIVOT</strong>: 행→열 전환(피벗 테이블 작성)</li>
+<li><strong>ROLLUP/CUBE</strong>: 그룹별 합계(소계) 계산</li>
+<li><strong>RANK</strong>: 행별(그룹별) 순위</li>
+<li><strong>의사컬럼(Pseudo Column)</strong>: ROWNUM(순번), ROWID(물리주소), 인덱스 사용 여부 등</li>
+</ul>
+<h2 id="트리거trigger">트리거(Trigger)
+</h2><ul>
+<li>테이블에 특정한 DML(INSERT/UPDATE/DELETE) 명령이 발생시 자동 실행</li>
+<li>타이밍(BEFORE/AFTER), 범위(STATEMENT/ROW)로 구분</li>
+</ul>
+<h2 id="옵티마이저">옵티마이저
+</h2><ul>
+<li>SQL을 가장 효율적으로 실행하도록 실행계획(컴파일) 결정</li>
+</ul>
+<h4 id="마무리">마무리
+</h4><p>이번 주 학습을 통해 DDL, DML 등 자주 사용하는 SQL 문법에만 익숙해진 나머지,<br>
+실제로는 다양한 DB 개념들을 많이 잊고 있었다는 점을 다시 한 번 실감했다.<br>
+프로젝트나 실무에서 데이터 조작과 테이블 구조 관리에만 신경 쓰다 보면,<br>
+DB 설계나 튜닝에 있어서 정말 중요한 핵심 원리들이 뒷전으로 밀려나는 경우가 많은 것 같다.</p>
+<p>특히 좋은 DB 설계와 효율적인 성능 튜닝을 위해서는 단지 SQL 쿼리문만 잘 쓰는 것에서 한 걸음 더 나아가,<br>
+제약조건이나 인덱스 구조, 트랜잭션 처리, 뷰·시퀀스 같은 객체의 특성과 역할을 확실히 이해하고 있어야 함을 느꼈다.<br>
+이번 기회를 통해 오래된 개념들도 제대로 복습하고, 단편적인 쿼리 작성 실력만 키우는 게 아니라<br>
+실무에 바로 적용 가능한 탄탄한 DB 설계 능력까지 함께 키워야겠다고 다짐했다.</p>
+<p><br><br></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4/">패스트캠퍼스</a>
+        
+            <a href="/tags/%EC%BB%A4%EB%84%90%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8/">커널아카데미</a>
+        
+            <a href="/tags/%EB%B0%B1%EC%97%94%EB%93%9C%EA%B0%9C%EB%B0%9C%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/">백엔드개발부트캠프</a>
+        
+            <a href="/tags/%EA%B5%AD%EB%B9%84%EC%A7%80%EC%9B%90%EA%B5%90%EC%9C%A1/">국비지원교육</a>
+        
+            <a href="/tags/%EB%82%B4%EC%9D%BC%EB%B0%B0%EC%9B%80%EC%B9%B4%EB%93%9C/">내일배움카드</a>
+        
+            <a href="/tags/kdt/">KDT</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">관련 글</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/week5-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 5주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week4-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 4주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week3-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 3주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week2-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 2주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week1-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 1주차]</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Soyeon&#39;s Dev Log
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.748d0acf3bd5d18477b5028b83b70ecfa20eb15aefdff97697a330a2202721bf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
