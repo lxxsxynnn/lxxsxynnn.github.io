@@ -6,7 +6,154 @@
         <description>Recent content in 백엔드개발부트캠프 on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Sun, 27 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/%EB%B0%B1%EC%97%94%EB%93%9C%EA%B0%9C%EB%B0%9C%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 03 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/%EB%B0%B1%EC%97%94%EB%93%9C%EA%B0%9C%EB%B0%9C%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 6주차</title>
+        <link>http://localhost:1313/posts/week7-retrospective/</link>
+        <pubDate>Sun, 03 Aug 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/week7-retrospective/</guid>
+        <description>&lt;h2 id=&#34;이번-주-키워드&#34;&gt;이번 주 키워드
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;데이터 모델링&lt;/li&gt;
+&lt;li&gt;SQL 튜닝 및 인덱스 최적화&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;데이터-모델링-이론&#34;&gt;데이터 모델링 이론
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;모델(Model)&lt;/strong&gt;: 실제(업무)를 추상화해 만든 가상 구조.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;모델링(Modeling)&lt;/strong&gt;: 현실(비즈니스) 분석 → 데이터로 표현할 수 있도록 구조화.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;목적&lt;/strong&gt;: 실제 업무를 효율적으로 시스템에 반영·지원하기 위함.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;모델링 단계&lt;/strong&gt;:
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;개념 모델&lt;/strong&gt;: 핵심 엔티티·주제영역 도출, 전체 구조 파악 (AS-IS/TO-BE)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;논리 모델&lt;/strong&gt;: 명확하고 구체적인 규칙·관계/제약 설정 (정규화)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;물리 모델&lt;/strong&gt;: 실제 DB에 적합한 구조(컬럼타입/파티션/인덱스) 설계&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;데이터-모델의-주요-용어&#34;&gt;데이터 모델의 주요 용어
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;용어&lt;/th&gt;
+          &lt;th&gt;설명&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;엔티티&lt;/td&gt;
+          &lt;td&gt;관리 대상이 되는 데이터 집합 (예: 고객, 주문)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;속성&lt;/td&gt;
+          &lt;td&gt;엔티티의 구체적 성질(예: 이름, 이메일)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;식별자&lt;/td&gt;
+          &lt;td&gt;유일하게 엔티티 구분 (Primary Key)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;도메인&lt;/td&gt;
+          &lt;td&gt;속성의 데이터 타입 및 허용값 범위&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;관계&lt;/td&gt;
+          &lt;td&gt;엔티티 간 연결 (1:1, 1:N, M:N 등)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;ERD&lt;/td&gt;
+          &lt;td&gt;엔티티 관계를 시각적으로 표현 (ER 다이어그램)&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;일반화/특수화&lt;/strong&gt;: 상하위 엔티티 추상화(클래스 상속 비슷)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;자기참조/재귀관계&lt;/strong&gt;: 엔티티가 자기 자신과 관계를 가질 때 (예: 사원-상사)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;관계형-데이터-모델&#34;&gt;관계형 데이터 모델
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;스키마&lt;/strong&gt;: 테이블 구조(릴레이션명+컬럼명 등)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;튜플&lt;/strong&gt;: 테이블의 한 행(데이터 한 건)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;제약조건&#34;&gt;제약조건
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;키 제약조건&lt;/strong&gt;: Primary Key, Unique 등&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;실체 무결성&lt;/strong&gt;: PK는 Null 불가&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;영역 무결성(Domain Integrity)&lt;/strong&gt;: 지정한 도메인 범위 값만 허용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;함수-종속함수적-종속성&#34;&gt;함수 종속(함수적 종속성)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;어떤 칼럼 값이 결정되면 나머지가 정해지는 관계(예: 학번 → 이름)&lt;/li&gt;
+&lt;li&gt;완전/부분/이행적 함수 종속; 완전 함수 종속만 남도록 테이블을 쪼개는 것 = 정규화&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;데이터-모델링-실습&#34;&gt;데이터 모델링 실습
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;개념 모델링&lt;/strong&gt;: 업무 분석 → 주제영역·핵심 엔티티 도출, 엔티티 관계 설계&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;논리 모델링&lt;/strong&gt;: 엔티티/속성/관계 상세화, 도메인·제약조건 명확히 정의&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;물리 모델링&lt;/strong&gt;: 실제 DB에 맞게 타입/인덱스/파티션 설계&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;엔티티 명명&lt;/strong&gt;: 전체에서 유일하게, 쉽게 이해되는 이름&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;식별자 설계&lt;/strong&gt;: 유일하고 불변, 최소구성, Not Null(본질/인조 식별자)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;표준화-및-모델-품질-관리&#34;&gt;표준화 및 모델 품질 관리
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;데이터 항목·도메인·코드 표준화(만들어진 도메인 사전 활용)&lt;/li&gt;
+&lt;li&gt;코드(공통 코드, 테이블별 관리) 표준화&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;sql-튜닝&#34;&gt;SQL 튜닝
+&lt;/h2&gt;&lt;h3 id=&#34;sql-처리과정&#34;&gt;SQL 처리과정
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;사용자가 SQL 실행 → 옵티마이저가 실행계획 수립&lt;/li&gt;
+&lt;li&gt;SQL 캐싱(SGA: 공유메모리, 라이브러리 캐시)
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;소프트 파싱&lt;/strong&gt;: 캐시에 동일 SQL 있으면 바로 실행&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;하드 파싱&lt;/strong&gt;: 없으면 파싱부터 재실행&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PreparedStatement&lt;/strong&gt;: 파싱·실행분리, 캐시 활용/성능↑, 보안↑&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;데이터-저장-및-io-구조&#34;&gt;데이터 저장 및 I/O 구조
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;클러스터 팩터(Clustering Factor)&lt;/strong&gt;: 인덱스-테이블 레코드 간 물리적 근접도, 낮을수록 효율↑&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;블록(Block)&lt;/strong&gt;: 최소 I/O 단위(8KB 등)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;순차/랜덤 액세스&lt;/strong&gt;: 대량조회(순차/풀스캔), 소량조회(랜덤/인덱스스캔)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;논리적/물리적 I/O&lt;/strong&gt;: 캐시에서 읽거나 디스크 직접읽기&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;인덱스-튜닝&#34;&gt;인덱스 튜닝
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;인덱스는 소량 데이터/조건절 자주 조회시 효율↑&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;DML(Insert/Update/Delete)이 많으면 인덱스가 오히려 성능↓, 디스크 낭비&lt;/li&gt;
+&lt;li&gt;인덱스 스캔 방식: Range/Full/Unique/Skip Scan(조건/인덱스 특성에 따라)&lt;/li&gt;
+&lt;li&gt;컬럼 변형, OR/IN/NULL, 부정조건에서는 인덱스가 잘 안 쓰일 수 있음&lt;/li&gt;
+&lt;li&gt;인덱스 생성시 주요 컬럼·조건 부여 순서 고려&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;조인-및-서브쿼리소트-튜닝&#34;&gt;조인 및 서브쿼리/소트 튜닝
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;반정규화&lt;/strong&gt;: 조인비용 줄이는 대신 중복 허용&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;조인 방식&lt;/strong&gt;: NL(소량, 인덱스), 소트머지(정렬), 해시(대량/일회성)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;서브쿼리 튜닝&lt;/strong&gt;: 인라인뷰/중첩/스칼라 서브쿼리, Exists/Unnest/Pushing/캐싱 활용&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;소트튜닝&lt;/strong&gt;: 메모리 소트 권장
+&lt;ul&gt;
+&lt;li&gt;Sort 오퍼레이션: Aggregate, Order By, Group By, Unique, Join, Window 등&lt;/li&gt;
+&lt;li&gt;되도록 소트 지양, 반드시 필요하면 Union All·Exists 적극 활용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;마무리&#34;&gt;마무리
+&lt;/h2&gt;&lt;p&gt;이번 주에는 &lt;strong&gt;데이터 모델링의 원리와 튜닝 기법&lt;/strong&gt;까지 심도 있게 학습했다. 올바른 모델링 없이는 튼튼한 데이터베이스 구축이 불가능하고, 아무리 복잡한 SQL을 짜도 기초 개념 부실·튜닝 부족하면 성능이 따라오지 않는다는 점을 다시 한 번 실감했다.&lt;br&gt;
+ERD 설계와 정규화, 표준화 등 이론뿐 아니라, 실제 현업에서 데이터베이스를 잘 설계하고 SQL 실행 속도를 높이기 위해 실천해야 할 여러 튜닝 팁까지 배울 수 있어 유익했다.&lt;br&gt;
+앞으로도 주어진 요구사항을 깊이 분석해 &lt;strong&gt;업무에 꼭 맞는 모델을 설계&lt;/strong&gt;하고, 근본적인 성능 개선을 위해 &lt;strong&gt;SQL 실행계획·인덱스 사용 방식·조인 구조&lt;/strong&gt;를 꼼꼼히 점검하는 습관을 가져야겠다.&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>[커널아카데미] 백엔드 개발 부트캠프 13기 6주차</title>
         <link>http://localhost:1313/posts/week6-retrospective/</link>
         <pubDate>Sun, 27 Jul 2025 00:00:00 +0000</pubDate>
@@ -141,6 +288,7 @@ DB 설계나 튜닝에 있어서 정말 중요한 핵심 원리들이 뒷전으�
 제약조건이나 인덱스 구조, 트랜잭션 처리, 뷰·시퀀스 같은 객체의 특성과 역할을 확실히 이해하고 있어야 함을 느꼈다.&lt;br&gt;
 이번 기회를 통해 오래된 개념들도 제대로 복습하고, 단편적인 쿼리 작성 실력만 키우는 게 아니라&lt;br&gt;
 실무에 바로 적용 가능한 탄탄한 DB 설계 능력까지 함께 키워야겠다고 다짐했다.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
