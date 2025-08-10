@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 이펙티브 자바 1. 생성자 대신 정적 팩터리 메서드를 고려하라 장점 이름 부여: 반환 목적, 특징을 이름에 반영 가능 (of(), valueOf(), from() 등) 인스턴스 재사용: 반드시 새 객체가 필요하지 않다면 캐시·싱글턴 등으로 같은 객체를 재사용할 수 있음 (성능·메모리 절약, ex. Boolean.valueOf, Integer.valueOf) 인스턴스 통제: 싱글턴, 불변 값 객체, 인스턴스화 불가능 객체(팩터리 메서드만 제공) 등 다양한 객체 관리 전략을 구현하기 쉬움 반환 타입 유연성: 팩터리 메서드의 반환타입은 하위타입까지 포함할 수 있어 확장성이 높음 (ex. 인터페이스 반환, 다양한 구현체 숨김) 구현 클래스 은닉: API 바깥에 구체 구현 클래스를 노출하지 않고도 객체를 반환할 수 있음 (ex. 컬렉션 프레임워크의 List.of 등) 다양한 반환: 입력값에 따라 서로 다른 클래스의 객체를 반환할 수 있음 단점 상속 제약: public/protected 생성자가 없으므로 하위 클래스를 만들 수 없음 (확장 불가) 호출 가시성↓: 사용자가 ‘생성자’로 객체를 찾는 습성 때문에, 정적 팩터리 메서드의 존재가 눈에 덜 띌 수 있음 2. 생성자에 매개변수가 많다면 빌더 패턴을 고려하라 점층적 생성자 패턴은 매개변수가 많아지면 난해 자바빈즈 패턴(setter)은 객체 일관성 깨짐 위험 빌더 패턴: 필수 매개변수는 생성자/정적 메서드, 선택 매개변수는 빌더 메서드 체이닝, 마지막에 build() MyObj obj = MyObj.builder(&#34;필수1&#34;, &#34;필수2&#34;) .optionA(123) .optionB(&#34;abc&#34;) .build(); 3. 싱글턴을 보증하는 방법 private 생성자 + public static final 필드 public class Singleton { public static final Singleton INSTANCE = new Singleton(); private Singleton() {} } private 생성자 + public static 팩터리 public class Singleton { private static final Singleton INSTANCE = new Singleton(); private Singleton() {} public static Singleton getInstance() { return INSTANCE; } } enum 사용 (가장 안전) public enum Singleton { INSTANCE; } 4. 인스턴스 생성을 막고 싶다면 private 생성자를 사용 추상클래스만으로는 인스턴스 생성 차단 불가 반드시 private 생성자 명시 유틸리티 클래스(정적 메서드만 모은 클래스)에서 사용 5. 의존 객체 주입(Dependency Injection) 활용 자원 변경이 필요한 경우 정적 유틸리티/싱글턴은 부적합 생성자 / 세터 / 인터페이스 / 람다 / 팩터리 등으로 주입 Mock 객체나 대체 구현체로 테스트 용이성 확보 6. 불필요한 객체 생성 피하기 불변 객체·캐시 재사용 값 비교시 == 사용 박싱/오토박싱 주의 7. 다 쓴 객체 참조 해제: 메모리 누수 예방 직접 메모리 관리 클래스(컬렉션, 캐시 등): 사용 후 참조 해제(null, 삭제 등) WeakHashMap, LinkedHashMap, java.lang.ref 활용 가능 참조변수를 유효 범위 밖으로 밀어내기 8. 결합도와 객체 생성 방식 비교 방식 결합도 확장/유연성 테스트 용이성 대표 사례 직접 생성 강함(Tight) 낮음 어려움 new MyObj(...) 팩토리 패턴 느슨함(Loose) 높음 좋음 new MyObj(factory) 람다/함수식 주입 매우 느슨함 매우 높음 매우 좋음 Java 8+ Supplier 등 9. equals와 hashCode 논리적 동치 비교 필요 시 규약 준수하여 재정의 필수 hashCode 불일치 시 HashSet/HashMap 등에서 문제 발생 10. 클래스와 멤버 접근 권한 최소화 public 가변 필드 → Thread-Safety 문제 내부 구현 최대한 은닉, API 최소 공개 디자인 패턴 객체 재사용 패턴 패턴 목적 특징/주요 역할 Singleton 객체 1개만 생성·재사용 전역 인스턴스, 상태 공유 Flyweight 객체 여러 개를 공유해 재사용 메모리 절약, 상태 최소화 Prototype 객체 복제(Cloning) clone/factory 기반 효율적 생성 Builder 복잡한 객체 생성 선택·필수 매개변수 분리, 조립식 생성 Iterator 컬렉션 순회 책임 분리 내부 구조 노출 없이 순회 행위 &amp; 구조 분리 패턴 Template Method 추상클래스에서 알고리즘 구조를 정의, 하위클래스가 세부 구현 예: AbstractList, AbstractCollection Strategy 알고리즘을 객체로 분리, 런타임에 주입 예: Comparator, Collections.sort Bridge 구현부와 추상부를 분리해 독립 확장 가능 예: JDBC Driver 구조 생성/구조/행위 패턴 패턴 개념/역할 설명·예시 Factory Method 객체 생성 추상화 Creator/Factory가 Product 생성 위임 Abstract Factory 객체 집합 생성 팩터리 테마별/계열별 제품군 생성, 의존성 교체 용이 Adapter 인터페이스 변환, 호환성 유지 구버전 → 신버전 연결 Proxy 대리자 역할, 접근 제어 Spring AOP, Lazy Loading Composite 트리 구조, 전체-부분 계층 폴더-파일 구조, UI 구성 Command 요청 캡슐화 실행/취소/이력 관리, Runnable, ActionListener Observer 이벤트 알림 MVC 패턴, 이벤트 구독자 State 상태에 따라 행위 변경 TCP 연결 상태, 게임 캐릭터 상태 등 자료구조 개념 동일 타입 데이터를 일정 구조로 저장 탐색·삽입·삭제 등 연산 효율 극대화 주요 종류 1. 리스트와 배열 선형 저장, 탐색 O(n), 삽입/삭제 O(n) 2. 스택과 큐 스택: LIFO 큐: FIFO 3. 트리 이진 트리 순회: 전위(NLR), 중위(LNR), 후위(LRN), 레벨 순회 스레드 이진 트리\n">
+<title>[커널아카데미] 백엔드 개발 부트캠프 13기 8주차</title>
+
+<link rel='canonical' href='http://localhost:1313/posts/week8-retrospective/'>
+
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="[커널아카데미] 백엔드 개발 부트캠프 13기 8주차">
+<meta property='og:description' content=" 이펙티브 자바 1. 생성자 대신 정적 팩터리 메서드를 고려하라 장점 이름 부여: 반환 목적, 특징을 이름에 반영 가능 (of(), valueOf(), from() 등) 인스턴스 재사용: 반드시 새 객체가 필요하지 않다면 캐시·싱글턴 등으로 같은 객체를 재사용할 수 있음 (성능·메모리 절약, ex. Boolean.valueOf, Integer.valueOf) 인스턴스 통제: 싱글턴, 불변 값 객체, 인스턴스화 불가능 객체(팩터리 메서드만 제공) 등 다양한 객체 관리 전략을 구현하기 쉬움 반환 타입 유연성: 팩터리 메서드의 반환타입은 하위타입까지 포함할 수 있어 확장성이 높음 (ex. 인터페이스 반환, 다양한 구현체 숨김) 구현 클래스 은닉: API 바깥에 구체 구현 클래스를 노출하지 않고도 객체를 반환할 수 있음 (ex. 컬렉션 프레임워크의 List.of 등) 다양한 반환: 입력값에 따라 서로 다른 클래스의 객체를 반환할 수 있음 단점 상속 제약: public/protected 생성자가 없으므로 하위 클래스를 만들 수 없음 (확장 불가) 호출 가시성↓: 사용자가 ‘생성자’로 객체를 찾는 습성 때문에, 정적 팩터리 메서드의 존재가 눈에 덜 띌 수 있음 2. 생성자에 매개변수가 많다면 빌더 패턴을 고려하라 점층적 생성자 패턴은 매개변수가 많아지면 난해 자바빈즈 패턴(setter)은 객체 일관성 깨짐 위험 빌더 패턴: 필수 매개변수는 생성자/정적 메서드, 선택 매개변수는 빌더 메서드 체이닝, 마지막에 build() MyObj obj = MyObj.builder(&#34;필수1&#34;, &#34;필수2&#34;) .optionA(123) .optionB(&#34;abc&#34;) .build(); 3. 싱글턴을 보증하는 방법 private 생성자 + public static final 필드 public class Singleton { public static final Singleton INSTANCE = new Singleton(); private Singleton() {} } private 생성자 + public static 팩터리 public class Singleton { private static final Singleton INSTANCE = new Singleton(); private Singleton() {} public static Singleton getInstance() { return INSTANCE; } } enum 사용 (가장 안전) public enum Singleton { INSTANCE; } 4. 인스턴스 생성을 막고 싶다면 private 생성자를 사용 추상클래스만으로는 인스턴스 생성 차단 불가 반드시 private 생성자 명시 유틸리티 클래스(정적 메서드만 모은 클래스)에서 사용 5. 의존 객체 주입(Dependency Injection) 활용 자원 변경이 필요한 경우 정적 유틸리티/싱글턴은 부적합 생성자 / 세터 / 인터페이스 / 람다 / 팩터리 등으로 주입 Mock 객체나 대체 구현체로 테스트 용이성 확보 6. 불필요한 객체 생성 피하기 불변 객체·캐시 재사용 값 비교시 == 사용 박싱/오토박싱 주의 7. 다 쓴 객체 참조 해제: 메모리 누수 예방 직접 메모리 관리 클래스(컬렉션, 캐시 등): 사용 후 참조 해제(null, 삭제 등) WeakHashMap, LinkedHashMap, java.lang.ref 활용 가능 참조변수를 유효 범위 밖으로 밀어내기 8. 결합도와 객체 생성 방식 비교 방식 결합도 확장/유연성 테스트 용이성 대표 사례 직접 생성 강함(Tight) 낮음 어려움 new MyObj(...) 팩토리 패턴 느슨함(Loose) 높음 좋음 new MyObj(factory) 람다/함수식 주입 매우 느슨함 매우 높음 매우 좋음 Java 8+ Supplier 등 9. equals와 hashCode 논리적 동치 비교 필요 시 규약 준수하여 재정의 필수 hashCode 불일치 시 HashSet/HashMap 등에서 문제 발생 10. 클래스와 멤버 접근 권한 최소화 public 가변 필드 → Thread-Safety 문제 내부 구현 최대한 은닉, API 최소 공개 디자인 패턴 객체 재사용 패턴 패턴 목적 특징/주요 역할 Singleton 객체 1개만 생성·재사용 전역 인스턴스, 상태 공유 Flyweight 객체 여러 개를 공유해 재사용 메모리 절약, 상태 최소화 Prototype 객체 복제(Cloning) clone/factory 기반 효율적 생성 Builder 복잡한 객체 생성 선택·필수 매개변수 분리, 조립식 생성 Iterator 컬렉션 순회 책임 분리 내부 구조 노출 없이 순회 행위 &amp; 구조 분리 패턴 Template Method 추상클래스에서 알고리즘 구조를 정의, 하위클래스가 세부 구현 예: AbstractList, AbstractCollection Strategy 알고리즘을 객체로 분리, 런타임에 주입 예: Comparator, Collections.sort Bridge 구현부와 추상부를 분리해 독립 확장 가능 예: JDBC Driver 구조 생성/구조/행위 패턴 패턴 개념/역할 설명·예시 Factory Method 객체 생성 추상화 Creator/Factory가 Product 생성 위임 Abstract Factory 객체 집합 생성 팩터리 테마별/계열별 제품군 생성, 의존성 교체 용이 Adapter 인터페이스 변환, 호환성 유지 구버전 → 신버전 연결 Proxy 대리자 역할, 접근 제어 Spring AOP, Lazy Loading Composite 트리 구조, 전체-부분 계층 폴더-파일 구조, UI 구성 Command 요청 캡슐화 실행/취소/이력 관리, Runnable, ActionListener Observer 이벤트 알림 MVC 패턴, 이벤트 구독자 State 상태에 따라 행위 변경 TCP 연결 상태, 게임 캐릭터 상태 등 자료구조 개념 동일 타입 데이터를 일정 구조로 저장 탐색·삽입·삭제 등 연산 효율 극대화 주요 종류 1. 리스트와 배열 선형 저장, 탐색 O(n), 삽입/삭제 O(n) 2. 스택과 큐 스택: LIFO 큐: FIFO 3. 트리 이진 트리 순회: 전위(NLR), 중위(LNR), 후위(LRN), 레벨 순회 스레드 이진 트리\n">
+<meta property='og:url' content='http://localhost:1313/posts/week8-retrospective/'>
+<meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='패스트캠퍼스' /><meta property='article:tag' content='커널아카데미' /><meta property='article:tag' content='백엔드개발부트캠프' /><meta property='article:tag' content='국비지원교육' /><meta property='article:tag' content='내일배움카드' /><meta property='article:tag' content='KDT' /><meta property='article:published_time' content='2025-08-10T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-10T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="[커널아카데미] 백엔드 개발 부트캠프 13기 8주차">
+<meta name="twitter:description" content=" 이펙티브 자바 1. 생성자 대신 정적 팩터리 메서드를 고려하라 장점 이름 부여: 반환 목적, 특징을 이름에 반영 가능 (of(), valueOf(), from() 등) 인스턴스 재사용: 반드시 새 객체가 필요하지 않다면 캐시·싱글턴 등으로 같은 객체를 재사용할 수 있음 (성능·메모리 절약, ex. Boolean.valueOf, Integer.valueOf) 인스턴스 통제: 싱글턴, 불변 값 객체, 인스턴스화 불가능 객체(팩터리 메서드만 제공) 등 다양한 객체 관리 전략을 구현하기 쉬움 반환 타입 유연성: 팩터리 메서드의 반환타입은 하위타입까지 포함할 수 있어 확장성이 높음 (ex. 인터페이스 반환, 다양한 구현체 숨김) 구현 클래스 은닉: API 바깥에 구체 구현 클래스를 노출하지 않고도 객체를 반환할 수 있음 (ex. 컬렉션 프레임워크의 List.of 등) 다양한 반환: 입력값에 따라 서로 다른 클래스의 객체를 반환할 수 있음 단점 상속 제약: public/protected 생성자가 없으므로 하위 클래스를 만들 수 없음 (확장 불가) 호출 가시성↓: 사용자가 ‘생성자’로 객체를 찾는 습성 때문에, 정적 팩터리 메서드의 존재가 눈에 덜 띌 수 있음 2. 생성자에 매개변수가 많다면 빌더 패턴을 고려하라 점층적 생성자 패턴은 매개변수가 많아지면 난해 자바빈즈 패턴(setter)은 객체 일관성 깨짐 위험 빌더 패턴: 필수 매개변수는 생성자/정적 메서드, 선택 매개변수는 빌더 메서드 체이닝, 마지막에 build() MyObj obj = MyObj.builder(&#34;필수1&#34;, &#34;필수2&#34;) .optionA(123) .optionB(&#34;abc&#34;) .build(); 3. 싱글턴을 보증하는 방법 private 생성자 + public static final 필드 public class Singleton { public static final Singleton INSTANCE = new Singleton(); private Singleton() {} } private 생성자 + public static 팩터리 public class Singleton { private static final Singleton INSTANCE = new Singleton(); private Singleton() {} public static Singleton getInstance() { return INSTANCE; } } enum 사용 (가장 안전) public enum Singleton { INSTANCE; } 4. 인스턴스 생성을 막고 싶다면 private 생성자를 사용 추상클래스만으로는 인스턴스 생성 차단 불가 반드시 private 생성자 명시 유틸리티 클래스(정적 메서드만 모은 클래스)에서 사용 5. 의존 객체 주입(Dependency Injection) 활용 자원 변경이 필요한 경우 정적 유틸리티/싱글턴은 부적합 생성자 / 세터 / 인터페이스 / 람다 / 팩터리 등으로 주입 Mock 객체나 대체 구현체로 테스트 용이성 확보 6. 불필요한 객체 생성 피하기 불변 객체·캐시 재사용 값 비교시 == 사용 박싱/오토박싱 주의 7. 다 쓴 객체 참조 해제: 메모리 누수 예방 직접 메모리 관리 클래스(컬렉션, 캐시 등): 사용 후 참조 해제(null, 삭제 등) WeakHashMap, LinkedHashMap, java.lang.ref 활용 가능 참조변수를 유효 범위 밖으로 밀어내기 8. 결합도와 객체 생성 방식 비교 방식 결합도 확장/유연성 테스트 용이성 대표 사례 직접 생성 강함(Tight) 낮음 어려움 new MyObj(...) 팩토리 패턴 느슨함(Loose) 높음 좋음 new MyObj(factory) 람다/함수식 주입 매우 느슨함 매우 높음 매우 좋음 Java 8+ Supplier 등 9. equals와 hashCode 논리적 동치 비교 필요 시 규약 준수하여 재정의 필수 hashCode 불일치 시 HashSet/HashMap 등에서 문제 발생 10. 클래스와 멤버 접근 권한 최소화 public 가변 필드 → Thread-Safety 문제 내부 구현 최대한 은닉, API 최소 공개 디자인 패턴 객체 재사용 패턴 패턴 목적 특징/주요 역할 Singleton 객체 1개만 생성·재사용 전역 인스턴스, 상태 공유 Flyweight 객체 여러 개를 공유해 재사용 메모리 절약, 상태 최소화 Prototype 객체 복제(Cloning) clone/factory 기반 효율적 생성 Builder 복잡한 객체 생성 선택·필수 매개변수 분리, 조립식 생성 Iterator 컬렉션 순회 책임 분리 내부 구조 노출 없이 순회 행위 &amp; 구조 분리 패턴 Template Method 추상클래스에서 알고리즘 구조를 정의, 하위클래스가 세부 구현 예: AbstractList, AbstractCollection Strategy 알고리즘을 객체로 분리, 런타임에 주입 예: Comparator, Collections.sort Bridge 구현부와 추상부를 분리해 독립 확장 가능 예: JDBC Driver 구조 생성/구조/행위 패턴 패턴 개념/역할 설명·예시 Factory Method 객체 생성 추상화 Creator/Factory가 Product 생성 위임 Abstract Factory 객체 집합 생성 팩터리 테마별/계열별 제품군 생성, 의존성 교체 용이 Adapter 인터페이스 변환, 호환성 유지 구버전 → 신버전 연결 Proxy 대리자 역할, 접근 제어 Spring AOP, Lazy Loading Composite 트리 구조, 전체-부분 계층 폴더-파일 구조, UI 구성 Command 요청 캡슐화 실행/취소/이력 관리, Runnable, ActionListener Observer 이벤트 알림 MVC 패턴, 이벤트 구독자 State 상태에 따라 행위 변경 TCP 연결 상태, 게임 캐릭터 상태 등 자료구조 개념 동일 타입 데이터를 일정 구조로 저장 탐색·삽입·삭제 등 연산 효율 극대화 주요 종류 1. 리스트와 배열 선형 저장, 탐색 O(n), 삽입/삭제 O(n) 2. 스택과 큐 스택: LIFO 큐: FIFO 3. 트리 이진 트리 순회: 전위(NLR), 중위(LNR), 후위(LRN), 레벨 순회 스레드 이진 트리\n"><link rel="alternate" type="application/json" href="http://localhost:1313/posts/week8-retrospective/index.json">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/../assets/avatar_hu_6c8b5d6cd0da96b6.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Soyeon&#39;s Dev Log</a></h1>
+            <h2 class="site-description">백엔드 개발자 지망생의 기록</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>다크 모드</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%EA%B3%B5%EB%B6%80/" >
+                공부
+            </a>
+        
+            <a href="/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/" >
+                주간회고
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/week8-retrospective/">[커널아카데미] 백엔드 개발 부트캠프 13기 8주차</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-08-10</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <div style="margin: 0 40px;">
+<h1 id="이펙티브-자바">이펙티브 자바
+</h1><h2 id="1-생성자-대신-정적-팩터리-메서드를-고려하라">1. 생성자 대신 정적 팩터리 메서드를 고려하라
+</h2><h3 id="장점">장점
+</h3><ul>
+<li><strong>이름 부여</strong>: 반환 목적, 특징을 이름에 반영 가능 (<code>of()</code>, <code>valueOf()</code>, <code>from()</code> 등)</li>
+<li><strong>인스턴스 재사용</strong>: 반드시 새 객체가 필요하지 않다면 캐시·싱글턴 등으로 같은 객체를 재사용할 수 있음 (성능·메모리 절약, ex. <code>Boolean.valueOf</code>, <code>Integer.valueOf</code>)</li>
+<li><strong>인스턴스 통제</strong>: 싱글턴, 불변 값 객체, 인스턴스화 불가능 객체(팩터리 메서드만 제공) 등 다양한 객체 관리 전략을 구현하기 쉬움</li>
+<li><strong>반환 타입 유연성</strong>: 팩터리 메서드의 반환타입은 하위타입까지 포함할 수 있어 확장성이 높음 (ex. 인터페이스 반환, 다양한 구현체 숨김)</li>
+<li><strong>구현 클래스 은닉</strong>: API 바깥에 구체 구현 클래스를 노출하지 않고도 객체를 반환할 수 있음 (ex. 컬렉션 프레임워크의 <code>List.of</code> 등)</li>
+<li><strong>다양한 반환</strong>: 입력값에 따라 서로 다른 클래스의 객체를 반환할 수 있음</li>
+</ul>
+<h3 id="단점">단점
+</h3><ul>
+<li><strong>상속 제약</strong>: <code>public</code>/<code>protected</code> 생성자가 없으므로 하위 클래스를 만들 수 없음 (확장 불가)</li>
+<li><strong>호출 가시성↓</strong>: 사용자가 ‘생성자’로 객체를 찾는 습성 때문에, 정적 팩터리 메서드의 존재가 눈에 덜 띌 수 있음</li>
+</ul>
+<hr>
+<h2 id="2-생성자에-매개변수가-많다면-빌더-패턴을-고려하라">2. 생성자에 매개변수가 많다면 빌더 패턴을 고려하라
+</h2><ul>
+<li>점층적 생성자 패턴은 매개변수가 많아지면 난해</li>
+<li>자바빈즈 패턴(setter)은 객체 일관성 깨짐 위험</li>
+<li><strong>빌더 패턴</strong>: 필수 매개변수는 생성자/정적 메서드, 선택 매개변수는 빌더 메서드 체이닝, 마지막에 <code>build()</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>MyObj obj <span style="color:#f92672">=</span> MyObj.<span style="color:#a6e22e">builder</span>(<span style="color:#e6db74">&#34;필수1&#34;</span>, <span style="color:#e6db74">&#34;필수2&#34;</span>)
+</span></span><span style="display:flex;"><span>                 .<span style="color:#a6e22e">optionA</span>(123)
+</span></span><span style="display:flex;"><span>                 .<span style="color:#a6e22e">optionB</span>(<span style="color:#e6db74">&#34;abc&#34;</span>)
+</span></span><span style="display:flex;"><span>                 .<span style="color:#a6e22e">build</span>();
+</span></span></code></pre></div><hr>
+<h2 id="3-싱글턴을-보증하는-방법">3. 싱글턴을 보증하는 방법
+</h2><ul>
+<li><strong>private 생성자 + public static final 필드</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Singleton</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> Singleton INSTANCE <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Singleton();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Singleton</span>() {}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>private 생성자 + public static 팩터리</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Singleton</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> Singleton INSTANCE <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Singleton();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Singleton</span>() {}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Singleton <span style="color:#a6e22e">getInstance</span>() { <span style="color:#66d9ef">return</span> INSTANCE; }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>enum 사용</strong> (가장 안전)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">enum</span> Singleton {
+</span></span><span style="display:flex;"><span>    INSTANCE;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h2 id="4-인스턴스-생성을-막고-싶다면-private-생성자를-사용">4. 인스턴스 생성을 막고 싶다면 private 생성자를 사용
+</h2><ul>
+<li>추상클래스만으로는 인스턴스 생성 차단 불가</li>
+<li>반드시 <code>private</code> 생성자 명시</li>
+<li>유틸리티 클래스(정적 메서드만 모은 클래스)에서 사용</li>
+</ul>
+<hr>
+<h2 id="5-의존-객체-주입dependency-injection-활용">5. 의존 객체 주입(Dependency Injection) 활용
+</h2><ul>
+<li>자원 변경이 필요한 경우 정적 유틸리티/싱글턴은 부적합</li>
+<li>생성자 / 세터 / 인터페이스 / 람다 / 팩터리 등으로 주입</li>
+<li>Mock 객체나 대체 구현체로 테스트 용이성 확보</li>
+</ul>
+<hr>
+<h2 id="6-불필요한-객체-생성-피하기">6. 불필요한 객체 생성 피하기
+</h2><ul>
+<li>불변 객체·캐시 재사용</li>
+<li>값 비교시 <code>==</code> 사용</li>
+<li>박싱/오토박싱 주의</li>
+</ul>
+<hr>
+<h2 id="7-다-쓴-객체-참조-해제-메모리-누수-예방">7. 다 쓴 객체 참조 해제: 메모리 누수 예방
+</h2><ul>
+<li>직접 메모리 관리 클래스(컬렉션, 캐시 등): 사용 후 참조 해제(<code>null</code>, 삭제 등)</li>
+<li><code>WeakHashMap</code>, <code>LinkedHashMap</code>, <code>java.lang.ref</code> 활용 가능</li>
+<li>참조변수를 유효 범위 밖으로 밀어내기</li>
+</ul>
+<hr>
+<h2 id="8-결합도와-객체-생성-방식-비교">8. 결합도와 객체 생성 방식 비교
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>방식</th>
+          <th>결합도</th>
+          <th>확장/유연성</th>
+          <th>테스트 용이성</th>
+          <th>대표 사례</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>직접 생성</td>
+          <td>강함(Tight)</td>
+          <td>낮음</td>
+          <td>어려움</td>
+          <td><code>new MyObj(...)</code></td>
+      </tr>
+      <tr>
+          <td>팩토리 패턴</td>
+          <td>느슨함(Loose)</td>
+          <td>높음</td>
+          <td>좋음</td>
+          <td><code>new MyObj(factory)</code></td>
+      </tr>
+      <tr>
+          <td>람다/함수식 주입</td>
+          <td>매우 느슨함</td>
+          <td>매우 높음</td>
+          <td>매우 좋음</td>
+          <td>Java 8+ Supplier 등</td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<h2 id="9-equals와-hashcode">9. equals와 hashCode
+</h2><ul>
+<li>논리적 동치 비교 필요 시 규약 준수하여 재정의 필수</li>
+<li>hashCode 불일치 시 HashSet/HashMap 등에서 문제 발생</li>
+</ul>
+<hr>
+<h2 id="10-클래스와-멤버-접근-권한-최소화">10. 클래스와 멤버 접근 권한 최소화
+</h2><ul>
+<li>public 가변 필드 → Thread-Safety 문제</li>
+<li>내부 구현 최대한 은닉, API 최소 공개</li>
+</ul>
+<hr>
+<h1 id="디자인-패턴">디자인 패턴
+</h1><h2 id="객체-재사용-패턴">객체 재사용 패턴
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>패턴</th>
+          <th>목적</th>
+          <th>특징/주요 역할</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Singleton</td>
+          <td>객체 1개만 생성·재사용</td>
+          <td>전역 인스턴스, 상태 공유</td>
+      </tr>
+      <tr>
+          <td>Flyweight</td>
+          <td>객체 여러 개를 공유해 재사용</td>
+          <td>메모리 절약, 상태 최소화</td>
+      </tr>
+      <tr>
+          <td>Prototype</td>
+          <td>객체 복제(Cloning)</td>
+          <td>clone/factory 기반 효율적 생성</td>
+      </tr>
+      <tr>
+          <td>Builder</td>
+          <td>복잡한 객체 생성</td>
+          <td>선택·필수 매개변수 분리, 조립식 생성</td>
+      </tr>
+      <tr>
+          <td>Iterator</td>
+          <td>컬렉션 순회 책임 분리</td>
+          <td>내부 구조 노출 없이 순회</td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<h2 id="행위--구조-분리-패턴">행위 &amp; 구조 분리 패턴
+</h2><h3 id="template-method">Template Method
+</h3><ul>
+<li>추상클래스에서 알고리즘 구조를 정의, 하위클래스가 세부 구현</li>
+<li>예: <code>AbstractList</code>, <code>AbstractCollection</code></li>
+</ul>
+<h3 id="strategy">Strategy
+</h3><ul>
+<li>알고리즘을 객체로 분리, 런타임에 주입</li>
+<li>예: <code>Comparator</code>, <code>Collections.sort</code></li>
+</ul>
+<h3 id="bridge">Bridge
+</h3><ul>
+<li>구현부와 추상부를 분리해 독립 확장 가능</li>
+<li>예: JDBC Driver 구조</li>
+</ul>
+<hr>
+<h2 id="생성구조행위-패턴">생성/구조/행위 패턴
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>패턴</th>
+          <th>개념/역할</th>
+          <th>설명·예시</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Factory Method</td>
+          <td>객체 생성 추상화</td>
+          <td>Creator/Factory가 Product 생성 위임</td>
+      </tr>
+      <tr>
+          <td>Abstract Factory</td>
+          <td>객체 집합 생성 팩터리</td>
+          <td>테마별/계열별 제품군 생성, 의존성 교체 용이</td>
+      </tr>
+      <tr>
+          <td>Adapter</td>
+          <td>인터페이스 변환, 호환성 유지</td>
+          <td>구버전 → 신버전 연결</td>
+      </tr>
+      <tr>
+          <td>Proxy</td>
+          <td>대리자 역할, 접근 제어</td>
+          <td>Spring AOP, Lazy Loading</td>
+      </tr>
+      <tr>
+          <td>Composite</td>
+          <td>트리 구조, 전체-부분 계층</td>
+          <td>폴더-파일 구조, UI 구성</td>
+      </tr>
+      <tr>
+          <td>Command</td>
+          <td>요청 캡슐화</td>
+          <td>실행/취소/이력 관리, Runnable, ActionListener</td>
+      </tr>
+      <tr>
+          <td>Observer</td>
+          <td>이벤트 알림</td>
+          <td>MVC 패턴, 이벤트 구독자</td>
+      </tr>
+      <tr>
+          <td>State</td>
+          <td>상태에 따라 행위 변경</td>
+          <td>TCP 연결 상태, 게임 캐릭터 상태 등</td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<h1 id="자료구조">자료구조
+</h1><h2 id="개념">개념
+</h2><ul>
+<li>동일 타입 데이터를 일정 구조로 저장</li>
+<li>탐색·삽입·삭제 등 연산 효율 극대화</li>
+</ul>
+<h2 id="주요-종류">주요 종류
+</h2><h3 id="1-리스트와-배열">1. 리스트와 배열
+</h3><ul>
+<li>선형 저장, 탐색 O(n), 삽입/삭제 O(n)</li>
+</ul>
+<h3 id="2-스택과-큐">2. 스택과 큐
+</h3><ul>
+<li>스택: LIFO</li>
+<li>큐: FIFO</li>
+</ul>
+<h3 id="3-트리">3. 트리
+</h3><ul>
+<li>이진 트리 순회: 전위(NLR), 중위(LNR), 후위(LRN), 레벨 순회</li>
+</ul>
+<p><strong>스레드 이진 트리</strong></p>
+<ul>
+<li>NULL 포인터 → 중위 순회 이웃 노드 연결</li>
+<li>재귀/스택 없이 반복문 가능</li>
+</ul>
+<h3 id="4-서로소-집합">4. 서로소 집합
+</h3><ul>
+<li><code>find(x)</code>: 대표 원소 탐색(경로 압축)</li>
+<li><code>union(x,y)</code>: 두 집합 합치기(랭크 병합)</li>
+</ul>
+<h3 id="5-해시-테이블">5. 해시 테이블
+</h3><ul>
+<li>해싱: 키 → 인덱스</li>
+<li>충돌 해결
+<ul>
+<li>개방 주소법(선형, 이차, 랜덤, 이중 해싱)</li>
+<li>체이닝(리스트, 트리 연결)</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-우선순위-큐">6. 우선순위 큐
+</h3><ul>
+<li>높은 우선순위 데이터 먼저 처리</li>
+<li>보통 힙(Binary Heap)으로 구현</li>
+</ul>
+<h3 id="7-정렬">7. 정렬
+</h3><ul>
+<li>삽입·선택·퀵·병합 등</li>
+<li>데이터 특성과 조건에 맞게 선택</li>
+</ul>
+<hr>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4/">패스트캠퍼스</a>
+        
+            <a href="/tags/%EC%BB%A4%EB%84%90%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8/">커널아카데미</a>
+        
+            <a href="/tags/%EB%B0%B1%EC%97%94%EB%93%9C%EA%B0%9C%EB%B0%9C%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/">백엔드개발부트캠프</a>
+        
+            <a href="/tags/%EA%B5%AD%EB%B9%84%EC%A7%80%EC%9B%90%EA%B5%90%EC%9C%A1/">국비지원교육</a>
+        
+            <a href="/tags/%EB%82%B4%EC%9D%BC%EB%B0%B0%EC%9B%80%EC%B9%B4%EB%93%9C/">내일배움카드</a>
+        
+            <a href="/tags/kdt/">KDT</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">관련 글</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/week7-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 7주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week6-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 6주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week5-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 5주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week4-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 4주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week3-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 3주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Soyeon&#39;s Dev Log
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.748d0acf3bd5d18477b5028b83b70ecfa20eb15aefdff97697a330a2202721bf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
