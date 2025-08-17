@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>MVC on Soyeon&#39;s Dev Log</title>
+        <link>http://localhost:1313/tags/mvc/</link>
+        <description>Recent content in MVC on Soyeon&#39;s Dev Log</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>ko</language>
+        <lastBuildDate>Sun, 17 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/mvc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 9주차</title>
+        <link>http://localhost:1313/posts/week9-retrospective/</link>
+        <pubDate>Sun, 17 Aug 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/week9-retrospective/</guid>
+        <description>&lt;h1 id=&#34;9주차-학습-정리&#34;&gt;9주차 학습 정리
+&lt;/h1&gt;&lt;h2 id=&#34;이번-주-키워드&#34;&gt;이번 주 키워드
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;웹(Web)의 구조와 표준&lt;/li&gt;
+&lt;li&gt;HTTP 프로토콜&lt;/li&gt;
+&lt;li&gt;Spring MVC 구조&lt;/li&gt;
+&lt;li&gt;서블릿/ JSP 동작 원리&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-웹web-기초&#34;&gt;1. 웹(Web) 기초
+&lt;/h2&gt;&lt;h3 id=&#34;웹web과-인터넷internet&#34;&gt;웹(Web)과 인터넷(Internet)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;웹&lt;/strong&gt;: 리소스들을 거미줄처럼 연결한 것&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;인터넷&lt;/strong&gt;: 웹이 동작하기 위한 인프라&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;리소스resource&#34;&gt;리소스(Resource)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;정적 리소스&lt;/strong&gt;: text, 이미지, 오디오, 비디오&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;동적 리소스&lt;/strong&gt;: streaming, 웹 애플리케이션&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;웹-표준과-접근성&#34;&gt;웹 표준과 접근성
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;웹 표준&lt;/strong&gt;: W3C 재단에서 제정, 현재 HTML5.1(2016)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;웹 접근성&lt;/strong&gt;: 장애에 구애받지 않고 누구나 이용 가능하게&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;html&#34;&gt;HTML
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Hyper Text Markup Language&lt;/li&gt;
+&lt;li&gt;문서 내 단어나 데이터베이스와 링크 → 사용자가 원하는 정보 탐색 가능&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-스프링spring-개요&#34;&gt;2. 스프링(Spring) 개요
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Spring Framework&lt;/strong&gt; (레거시) → 기존 방식&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Spring Boot&lt;/strong&gt; → 사용 권장 (설정 간소화)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;외부-접근&#34;&gt;외부 접근
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;내 프로그램(서버)을 외부 클라이언트가 URL로 사용 가능&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@Controller&lt;/code&gt; : 프로그램 등록&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@RequestMapping&lt;/code&gt; : URL과 메서드 연결&lt;br&gt;
+→ 특정 URL 요청 시 해당 메서드 실행&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3-http-요청과-응답&#34;&gt;3. HTTP 요청과 응답
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;요청(Request)&lt;/strong&gt; : &lt;code&gt;HttpServletRequest&lt;/code&gt;로 들어옴 (정보를 객체화)
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;requestUrl&lt;/code&gt;: 리소스 요청&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;queryString&lt;/code&gt;: 추가 정보 (&lt;code&gt;Map&lt;/code&gt; 구조)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;응답(Response)&lt;/strong&gt; : text(HTML, CSS, JS) 또는 binary(file, image 등)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;클라이언트-서버-구조&#34;&gt;클라이언트-서버 구조
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;웹 요청을 처리하는 서버 = 웹 서버 (예: Apache)&lt;/li&gt;
+&lt;li&gt;웹 애플리케이션 실행 = WAS(Web Application Server, 예: Tomcat)&lt;/li&gt;
+&lt;li&gt;하나의 프로그램이 여러 서버를 가질 경우 → 포트 번호 구분&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4-tomcat-서버-구조&#34;&gt;4. Tomcat 서버 구조
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;WAS = 서비스(커넥터 + 엔진[카탈리나])&lt;/li&gt;
+&lt;li&gt;내부 구조는 &lt;code&gt;Map&lt;/code&gt; 기반의 컨테이너 (캐싱으로 성능↑)&lt;br&gt;
+→ &lt;strong&gt;FlyWeight 패턴&lt;/strong&gt; 적용 (객체/자원 재사용 극대화)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;메모리-성능-영향을-주는-요소&#34;&gt;메모리 성능 영향을 주는 요소
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;클래스 수 (적을 수록 좋음)&lt;/li&gt;
+&lt;li&gt;객체 재사용성&lt;/li&gt;
+&lt;li&gt;동적 할당 최소화&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;5-http-프로토콜&#34;&gt;5. HTTP 프로토콜
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;정의&lt;/strong&gt;: Hyper Text Transfer Protocol (텍스트 기반)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;특징&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;stateless&lt;/strong&gt;: 클라이언트 상태 저장 X&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;connectless&lt;/strong&gt;: 요청-응답 후 연결 종료&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;http-상태-코드&#34;&gt;HTTP 상태 코드
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;100번대 : Informational&lt;/li&gt;
+&lt;li&gt;200번대 : Success&lt;/li&gt;
+&lt;li&gt;300번대 : Redirect&lt;/li&gt;
+&lt;li&gt;400번대 : Client Error&lt;/li&gt;
+&lt;li&gt;500번대 : Server Error&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;http-메서드&#34;&gt;HTTP 메서드
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;HEAD, GET(소용량 조회), POST(대용량 쓰기), PUT(업로드), DELETE, PATCH(수정), TRACE, OPTIONS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;보안&#34;&gt;보안
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;HTTP는 암호화가 없음 → &lt;strong&gt;TLS 기반 HTTPS&lt;/strong&gt; 사용 권장&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;mime--base64&#34;&gt;MIME &amp;amp; Base64
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;MIME: text 기반 프로토콜에서 binary 전송 시 데이터 타입 명시 (&lt;code&gt;Content-Type&lt;/code&gt; 헤더)&lt;/li&gt;
+&lt;li&gt;Base64: binary → text 변환 (64진법 사용, &lt;code&gt;2^6&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;6-spring-mvc-아키텍처&#34;&gt;6. Spring MVC 아키텍처
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;관심사의 분리(SoC)&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;Controller → 데이터 처리&lt;/li&gt;
+&lt;li&gt;View → 출력&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MVC 패턴&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;요청 → &lt;code&gt;DispatcherServlet&lt;/code&gt; → 입력 처리 및 모델 생성&lt;/li&gt;
+&lt;li&gt;전달 → Controller에서 처리, 반환값은 View에서 렌더링 후 응답&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;컨트롤러-메서드-반환-타입&#34;&gt;컨트롤러 메서드 반환 타입
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;String&lt;/code&gt; : 뷰 이름 반환&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;void&lt;/code&gt; : 매핑된 url 끝 단어 == 뷰 이름&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ModelAndView&lt;/code&gt; : Model과 View 함께 반환&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;7-서블릿servlet-vs-컨트롤러&#34;&gt;7. 서블릿(Servlet) vs 컨트롤러
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;서블릿&lt;/strong&gt;: 1클래스 = 1 URL&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;컨트롤러&lt;/strong&gt;: 1클래스 = 다수 URL&lt;br&gt;
+→ URL 많아질수록 서블릿은 클래스 수도 증가&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;서블릿 호출 과정: JSP → &lt;code&gt;.jsp&lt;/code&gt; → &lt;code&gt;.java(서블릿)&lt;/code&gt; → &lt;code&gt;.class&lt;/code&gt; 컴파일 → 인스턴스 생성 후 응답&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;JSP&lt;/strong&gt; : HTML 속 Java (``),&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;서블릿&lt;/strong&gt; : Java 속 HTML (&lt;code&gt;out.print(&amp;quot;&amp;quot;)&lt;/code&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;jsp-scope&#34;&gt;JSP Scope
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;전역: &lt;code&gt;application&lt;/code&gt; (프로그램 전체 1개)&lt;/li&gt;
+&lt;li&gt;지역: method 영역&lt;/li&gt;
+&lt;li&gt;세션: 사용자별 객체 (Login~Logout 동안 유지)&lt;/li&gt;
+&lt;li&gt;요청: Request 범위&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;파이썬/자바스크립트도 각 Scope를 Map 구조로 관리&lt;/p&gt;&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;8-jsp--스프링-연동-요소&#34;&gt;8. JSP &amp;amp; 스프링 연동 요소
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;URL 패턴&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;정확히 일치, 경로 일치, 확장자 일치, 기본값&lt;/li&gt;
+&lt;li&gt;예: &lt;code&gt;JspServlet =&amp;gt; *.jsp&lt;/code&gt;, &lt;code&gt;DispatcherServlet =&amp;gt; /*&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;JSTL / EL 태그&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;% %&amp;gt;&lt;/code&gt; → JSTL로 대체 (Java 코드 제거)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;%= 값%&amp;gt;&lt;/code&gt; → EL 태그로 대체&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;@RequestParam&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;요청 파라미터를 메서드 매개변수로 바인딩&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;@ModelAttribute&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;파라미터를 Model 속성으로 자동 추가&lt;/li&gt;
+&lt;li&gt;반환 타입/메서드 매개변수에 적용 가능&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;마무리&#34;&gt;마무리
+&lt;/h4&gt;&lt;p&gt;JSP와 Servlet으로 게시판 사이트를 따라 만들어본 경험은 있었지만, &lt;br&gt;
+이번에 동작 원리를 심도 있게 배우면서 예전엔 복잡하게만 느껴졌던 코드들이 훨씬 잘 이해되기 시작했다. &lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;특히 Spring Framework로 실습을 오랜만에 해보면서 Spring Framework와 Spring Boot의 차이점을 &lt;br&gt;
+명확히 짚고 넘어갈 수 있었던 점이 의미있었다. &lt;br&gt;
+이전에는 단순히 &amp;ldquo;Spring Boot로 만들면 편하다&amp;quot;는 정도로만 생각했는데,&lt;br&gt;
+내장 톰캣 지원뿐 아니라, 자동 설정, 스타터(Starter) 의존성 관리, 쉬운 환경구성 등 다양한 차이점이 있음을 체감할 수 있었다.&lt;br&gt;
+Spring Boot가 얼마나 개발자의 불필요한 반복 작업과 초기 설정을 줄여주는지를 구체적으로 알게 되어, &amp;ldquo;왜 현업에서 표준처럼 쓰이는지&amp;quot;도 납득이 갔다.&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;프레임워크란 결국 개발자의 편의를 높이기 위해 등장한 것이지만,&lt;br&gt;
+그 원리와 기초 기술을 제대로 이해하고 활용하는 것과 단순히 겉만 사용하는 것에는 분명 큰 차이가 있다는 사실을 다시 깨달았다.&lt;br&gt;
+앞으로는 편리함에만 기대지 않고, 동작 원리와 내부 구조까지 깊이 이해하며 기술을 활용하는 습관을 가져야겠다고 다짐했다.
+&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
