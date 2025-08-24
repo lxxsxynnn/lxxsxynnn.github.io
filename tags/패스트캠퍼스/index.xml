@@ -6,13 +6,122 @@
         <description>Recent content in 패스트캠퍼스 on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Sun, 17 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 24 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 10주차</title>
+        <link>http://localhost:1313/posts/week10-retrospective/</link>
+        <pubDate>Sun, 24 Aug 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/week10-retrospective/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h1 id=&#34;10주차-학습-정리&#34;&gt;10주차 학습 정리
+&lt;/h1&gt;&lt;h2 id=&#34;이번-주-키워드&#34;&gt;이번 주 키워드
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Spring DI &amp;amp; AOP&lt;/li&gt;
+&lt;li&gt;Spring MVC 동작 원리&lt;/li&gt;
+&lt;li&gt;DAO, DTO, Service 계층 분리&lt;/li&gt;
+&lt;li&gt;MyBatis SQL 매핑&lt;/li&gt;
+&lt;li&gt;트랜잭션(Transaction) 처리&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-spring의-핵심-철학-di와-aop&#34;&gt;1. Spring의 핵심 철학: DI와 AOP
+&lt;/h2&gt;&lt;h3 id=&#34;의존성-주입-di-dependency-injection&#34;&gt;의존성 주입 (DI, Dependency Injection)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;IoC (제어의 역전)&lt;/strong&gt;: 객체의 생성과 생명주기를 개발자가 아닌 스프링 컨테이너(&lt;code&gt;ApplicationContext&lt;/code&gt;)가 관리하는 개념&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Bean (빈)&lt;/strong&gt;: 스프링 컨테이너가 관리하는 자바 객체(POJO)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DI (의존성 주입)&lt;/strong&gt;: 필요한 객체를 직접 생성하지 않고 외부(스프링 컨테이너)에서 주입받는 방식
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;@Autowired&lt;/code&gt;: &lt;strong&gt;타입&lt;/strong&gt;을 기준으로 빈을 찾아 자동으로 의존성을 주입&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@Resource&lt;/code&gt;: &lt;strong&gt;이름&lt;/strong&gt;을 기준으로 빈을 찾아 자동으로 의존성을 주입&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@Component&lt;/code&gt;: 클래스를 스캔하여 빈으로 자동 등록&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;관점-지향-프로그래밍-aop-aspect-oriented-programming&#34;&gt;관점 지향 프로그래밍 (AOP, Aspect Oriented Programming)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;AOP&lt;/strong&gt;: 트랜잭션, 로깅, 보안 등 여러 메서드에 공통적으로 필요한 **부가 기능(횡단 관심사)**을 핵심 비즈니스 로직에서 분리하는 기술&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;주요 용어&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Advice&lt;/strong&gt;: 부가 기능 자체(코드).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Join point&lt;/strong&gt;: Advice가 적용될 수 있는 위치 (예: 메서드)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Pointcut&lt;/strong&gt;: Advice를 실제로 적용할 Join point를 선별하는 패턴&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Weaving&lt;/strong&gt;: Advice를 핵심 로직에 적용하여 프록시(Proxy) 객체를 만드는 과정&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-spring-mvc-아키텍처-심화&#34;&gt;2. Spring MVC 아키텍처 심화
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;DispatcherServlet&lt;/strong&gt;: 모든 클라이언트의 요청을 가장 먼저 받아 처리 흐름을 제어하는 &lt;strong&gt;중앙 컨트롤러&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;요청 처리 흐름&lt;/strong&gt;:
+&lt;ol&gt;
+&lt;li&gt;요청 → &lt;code&gt;DispatcherServlet&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HandlerMapping&lt;/code&gt;이 요청 URL에 맞는 &lt;code&gt;Controller&lt;/code&gt; 탐색.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HandlerAdapter&lt;/code&gt;가 &lt;code&gt;Controller&lt;/code&gt;의 메서드를 호출&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Controller&lt;/code&gt;는 비즈니스 로직 처리 후, &lt;strong&gt;View 이름&lt;/strong&gt;과 &lt;strong&gt;Model&lt;/strong&gt;을 반환&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ViewResolver&lt;/code&gt;가 View 이름을 기반으로 실제 View(JSP 등)를 찾아 렌더링&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;상태-관리-쿠키-vs-세션&#34;&gt;상태 관리: 쿠키 vs 세션
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;쿠키(Cookie)&lt;/strong&gt;: 사용자의 정보를 **브라우저(클라이언트)**에 저장하는 작은 데이터 조각&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;세션(Session)&lt;/strong&gt;: 사용자의 정보를 &lt;strong&gt;서버&lt;/strong&gt;에 저장하고, &lt;code&gt;JSESSIONID&lt;/code&gt; 쿠키를 통해 클라이언트를 식별하는 방식&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;예외-처리&#34;&gt;예외 처리
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;@ExceptionHandler&lt;/code&gt;: 컨트롤러 내에서 특정 예외를 처리하는 메서드를 지정&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@ControllerAdvice&lt;/code&gt;: 여러 컨트롤러에 걸쳐 발생하는 예외를 전역적으로 처리&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3-데이터베이스-연동과-계층형-아키텍처&#34;&gt;3. 데이터베이스 연동과 계층형 아키텍처
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;계층 분리(Layering)&lt;/strong&gt;: 유지보수성과 재사용성을 높이기 위해 코드를 &lt;strong&gt;Controller - Service - Repository(DAO)&lt;/strong&gt; 계층으로 분리
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Controller&lt;/strong&gt;: HTTP 요청/응답 처리&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Service&lt;/strong&gt;: 비즈니스 로직 및 트랜잭션 처리&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Repository(DAO)&lt;/strong&gt;: 순수 데이터베이스 접근(CRUD) 담당&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DTO (Data Transfer Object)&lt;/strong&gt;: 계층 간 데이터 전송을 위해 사용되는 객체&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;mybatis-연동&#34;&gt;MyBatis 연동
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;MyBatis&lt;/strong&gt;: SQL 쿼리를 Java 코드에서 분리하여 XML 파일(&lt;code&gt;Mapper&lt;/code&gt;)로 관리하는 &lt;strong&gt;SQL 매핑 프레임워크&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SqlSession&lt;/strong&gt;: SQL 실행에 필요한 메서드(&lt;code&gt;insert&lt;/code&gt;, &lt;code&gt;selectOne&lt;/code&gt; 등)를 제공하는 핵심 객체&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;동적 쿼리&lt;/strong&gt;: &lt;code&gt;&amp;lt;if&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;choose&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;foreach&amp;gt;&lt;/code&gt; 등의 태그를 사용해 조건에 따라 SQL을 동적으로 생성 가능. 검색 기능 구현 시 매우 유용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4-트랜잭션-관리와-rest-api&#34;&gt;4. 트랜잭션 관리와 REST API
+&lt;/h2&gt;&lt;h3 id=&#34;트랜잭션-transaction&#34;&gt;트랜잭션 (Transaction)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;정의&lt;/strong&gt;: &amp;lsquo;모 아니면 도&amp;rsquo;처럼, 모두 성공하거나 모두 실패해야 하는 &lt;strong&gt;분리될 수 없는 하나의 작업 단위&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ACID 속성&lt;/strong&gt;: 원자성(Atomicity), 일관성(Consistency), 고립성(Isolation), 영속성(Durability)을 보장&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Spring의 트랜잭션 처리&lt;/strong&gt;: &lt;code&gt;@Transactional&lt;/code&gt; 어노테이션을 서비스 계층 메서드에 추가하면, AOP를 통해 &lt;strong&gt;트랜잭션의 시작, 커밋, 롤백이 자동으로 관리&lt;/strong&gt;됨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;rest-api와-ajax&#34;&gt;REST API와 Ajax
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;REST API&lt;/strong&gt;: 자원(Resource)을 URI로 표현하고, HTTP 메서드(GET, POST, PUT, DELETE 등)로 해당 자원에 대한 행위를 정의하는 아키텍처 스타일&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ajax&lt;/strong&gt;: 웹 페이지 전체를 새로고침하지 않고, 백그라운드에서 서버와 데이터를 교환하여 화면 일부만 동적으로 갱신하는 기술&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@RestController&lt;/code&gt;: &lt;code&gt;@Controller&lt;/code&gt;와 &lt;code&gt;@ResponseBody&lt;/code&gt;를 합친 것으로, 메서드의 반환 값을 View가 아닌 JSON 등의 데이터 형식으로 반환할 때 사용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;마무리&#34;&gt;마무리
+&lt;/h4&gt;&lt;p&gt;스프링 프레임워크를 적용하게 되면 단순히 코드를 분리하는 것을 넘어, 각 계층의 책임이 명확해지고,&lt;br&gt;
+&lt;strong&gt;&lt;code&gt;@Transactional&lt;/code&gt; 어노테이션 하나로 서비스 계층의 비즈니스 로직 전체를 원자적 단위로 묶어 처리&lt;/strong&gt;할 수 있다는 점이&lt;br&gt;
+인상 깊었다.&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;또한 MyBatis를 통해 SQL 쿼리를 자바 코드와 완전히 분리하면서, 왜 SQL 매퍼 프레임워크가 필요한지를 체감했다.&lt;br&gt;
+자바 코드에서는 비즈니스 로직에만 집중하고, SQL은 XML에서 따로 관리하니 가독성과 유지보수성이 크게 향상되었다. &lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;DI, AOP, 트랜잭션, 계층형 아키텍처 등의 개념들이 스프링이라는 생태계 안에서 어떻게 유기적으로 결합하여 동작하는지를 깨닫게 된 한 주였다. 앞으로는 단순히 기능을 구현하는 것을 넘어, 스프링의 철학을 이해하고 각 기술이 어떤 문제를 해결하기 위해 등장했는지 고민하며 코드를 작성해야겠다고 다짐했다.&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>[커널아카데미] 백엔드 개발 부트캠프 13기 9주차</title>
         <link>http://localhost:1313/posts/week9-retrospective/</link>
         <pubDate>Sun, 17 Aug 2025 00:00:00 +0000</pubDate>
         
         <guid>http://localhost:1313/posts/week9-retrospective/</guid>
-        <description>&lt;h1 id=&#34;9주차-학습-정리&#34;&gt;9주차 학습 정리
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h1 id=&#34;9주차-학습-정리&#34;&gt;9주차 학습 정리
 &lt;/h1&gt;&lt;h2 id=&#34;이번-주-키워드&#34;&gt;이번 주 키워드
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;웹(Web)의 구조와 표준&lt;/li&gt;
@@ -166,8 +275,7 @@
 &lt;li&gt;세션: 사용자별 객체 (Login~Logout 동안 유지)&lt;/li&gt;
 &lt;li&gt;요청: Request 범위&lt;/li&gt;
 &lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;파이썬/자바스크립트도 각 Scope를 Map 구조로 관리&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;+) 파이썬/자바스크립트도 각 Scope를 Map 구조로 관리&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;8-jsp--스프링-연동-요소&#34;&gt;8. JSP &amp;amp; 스프링 연동 요소
 &lt;/h2&gt;&lt;ul&gt;

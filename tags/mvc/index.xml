@@ -12,7 +12,8 @@
         <pubDate>Sun, 17 Aug 2025 00:00:00 +0000</pubDate>
         
         <guid>http://localhost:1313/posts/week9-retrospective/</guid>
-        <description>&lt;h1 id=&#34;9주차-학습-정리&#34;&gt;9주차 학습 정리
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h1 id=&#34;9주차-학습-정리&#34;&gt;9주차 학습 정리
 &lt;/h1&gt;&lt;h2 id=&#34;이번-주-키워드&#34;&gt;이번 주 키워드
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;웹(Web)의 구조와 표준&lt;/li&gt;
@@ -166,8 +167,7 @@
 &lt;li&gt;세션: 사용자별 객체 (Login~Logout 동안 유지)&lt;/li&gt;
 &lt;li&gt;요청: Request 범위&lt;/li&gt;
 &lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;파이썬/자바스크립트도 각 Scope를 Map 구조로 관리&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;+) 파이썬/자바스크립트도 각 Scope를 Map 구조로 관리&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;8-jsp--스프링-연동-요소&#34;&gt;8. JSP &amp;amp; 스프링 연동 요소
 &lt;/h2&gt;&lt;ul&gt;

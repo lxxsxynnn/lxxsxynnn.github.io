@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 10주차 학습 정리 - 2 이번 주 키워드 JavaScript 기본 문법 (자료형, 호이스팅, 스코프) 객체와 프로토타입 (Object &amp; Prototype) DOM (Document Object Model) 조작 이벤트(Event) 처리 모델 1. JavaScript 기본 문법 Java와 이름은 비슷하지만 동작 방식이 매우 다른 웹 브라우저를 제어하기 위한 핵심 언어\n자료형(Data Types) &amp; 동적 타이핑 동적 타입 언어: 변수의 타입이 고정되어 있지 않고 할당되는 값에 따라 동적으로 결정됨 기본형: number, string, boolean, null, undefined 파생형: object (배열, 함수 포함) 함수의 typeof 결과는 &lsquo;function&rsquo;으로 특별 취급 타입 확인: typeof 연산자 사용 호이스팅(Hoisting) 변수/함수 선언이 범위의 최상단으로 끌어올려지는 현상 함수 선언: 선언 전에 호출 가능 var 변수: 선언 전에 접근하면 undefined 스코프(Scope) 전역 변수: 함수 외부에서 선언, window 객체의 속성 지역 변수: 함수 내부에서 var로 선언, 함수 내에서만 유효 ES5 기준: 블록({}) 단위 스코프 X 2. 객체와 프로토타입(Object &amp; Prototype) 객체 생성 객체 리터럴: {}로 생성, 속성과 메서드 추가 가능 생성자 함수: function Person(...), new 키워드로 객체 생성 this 키워드 함수를 호출한 객체를 가리킴(사용 위치에 따라 다름) 전역: window 객체 메서드 내: 해당 객체 생성자 함수 내: 생성될 객체 call(), apply()로 this 명시적 변경 가능 프로토타입(Prototype) JS 상속의 핵심 메커니즘 모든 객체는 생성자 함수의 prototype 객체를 가리키는 내부 링크(__proto__)를 가짐 생성자.prototype에 메서드를 추가 → 해당 생성자로 만들어진 모든 객체가 공유함(메모리 효율↑) 3. DOM(Document Object Model) 조작 DOM이란? 브라우저가 HTML 문서를 읽어 트리 구조의 객체로 메모리에 생성한 것 JS는 DOM을 통해 HTML 요소에 접근·조작 가능 요소 선택 document.getElementById('id') : id로 요소 선택(단일) document.querySelectorAll('selector') : CSS 선택자로 요소들 선택(복수) 요소 조작 및 추가 element.innerHTML : 요소 내부 HTML 변경 element.style.color : CSS 스타일 변경 document.createElement('tag') : 새 요소 생성 parentElement.appendChild(childElement) : 자식 요소를 부모에 추가 4. 이벤트(Event) 처리 기본 개념 이벤트: HTML 요소에서 발생하는 클릭, 마우스 오버 등의 사건 이벤트 핸들러: 이벤트 발생 시 실행할 함수 이벤트 모델 기본: element.onclick = function() { ... } 표준: element.addEventListener('click', handler) 여러 이벤트 핸들러 등록 가능 이벤트 전파(Event Propagation) 이벤트 버블링: 자식 요소에서 발생한 이벤트가 부모 요소로 올라가며 전파되는 현상 ">
+<title>[커널아카데미] 백엔드 개발 부트캠프 13기 10주차(2)</title>
+
+<link rel='canonical' href='http://localhost:1313/posts/week10-2-retrospective/'>
+
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="[커널아카데미] 백엔드 개발 부트캠프 13기 10주차(2)">
+<meta property='og:description' content=" 10주차 학습 정리 - 2 이번 주 키워드 JavaScript 기본 문법 (자료형, 호이스팅, 스코프) 객체와 프로토타입 (Object &amp; Prototype) DOM (Document Object Model) 조작 이벤트(Event) 처리 모델 1. JavaScript 기본 문법 Java와 이름은 비슷하지만 동작 방식이 매우 다른 웹 브라우저를 제어하기 위한 핵심 언어\n자료형(Data Types) &amp; 동적 타이핑 동적 타입 언어: 변수의 타입이 고정되어 있지 않고 할당되는 값에 따라 동적으로 결정됨 기본형: number, string, boolean, null, undefined 파생형: object (배열, 함수 포함) 함수의 typeof 결과는 &lsquo;function&rsquo;으로 특별 취급 타입 확인: typeof 연산자 사용 호이스팅(Hoisting) 변수/함수 선언이 범위의 최상단으로 끌어올려지는 현상 함수 선언: 선언 전에 호출 가능 var 변수: 선언 전에 접근하면 undefined 스코프(Scope) 전역 변수: 함수 외부에서 선언, window 객체의 속성 지역 변수: 함수 내부에서 var로 선언, 함수 내에서만 유효 ES5 기준: 블록({}) 단위 스코프 X 2. 객체와 프로토타입(Object &amp; Prototype) 객체 생성 객체 리터럴: {}로 생성, 속성과 메서드 추가 가능 생성자 함수: function Person(...), new 키워드로 객체 생성 this 키워드 함수를 호출한 객체를 가리킴(사용 위치에 따라 다름) 전역: window 객체 메서드 내: 해당 객체 생성자 함수 내: 생성될 객체 call(), apply()로 this 명시적 변경 가능 프로토타입(Prototype) JS 상속의 핵심 메커니즘 모든 객체는 생성자 함수의 prototype 객체를 가리키는 내부 링크(__proto__)를 가짐 생성자.prototype에 메서드를 추가 → 해당 생성자로 만들어진 모든 객체가 공유함(메모리 효율↑) 3. DOM(Document Object Model) 조작 DOM이란? 브라우저가 HTML 문서를 읽어 트리 구조의 객체로 메모리에 생성한 것 JS는 DOM을 통해 HTML 요소에 접근·조작 가능 요소 선택 document.getElementById('id') : id로 요소 선택(단일) document.querySelectorAll('selector') : CSS 선택자로 요소들 선택(복수) 요소 조작 및 추가 element.innerHTML : 요소 내부 HTML 변경 element.style.color : CSS 스타일 변경 document.createElement('tag') : 새 요소 생성 parentElement.appendChild(childElement) : 자식 요소를 부모에 추가 4. 이벤트(Event) 처리 기본 개념 이벤트: HTML 요소에서 발생하는 클릭, 마우스 오버 등의 사건 이벤트 핸들러: 이벤트 발생 시 실행할 함수 이벤트 모델 기본: element.onclick = function() { ... } 표준: element.addEventListener('click', handler) 여러 이벤트 핸들러 등록 가능 이벤트 전파(Event Propagation) 이벤트 버블링: 자식 요소에서 발생한 이벤트가 부모 요소로 올라가며 전파되는 현상 ">
+<meta property='og:url' content='http://localhost:1313/posts/week10-2-retrospective/'>
+<meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='패스트캠퍼스' /><meta property='article:tag' content='커널아카데미' /><meta property='article:tag' content='백엔드개발부트캠프' /><meta property='article:tag' content='JavaScript' /><meta property='article:tag' content='JS' /><meta property='article:tag' content='DOM' /><meta property='article:tag' content='이벤트' /><meta property='article:tag' content='프로토타입' /><meta property='article:published_time' content='2025-08-24T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-24T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="[커널아카데미] 백엔드 개발 부트캠프 13기 10주차(2)">
+<meta name="twitter:description" content=" 10주차 학습 정리 - 2 이번 주 키워드 JavaScript 기본 문법 (자료형, 호이스팅, 스코프) 객체와 프로토타입 (Object &amp; Prototype) DOM (Document Object Model) 조작 이벤트(Event) 처리 모델 1. JavaScript 기본 문법 Java와 이름은 비슷하지만 동작 방식이 매우 다른 웹 브라우저를 제어하기 위한 핵심 언어\n자료형(Data Types) &amp; 동적 타이핑 동적 타입 언어: 변수의 타입이 고정되어 있지 않고 할당되는 값에 따라 동적으로 결정됨 기본형: number, string, boolean, null, undefined 파생형: object (배열, 함수 포함) 함수의 typeof 결과는 &lsquo;function&rsquo;으로 특별 취급 타입 확인: typeof 연산자 사용 호이스팅(Hoisting) 변수/함수 선언이 범위의 최상단으로 끌어올려지는 현상 함수 선언: 선언 전에 호출 가능 var 변수: 선언 전에 접근하면 undefined 스코프(Scope) 전역 변수: 함수 외부에서 선언, window 객체의 속성 지역 변수: 함수 내부에서 var로 선언, 함수 내에서만 유효 ES5 기준: 블록({}) 단위 스코프 X 2. 객체와 프로토타입(Object &amp; Prototype) 객체 생성 객체 리터럴: {}로 생성, 속성과 메서드 추가 가능 생성자 함수: function Person(...), new 키워드로 객체 생성 this 키워드 함수를 호출한 객체를 가리킴(사용 위치에 따라 다름) 전역: window 객체 메서드 내: 해당 객체 생성자 함수 내: 생성될 객체 call(), apply()로 this 명시적 변경 가능 프로토타입(Prototype) JS 상속의 핵심 메커니즘 모든 객체는 생성자 함수의 prototype 객체를 가리키는 내부 링크(__proto__)를 가짐 생성자.prototype에 메서드를 추가 → 해당 생성자로 만들어진 모든 객체가 공유함(메모리 효율↑) 3. DOM(Document Object Model) 조작 DOM이란? 브라우저가 HTML 문서를 읽어 트리 구조의 객체로 메모리에 생성한 것 JS는 DOM을 통해 HTML 요소에 접근·조작 가능 요소 선택 document.getElementById('id') : id로 요소 선택(단일) document.querySelectorAll('selector') : CSS 선택자로 요소들 선택(복수) 요소 조작 및 추가 element.innerHTML : 요소 내부 HTML 변경 element.style.color : CSS 스타일 변경 document.createElement('tag') : 새 요소 생성 parentElement.appendChild(childElement) : 자식 요소를 부모에 추가 4. 이벤트(Event) 처리 기본 개념 이벤트: HTML 요소에서 발생하는 클릭, 마우스 오버 등의 사건 이벤트 핸들러: 이벤트 발생 시 실행할 함수 이벤트 모델 기본: element.onclick = function() { ... } 표준: element.addEventListener('click', handler) 여러 이벤트 핸들러 등록 가능 이벤트 전파(Event Propagation) 이벤트 버블링: 자식 요소에서 발생한 이벤트가 부모 요소로 올라가며 전파되는 현상 "><link rel="alternate" type="application/json" href="http://localhost:1313/posts/week10-2-retrospective/index.json">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/../assets/avatar_hu_6c8b5d6cd0da96b6.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Soyeon&#39;s Dev Log</a></h1>
+            <h2 class="site-description">백엔드 개발자 지망생의 기록</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>다크 모드</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%EA%B3%B5%EB%B6%80/" >
+                공부
+            </a>
+        
+            <a href="/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/" >
+                주간회고
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/week10-2-retrospective/">[커널아카데미] 백엔드 개발 부트캠프 13기 10주차(2)</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-08-24</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <div style="margin: 0 40px;">
+<h1 id="10주차-학습-정리---2">10주차 학습 정리 - 2
+</h1><h2 id="이번-주-키워드">이번 주 키워드
+</h2><ul>
+<li>JavaScript 기본 문법 (자료형, 호이스팅, 스코프)</li>
+<li>객체와 프로토타입 (Object &amp; Prototype)</li>
+<li>DOM (Document Object Model) 조작</li>
+<li>이벤트(Event) 처리 모델</li>
+</ul>
+<hr>
+<h2 id="1-javascript-기본-문법">1. JavaScript 기본 문법
+</h2><p>Java와 이름은 비슷하지만 동작 방식이 매우 다른 웹 브라우저를 제어하기 위한 핵심 언어</p>
+<h3 id="자료형data-types--동적-타이핑">자료형(Data Types) &amp; 동적 타이핑
+</h3><ul>
+<li><strong>동적 타입 언어</strong>: 변수의 타입이 고정되어 있지 않고 할당되는 값에 따라 동적으로 결정됨</li>
+<li><strong>기본형</strong>: number, string, boolean, null, undefined</li>
+<li><strong>파생형</strong>: object (배열, 함수 포함)</li>
+<li>함수의 typeof 결과는 &lsquo;function&rsquo;으로 특별 취급</li>
+<li>타입 확인: <code>typeof</code> 연산자 사용</li>
+</ul>
+<h3 id="호이스팅hoisting">호이스팅(Hoisting)
+</h3><ul>
+<li>변수/함수 선언이 범위의 최상단으로 끌어올려지는 현상</li>
+<li>함수 선언: 선언 전에 호출 가능</li>
+<li><code>var</code> 변수: 선언 전에 접근하면 undefined</li>
+</ul>
+<h3 id="스코프scope">스코프(Scope)
+</h3><ul>
+<li><strong>전역 변수</strong>: 함수 외부에서 선언, window 객체의 속성</li>
+<li><strong>지역 변수</strong>: 함수 내부에서 <code>var</code>로 선언, 함수 내에서만 유효</li>
+<li><strong>ES5 기준</strong>: 블록({}) 단위 스코프 X</li>
+</ul>
+<hr>
+<h2 id="2-객체와-프로토타입object--prototype">2. 객체와 프로토타입(Object &amp; Prototype)
+</h2><h3 id="객체-생성">객체 생성
+</h3><ul>
+<li><strong>객체 리터럴</strong>: <code>{}</code>로 생성, 속성과 메서드 추가 가능</li>
+<li><strong>생성자 함수</strong>: <code>function Person(...)</code>, <code>new</code> 키워드로 객체 생성</li>
+</ul>
+<h3 id="this-키워드">this 키워드
+</h3><ul>
+<li>함수를 호출한 <strong>객체</strong>를 가리킴(사용 위치에 따라 다름)
+<ul>
+<li>전역: window 객체</li>
+<li>메서드 내: 해당 객체</li>
+<li>생성자 함수 내: 생성될 객체</li>
+<li><code>call()</code>, <code>apply()</code>로 this 명시적 변경 가능</li>
+</ul>
+</li>
+</ul>
+<h3 id="프로토타입prototype">프로토타입(Prototype)
+</h3><ul>
+<li>JS 상속의 핵심 메커니즘</li>
+<li>모든 객체는 생성자 함수의 prototype 객체를 가리키는 내부 링크(<code>__proto__</code>)를 가짐</li>
+<li>생성자.prototype에 메서드를 추가 → 해당 생성자로 만들어진 모든 객체가 공유함(메모리 효율↑)</li>
+</ul>
+<hr>
+<h2 id="3-domdocument-object-model-조작">3. DOM(Document Object Model) 조작
+</h2><h3 id="dom이란">DOM이란?
+</h3><ul>
+<li>브라우저가 HTML 문서를 읽어 트리 구조의 객체로 메모리에 생성한 것</li>
+<li>JS는 DOM을 통해 HTML 요소에 접근·조작 가능</li>
+</ul>
+<h3 id="요소-선택">요소 선택
+</h3><ul>
+<li><code>document.getElementById('id')</code> : id로 요소 선택(단일)</li>
+<li><code>document.querySelectorAll('selector')</code> : CSS 선택자로 요소들 선택(복수)</li>
+</ul>
+<h3 id="요소-조작-및-추가">요소 조작 및 추가
+</h3><ul>
+<li><code>element.innerHTML</code> : 요소 내부 HTML 변경</li>
+<li><code>element.style.color</code> : CSS 스타일 변경</li>
+<li><code>document.createElement('tag')</code> : 새 요소 생성</li>
+<li><code>parentElement.appendChild(childElement)</code> : 자식 요소를 부모에 추가</li>
+</ul>
+<hr>
+<h2 id="4-이벤트event-처리">4. 이벤트(Event) 처리
+</h2><h3 id="기본-개념">기본 개념
+</h3><ul>
+<li>이벤트: HTML 요소에서 발생하는 클릭, 마우스 오버 등의 사건</li>
+<li>이벤트 핸들러: 이벤트 발생 시 실행할 함수</li>
+</ul>
+<h3 id="이벤트-모델">이벤트 모델
+</h3><ul>
+<li><strong>기본</strong>: <code>element.onclick = function() { ... }</code></li>
+<li><strong>표준</strong>: <code>element.addEventListener('click', handler)</code>
+<ul>
+<li>여러 이벤트 핸들러 등록 가능</li>
+</ul>
+</li>
+</ul>
+<h3 id="이벤트-전파event-propagation">이벤트 전파(Event Propagation)
+</h3><ul>
+<li><strong>이벤트 버블링</strong>: 자식 요소에서 발생한 이벤트가 부모 요소로 올라가며 전파되는 현상</li>
+</ul>
+</div>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4/">패스트캠퍼스</a>
+        
+            <a href="/tags/%EC%BB%A4%EB%84%90%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8/">커널아카데미</a>
+        
+            <a href="/tags/%EB%B0%B1%EC%97%94%EB%93%9C%EA%B0%9C%EB%B0%9C%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/">백엔드개발부트캠프</a>
+        
+            <a href="/tags/javascript/">JavaScript</a>
+        
+            <a href="/tags/js/">JS</a>
+        
+            <a href="/tags/dom/">DOM</a>
+        
+            <a href="/tags/%EC%9D%B4%EB%B2%A4%ED%8A%B8/">이벤트</a>
+        
+            <a href="/tags/%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85/">프로토타입</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">관련 글</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/week10-1-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 10주차(1)</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week9-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 9주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week8-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 8주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week7-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 7주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week6-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 6주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Soyeon&#39;s Dev Log
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.748d0acf3bd5d18477b5028b83b70ecfa20eb15aefdff97697a330a2202721bf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

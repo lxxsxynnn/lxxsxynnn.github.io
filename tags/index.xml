@@ -6,7 +6,31 @@
         <description>Recent content in Tags on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Sun, 17 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 24 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>백엔드개발부트캠프</title>
+        <link>http://localhost:1313/tags/%EB%B0%B1%EC%97%94%EB%93%9C%EA%B0%9C%EB%B0%9C%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/</link>
+        <pubDate>Sun, 24 Aug 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/tags/%EB%B0%B1%EC%97%94%EB%93%9C%EA%B0%9C%EB%B0%9C%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>커널아카데미</title>
+        <link>http://localhost:1313/tags/%EC%BB%A4%EB%84%90%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8/</link>
+        <pubDate>Sun, 24 Aug 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/tags/%EC%BB%A4%EB%84%90%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>패스트캠퍼스</title>
+        <link>http://localhost:1313/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4/</link>
+        <pubDate>Sun, 24 Aug 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>MVC</title>
         <link>http://localhost:1313/tags/mvc/</link>
         <pubDate>Sun, 17 Aug 2025 00:00:00 +0000</pubDate>
@@ -23,35 +47,11 @@
         <description></description>
         </item>
         <item>
-        <title>백엔드개발부트캠프</title>
-        <link>http://localhost:1313/tags/%EB%B0%B1%EC%97%94%EB%93%9C%EA%B0%9C%EB%B0%9C%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/</link>
-        <pubDate>Sun, 17 Aug 2025 00:00:00 +0000</pubDate>
-        
-        <guid>http://localhost:1313/tags/%EB%B0%B1%EC%97%94%EB%93%9C%EA%B0%9C%EB%B0%9C%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/</guid>
-        <description></description>
-        </item>
-        <item>
         <title>웹</title>
         <link>http://localhost:1313/tags/%EC%9B%B9/</link>
         <pubDate>Sun, 17 Aug 2025 00:00:00 +0000</pubDate>
         
         <guid>http://localhost:1313/tags/%EC%9B%B9/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>커널아카데미</title>
-        <link>http://localhost:1313/tags/%EC%BB%A4%EB%84%90%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8/</link>
-        <pubDate>Sun, 17 Aug 2025 00:00:00 +0000</pubDate>
-        
-        <guid>http://localhost:1313/tags/%EC%BB%A4%EB%84%90%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>패스트캠퍼스</title>
-        <link>http://localhost:1313/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4/</link>
-        <pubDate>Sun, 17 Aug 2025 00:00:00 +0000</pubDate>
-        
-        <guid>http://localhost:1313/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4/</guid>
         <description></description>
         </item>
         <item>
