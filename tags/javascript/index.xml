@@ -7,93 +7,107 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
         <lastBuildDate>Sun, 24 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/javascript/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 10주차</title>
+        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 10주차(2)</title>
         <link>http://localhost:1313/posts/week10-2-retrospective/</link>
         <pubDate>Sun, 24 Aug 2025 00:00:00 +0000</pubDate>
         
         <guid>http://localhost:1313/posts/week10-2-retrospective/</guid>
         <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
-&lt;p&gt;10주차 학습 정리
-이번 주 키워드
-JavaScript 기본 문법 (자료형, 호이스팅, 스코프)&lt;/p&gt;
-&lt;p&gt;객체와 프로토타입 (Object &amp;amp; Prototype)&lt;/p&gt;
-&lt;p&gt;DOM (Document Object Model) 조작&lt;/p&gt;
-&lt;p&gt;이벤트(Event) 처리 모델&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;JavaScript 기본 문법
-자바와 이름은 비슷하지만 동작 방식이 매우 다른, 웹 브라우저를 제어하기 위한 핵심 언어인 JavaScript의 기초를 다졌습니다.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;자료형 (Data Types) &amp;amp; 동적 타이핑
-JavaScript는&lt;/p&gt;
-&lt;p&gt;동적 타입(Dynamic type) 언어로, 변수의 타입이 고정되어 있지 않고 할당되는 값에 따라 동적으로 결정됩니다.&lt;/p&gt;
-&lt;p&gt;자료형은 크게&lt;/p&gt;
-&lt;p&gt;기본형(number, string, boolean, null, undefined)과 파생형(object)으로 나뉩니다. 배열과 함수도 객체에 속하지만, 함수의&lt;/p&gt;
-&lt;p&gt;typeof 결과는 &amp;lsquo;function&amp;rsquo;으로 특별 취급됩니다.&lt;/p&gt;
-&lt;p&gt;typeof 연산자를 통해 변수의 타입을 확인할 수 있습니다.&lt;/p&gt;
-&lt;p&gt;호이스팅 (Hoisting)
-변수나 함수의 선언이 해당 범위(scope)의&lt;/p&gt;
-&lt;p&gt;최상단으로 끌어올려지는 현상을 의미합니다.&lt;/p&gt;
-&lt;p&gt;이 때문에 함수는 선언되기 전에 호출할 수 있지만,&lt;/p&gt;
-&lt;p&gt;var로 선언된 변수는 선언 전에 접근하면 undefined가 됩니다.&lt;/p&gt;
-&lt;p&gt;변수 범위 (Scope)&lt;/p&gt;
-&lt;p&gt;전역 변수: 함수 외부에서 선언된 변수로, window 객체의 속성이 됩니다.&lt;/p&gt;
-&lt;p&gt;지역 변수: 함수 내부에서 var로 선언된 변수이며, 해당 함수 내에서만 유효합니다. JavaScript(ES5 기준)는&lt;/p&gt;
-&lt;p&gt;블록 {} 단위 스코프가 없습니다.&lt;/p&gt;
-&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;JavaScript 객체와 프로토타입
-Java의 클래스 기반 객체 지향과 다른, JavaScript만의 독특한 프로토타입 기반 객체 지향 모델을 학습했습니다.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;객체 생성&lt;/p&gt;
-&lt;p&gt;객체 리터럴: {}를 이용해 간단하게 객체를 생성하고 속성과 메서드를 추가할 수 있습니다.&lt;/p&gt;
-&lt;p&gt;생성자 함수: function Person(&amp;hellip;)과 같이 생성자를 정의하고, new 키워드로 객체를 생성하는 방식입니다.&lt;/p&gt;
-&lt;p&gt;this 키워드
-**&lt;/p&gt;
-&lt;p&gt;this**는 기본적으로 함수를 호출한 객체를 가리키며, 상황에 따라 가리키는 대상이 달라집니다.&lt;/p&gt;
-&lt;p&gt;전역에서 사용 시&lt;/p&gt;
-&lt;p&gt;window 객체.&lt;/p&gt;
-&lt;p&gt;객체의 메서드 내에서 사용 시 해당 객체.&lt;/p&gt;
-&lt;p&gt;생성자 함수 내에서 사용 시 새로 생성될 객체.&lt;/p&gt;
-&lt;p&gt;call(), apply()를 사용하면 this가 가리키는 대상을 명시적으로 변경할 수 있습니다.&lt;/p&gt;
-&lt;p&gt;프로토타입 (Prototype)
-JavaScript의 상속을 구현하는 핵심 메커니즘입니다.&lt;/p&gt;
-&lt;p&gt;모든 객체는 자신을 생성한 생성자 함수의&lt;/p&gt;
-&lt;p&gt;prototype 객체를 가리키는 내부 링크(&lt;strong&gt;proto&lt;/strong&gt;)를 가집니다.&lt;/p&gt;
-&lt;p&gt;생성자의&lt;/p&gt;
-&lt;p&gt;prototype에 메서드를 추가하면, 해당 생성자로 만들어진 모든 객체들이 이 메서드를 공유하여 사용할 수 있습니다. 이는 메모리 효율성을 높이는 중요한 방법입니다.&lt;/p&gt;
-&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;DOM (Document Object Model) 조작
-JavaScript가 브라우저의 HTML 문서를 어떻게 인식하고 제어하는지에 대해 배웠습니다.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;DOM이란?: 브라우저가 HTML 문서를 읽어 메모리에 생성하는 트리 구조의 객체 모델입니다. JavaScript는 이 DOM을 통해 HTML 요소에 접근하고 조작할 수 있습니다.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;요소 선택:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;document.getElementById(&amp;lsquo;id&amp;rsquo;): ID로 요소 하나를 찾음&lt;/li&gt;
-&lt;li&gt;document.querySelectorAll(&amp;lsquo;selector&amp;rsquo;): CSS 선택자로 해당하는 모든 요소를 찾음&lt;/li&gt;
+&lt;h1 id=&#34;10주차-학습-정리---2&#34;&gt;10주차 학습 정리 - 2
+&lt;/h1&gt;&lt;h2 id=&#34;이번-주-키워드&#34;&gt;이번 주 키워드
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;JavaScript 기본 문법 (자료형, 호이스팅, 스코프)&lt;/li&gt;
+&lt;li&gt;객체와 프로토타입 (Object &amp;amp; Prototype)&lt;/li&gt;
+&lt;li&gt;DOM (Document Object Model) 조작&lt;/li&gt;
+&lt;li&gt;이벤트(Event) 처리 모델&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;요소 조작 및 추가:&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-javascript-기본-문법&#34;&gt;1. JavaScript 기본 문법
+&lt;/h2&gt;&lt;p&gt;Java와 이름은 비슷하지만 동작 방식이 매우 다른 웹 브라우저를 제어하기 위한 핵심 언어&lt;/p&gt;
+&lt;h3 id=&#34;자료형data-types--동적-타이핑&#34;&gt;자료형(Data Types) &amp;amp; 동적 타이핑
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;동적 타입 언어&lt;/strong&gt;: 변수의 타입이 고정되어 있지 않고 할당되는 값에 따라 동적으로 결정됨&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;기본형&lt;/strong&gt;: number, string, boolean, null, undefined&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;파생형&lt;/strong&gt;: object (배열, 함수 포함)&lt;/li&gt;
+&lt;li&gt;함수의 typeof 결과는 &amp;lsquo;function&amp;rsquo;으로 특별 취급&lt;/li&gt;
+&lt;li&gt;타입 확인: &lt;code&gt;typeof&lt;/code&gt; 연산자 사용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;호이스팅hoisting&#34;&gt;호이스팅(Hoisting)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;변수/함수 선언이 범위의 최상단으로 끌어올려지는 현상&lt;/li&gt;
+&lt;li&gt;함수 선언: 선언 전에 호출 가능&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;var&lt;/code&gt; 변수: 선언 전에 접근하면 undefined&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;스코프scope&#34;&gt;스코프(Scope)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;전역 변수&lt;/strong&gt;: 함수 외부에서 선언, window 객체의 속성&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;지역 변수&lt;/strong&gt;: 함수 내부에서 &lt;code&gt;var&lt;/code&gt;로 선언, 함수 내에서만 유효&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ES5 기준&lt;/strong&gt;: 블록({}) 단위 스코프 X&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-객체와-프로토타입object--prototype&#34;&gt;2. 객체와 프로토타입(Object &amp;amp; Prototype)
+&lt;/h2&gt;&lt;h3 id=&#34;객체-생성&#34;&gt;객체 생성
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;객체 리터럴&lt;/strong&gt;: &lt;code&gt;{}&lt;/code&gt;로 생성, 속성과 메서드 추가 가능&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;생성자 함수&lt;/strong&gt;: &lt;code&gt;function Person(...)&lt;/code&gt;, &lt;code&gt;new&lt;/code&gt; 키워드로 객체 생성&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;this-키워드&#34;&gt;this 키워드
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;함수를 호출한 &lt;strong&gt;객체&lt;/strong&gt;를 가리킴(사용 위치에 따라 다름)
 &lt;ul&gt;
-&lt;li&gt;element.innerHTML: 요소 내부의 HTML 내용을 변경&lt;/li&gt;
-&lt;li&gt;element.style.color: 요소의 CSS 스타일을 변경&lt;/li&gt;
-&lt;li&gt;document.createElement(&amp;rsquo;tag&amp;rsquo;): 새로운 HTML 요소를 생성&lt;/li&gt;
-&lt;li&gt;parentElement.appendChild(childElement): 자식 요소를 부모에 추가&lt;/li&gt;
+&lt;li&gt;전역: window 객체&lt;/li&gt;
+&lt;li&gt;메서드 내: 해당 객체&lt;/li&gt;
+&lt;li&gt;생성자 함수 내: 생성될 객체&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;call()&lt;/code&gt;, &lt;code&gt;apply()&lt;/code&gt;로 this 명시적 변경 가능&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;ol start=&#34;4&#34;&gt;
-&lt;li&gt;이벤트(Event) 처리&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;이벤트: HTML 요소에서 발생하는 특정 사건(클릭, 마우스 오버 등)을 의미&lt;/li&gt;
-&lt;li&gt;이벤트 모델: 이벤트가 발생했을 때 실행할 함수(이벤트 핸들러)를 연결하는 방법&lt;/li&gt;
-&lt;li&gt;기본 이벤트 모델: element.onclick = function() { &amp;hellip; } 과 같이 이벤트 속성에 함수를 할당&lt;/li&gt;
-&lt;li&gt;표준 이벤트 모델: element.addEventListener(&amp;lsquo;click&amp;rsquo;, handler)를 사용하며, 여러 개의 핸들러를 등록할 수 있는 장점이 있음&lt;/li&gt;
-&lt;li&gt;이벤트 전파 (Event Propagation):
-이벤트 버블링: 자식 요소에서 발생한 이벤트가 부모 요소로 거슬러 올라가며 전파되는 현상&lt;/li&gt;
+&lt;h3 id=&#34;프로토타입prototype&#34;&gt;프로토타입(Prototype)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;JS 상속의 핵심 메커니즘&lt;/li&gt;
+&lt;li&gt;모든 객체는 생성자 함수의 prototype 객체를 가리키는 내부 링크(&lt;code&gt;__proto__&lt;/code&gt;)를 가짐&lt;/li&gt;
+&lt;li&gt;생성자.prototype에 메서드를 추가 → 해당 생성자로 만들어진 모든 객체가 공유함(메모리 효율↑)&lt;/li&gt;
 &lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3-domdocument-object-model-조작&#34;&gt;3. DOM(Document Object Model) 조작
+&lt;/h2&gt;&lt;h3 id=&#34;dom이란&#34;&gt;DOM이란?
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;브라우저가 HTML 문서를 읽어 트리 구조의 객체로 메모리에 생성한 것&lt;/li&gt;
+&lt;li&gt;JS는 DOM을 통해 HTML 요소에 접근·조작 가능&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;요소-선택&#34;&gt;요소 선택
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;document.getElementById(&#39;id&#39;)&lt;/code&gt; : id로 요소 선택(단일)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;document.querySelectorAll(&#39;selector&#39;)&lt;/code&gt; : CSS 선택자로 요소들 선택(복수)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;요소-조작-및-추가&#34;&gt;요소 조작 및 추가
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;element.innerHTML&lt;/code&gt; : 요소 내부 HTML 변경&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;element.style.color&lt;/code&gt; : CSS 스타일 변경&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;document.createElement(&#39;tag&#39;)&lt;/code&gt; : 새 요소 생성&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;parentElement.appendChild(childElement)&lt;/code&gt; : 자식 요소를 부모에 추가&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4-이벤트event-처리&#34;&gt;4. 이벤트(Event) 처리
+&lt;/h2&gt;&lt;h3 id=&#34;기본-개념&#34;&gt;기본 개념
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;이벤트: HTML 요소에서 발생하는 클릭, 마우스 오버 등의 사건&lt;/li&gt;
+&lt;li&gt;이벤트 핸들러: 이벤트 발생 시 실행할 함수&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;이벤트-모델&#34;&gt;이벤트 모델
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;기본&lt;/strong&gt;: &lt;code&gt;element.onclick = function() { ... }&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;표준&lt;/strong&gt;: &lt;code&gt;element.addEventListener(&#39;click&#39;, handler)&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;여러 이벤트 핸들러 등록 가능&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;이벤트-전파event-propagation&#34;&gt;이벤트 전파(Event Propagation)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;이벤트 버블링&lt;/strong&gt;: 자식 요소에서 발생한 이벤트가 부모 요소로 올라가며 전파되는 현상&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
 </description>
         </item>
         

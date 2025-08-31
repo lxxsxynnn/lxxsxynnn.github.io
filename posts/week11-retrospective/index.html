@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 11주차 학습 정리 이번 주 키워드 Spring Boot 자동 설정 JPA와 ORM Spring Data JPA (Repository, 쿼리 메서드) 필터(Filter)와 인터셉터(Interceptor) 1. 의존성 관리와 자동 설정 스타터(Starters): 기능별 의존성 묶음 pom.xml에 추가 시 관련 라이브러리들이 자동으로 추가됨 @SpringBootApplication : @Configuration + @ComponentScan + @EnableAutoConfiguration의 조합 자동 설정(Auto-configuration) @EnableAutoConfiguration이 핵심 기능 클래스패스 등 특정 조건에 따라 필요한 빈(Bean)을 자동으로 설정 @Conditional : 조건부 빈 등록 기능\n@ConditionalOnClass(클래스 존재 시), @ConditionalOnBean(빈 존재 시) 등 다양한 조건을 제공 2. ORM과 JPA ORM(Object-Relational Mapping): 객체와 관계형 DB 테이블을 매핑하는 기술\n객체 모델과 관계형 모델의 개념 차이를 해소\n">
+<title>[커널아카데미] 백엔드 개발 부트캠프 13기 11주차</title>
+
+<link rel='canonical' href='http://localhost:1313/posts/week11-retrospective/'>
+
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="[커널아카데미] 백엔드 개발 부트캠프 13기 11주차">
+<meta property='og:description' content=" 11주차 학습 정리 이번 주 키워드 Spring Boot 자동 설정 JPA와 ORM Spring Data JPA (Repository, 쿼리 메서드) 필터(Filter)와 인터셉터(Interceptor) 1. 의존성 관리와 자동 설정 스타터(Starters): 기능별 의존성 묶음 pom.xml에 추가 시 관련 라이브러리들이 자동으로 추가됨 @SpringBootApplication : @Configuration + @ComponentScan + @EnableAutoConfiguration의 조합 자동 설정(Auto-configuration) @EnableAutoConfiguration이 핵심 기능 클래스패스 등 특정 조건에 따라 필요한 빈(Bean)을 자동으로 설정 @Conditional : 조건부 빈 등록 기능\n@ConditionalOnClass(클래스 존재 시), @ConditionalOnBean(빈 존재 시) 등 다양한 조건을 제공 2. ORM과 JPA ORM(Object-Relational Mapping): 객체와 관계형 DB 테이블을 매핑하는 기술\n객체 모델과 관계형 모델의 개념 차이를 해소\n">
+<meta property='og:url' content='http://localhost:1313/posts/week11-retrospective/'>
+<meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='패스트캠퍼스' /><meta property='article:tag' content='커널아카데미' /><meta property='article:tag' content='백엔드개발부트캠프' /><meta property='article:published_time' content='2025-08-31T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-31T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="[커널아카데미] 백엔드 개발 부트캠프 13기 11주차">
+<meta name="twitter:description" content=" 11주차 학습 정리 이번 주 키워드 Spring Boot 자동 설정 JPA와 ORM Spring Data JPA (Repository, 쿼리 메서드) 필터(Filter)와 인터셉터(Interceptor) 1. 의존성 관리와 자동 설정 스타터(Starters): 기능별 의존성 묶음 pom.xml에 추가 시 관련 라이브러리들이 자동으로 추가됨 @SpringBootApplication : @Configuration + @ComponentScan + @EnableAutoConfiguration의 조합 자동 설정(Auto-configuration) @EnableAutoConfiguration이 핵심 기능 클래스패스 등 특정 조건에 따라 필요한 빈(Bean)을 자동으로 설정 @Conditional : 조건부 빈 등록 기능\n@ConditionalOnClass(클래스 존재 시), @ConditionalOnBean(빈 존재 시) 등 다양한 조건을 제공 2. ORM과 JPA ORM(Object-Relational Mapping): 객체와 관계형 DB 테이블을 매핑하는 기술\n객체 모델과 관계형 모델의 개념 차이를 해소\n"><link rel="alternate" type="application/json" href="http://localhost:1313/posts/week11-retrospective/index.json">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/../assets/avatar_hu_6c8b5d6cd0da96b6.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Soyeon&#39;s Dev Log</a></h1>
+            <h2 class="site-description">백엔드 개발자 지망생의 기록</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>다크 모드</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%EA%B3%B5%EB%B6%80/" >
+                공부
+            </a>
+        
+            <a href="/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/" >
+                주간회고
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/week11-retrospective/">[커널아카데미] 백엔드 개발 부트캠프 13기 11주차</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-08-31</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <div style="margin: 0 40px;">
+<h1 id="11주차-학습-정리">11주차 학습 정리
+</h1><h2 id="이번-주-키워드">이번 주 키워드
+</h2><ul>
+<li>Spring Boot 자동 설정</li>
+<li>JPA와 ORM</li>
+<li>Spring Data JPA (Repository, 쿼리 메서드)</li>
+<li>필터(Filter)와 인터셉터(Interceptor)</li>
+</ul>
+<hr>
+<h2 id="1-의존성-관리와-자동-설정">1. 의존성 관리와 자동 설정
+</h2><ul>
+<li>스타터(Starters): 기능별 의존성 묶음</li>
+<li>pom.xml에 추가 시 관련 라이브러리들이 자동으로 추가됨</li>
+<li><code>@SpringBootApplication</code> : <code>@Configuration</code> + <code>@ComponentScan</code> + <code>@EnableAutoConfiguration</code>의 조합</li>
+</ul>
+<h3 id="자동-설정auto-configuration">자동 설정(Auto-configuration)
+</h3><ul>
+<li>@EnableAutoConfiguration이 핵심 기능</li>
+<li>클래스패스 등 특정 조건에 따라 필요한 빈(Bean)을 자동으로 설정</li>
+</ul>
+<p><strong>@Conditional</strong> : 조건부 빈 등록 기능</p>
+<ul>
+<li><code>@ConditionalOnClass(클래스 존재 시)</code>, <code>@ConditionalOnBean(빈 존재 시)</code> 등 다양한 조건을 제공</li>
+</ul>
+<h2 id="2-orm과-jpa">2. ORM과 JPA
+</h2><ul>
+<li>
+<p><strong>ORM(Object-Relational Mapping)</strong>: 객체와 관계형 DB 테이블을 매핑하는 기술<br>
+객체 모델과 관계형 모델의 개념 차이를 해소</p>
+</li>
+<li>
+<p><strong>JPA(Java Persistence API)</strong>: 자바 ORM 기술의 표준 API</p>
+</li>
+</ul>
+<p>Hibernate가 가장 대표적인 구현체</p>
+<ul>
+<li>
+<p><strong>EntityManagerFactory</strong>: EntityManager를 생성하는 팩토리<br>
+애플리케이션 전체에서 하나만 생성</p>
+</li>
+<li>
+<p>EntityManager: 엔티티를 관리(저장, 조회, 삭제)하는 핵심 객체</p>
+</li>
+<li>
+<p>엔티티(Entity): DB 테이블과 매핑되는 자바 클래스
+@Entity로 지정하며 @Id로 PK를 표시</p>
+</li>
+<li>
+<p>영속성 컨텍스트(Persistence Context): 엔티티를 보관하는 공간(1차 캐시)<br>
+엔티티의 변경 사항을 감지(Dirty Checking)하고 트랜잭션 커밋 시 DB에 자동으로 반영</p>
+</li>
+</ul>
+<h2 id="3-spring-data-jpa">3. Spring Data JPA
+</h2><ul>
+<li>
+<p>Spring Data JPA: JPA를 더 쉽고 일관되게 사용하도록 돕는 스프링 프로젝트<br>
+JpaRepository와 같은 저장소 기능 제공</p>
+</li>
+<li>
+<p><strong>JpaRepository</strong>: CrudRepository, PagingAndSortingRepository를 상속받아 CRUD, 페이징, 정렬 기능을 기본으로 제공하는 인터페이스</p>
+</li>
+<li>
+<p>쿼리 메서드(Query Method): 메서드 이름으로 JPQL을 자동 생성하는 기능<br>
+예시: List<Board> findByWriter(String writer);</p>
+</li>
+<li>
+<p>JPQL(Java Persistence Query Language): DB 테이블이 아닌 엔티티 객체를 대상으로 하는 쿼리 언어<br>
+@Query 어노테이션으로 직접 작성 가능</p>
+</li>
+<li>
+<p>Querydsl: JPQL을 문자열이 아닌 타입에 안전한(Type-safe) 자바 코드로 작성하게 해주는 프레임워크</p>
+</li>
+</ul>
+<h2 id="4-filter와-interceptor">4. Filter와 Interceptor
+</h2><ul>
+<li>공통점: 요청에 대한 공통적인 전처리(pre-processing)와 후처리(post-processing)에 사용 (예: 로깅, 인코딩)</li>
+</ul>
+<h3 id="filter-필터">Filter (필터)
+</h3><ul>
+<li>서블릿(Servlet) 스펙에 포함된 기능</li>
+<li>요청이 DispatcherServlet에 도달하기 전에 동작</li>
+<li>스프링 컨테이너와 무관하게 동작하므로 빈(Bean) 주입이 불가능</li>
+</ul>
+<h3 id="interceptor-인터셉터">Interceptor (인터셉터)
+</h3><ul>
+<li>Spring MVC 프레임워크가 제공하는 기능</li>
+<li>DispatcherServlet과 컨트롤러 사이에서 동작.</li>
+<li>스프링 컨테이너의 일부이므로 빈(Bean) 주입이 가능</li>
+<li>로그인 인증, 권한 체크 등 비즈니스 로직과 연관된 처리에 주로 사용</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4/">패스트캠퍼스</a>
+        
+            <a href="/tags/%EC%BB%A4%EB%84%90%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8/">커널아카데미</a>
+        
+            <a href="/tags/%EB%B0%B1%EC%97%94%EB%93%9C%EA%B0%9C%EB%B0%9C%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/">백엔드개발부트캠프</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">관련 글</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/week10-2-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 10주차(2)</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week10-1-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 10주차(1)</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week9-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 9주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week8-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 8주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week7-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 7주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Soyeon&#39;s Dev Log
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.748d0acf3bd5d18477b5028b83b70ecfa20eb15aefdff97697a330a2202721bf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

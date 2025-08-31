@@ -6,14 +6,217 @@
         <description>Recent content in 백엔드개발부트캠프 on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Sun, 24 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/%EB%B0%B1%EC%97%94%EB%93%9C%EA%B0%9C%EB%B0%9C%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 10주차</title>
-        <link>http://localhost:1313/posts/week10-retrospective/</link>
+        <lastBuildDate>Sun, 31 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/%EB%B0%B1%EC%97%94%EB%93%9C%EA%B0%9C%EB%B0%9C%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 11주차</title>
+        <link>http://localhost:1313/posts/week11-retrospective/</link>
+        <pubDate>Sun, 31 Aug 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/week11-retrospective/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h1 id=&#34;11주차-학습-정리&#34;&gt;11주차 학습 정리
+&lt;/h1&gt;&lt;h2 id=&#34;이번-주-키워드&#34;&gt;이번 주 키워드
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Spring Boot 자동 설정&lt;/li&gt;
+&lt;li&gt;JPA와 ORM&lt;/li&gt;
+&lt;li&gt;Spring Data JPA (Repository, 쿼리 메서드)&lt;/li&gt;
+&lt;li&gt;필터(Filter)와 인터셉터(Interceptor)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-의존성-관리와-자동-설정&#34;&gt;1. 의존성 관리와 자동 설정
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;스타터(Starters): 기능별 의존성 묶음&lt;/li&gt;
+&lt;li&gt;pom.xml에 추가 시 관련 라이브러리들이 자동으로 추가됨&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@SpringBootApplication&lt;/code&gt; : &lt;code&gt;@Configuration&lt;/code&gt; + &lt;code&gt;@ComponentScan&lt;/code&gt; + &lt;code&gt;@EnableAutoConfiguration&lt;/code&gt;의 조합&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;자동-설정auto-configuration&#34;&gt;자동 설정(Auto-configuration)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;@EnableAutoConfiguration이 핵심 기능&lt;/li&gt;
+&lt;li&gt;클래스패스 등 특정 조건에 따라 필요한 빈(Bean)을 자동으로 설정&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;@Conditional&lt;/strong&gt; : 조건부 빈 등록 기능&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;@ConditionalOnClass(클래스 존재 시)&lt;/code&gt;, &lt;code&gt;@ConditionalOnBean(빈 존재 시)&lt;/code&gt; 등 다양한 조건을 제공&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2-orm과-jpa&#34;&gt;2. ORM과 JPA
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;ORM(Object-Relational Mapping)&lt;/strong&gt;: 객체와 관계형 DB 테이블을 매핑하는 기술&lt;br&gt;
+객체 모델과 관계형 모델의 개념 차이를 해소&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;JPA(Java Persistence API)&lt;/strong&gt;: 자바 ORM 기술의 표준 API&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Hibernate가 가장 대표적인 구현체&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;EntityManagerFactory&lt;/strong&gt;: EntityManager를 생성하는 팩토리&lt;br&gt;
+애플리케이션 전체에서 하나만 생성&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;EntityManager: 엔티티를 관리(저장, 조회, 삭제)하는 핵심 객체&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;엔티티(Entity): DB 테이블과 매핑되는 자바 클래스
+@Entity로 지정하며 @Id로 PK를 표시&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;영속성 컨텍스트(Persistence Context): 엔티티를 보관하는 공간(1차 캐시)&lt;br&gt;
+엔티티의 변경 사항을 감지(Dirty Checking)하고 트랜잭션 커밋 시 DB에 자동으로 반영&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3-spring-data-jpa&#34;&gt;3. Spring Data JPA
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Spring Data JPA: JPA를 더 쉽고 일관되게 사용하도록 돕는 스프링 프로젝트&lt;br&gt;
+JpaRepository와 같은 저장소 기능 제공&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;JpaRepository&lt;/strong&gt;: CrudRepository, PagingAndSortingRepository를 상속받아 CRUD, 페이징, 정렬 기능을 기본으로 제공하는 인터페이스&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;쿼리 메서드(Query Method): 메서드 이름으로 JPQL을 자동 생성하는 기능&lt;br&gt;
+예시: List&lt;Board&gt; findByWriter(String writer);&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;JPQL(Java Persistence Query Language): DB 테이블이 아닌 엔티티 객체를 대상으로 하는 쿼리 언어&lt;br&gt;
+@Query 어노테이션으로 직접 작성 가능&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Querydsl: JPQL을 문자열이 아닌 타입에 안전한(Type-safe) 자바 코드로 작성하게 해주는 프레임워크&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4-filter와-interceptor&#34;&gt;4. Filter와 Interceptor
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;공통점: 요청에 대한 공통적인 전처리(pre-processing)와 후처리(post-processing)에 사용 (예: 로깅, 인코딩)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;filter-필터&#34;&gt;Filter (필터)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;서블릿(Servlet) 스펙에 포함된 기능&lt;/li&gt;
+&lt;li&gt;요청이 DispatcherServlet에 도달하기 전에 동작&lt;/li&gt;
+&lt;li&gt;스프링 컨테이너와 무관하게 동작하므로 빈(Bean) 주입이 불가능&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;interceptor-인터셉터&#34;&gt;Interceptor (인터셉터)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Spring MVC 프레임워크가 제공하는 기능&lt;/li&gt;
+&lt;li&gt;DispatcherServlet과 컨트롤러 사이에서 동작.&lt;/li&gt;
+&lt;li&gt;스프링 컨테이너의 일부이므로 빈(Bean) 주입이 가능&lt;/li&gt;
+&lt;li&gt;로그인 인증, 권한 체크 등 비즈니스 로직과 연관된 처리에 주로 사용&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 10주차(2)</title>
+        <link>http://localhost:1313/posts/week10-2-retrospective/</link>
         <pubDate>Sun, 24 Aug 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/posts/week10-retrospective/</guid>
+        <guid>http://localhost:1313/posts/week10-2-retrospective/</guid>
         <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
-&lt;h1 id=&#34;10주차-학습-정리&#34;&gt;10주차 학습 정리
+&lt;h1 id=&#34;10주차-학습-정리---2&#34;&gt;10주차 학습 정리 - 2
+&lt;/h1&gt;&lt;h2 id=&#34;이번-주-키워드&#34;&gt;이번 주 키워드
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;JavaScript 기본 문법 (자료형, 호이스팅, 스코프)&lt;/li&gt;
+&lt;li&gt;객체와 프로토타입 (Object &amp;amp; Prototype)&lt;/li&gt;
+&lt;li&gt;DOM (Document Object Model) 조작&lt;/li&gt;
+&lt;li&gt;이벤트(Event) 처리 모델&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-javascript-기본-문법&#34;&gt;1. JavaScript 기본 문법
+&lt;/h2&gt;&lt;p&gt;Java와 이름은 비슷하지만 동작 방식이 매우 다른 웹 브라우저를 제어하기 위한 핵심 언어&lt;/p&gt;
+&lt;h3 id=&#34;자료형data-types--동적-타이핑&#34;&gt;자료형(Data Types) &amp;amp; 동적 타이핑
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;동적 타입 언어&lt;/strong&gt;: 변수의 타입이 고정되어 있지 않고 할당되는 값에 따라 동적으로 결정됨&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;기본형&lt;/strong&gt;: number, string, boolean, null, undefined&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;파생형&lt;/strong&gt;: object (배열, 함수 포함)&lt;/li&gt;
+&lt;li&gt;함수의 typeof 결과는 &amp;lsquo;function&amp;rsquo;으로 특별 취급&lt;/li&gt;
+&lt;li&gt;타입 확인: &lt;code&gt;typeof&lt;/code&gt; 연산자 사용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;호이스팅hoisting&#34;&gt;호이스팅(Hoisting)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;변수/함수 선언이 범위의 최상단으로 끌어올려지는 현상&lt;/li&gt;
+&lt;li&gt;함수 선언: 선언 전에 호출 가능&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;var&lt;/code&gt; 변수: 선언 전에 접근하면 undefined&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;스코프scope&#34;&gt;스코프(Scope)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;전역 변수&lt;/strong&gt;: 함수 외부에서 선언, window 객체의 속성&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;지역 변수&lt;/strong&gt;: 함수 내부에서 &lt;code&gt;var&lt;/code&gt;로 선언, 함수 내에서만 유효&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ES5 기준&lt;/strong&gt;: 블록({}) 단위 스코프 X&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-객체와-프로토타입object--prototype&#34;&gt;2. 객체와 프로토타입(Object &amp;amp; Prototype)
+&lt;/h2&gt;&lt;h3 id=&#34;객체-생성&#34;&gt;객체 생성
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;객체 리터럴&lt;/strong&gt;: &lt;code&gt;{}&lt;/code&gt;로 생성, 속성과 메서드 추가 가능&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;생성자 함수&lt;/strong&gt;: &lt;code&gt;function Person(...)&lt;/code&gt;, &lt;code&gt;new&lt;/code&gt; 키워드로 객체 생성&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;this-키워드&#34;&gt;this 키워드
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;함수를 호출한 &lt;strong&gt;객체&lt;/strong&gt;를 가리킴(사용 위치에 따라 다름)
+&lt;ul&gt;
+&lt;li&gt;전역: window 객체&lt;/li&gt;
+&lt;li&gt;메서드 내: 해당 객체&lt;/li&gt;
+&lt;li&gt;생성자 함수 내: 생성될 객체&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;call()&lt;/code&gt;, &lt;code&gt;apply()&lt;/code&gt;로 this 명시적 변경 가능&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;프로토타입prototype&#34;&gt;프로토타입(Prototype)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;JS 상속의 핵심 메커니즘&lt;/li&gt;
+&lt;li&gt;모든 객체는 생성자 함수의 prototype 객체를 가리키는 내부 링크(&lt;code&gt;__proto__&lt;/code&gt;)를 가짐&lt;/li&gt;
+&lt;li&gt;생성자.prototype에 메서드를 추가 → 해당 생성자로 만들어진 모든 객체가 공유함(메모리 효율↑)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3-domdocument-object-model-조작&#34;&gt;3. DOM(Document Object Model) 조작
+&lt;/h2&gt;&lt;h3 id=&#34;dom이란&#34;&gt;DOM이란?
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;브라우저가 HTML 문서를 읽어 트리 구조의 객체로 메모리에 생성한 것&lt;/li&gt;
+&lt;li&gt;JS는 DOM을 통해 HTML 요소에 접근·조작 가능&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;요소-선택&#34;&gt;요소 선택
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;document.getElementById(&#39;id&#39;)&lt;/code&gt; : id로 요소 선택(단일)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;document.querySelectorAll(&#39;selector&#39;)&lt;/code&gt; : CSS 선택자로 요소들 선택(복수)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;요소-조작-및-추가&#34;&gt;요소 조작 및 추가
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;element.innerHTML&lt;/code&gt; : 요소 내부 HTML 변경&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;element.style.color&lt;/code&gt; : CSS 스타일 변경&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;document.createElement(&#39;tag&#39;)&lt;/code&gt; : 새 요소 생성&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;parentElement.appendChild(childElement)&lt;/code&gt; : 자식 요소를 부모에 추가&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4-이벤트event-처리&#34;&gt;4. 이벤트(Event) 처리
+&lt;/h2&gt;&lt;h3 id=&#34;기본-개념&#34;&gt;기본 개념
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;이벤트: HTML 요소에서 발생하는 클릭, 마우스 오버 등의 사건&lt;/li&gt;
+&lt;li&gt;이벤트 핸들러: 이벤트 발생 시 실행할 함수&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;이벤트-모델&#34;&gt;이벤트 모델
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;기본&lt;/strong&gt;: &lt;code&gt;element.onclick = function() { ... }&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;표준&lt;/strong&gt;: &lt;code&gt;element.addEventListener(&#39;click&#39;, handler)&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;여러 이벤트 핸들러 등록 가능&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;이벤트-전파event-propagation&#34;&gt;이벤트 전파(Event Propagation)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;이벤트 버블링&lt;/strong&gt;: 자식 요소에서 발생한 이벤트가 부모 요소로 올라가며 전파되는 현상&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</description>
+        </item>
+        <item>
+        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 10주차(1)</title>
+        <link>http://localhost:1313/posts/week10-1-retrospective/</link>
+        <pubDate>Sat, 23 Aug 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/week10-1-retrospective/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h1 id=&#34;10주차-학습-정리---1&#34;&gt;10주차 학습 정리 - 1
 &lt;/h1&gt;&lt;h2 id=&#34;이번-주-키워드&#34;&gt;이번 주 키워드
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;Spring DI &amp;amp; AOP&lt;/li&gt;
@@ -111,7 +314,8 @@
 인상 깊었다.&lt;br&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;또한 MyBatis를 통해 SQL 쿼리를 자바 코드와 완전히 분리하면서, 왜 SQL 매퍼 프레임워크가 필요한지를 체감했다.&lt;br&gt;
 자바 코드에서는 비즈니스 로직에만 집중하고, SQL은 XML에서 따로 관리하니 가독성과 유지보수성이 크게 향상되었다. &lt;br&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;DI, AOP, 트랜잭션, 계층형 아키텍처 등의 개념들이 스프링이라는 생태계 안에서 어떻게 유기적으로 결합하여 동작하는지를 깨닫게 된 한 주였다. 앞으로는 단순히 기능을 구현하는 것을 넘어, 스프링의 철학을 이해하고 각 기술이 어떤 문제를 해결하기 위해 등장했는지 고민하며 코드를 작성해야겠다고 다짐했다.&lt;/p&gt;
+&lt;p&gt;DI, AOP, 트랜잭션, 계층형 아키텍처 등의 개념들이 스프링이라는 생태계 안에서 어떻게 유기적으로 결합하여 동작하는지를 깨닫게 된 한 주였다.&lt;br&gt;
+앞으로는 단순히 기능을 구현하는 것을 넘어, 스프링의 철학을 이해하고 각 기술이 어떤 문제를 해결하기 위해 등장했는지 고민하며 코드를 작성해야겠다고 다짐했다.&lt;/p&gt;
 </description>
         </item>
         <item>

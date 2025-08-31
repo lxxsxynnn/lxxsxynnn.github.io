@@ -6,7 +6,106 @@
         <description>Recent content on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Sun, 24 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 31 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 11주차</title>
+        <link>http://localhost:1313/posts/week11-retrospective/</link>
+        <pubDate>Sun, 31 Aug 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/week11-retrospective/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h1 id=&#34;11주차-학습-정리&#34;&gt;11주차 학습 정리
+&lt;/h1&gt;&lt;h2 id=&#34;이번-주-키워드&#34;&gt;이번 주 키워드
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Spring Boot 자동 설정&lt;/li&gt;
+&lt;li&gt;JPA와 ORM&lt;/li&gt;
+&lt;li&gt;Spring Data JPA (Repository, 쿼리 메서드)&lt;/li&gt;
+&lt;li&gt;필터(Filter)와 인터셉터(Interceptor)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-의존성-관리와-자동-설정&#34;&gt;1. 의존성 관리와 자동 설정
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;스타터(Starters): 기능별 의존성 묶음&lt;/li&gt;
+&lt;li&gt;pom.xml에 추가 시 관련 라이브러리들이 자동으로 추가됨&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@SpringBootApplication&lt;/code&gt; : &lt;code&gt;@Configuration&lt;/code&gt; + &lt;code&gt;@ComponentScan&lt;/code&gt; + &lt;code&gt;@EnableAutoConfiguration&lt;/code&gt;의 조합&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;자동-설정auto-configuration&#34;&gt;자동 설정(Auto-configuration)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;@EnableAutoConfiguration이 핵심 기능&lt;/li&gt;
+&lt;li&gt;클래스패스 등 특정 조건에 따라 필요한 빈(Bean)을 자동으로 설정&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;@Conditional&lt;/strong&gt; : 조건부 빈 등록 기능&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;@ConditionalOnClass(클래스 존재 시)&lt;/code&gt;, &lt;code&gt;@ConditionalOnBean(빈 존재 시)&lt;/code&gt; 등 다양한 조건을 제공&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2-orm과-jpa&#34;&gt;2. ORM과 JPA
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;ORM(Object-Relational Mapping)&lt;/strong&gt;: 객체와 관계형 DB 테이블을 매핑하는 기술&lt;br&gt;
+객체 모델과 관계형 모델의 개념 차이를 해소&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;JPA(Java Persistence API)&lt;/strong&gt;: 자바 ORM 기술의 표준 API&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Hibernate가 가장 대표적인 구현체&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;EntityManagerFactory&lt;/strong&gt;: EntityManager를 생성하는 팩토리&lt;br&gt;
+애플리케이션 전체에서 하나만 생성&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;EntityManager: 엔티티를 관리(저장, 조회, 삭제)하는 핵심 객체&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;엔티티(Entity): DB 테이블과 매핑되는 자바 클래스
+@Entity로 지정하며 @Id로 PK를 표시&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;영속성 컨텍스트(Persistence Context): 엔티티를 보관하는 공간(1차 캐시)&lt;br&gt;
+엔티티의 변경 사항을 감지(Dirty Checking)하고 트랜잭션 커밋 시 DB에 자동으로 반영&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3-spring-data-jpa&#34;&gt;3. Spring Data JPA
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Spring Data JPA: JPA를 더 쉽고 일관되게 사용하도록 돕는 스프링 프로젝트&lt;br&gt;
+JpaRepository와 같은 저장소 기능 제공&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;JpaRepository&lt;/strong&gt;: CrudRepository, PagingAndSortingRepository를 상속받아 CRUD, 페이징, 정렬 기능을 기본으로 제공하는 인터페이스&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;쿼리 메서드(Query Method): 메서드 이름으로 JPQL을 자동 생성하는 기능&lt;br&gt;
+예시: List&lt;Board&gt; findByWriter(String writer);&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;JPQL(Java Persistence Query Language): DB 테이블이 아닌 엔티티 객체를 대상으로 하는 쿼리 언어&lt;br&gt;
+@Query 어노테이션으로 직접 작성 가능&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Querydsl: JPQL을 문자열이 아닌 타입에 안전한(Type-safe) 자바 코드로 작성하게 해주는 프레임워크&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4-filter와-interceptor&#34;&gt;4. Filter와 Interceptor
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;공통점: 요청에 대한 공통적인 전처리(pre-processing)와 후처리(post-processing)에 사용 (예: 로깅, 인코딩)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;filter-필터&#34;&gt;Filter (필터)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;서블릿(Servlet) 스펙에 포함된 기능&lt;/li&gt;
+&lt;li&gt;요청이 DispatcherServlet에 도달하기 전에 동작&lt;/li&gt;
+&lt;li&gt;스프링 컨테이너와 무관하게 동작하므로 빈(Bean) 주입이 불가능&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;interceptor-인터셉터&#34;&gt;Interceptor (인터셉터)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Spring MVC 프레임워크가 제공하는 기능&lt;/li&gt;
+&lt;li&gt;DispatcherServlet과 컨트롤러 사이에서 동작.&lt;/li&gt;
+&lt;li&gt;스프링 컨테이너의 일부이므로 빈(Bean) 주입이 가능&lt;/li&gt;
+&lt;li&gt;로그인 인증, 권한 체크 등 비즈니스 로직과 연관된 처리에 주로 사용&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>[커널아카데미] 백엔드 개발 부트캠프 13기 10주차(2)</title>
         <link>http://localhost:1313/posts/week10-2-retrospective/</link>
         <pubDate>Sun, 24 Aug 2025 00:00:00 +0000</pubDate>
