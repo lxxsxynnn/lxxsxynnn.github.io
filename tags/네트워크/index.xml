@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>네트워크 on Soyeon&#39;s Dev Log</title>
+        <link>http://localhost:1313/tags/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/</link>
+        <description>Recent content in 네트워크 on Soyeon&#39;s Dev Log</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>ko</language>
+        <lastBuildDate>Sun, 07 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 12주차</title>
+        <link>http://localhost:1313/posts/week12-retrospective/</link>
+        <pubDate>Sun, 07 Sep 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/week12-retrospective/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h1 id=&#34;12주차-학습-정리---spring-ai--tcpip&#34;&gt;12주차 학습 정리 - Spring AI &amp;amp; TCP/IP
+&lt;/h1&gt;&lt;h2 id=&#34;이번-주-키워드&#34;&gt;이번 주 키워드
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Spring AI 프레임워크&lt;/li&gt;
+&lt;li&gt;생성형 AI와 LLM 연동(RAG, Tool Calling)&lt;/li&gt;
+&lt;li&gt;Spring Boot와 AI 통합&lt;/li&gt;
+&lt;li&gt;TCP/IP 네트워크 기초와 실무&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-spring-ai란&#34;&gt;1. Spring AI란?
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Spring AI&lt;/strong&gt;는 자바 기반 스프링 생태계에서 생성형 AI 기능(LLM, 벡터DB 등)을 쉽고 일관되게 활용할 수 있도록 만든 차세대 프레임워크이다.&lt;/li&gt;
+&lt;li&gt;OpenAI, Anthropic, Microsoft, Google 등 주요 AI 모델 및 Chroma, Pinecone 등 여러 벡터DB와 빠르게 연동된다.&lt;/li&gt;
+&lt;li&gt;기존 Spring Boot 환경에 &lt;strong&gt;자동 구성(Auto Configuration)&lt;/strong&gt;, 다양한 &lt;strong&gt;LLM API 지원&lt;/strong&gt;, &lt;strong&gt;RAG(검색 증강 생성)&lt;/strong&gt;, &lt;strong&gt;툴 콜링&lt;/strong&gt;, &lt;strong&gt;실시간 스트리밍 API&lt;/strong&gt; 등 최신 AI 관련 기능을 간단하게 추가할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-spring-ai의-주요-특징&#34;&gt;2. Spring AI의 주요 특징
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;자동 설정 &amp;amp; 스타터 의존성&lt;/strong&gt;: 복잡한 설정 없이 거의 바로 서비스 개발이 가능&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;다양한 AI/데이터베이스 연동&lt;/strong&gt;: 주요 AI 모델, 문서·테이블 기반 RAG 시스템, 실시간 챗봇 등 빠르게 구현&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;툴 호출 기능&lt;/strong&gt;: AI가 실시간으로 클라이언트 함수나 외부 API를 직접 실행할 수 있음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;출력 매핑·스트리밍 지원&lt;/strong&gt;: 생성형 응답을 자바 객체(POJO)로 바로 연결, 대형 모델 응답 스트리밍까지 지원&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;실무 활용 예시&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;내 문서/PDF 기반 QnA 챗봇&lt;/li&gt;
+&lt;li&gt;외부 API 연동형 생성형 응답 서비스&lt;/li&gt;
+&lt;li&gt;데이터베이스 문서 검색 + RAG&lt;/li&gt;
+&lt;li&gt;AI 결과 실시간 모니터링(Actuator, Observability)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3-tcpip-네트워크-기초&#34;&gt;3. TCP/IP 네트워크 기초
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;TCP/IP 4계층 모델&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Network Interface: 실제 신호 전달(Ethernet, MAC)&lt;/li&gt;
+&lt;li&gt;Internet(IP): 패킷 라우팅, 경로 지정&lt;/li&gt;
+&lt;li&gt;Transport(TCP/UDP):
+&lt;ul&gt;
+&lt;li&gt;TCP: 신뢰성, 순서 보장, 패킷 재전송, 오류 검출&lt;/li&gt;
+&lt;li&gt;UDP: 비신뢰, 빠른 전송&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Application Layer: HTTP, FTP, WebSocket 등 실제 서비스&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;작동 흐름&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;송신: Application 계층(HTTP 등) → Transport(TCP: 포트) → Internet(IP) → Network Interface로 캡슐화&lt;/li&gt;
+&lt;li&gt;수신: 반대로 해체(역캡슐화)해 최종 Application 데이터로&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Spring Boot/Spring AI 연동에 미치는 영향&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;모든 REST API/LLM 챗봇/WebSocket 등은 실제로 TCP/IP로 연결된다.&lt;/li&gt;
+&lt;li&gt;HTTPS, WSS(WebSocket Secure)=TCP 기반 암호화 프로토콜&lt;/li&gt;
+&lt;li&gt;서버/클라이언트가 도메인, 포트, 프로토콜이 다르면 인증서, CORS, Origin 등의 네트워크/보안 설정을 항상 신경 써야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4-배운-점--느낀-점&#34;&gt;4. 배운 점 &amp;amp; 느낀 점
+&lt;/h2&gt;&lt;p&gt;지난 프로젝트에서 https, wss 환경에서 프론트엔드와 백엔드 도메인이 달라서&lt;br&gt;
+CORS 에러, 인증서 적용, 보안 정책 등 여러 네트워크 문제를 직접 경험했다.&lt;br&gt;
+기존에는 http로만 단순히 API를 연결하는 게 전부처럼 느껴졌지만,&lt;br&gt;
+실제로 안정적인 서비스와 실시간 통신을 지원하려면&lt;br&gt;
+&lt;strong&gt;TCP/IP와 애플리케이션 계층(HTTP, WSS 등)의 동작 원리까지 제대로 이해하는 게 필수&lt;/strong&gt;라는 점을 절실히 알게 되었다.&lt;/p&gt;
+&lt;p&gt;이번에 Spring AI를 배우면서, 단순히 최신 프레임워크만 다루는 게 아니라&lt;br&gt;
+서버와 클라이언트가 어떻게 서로 데이터를 주고받고, 네트워크 내부에서 어떤 문제가 발생할 수 있는지&lt;br&gt;
+그리고 그 문제를 제대로 해결하기 위해서는 &lt;strong&gt;기초가 되는 TCP/IP와 같은 네트워크 구조까지 함께 신경 쓰는 것이 중요&lt;/strong&gt;하다는 사실을 다시 깨달았다.&lt;/p&gt;
+&lt;p&gt;Spring Boot와 Spring AI가 제공하는 높은 개발 생산성과 편의성에 기대는 것도 좋지만,&lt;br&gt;
+결국 실무에서는 &lt;strong&gt;네트워크 구조, 보안, 통신 정책까지 꼼꼼히 신경 써야 제대로 동작하는 백엔드 서비스&lt;/strong&gt;를 만들 수 있다는 점을 이번 주에 깊이 인식했다.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
