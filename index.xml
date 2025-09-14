@@ -6,7 +6,311 @@
         <description>Recent content on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Sun, 07 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 14 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 13주차</title>
+        <link>http://localhost:1313/posts/week13-retrospective/</link>
+        <pubDate>Sun, 14 Sep 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/week13-retrospective/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h1 id=&#34;13주차-학습정리---운영체제&#34;&gt;13주차 학습정리 - 운영체제
+&lt;/h1&gt;&lt;h2 id=&#34;1-정의와-목적&#34;&gt;1. 정의와 목적
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;운영체제(OS)&lt;/strong&gt;: 컴퓨터의 하드웨어 및 소프트웨어 자원을 관리·제어하고,&lt;br&gt;
+사용자와 응용 프로그램에 대해 통합적·효율적 서비스를 제공하는 시스템 소프트웨어&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;대표 예시&lt;/strong&gt;: Windows, macOS, Linux, Android, iOS 등&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-구성과-구조&#34;&gt;2. 구성과 구조
+&lt;/h2&gt;&lt;h3 id=&#34;전체-구조&#34;&gt;전체 구조
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;하드웨어&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;커널(Kernel)&lt;/strong&gt;: OS의 핵심, 자원관리·프로세스·메모리·파일·I/O 등 주요기능 수행&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;셸(Shell)&lt;/strong&gt;: 사용자 인터페이스(터미널·명령어·그래픽 등)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;응용프로그램/App&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;사용자 및 외부장치&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;계층-관계도식&#34;&gt;계층 관계(도식)
+&lt;/h3&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[사용자]
+  |
+[셸/앱]
+  |
+[운영체제(OS) - 커널]
+  |
+[하드웨어 (CPU, 메모리, 디스크, 네트워크, I/O장치)]
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h2 id=&#34;3-핵심-역할과-기능&#34;&gt;3. 핵심 역할과 기능
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;자원 관리(Resource Management)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CPU, 메모리, 저장장치, 입출력장치 등 자원 배분·제어[1]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;프로세스/스레드 관리(Process/Thread Management)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;실행중인 프로그램, 스케줄링(순서관리), 생성/종료/상태관리&lt;/li&gt;
+&lt;li&gt;멀티태스킹 지원(동시 실행 효과)&lt;/li&gt;
+&lt;li&gt;스레드 : 내부 작업단위, 메모리 공유&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;메모리 관리(Memory Management)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;프로세스/프로그램별 메모리 할당/회수/배치&lt;/li&gt;
+&lt;li&gt;가상 메모리, 페이징 등 효율화 기법&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;파일 시스템 관리(File System Management)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;데이터 저장/읽기/삭제, 파일·디렉토리 구조 제공&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;입출력(I/O) 및 장치관리&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;키보드, 마우스, 프린터, 디스플레이 등 연결·제어&lt;/li&gt;
+&lt;li&gt;드라이버(Driver) 통한 하드웨어/OS 연동&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;보안 및 권한(Security &amp;amp; Authorization)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;자원 접근권한, 사용자 인증, 데이터 보호&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;네트워킹&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;시스템 간 통신, 네트워크 자원 관리(소켓, TCP/IP)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;시스템 서비스 및 API&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;응용프로그램이 OS 서비스 이용할 수 있도록 시스템콜 제공&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4-용어-및-주요-원리&#34;&gt;4. 용어 및 주요 원리
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;용어&lt;/th&gt;
+          &lt;th&gt;설명&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;커널&lt;/td&gt;
+          &lt;td&gt;OS 핵심, 자원·스케줄링·메모리 관리&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;셸&lt;/td&gt;
+          &lt;td&gt;사용자와 OS간 인터페이스 (명령/그래픽 등)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;프로세스&lt;/td&gt;
+          &lt;td&gt;실행중인 프로그램 인스턴스&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;스레드&lt;/td&gt;
+          &lt;td&gt;프로세스 내 작업 실행 단위&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;시스템콜&lt;/td&gt;
+          &lt;td&gt;프로그램↔OS 인터페이스용 함수&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;드라이버&lt;/td&gt;
+          &lt;td&gt;하드웨어↔OS 연동 소프트웨어&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;파일 시스템&lt;/td&gt;
+          &lt;td&gt;저장·검색·구조화·삭제를 위한 OS 서비스&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;가상 메모리&lt;/td&gt;
+          &lt;td&gt;실제·논리 메모리 분리, 효율증대&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;멀티태스킹&lt;/td&gt;
+          &lt;td&gt;여러 앱·프로세스를 동시에 실행&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;5-os-종류와-특징&#34;&gt;5. OS 종류와 특징
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;데스크탑/서버 OS&lt;/strong&gt;: Windows, macOS, Linux (다중 사용자/프로세스, 보안기능↑)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;모바일/임베디드 OS&lt;/strong&gt;: Android, iOS, RTOS 등 (경량화, 실시간 처리, 장치특화)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;기타&lt;/strong&gt;: UNIX, BSD, 하이퍼바이저(가상화 OS)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;6-프로세스-관리와-문맥-전환&#34;&gt;6. 프로세스 관리와 문맥 전환
+&lt;/h2&gt;&lt;h3 id=&#34;프로세스process와-스레드thread의-차이&#34;&gt;프로세스(Process)와 스레드(Thread)의 차이
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;프로세스&lt;/strong&gt;: 실행 중인 프로그램의 인스턴스, 별도의 메모리 공간과 자원을 가짐&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;스레드&lt;/strong&gt;: 프로세스 내 실행 단위, 프로세스 자원(메모리, 변수)을 공유&lt;/li&gt;
+&lt;li&gt;프로세스 간 독립성 높고, 스레드는 경량 프로세스라고도 불림&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;문맥-전환context-switching&#34;&gt;문맥 전환(Context Switching)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;CPU가 한 프로세스에서 다른 프로세스로 전환할 때 이전 프로세스 상태(레지스터, PC 등)를 저장하고,&lt;br&gt;
+다음 프로세스 상태를 복원하는 작업&lt;/li&gt;
+&lt;li&gt;비용이 크고 빈번한 전환은 성능 저하 원인&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;pcbprocess-control-block&#34;&gt;PCB(Process Control Block)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;각 프로세스의 상태와 정보(프로세스 ID, 상태, 레지스터, 메모리 정보, 스케줄링 정보 등)를 저장하는 데이터 구조&lt;/li&gt;
+&lt;li&gt;OS는 PCB를 이용해 프로세스 실행 상태 관리&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;프로세스-상태-변화-예시&#34;&gt;프로세스 상태 변화 예시
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;대기(Ready) → 실행(Running) → 대기(Waiting) → 종료(Terminated)&lt;/li&gt;
+&lt;li&gt;상태 전이 시 PCB 업데이트와 문맥 전환 발생&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;7-스케줄링-알고리즘&#34;&gt;7. 스케줄링 알고리즘
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;알고리즘&lt;/th&gt;
+          &lt;th&gt;설명&lt;/th&gt;
+          &lt;th&gt;장점&lt;/th&gt;
+          &lt;th&gt;단점&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;FCFS&lt;/td&gt;
+          &lt;td&gt;먼저 온 요청부터 처리&lt;/td&gt;
+          &lt;td&gt;구현 단순, 공정함&lt;/td&gt;
+          &lt;td&gt;긴 작업이 전체 대기 시간 증가(Convoy 효과)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SJF&lt;/td&gt;
+          &lt;td&gt;실행 시간이 짧은 작업 먼저 처리&lt;/td&gt;
+          &lt;td&gt;평균 대기시간 최소화&lt;/td&gt;
+          &lt;td&gt;긴 작업이 무한 대기 가능(Starvation)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Priority&lt;/td&gt;
+          &lt;td&gt;우선순위 높은 작업 먼저 처리&lt;/td&gt;
+          &lt;td&gt;중요한 작업 우선 수행 가능&lt;/td&gt;
+          &lt;td&gt;낮은 우선순위 작업 무한대기 위험&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RR (Round Robin)&lt;/td&gt;
+          &lt;td&gt;정해진 시간으로 순환&lt;/td&gt;
+          &lt;td&gt;공평한 CPU 시간 분배&lt;/td&gt;
+          &lt;td&gt;짧은 시간 할당 시 문맥 전환 과다&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;멀티레벨 큐&lt;/td&gt;
+          &lt;td&gt;여러 큐로 작업 분리, 각 큐별 스케줄링&lt;/td&gt;
+          &lt;td&gt;다양한 우선순위/형태 지원&lt;/td&gt;
+          &lt;td&gt;복잡한 관리, 프로세스 이동 정책 필요&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;실무-시스템서버-적용-사례&#34;&gt;실무 시스템/서버 적용 사례
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;서버는 RR 기반 멀티태스킹+우선순위 혼합 적용&lt;/li&gt;
+&lt;li&gt;실시간 시스템은 Priority 스케줄링 혹은 Rate-monotonic&lt;/li&gt;
+&lt;li&gt;대형 OS(리눅스 등)는 멀티레벨 피드백 큐 스케줄링 사용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;8-메모리-관리&#34;&gt;8. 메모리 관리
+&lt;/h2&gt;&lt;h3 id=&#34;기본-개념&#34;&gt;기본 개념
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;메모리 주소를 효율적으로 할당·회수하고 보호&lt;/li&gt;
+&lt;li&gt;실제 물리 메모리와 가상 메모리를 분리해 관리&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;페이징paging&#34;&gt;페이징(Paging)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;메모리를 고정 크기 블록(페이지)으로 분리하여 할당&lt;/li&gt;
+&lt;li&gt;페이지 단위로 물리 메모리 대응, 내부 단편화 최소화&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;세그먼테이션segmentation&#34;&gt;세그먼테이션(Segmentation)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;프로그램을 의미 단위(코드, 데이터, 스택 등)로 분할하여 관리&lt;/li&gt;
+&lt;li&gt;논리적 구조 반영이 용이하나 외부 단편화 발생 가능&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;가상-메모리&#34;&gt;가상 메모리
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;실제 메모리보다 큰 메모리 공간 제공&lt;/li&gt;
+&lt;li&gt;필요시 디스크에 ‘스왑(swapping)’하여 메모리 부족 해소&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;페이지-폴트page-fault&#34;&gt;페이지 폴트(Page Fault)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;페이지가 메모리에 없을 때 발생하는 인터럽트&lt;/li&gt;
+&lt;li&gt;OS가 디스크에서 적절한 페이지를 메모리로 로드&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;현대-os-메모리-관리-사례&#34;&gt;현대 OS 메모리 관리 사례
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;요구 페이징, 메모리 보호, 공유 메모리, 메모리 매핑 파일&lt;/li&gt;
+&lt;li&gt;리눅스, 윈도우 등에서 다양한 기법 조합 적용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;9-동기화와-병행성&#34;&gt;9. 동기화와 병행성
+&lt;/h2&gt;&lt;h3 id=&#34;임계-구역critical-section&#34;&gt;임계 구역(Critical Section)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;다중 스레드가 동시에 접근 시 문제가 생기는 공유 자원 접근 구간&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;동기화-도구&#34;&gt;동기화 도구
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;뮤텍스(Mutex)&lt;/strong&gt;: 상호 배제 자원 잠금&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;세마포어(Semaphore)&lt;/strong&gt;: 자원 수 계산 및 접근 제한&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;모니터(Monitor)&lt;/strong&gt;: 뮤텍스+조건변수, 구조화된 동기화 제공&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;동기화-필요-이유&#34;&gt;동기화 필요 이유
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;데이터 일관성 및 무결성 보장을 위해 필수&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;동기화-문제점&#34;&gt;동기화 문제점
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;데드락(Deadlock) : 자원 순환 대기로 작업 정지&lt;/li&gt;
+&lt;li&gt;라이브락(Livelock) : 반복 응답하지만 처리 못함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;병행-프로그래밍-실전&#34;&gt;병행 프로그래밍 실전
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;적절한 락 사용, 최소화&lt;/li&gt;
+&lt;li&gt;불변 객체 활용&lt;/li&gt;
+&lt;li&gt;원자성 보장 코드 작성&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;10-파일-시스템&#34;&gt;10. 파일 시스템
+&lt;/h2&gt;&lt;h3 id=&#34;파일-시스템-원리&#34;&gt;파일 시스템 원리
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;데이터 저장소를 파일과 폴더 구조로 추상화하여 관리&lt;/li&gt;
+&lt;li&gt;데이터 추가, 삭제, 검색 기능&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;파일-시스템-종류&#34;&gt;파일 시스템 종류
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;FAT(File Allocation Table): 간단, 플로피 디스크용&lt;/li&gt;
+&lt;li&gt;NTFS(New Technology File System): 윈도우 주력&lt;/li&gt;
+&lt;li&gt;ext3, ext4: 리눅스에서 널리 사용하는 저널링 파일 시스템&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;파일-입출력-및-권한-관리&#34;&gt;파일 입출력 및 권한 관리
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;OS API 통해 파일 열기, 읽기, 쓰기, 닫기 수행&lt;/li&gt;
+&lt;li&gt;권한은 소유자, 그룹, 기타 사용자 별로 읽기, 쓰기, 실행 구분&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;정리&#34;&gt;정리
+&lt;/h1&gt;&lt;p&gt;운영체제의 핵심 기능인 프로세스와 스레드 관리, 문맥 전환을 이해하고 스케줄링 알고리즘을 익히는 것은&lt;br&gt;
+효율적인 CPU 사용과 멀티태스킹 구현의 기본&lt;/p&gt;
+&lt;p&gt;메모리 관리 기법 - 자원 최적화와 시스템 안정성에 직결&lt;br&gt;
+동기화 이슈 - 병행 처리에서 데이터 일관성을 보장하는 필수 요소&lt;/p&gt;
+&lt;p&gt;파일 시스템 - 영속적 데이터 저장과 관리의 근간으로, 운영체제 전반의 이해를 완성하는 중요한 주제&lt;/p&gt;
+&lt;/div&gt;
+</description>
+        </item>
+        <item>
         <title>[커널아카데미] 백엔드 개발 부트캠프 13기 12주차</title>
         <link>http://localhost:1313/posts/week12-retrospective/</link>
         <pubDate>Sun, 07 Sep 2025 00:00:00 +0000</pubDate>

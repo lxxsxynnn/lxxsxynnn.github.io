@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 13주차 학습정리 - 운영체제 1. 정의와 목적 운영체제(OS): 컴퓨터의 하드웨어 및 소프트웨어 자원을 관리·제어하고,\n사용자와 응용 프로그램에 대해 통합적·효율적 서비스를 제공하는 시스템 소프트웨어 대표 예시: Windows, macOS, Linux, Android, iOS 등 2. 구성과 구조 전체 구조 하드웨어 커널(Kernel): OS의 핵심, 자원관리·프로세스·메모리·파일·I/O 등 주요기능 수행 셸(Shell): 사용자 인터페이스(터미널·명령어·그래픽 등) 응용프로그램/App 사용자 및 외부장치 계층 관계(도식) [사용자] | [셸/앱] | [운영체제(OS) - 커널] | [하드웨어 (CPU, 메모리, 디스크, 네트워크, I/O장치)] 3. 핵심 역할과 기능 자원 관리(Resource Management)\n">
+<title>[커널아카데미] 백엔드 개발 부트캠프 13기 13주차</title>
+
+<link rel='canonical' href='http://localhost:1313/posts/week13-retrospective/'>
+
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="[커널아카데미] 백엔드 개발 부트캠프 13기 13주차">
+<meta property='og:description' content=" 13주차 학습정리 - 운영체제 1. 정의와 목적 운영체제(OS): 컴퓨터의 하드웨어 및 소프트웨어 자원을 관리·제어하고,\n사용자와 응용 프로그램에 대해 통합적·효율적 서비스를 제공하는 시스템 소프트웨어 대표 예시: Windows, macOS, Linux, Android, iOS 등 2. 구성과 구조 전체 구조 하드웨어 커널(Kernel): OS의 핵심, 자원관리·프로세스·메모리·파일·I/O 등 주요기능 수행 셸(Shell): 사용자 인터페이스(터미널·명령어·그래픽 등) 응용프로그램/App 사용자 및 외부장치 계층 관계(도식) [사용자] | [셸/앱] | [운영체제(OS) - 커널] | [하드웨어 (CPU, 메모리, 디스크, 네트워크, I/O장치)] 3. 핵심 역할과 기능 자원 관리(Resource Management)\n">
+<meta property='og:url' content='http://localhost:1313/posts/week13-retrospective/'>
+<meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='패스트캠퍼스' /><meta property='article:tag' content='커널아카데미' /><meta property='article:tag' content='백엔드개발부트캠프' /><meta property='article:tag' content='국비지원교육' /><meta property='article:tag' content='내일배움카드' /><meta property='article:tag' content='KDT' /><meta property='article:published_time' content='2025-09-14T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-14T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="[커널아카데미] 백엔드 개발 부트캠프 13기 13주차">
+<meta name="twitter:description" content=" 13주차 학습정리 - 운영체제 1. 정의와 목적 운영체제(OS): 컴퓨터의 하드웨어 및 소프트웨어 자원을 관리·제어하고,\n사용자와 응용 프로그램에 대해 통합적·효율적 서비스를 제공하는 시스템 소프트웨어 대표 예시: Windows, macOS, Linux, Android, iOS 등 2. 구성과 구조 전체 구조 하드웨어 커널(Kernel): OS의 핵심, 자원관리·프로세스·메모리·파일·I/O 등 주요기능 수행 셸(Shell): 사용자 인터페이스(터미널·명령어·그래픽 등) 응용프로그램/App 사용자 및 외부장치 계층 관계(도식) [사용자] | [셸/앱] | [운영체제(OS) - 커널] | [하드웨어 (CPU, 메모리, 디스크, 네트워크, I/O장치)] 3. 핵심 역할과 기능 자원 관리(Resource Management)\n"><link rel="alternate" type="application/json" href="http://localhost:1313/posts/week13-retrospective/index.json">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/../assets/avatar_hu_6c8b5d6cd0da96b6.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Soyeon&#39;s Dev Log</a></h1>
+            <h2 class="site-description">백엔드 개발자 지망생의 기록</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>다크 모드</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%EA%B3%B5%EB%B6%80/" >
+                공부
+            </a>
+        
+            <a href="/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/" >
+                주간회고
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/week13-retrospective/">[커널아카데미] 백엔드 개발 부트캠프 13기 13주차</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-09-14</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <div style="margin: 0 40px;">
+<h1 id="13주차-학습정리---운영체제">13주차 학습정리 - 운영체제
+</h1><h2 id="1-정의와-목적">1. 정의와 목적
+</h2><ul>
+<li><strong>운영체제(OS)</strong>: 컴퓨터의 하드웨어 및 소프트웨어 자원을 관리·제어하고,<br>
+사용자와 응용 프로그램에 대해 통합적·효율적 서비스를 제공하는 시스템 소프트웨어</li>
+<li><strong>대표 예시</strong>: Windows, macOS, Linux, Android, iOS 등</li>
+</ul>
+<hr>
+<h2 id="2-구성과-구조">2. 구성과 구조
+</h2><h3 id="전체-구조">전체 구조
+</h3><ul>
+<li><strong>하드웨어</strong></li>
+<li><strong>커널(Kernel)</strong>: OS의 핵심, 자원관리·프로세스·메모리·파일·I/O 등 주요기능 수행</li>
+<li><strong>셸(Shell)</strong>: 사용자 인터페이스(터미널·명령어·그래픽 등)</li>
+<li><strong>응용프로그램/App</strong></li>
+<li><strong>사용자 및 외부장치</strong></li>
+</ul>
+<h3 id="계층-관계도식">계층 관계(도식)
+</h3><pre tabindex="0"><code>[사용자]
+  |
+[셸/앱]
+  |
+[운영체제(OS) - 커널]
+  |
+[하드웨어 (CPU, 메모리, 디스크, 네트워크, I/O장치)]
+</code></pre><hr>
+<h2 id="3-핵심-역할과-기능">3. 핵심 역할과 기능
+</h2><ol>
+<li>
+<p><strong>자원 관리(Resource Management)</strong></p>
+<ul>
+<li>CPU, 메모리, 저장장치, 입출력장치 등 자원 배분·제어[1]</li>
+</ul>
+</li>
+<li>
+<p><strong>프로세스/스레드 관리(Process/Thread Management)</strong></p>
+<ul>
+<li>실행중인 프로그램, 스케줄링(순서관리), 생성/종료/상태관리</li>
+<li>멀티태스킹 지원(동시 실행 효과)</li>
+<li>스레드 : 내부 작업단위, 메모리 공유</li>
+</ul>
+</li>
+<li>
+<p><strong>메모리 관리(Memory Management)</strong></p>
+<ul>
+<li>프로세스/프로그램별 메모리 할당/회수/배치</li>
+<li>가상 메모리, 페이징 등 효율화 기법</li>
+</ul>
+</li>
+<li>
+<p><strong>파일 시스템 관리(File System Management)</strong></p>
+<ul>
+<li>데이터 저장/읽기/삭제, 파일·디렉토리 구조 제공</li>
+</ul>
+</li>
+<li>
+<p><strong>입출력(I/O) 및 장치관리</strong></p>
+<ul>
+<li>키보드, 마우스, 프린터, 디스플레이 등 연결·제어</li>
+<li>드라이버(Driver) 통한 하드웨어/OS 연동</li>
+</ul>
+</li>
+<li>
+<p><strong>보안 및 권한(Security &amp; Authorization)</strong></p>
+<ul>
+<li>자원 접근권한, 사용자 인증, 데이터 보호</li>
+</ul>
+</li>
+<li>
+<p><strong>네트워킹</strong></p>
+<ul>
+<li>시스템 간 통신, 네트워크 자원 관리(소켓, TCP/IP)</li>
+</ul>
+</li>
+<li>
+<p><strong>시스템 서비스 및 API</strong></p>
+<ul>
+<li>응용프로그램이 OS 서비스 이용할 수 있도록 시스템콜 제공</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="4-용어-및-주요-원리">4. 용어 및 주요 원리
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>용어</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>커널</td>
+          <td>OS 핵심, 자원·스케줄링·메모리 관리</td>
+      </tr>
+      <tr>
+          <td>셸</td>
+          <td>사용자와 OS간 인터페이스 (명령/그래픽 등)</td>
+      </tr>
+      <tr>
+          <td>프로세스</td>
+          <td>실행중인 프로그램 인스턴스</td>
+      </tr>
+      <tr>
+          <td>스레드</td>
+          <td>프로세스 내 작업 실행 단위</td>
+      </tr>
+      <tr>
+          <td>시스템콜</td>
+          <td>프로그램↔OS 인터페이스용 함수</td>
+      </tr>
+      <tr>
+          <td>드라이버</td>
+          <td>하드웨어↔OS 연동 소프트웨어</td>
+      </tr>
+      <tr>
+          <td>파일 시스템</td>
+          <td>저장·검색·구조화·삭제를 위한 OS 서비스</td>
+      </tr>
+      <tr>
+          <td>가상 메모리</td>
+          <td>실제·논리 메모리 분리, 효율증대</td>
+      </tr>
+      <tr>
+          <td>멀티태스킹</td>
+          <td>여러 앱·프로세스를 동시에 실행</td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<h2 id="5-os-종류와-특징">5. OS 종류와 특징
+</h2><ul>
+<li><strong>데스크탑/서버 OS</strong>: Windows, macOS, Linux (다중 사용자/프로세스, 보안기능↑)</li>
+<li><strong>모바일/임베디드 OS</strong>: Android, iOS, RTOS 등 (경량화, 실시간 처리, 장치특화)</li>
+<li><strong>기타</strong>: UNIX, BSD, 하이퍼바이저(가상화 OS)</li>
+</ul>
+<hr>
+<h2 id="6-프로세스-관리와-문맥-전환">6. 프로세스 관리와 문맥 전환
+</h2><h3 id="프로세스process와-스레드thread의-차이">프로세스(Process)와 스레드(Thread)의 차이
+</h3><ul>
+<li><strong>프로세스</strong>: 실행 중인 프로그램의 인스턴스, 별도의 메모리 공간과 자원을 가짐</li>
+<li><strong>스레드</strong>: 프로세스 내 실행 단위, 프로세스 자원(메모리, 변수)을 공유</li>
+<li>프로세스 간 독립성 높고, 스레드는 경량 프로세스라고도 불림</li>
+</ul>
+<h3 id="문맥-전환context-switching">문맥 전환(Context Switching)
+</h3><ul>
+<li>CPU가 한 프로세스에서 다른 프로세스로 전환할 때 이전 프로세스 상태(레지스터, PC 등)를 저장하고,<br>
+다음 프로세스 상태를 복원하는 작업</li>
+<li>비용이 크고 빈번한 전환은 성능 저하 원인</li>
+</ul>
+<h3 id="pcbprocess-control-block">PCB(Process Control Block)
+</h3><ul>
+<li>각 프로세스의 상태와 정보(프로세스 ID, 상태, 레지스터, 메모리 정보, 스케줄링 정보 등)를 저장하는 데이터 구조</li>
+<li>OS는 PCB를 이용해 프로세스 실행 상태 관리</li>
+</ul>
+<h3 id="프로세스-상태-변화-예시">프로세스 상태 변화 예시
+</h3><ul>
+<li>대기(Ready) → 실행(Running) → 대기(Waiting) → 종료(Terminated)</li>
+<li>상태 전이 시 PCB 업데이트와 문맥 전환 발생</li>
+</ul>
+<hr>
+<h2 id="7-스케줄링-알고리즘">7. 스케줄링 알고리즘
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>알고리즘</th>
+          <th>설명</th>
+          <th>장점</th>
+          <th>단점</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>FCFS</td>
+          <td>먼저 온 요청부터 처리</td>
+          <td>구현 단순, 공정함</td>
+          <td>긴 작업이 전체 대기 시간 증가(Convoy 효과)</td>
+      </tr>
+      <tr>
+          <td>SJF</td>
+          <td>실행 시간이 짧은 작업 먼저 처리</td>
+          <td>평균 대기시간 최소화</td>
+          <td>긴 작업이 무한 대기 가능(Starvation)</td>
+      </tr>
+      <tr>
+          <td>Priority</td>
+          <td>우선순위 높은 작업 먼저 처리</td>
+          <td>중요한 작업 우선 수행 가능</td>
+          <td>낮은 우선순위 작업 무한대기 위험</td>
+      </tr>
+      <tr>
+          <td>RR (Round Robin)</td>
+          <td>정해진 시간으로 순환</td>
+          <td>공평한 CPU 시간 분배</td>
+          <td>짧은 시간 할당 시 문맥 전환 과다</td>
+      </tr>
+      <tr>
+          <td>멀티레벨 큐</td>
+          <td>여러 큐로 작업 분리, 각 큐별 스케줄링</td>
+          <td>다양한 우선순위/형태 지원</td>
+          <td>복잡한 관리, 프로세스 이동 정책 필요</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="실무-시스템서버-적용-사례">실무 시스템/서버 적용 사례
+</h3><ul>
+<li>서버는 RR 기반 멀티태스킹+우선순위 혼합 적용</li>
+<li>실시간 시스템은 Priority 스케줄링 혹은 Rate-monotonic</li>
+<li>대형 OS(리눅스 등)는 멀티레벨 피드백 큐 스케줄링 사용</li>
+</ul>
+<hr>
+<h2 id="8-메모리-관리">8. 메모리 관리
+</h2><h3 id="기본-개념">기본 개념
+</h3><ul>
+<li>메모리 주소를 효율적으로 할당·회수하고 보호</li>
+<li>실제 물리 메모리와 가상 메모리를 분리해 관리</li>
+</ul>
+<h3 id="페이징paging">페이징(Paging)
+</h3><ul>
+<li>메모리를 고정 크기 블록(페이지)으로 분리하여 할당</li>
+<li>페이지 단위로 물리 메모리 대응, 내부 단편화 최소화</li>
+</ul>
+<h3 id="세그먼테이션segmentation">세그먼테이션(Segmentation)
+</h3><ul>
+<li>프로그램을 의미 단위(코드, 데이터, 스택 등)로 분할하여 관리</li>
+<li>논리적 구조 반영이 용이하나 외부 단편화 발생 가능</li>
+</ul>
+<h3 id="가상-메모리">가상 메모리
+</h3><ul>
+<li>실제 메모리보다 큰 메모리 공간 제공</li>
+<li>필요시 디스크에 ‘스왑(swapping)’하여 메모리 부족 해소</li>
+</ul>
+<h3 id="페이지-폴트page-fault">페이지 폴트(Page Fault)
+</h3><ul>
+<li>페이지가 메모리에 없을 때 발생하는 인터럽트</li>
+<li>OS가 디스크에서 적절한 페이지를 메모리로 로드</li>
+</ul>
+<h3 id="현대-os-메모리-관리-사례">현대 OS 메모리 관리 사례
+</h3><ul>
+<li>요구 페이징, 메모리 보호, 공유 메모리, 메모리 매핑 파일</li>
+<li>리눅스, 윈도우 등에서 다양한 기법 조합 적용</li>
+</ul>
+<hr>
+<h2 id="9-동기화와-병행성">9. 동기화와 병행성
+</h2><h3 id="임계-구역critical-section">임계 구역(Critical Section)
+</h3><ul>
+<li>다중 스레드가 동시에 접근 시 문제가 생기는 공유 자원 접근 구간</li>
+</ul>
+<h3 id="동기화-도구">동기화 도구
+</h3><ul>
+<li><strong>뮤텍스(Mutex)</strong>: 상호 배제 자원 잠금</li>
+<li><strong>세마포어(Semaphore)</strong>: 자원 수 계산 및 접근 제한</li>
+<li><strong>모니터(Monitor)</strong>: 뮤텍스+조건변수, 구조화된 동기화 제공</li>
+</ul>
+<h3 id="동기화-필요-이유">동기화 필요 이유
+</h3><ul>
+<li>데이터 일관성 및 무결성 보장을 위해 필수</li>
+</ul>
+<h3 id="동기화-문제점">동기화 문제점
+</h3><ul>
+<li>데드락(Deadlock) : 자원 순환 대기로 작업 정지</li>
+<li>라이브락(Livelock) : 반복 응답하지만 처리 못함</li>
+</ul>
+<h3 id="병행-프로그래밍-실전">병행 프로그래밍 실전
+</h3><ul>
+<li>적절한 락 사용, 최소화</li>
+<li>불변 객체 활용</li>
+<li>원자성 보장 코드 작성</li>
+</ul>
+<hr>
+<h2 id="10-파일-시스템">10. 파일 시스템
+</h2><h3 id="파일-시스템-원리">파일 시스템 원리
+</h3><ul>
+<li>데이터 저장소를 파일과 폴더 구조로 추상화하여 관리</li>
+<li>데이터 추가, 삭제, 검색 기능</li>
+</ul>
+<h3 id="파일-시스템-종류">파일 시스템 종류
+</h3><ul>
+<li>FAT(File Allocation Table): 간단, 플로피 디스크용</li>
+<li>NTFS(New Technology File System): 윈도우 주력</li>
+<li>ext3, ext4: 리눅스에서 널리 사용하는 저널링 파일 시스템</li>
+</ul>
+<h3 id="파일-입출력-및-권한-관리">파일 입출력 및 권한 관리
+</h3><ul>
+<li>OS API 통해 파일 열기, 읽기, 쓰기, 닫기 수행</li>
+<li>권한은 소유자, 그룹, 기타 사용자 별로 읽기, 쓰기, 실행 구분</li>
+</ul>
+<hr>
+<h1 id="정리">정리
+</h1><p>운영체제의 핵심 기능인 프로세스와 스레드 관리, 문맥 전환을 이해하고 스케줄링 알고리즘을 익히는 것은<br>
+효율적인 CPU 사용과 멀티태스킹 구현의 기본</p>
+<p>메모리 관리 기법 - 자원 최적화와 시스템 안정성에 직결<br>
+동기화 이슈 - 병행 처리에서 데이터 일관성을 보장하는 필수 요소</p>
+<p>파일 시스템 - 영속적 데이터 저장과 관리의 근간으로, 운영체제 전반의 이해를 완성하는 중요한 주제</p>
+</div>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4/">패스트캠퍼스</a>
+        
+            <a href="/tags/%EC%BB%A4%EB%84%90%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8/">커널아카데미</a>
+        
+            <a href="/tags/%EB%B0%B1%EC%97%94%EB%93%9C%EA%B0%9C%EB%B0%9C%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/">백엔드개발부트캠프</a>
+        
+            <a href="/tags/%EA%B5%AD%EB%B9%84%EC%A7%80%EC%9B%90%EA%B5%90%EC%9C%A1/">국비지원교육</a>
+        
+            <a href="/tags/%EB%82%B4%EC%9D%BC%EB%B0%B0%EC%9B%80%EC%B9%B4%EB%93%9C/">내일배움카드</a>
+        
+            <a href="/tags/kdt/">KDT</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">관련 글</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/week12-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 12주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week8-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 8주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week7-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 7주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week6-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 6주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week5-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 5주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Soyeon&#39;s Dev Log
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.748d0acf3bd5d18477b5028b83b70ecfa20eb15aefdff97697a330a2202721bf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
