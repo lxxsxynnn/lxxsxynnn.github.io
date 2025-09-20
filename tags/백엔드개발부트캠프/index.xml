@@ -6,7 +6,685 @@
         <description>Recent content in 백엔드개발부트캠프 on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Sun, 31 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/%EB%B0%B1%EC%97%94%EB%93%9C%EA%B0%9C%EB%B0%9C%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 20 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/%EB%B0%B1%EC%97%94%EB%93%9C%EA%B0%9C%EB%B0%9C%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 CS 정리 - 네트워크 기초와 심화</title>
+        <link>http://localhost:1313/posts/week14-retrospective/</link>
+        <pubDate>Sat, 20 Sep 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/week14-retrospective/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h1 id=&#34;네트워크-기초-및-심화-종합-정리&#34;&gt;네트워크 기초 및 심화 종합 정리
+&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&#34;1-네트워크란&#34;&gt;1. 네트워크란?
+&lt;/h2&gt;&lt;p&gt;컴퓨터와 장치들이 데이터를 주고받는 통신 체계다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;LAN(근거리), WAN(광역), 인터넷 등 다양한 형태와 규모가 존재&lt;/li&gt;
+&lt;li&gt;주 목적은 원격 자원 접근과 데이터 공유, 통신 서비스 제공&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-네트워크-주요-용어&#34;&gt;2. 네트워크 주요 용어
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;용어&lt;/th&gt;
+          &lt;th&gt;설명&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;IP 주소&lt;/td&gt;
+          &lt;td&gt;네트워크 상의 장치 식별을 위한 고유 주소&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MAC 주소&lt;/td&gt;
+          &lt;td&gt;물리적 네트워크 인터페이스의 고유 식별자&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;포트&lt;/td&gt;
+          &lt;td&gt;장치 내 서비스 구분을 위한 번호&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;소켓&lt;/td&gt;
+          &lt;td&gt;IP 주소와 포트 번호의 조합으로 된 네트워크 통신 종착점&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;패킷&lt;/td&gt;
+          &lt;td&gt;네트워크 상 데이터 전송 단위&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;프로토콜&lt;/td&gt;
+          &lt;td&gt;통신을 위한 규칙과 절차&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;라우터&lt;/td&gt;
+          &lt;td&gt;네트워크 간 데이터 전달 장치&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;스위치&lt;/td&gt;
+          &lt;td&gt;같은 네트워크 내 데이터 중계 장치&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;DNS&lt;/td&gt;
+          &lt;td&gt;도메인명을 IP 주소로 변환하는 서비스&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3-osi-7계층-모델-상세&#34;&gt;3. OSI 7계층 모델 상세
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;계층 번호&lt;/th&gt;
+          &lt;th&gt;이름&lt;/th&gt;
+          &lt;th&gt;주요 기능 및 설명&lt;/th&gt;
+          &lt;th&gt;주요 프로토콜 예&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;7&lt;/td&gt;
+          &lt;td&gt;응용 계층&lt;/td&gt;
+          &lt;td&gt;사용자와 직접 상호작용, 애플리케이션 서비스 제공&lt;/td&gt;
+          &lt;td&gt;HTTP, FTP, SMTP, DNS&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;6&lt;/td&gt;
+          &lt;td&gt;표현 계층&lt;/td&gt;
+          &lt;td&gt;데이터 표현과 암호화, 압축&lt;/td&gt;
+          &lt;td&gt;JPEG, ASCII, TLS&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;5&lt;/td&gt;
+          &lt;td&gt;세션 계층&lt;/td&gt;
+          &lt;td&gt;세션 설정, 유지, 종료&lt;/td&gt;
+          &lt;td&gt;NetBIOS, SAP&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;4&lt;/td&gt;
+          &lt;td&gt;전송 계층&lt;/td&gt;
+          &lt;td&gt;데이터 전송, 오류 제어, 흐름 제어&lt;/td&gt;
+          &lt;td&gt;TCP, UDP&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;3&lt;/td&gt;
+          &lt;td&gt;네트워크 계층&lt;/td&gt;
+          &lt;td&gt;패킷 라우팅, IP 주소 관리&lt;/td&gt;
+          &lt;td&gt;IP, ICMP&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;데이터 링크 계층&lt;/td&gt;
+          &lt;td&gt;프레임 전송, MAC 주소 관리, 에러 검출 및 수정&lt;/td&gt;
+          &lt;td&gt;Ethernet, PPP&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;물리 계층&lt;/td&gt;
+          &lt;td&gt;전기 신호, 케이블 등 물리 매체의 실제 전송&lt;/td&gt;
+          &lt;td&gt;Ethernet physical, USB&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4-tcpip-4계층-모델-심화&#34;&gt;4. TCP/IP 4계층 모델 심화
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;계층&lt;/th&gt;
+          &lt;th&gt;역할&lt;/th&gt;
+          &lt;th&gt;상세 원리 및 주요 명령어/프로토콜&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;링크 계층&lt;/td&gt;
+          &lt;td&gt;물리 데이터 전송 및 에러 제어&lt;/td&gt;
+          &lt;td&gt;Ethernet, Wi-Fi, ARP; 주요 명령어: ifconfig, tcpdump&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;인터넷 계층&lt;/td&gt;
+          &lt;td&gt;IP 기반 패킷 전송 및 라우팅&lt;/td&gt;
+          &lt;td&gt;IPv4, IPv6, ICMP; 주요 명령어: ping, traceroute&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;전송 계층&lt;/td&gt;
+          &lt;td&gt;신뢰성 있는 데이터 전송, 오류 복구&lt;/td&gt;
+          &lt;td&gt;TCP(3-way handshake, seq/ack), UDP; netstat 사용&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;응용 계층&lt;/td&gt;
+          &lt;td&gt;애플리케이션 서비스 프로토콜&lt;/td&gt;
+          &lt;td&gt;HTTP/HTTPS(curl, Postman), FTP, DNS 조회 명령어&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;5-ip-주소-및-서브넷팅-상세&#34;&gt;5. IP 주소 및 서브넷팅 상세
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;IPv4: 32bit 주소, 4옥텟으로 표현 (ex. 192.168.0.1)&lt;/li&gt;
+&lt;li&gt;서브넷 마스크: 네트워크/호스트 구분 위해 사용&lt;/li&gt;
+&lt;li&gt;CIDR 표기법: 192.168.1.0/24 (앞 24비트 네트워크 부분)&lt;/li&gt;
+&lt;li&gt;IPv6: 128bit 주소, 넓은 주소 공간과 보안성 강화&lt;/li&gt;
+&lt;li&gt;명령어: &lt;code&gt;ipconfig&lt;/code&gt;(Windows), &lt;code&gt;ifconfig&lt;/code&gt;(Linux/Mac), &lt;code&gt;route&lt;/code&gt;, &lt;code&gt;netstat -r&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;6-포트와-소켓&#34;&gt;6. 포트와 소켓
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;포트 번호 범위: 0~65535
+&lt;ul&gt;
+&lt;li&gt;0~1023 웰노운 포트(HTTP 80, HTTPS 443 등)&lt;/li&gt;
+&lt;li&gt;1024~49151 등록 포트&lt;/li&gt;
+&lt;li&gt;49152~65535 동적/임시 포트&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;소켓 = IP 주소 + 포트 번호 (통신 단위)&lt;/li&gt;
+&lt;li&gt;주요 시스템 콜: &lt;code&gt;socket()&lt;/code&gt;, &lt;code&gt;bind()&lt;/code&gt;, &lt;code&gt;listen()&lt;/code&gt;, &lt;code&gt;accept()&lt;/code&gt;, &lt;code&gt;connect()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;소켓 상태: LISTEN, SYN_SENT, ESTABLISHED, CLOSE_WAIT, TIME_WAIT&lt;/li&gt;
+&lt;li&gt;명령어 예: &lt;code&gt;netstat -an&lt;/code&gt;, &lt;code&gt;ss -tuln&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;7-httphttps-심화&#34;&gt;7. HTTP/HTTPS 심화
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;HTTP: 텍스트 기반 무상태 프로토콜, GET/POST/PUT/DELETE 등 메서드 지원&lt;/li&gt;
+&lt;li&gt;HTTPS: TLS/SSL 암호화와 인증서 제공, 데이터 무결성 보장&lt;/li&gt;
+&lt;li&gt;HTTP/2: 헤더 압축, 멀티플렉싱, 서버 푸시&lt;/li&gt;
+&lt;li&gt;HTTP/3(QUIC): UDP 기반, 저지연 통신&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;8-네트워크-통신-흐름-심화&#34;&gt;8. 네트워크 통신 흐름 심화
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;클라이언트가 도메인명으로 DNS 질의&lt;/li&gt;
+&lt;li&gt;DNS가 IP 주소 반환&lt;/li&gt;
+&lt;li&gt;TCP 3-way handshake로 연결 수립&lt;/li&gt;
+&lt;li&gt;HTTP 요청 및 응답 교환&lt;/li&gt;
+&lt;li&gt;(HTTPS) TLS 인증서 교환 및 암호화 과정&lt;/li&gt;
+&lt;li&gt;연결 유지 혹은 종료(Keep-Alive 옵션)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;9-nat와-포트포워딩&#34;&gt;9. NAT와 포트포워딩
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;NAT: 사설 IP주소를 공인 IP주소로 변환, 네트워크 보안 및 주소 절약 목적&lt;/li&gt;
+&lt;li&gt;포트포워딩: 외부 요청을 내부 네트워크 특정 IP 및 포트로 전달&lt;/li&gt;
+&lt;li&gt;방화벽과 병행해 서비스 접근을 제어함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;10-실무와-면접-팁&#34;&gt;10. 실무와 면접 팁
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;TCP와 UDP의 특징과 용도 차이 숙지&lt;/li&gt;
+&lt;li&gt;방화벽, NAT 문제 발생 시 해결법 익히기&lt;/li&gt;
+&lt;li&gt;SSL/TLS 인증서 설정 시 유의점과 절차 이해&lt;/li&gt;
+&lt;li&gt;CORS 정책 문제 이해 및 해결 방법&lt;/li&gt;
+&lt;li&gt;소켓 프로그래밍 API 이해 및 활용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;11-확장-및-응용-사례&#34;&gt;11. 확장 및 응용 사례
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;RESTful API와 GraphQL의 네트워크 차이&lt;/li&gt;
+&lt;li&gt;WebSocket 기반 양방향 실시간 통신 설계 및 구현&lt;/li&gt;
+&lt;li&gt;스프링 WebFlux를 활용한 리액티브 네트워크 프로그래밍 이해&lt;/li&gt;
+&lt;li&gt;로드밸런싱 및 네트워크 보안 기법&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;12-주요-명령어-및-코드-예제&#34;&gt;12. 주요 명령어 및 코드 예제
+&lt;/h2&gt;&lt;h3 id=&#34;네트워크-주요-명령어&#34;&gt;네트워크 주요 명령어
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ipconfig          &lt;span style=&#34;color:#75715e&#34;&gt;# 윈도우 IP 정보&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ifconfig          &lt;span style=&#34;color:#75715e&#34;&gt;# 리눅스/Mac IP 정보&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ping google.com   &lt;span style=&#34;color:#75715e&#34;&gt;# 연결 테스트&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;traceroute google.com  &lt;span style=&#34;color:#75715e&#34;&gt;# 리눅스 경로 추적&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tracert google.com     &lt;span style=&#34;color:#75715e&#34;&gt;# 윈도우 경로 추적&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;netstat -an       &lt;span style=&#34;color:#75715e&#34;&gt;# 소켓 및 포트 상태&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ss -tuln          &lt;span style=&#34;color:#75715e&#34;&gt;# 리눅스 소켓 상세 정보&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nslookup example.com   &lt;span style=&#34;color:#75715e&#34;&gt;# DNS 조회&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;java-tcp-서버-예제&#34;&gt;Java TCP 서버 예제
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; java.io.*;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; java.net.*;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;TcpServer&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;(String&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; args) &lt;span style=&#34;color:#66d9ef&#34;&gt;throws&lt;/span&gt; IOException {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ServerSocket serverSocket &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; ServerSocket(5000);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        System.&lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;서버 대기 중...&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        Socket clientSocket &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; serverSocket.&lt;span style=&#34;color:#a6e22e&#34;&gt;accept&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        BufferedReader in &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; BufferedReader(&lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; InputStreamReader(clientSocket.&lt;span style=&#34;color:#a6e22e&#34;&gt;getInputStream&lt;/span&gt;()));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        PrintWriter out &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; PrintWriter(clientSocket.&lt;span style=&#34;color:#a6e22e&#34;&gt;getOutputStream&lt;/span&gt;(), &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        String line;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; ((line &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; in.&lt;span style=&#34;color:#a6e22e&#34;&gt;readLine&lt;/span&gt;()) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            System.&lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;클라이언트: &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; line);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            out.&lt;span style=&#34;color:#a6e22e&#34;&gt;println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;echo: &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; line);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;bye&amp;#34;&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;equalsIgnoreCase&lt;/span&gt;(line)) &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        clientSocket.&lt;span style=&#34;color:#a6e22e&#34;&gt;close&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        serverSocket.&lt;span style=&#34;color:#a6e22e&#34;&gt;close&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;java-tcp-클라이언트-예제&#34;&gt;Java TCP 클라이언트 예제
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; java.io.*;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; java.net.*;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;TcpClient&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;(String&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; args) &lt;span style=&#34;color:#66d9ef&#34;&gt;throws&lt;/span&gt; IOException {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        Socket socket &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; Socket(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;localhost&amp;#34;&lt;/span&gt;, 5000);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        BufferedReader keyboard &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; BufferedReader(&lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; InputStreamReader(System.&lt;span style=&#34;color:#a6e22e&#34;&gt;in&lt;/span&gt;));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        PrintWriter out &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; PrintWriter(socket.&lt;span style=&#34;color:#a6e22e&#34;&gt;getOutputStream&lt;/span&gt;(), &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        BufferedReader in &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; BufferedReader(&lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; InputStreamReader(socket.&lt;span style=&#34;color:#a6e22e&#34;&gt;getInputStream&lt;/span&gt;()));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        String userInput;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; ((userInput &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; keyboard.&lt;span style=&#34;color:#a6e22e&#34;&gt;readLine&lt;/span&gt;()) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            out.&lt;span style=&#34;color:#a6e22e&#34;&gt;println&lt;/span&gt;(userInput);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            System.&lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;서버 응답: &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; in.&lt;span style=&#34;color:#a6e22e&#34;&gt;readLine&lt;/span&gt;());
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;bye&amp;#34;&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;equalsIgnoreCase&lt;/span&gt;(userInput)) &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        socket.&lt;span style=&#34;color:#a6e22e&#34;&gt;close&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;13-네트워크-통신-과정-도식화&#34;&gt;13. 네트워크 통신 과정 도식화
+&lt;/h2&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[Application Layer (HTTP/FTP 등)]
+      ↓
+[Transport Layer (TCP/UDP) - 3-way Handshake]
+      ↓
+[Internet Layer (IP, 라우팅)]
+      ↓
+[Data Link Layer (MAC, 프레임)]
+      ↓
+[Physical Layer (전기 신호, 케이블)]
+      ↓
+(물리 전송 매체 → 수신 측은 역순으로 헤더 해체 후 응용까지 전달)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+        </item>
+        <item>
+        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 13주차</title>
+        <link>http://localhost:1313/posts/week13-retrospective/</link>
+        <pubDate>Sun, 14 Sep 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/week13-retrospective/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h1 id=&#34;13주차-학습정리---운영체제&#34;&gt;13주차 학습정리 - 운영체제
+&lt;/h1&gt;&lt;h2 id=&#34;1-정의와-목적&#34;&gt;1. 정의와 목적
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;운영체제(OS)&lt;/strong&gt;: 컴퓨터의 하드웨어 및 소프트웨어 자원을 관리·제어하고,&lt;br&gt;
+사용자와 응용 프로그램에 대해 통합적·효율적 서비스를 제공하는 시스템 소프트웨어&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;대표 예시&lt;/strong&gt;: Windows, macOS, Linux, Android, iOS 등&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-구성과-구조&#34;&gt;2. 구성과 구조
+&lt;/h2&gt;&lt;h3 id=&#34;전체-구조&#34;&gt;전체 구조
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;하드웨어&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;커널(Kernel)&lt;/strong&gt;: OS의 핵심, 자원관리·프로세스·메모리·파일·I/O 등 주요기능 수행&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;셸(Shell)&lt;/strong&gt;: 사용자 인터페이스(터미널·명령어·그래픽 등)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;응용프로그램/App&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;사용자 및 외부장치&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;계층-관계도식&#34;&gt;계층 관계(도식)
+&lt;/h3&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[사용자]
+  |
+[셸/앱]
+  |
+[운영체제(OS) - 커널]
+  |
+[하드웨어 (CPU, 메모리, 디스크, 네트워크, I/O장치)]
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h2 id=&#34;3-핵심-역할과-기능&#34;&gt;3. 핵심 역할과 기능
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;자원 관리(Resource Management)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CPU, 메모리, 저장장치, 입출력장치 등 자원 배분·제어[1]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;프로세스/스레드 관리(Process/Thread Management)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;실행중인 프로그램, 스케줄링(순서관리), 생성/종료/상태관리&lt;/li&gt;
+&lt;li&gt;멀티태스킹 지원(동시 실행 효과)&lt;/li&gt;
+&lt;li&gt;스레드 : 내부 작업단위, 메모리 공유&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;메모리 관리(Memory Management)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;프로세스/프로그램별 메모리 할당/회수/배치&lt;/li&gt;
+&lt;li&gt;가상 메모리, 페이징 등 효율화 기법&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;파일 시스템 관리(File System Management)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;데이터 저장/읽기/삭제, 파일·디렉토리 구조 제공&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;입출력(I/O) 및 장치관리&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;키보드, 마우스, 프린터, 디스플레이 등 연결·제어&lt;/li&gt;
+&lt;li&gt;드라이버(Driver) 통한 하드웨어/OS 연동&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;보안 및 권한(Security &amp;amp; Authorization)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;자원 접근권한, 사용자 인증, 데이터 보호&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;네트워킹&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;시스템 간 통신, 네트워크 자원 관리(소켓, TCP/IP)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;시스템 서비스 및 API&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;응용프로그램이 OS 서비스 이용할 수 있도록 시스템콜 제공&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4-용어-및-주요-원리&#34;&gt;4. 용어 및 주요 원리
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;용어&lt;/th&gt;
+          &lt;th&gt;설명&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;커널&lt;/td&gt;
+          &lt;td&gt;OS 핵심, 자원·스케줄링·메모리 관리&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;셸&lt;/td&gt;
+          &lt;td&gt;사용자와 OS간 인터페이스 (명령/그래픽 등)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;프로세스&lt;/td&gt;
+          &lt;td&gt;실행중인 프로그램 인스턴스&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;스레드&lt;/td&gt;
+          &lt;td&gt;프로세스 내 작업 실행 단위&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;시스템콜&lt;/td&gt;
+          &lt;td&gt;프로그램↔OS 인터페이스용 함수&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;드라이버&lt;/td&gt;
+          &lt;td&gt;하드웨어↔OS 연동 소프트웨어&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;파일 시스템&lt;/td&gt;
+          &lt;td&gt;저장·검색·구조화·삭제를 위한 OS 서비스&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;가상 메모리&lt;/td&gt;
+          &lt;td&gt;실제·논리 메모리 분리, 효율증대&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;멀티태스킹&lt;/td&gt;
+          &lt;td&gt;여러 앱·프로세스를 동시에 실행&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;5-os-종류와-특징&#34;&gt;5. OS 종류와 특징
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;데스크탑/서버 OS&lt;/strong&gt;: Windows, macOS, Linux (다중 사용자/프로세스, 보안기능↑)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;모바일/임베디드 OS&lt;/strong&gt;: Android, iOS, RTOS 등 (경량화, 실시간 처리, 장치특화)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;기타&lt;/strong&gt;: UNIX, BSD, 하이퍼바이저(가상화 OS)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;6-프로세스-관리와-문맥-전환&#34;&gt;6. 프로세스 관리와 문맥 전환
+&lt;/h2&gt;&lt;h3 id=&#34;프로세스process와-스레드thread의-차이&#34;&gt;프로세스(Process)와 스레드(Thread)의 차이
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;프로세스&lt;/strong&gt;: 실행 중인 프로그램의 인스턴스, 별도의 메모리 공간과 자원을 가짐&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;스레드&lt;/strong&gt;: 프로세스 내 실행 단위, 프로세스 자원(메모리, 변수)을 공유&lt;/li&gt;
+&lt;li&gt;프로세스 간 독립성 높고, 스레드는 경량 프로세스라고도 불림&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;문맥-전환context-switching&#34;&gt;문맥 전환(Context Switching)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;CPU가 한 프로세스에서 다른 프로세스로 전환할 때 이전 프로세스 상태(레지스터, PC 등)를 저장하고,&lt;br&gt;
+다음 프로세스 상태를 복원하는 작업&lt;/li&gt;
+&lt;li&gt;비용이 크고 빈번한 전환은 성능 저하 원인&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;pcbprocess-control-block&#34;&gt;PCB(Process Control Block)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;각 프로세스의 상태와 정보(프로세스 ID, 상태, 레지스터, 메모리 정보, 스케줄링 정보 등)를 저장하는 데이터 구조&lt;/li&gt;
+&lt;li&gt;OS는 PCB를 이용해 프로세스 실행 상태 관리&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;프로세스-상태-변화-예시&#34;&gt;프로세스 상태 변화 예시
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;대기(Ready) → 실행(Running) → 대기(Waiting) → 종료(Terminated)&lt;/li&gt;
+&lt;li&gt;상태 전이 시 PCB 업데이트와 문맥 전환 발생&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;7-스케줄링-알고리즘&#34;&gt;7. 스케줄링 알고리즘
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;알고리즘&lt;/th&gt;
+          &lt;th&gt;설명&lt;/th&gt;
+          &lt;th&gt;장점&lt;/th&gt;
+          &lt;th&gt;단점&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;FCFS&lt;/td&gt;
+          &lt;td&gt;먼저 온 요청부터 처리&lt;/td&gt;
+          &lt;td&gt;구현 단순, 공정함&lt;/td&gt;
+          &lt;td&gt;긴 작업이 전체 대기 시간 증가(Convoy 효과)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SJF&lt;/td&gt;
+          &lt;td&gt;실행 시간이 짧은 작업 먼저 처리&lt;/td&gt;
+          &lt;td&gt;평균 대기시간 최소화&lt;/td&gt;
+          &lt;td&gt;긴 작업이 무한 대기 가능(Starvation)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Priority&lt;/td&gt;
+          &lt;td&gt;우선순위 높은 작업 먼저 처리&lt;/td&gt;
+          &lt;td&gt;중요한 작업 우선 수행 가능&lt;/td&gt;
+          &lt;td&gt;낮은 우선순위 작업 무한대기 위험&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RR (Round Robin)&lt;/td&gt;
+          &lt;td&gt;정해진 시간으로 순환&lt;/td&gt;
+          &lt;td&gt;공평한 CPU 시간 분배&lt;/td&gt;
+          &lt;td&gt;짧은 시간 할당 시 문맥 전환 과다&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;멀티레벨 큐&lt;/td&gt;
+          &lt;td&gt;여러 큐로 작업 분리, 각 큐별 스케줄링&lt;/td&gt;
+          &lt;td&gt;다양한 우선순위/형태 지원&lt;/td&gt;
+          &lt;td&gt;복잡한 관리, 프로세스 이동 정책 필요&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;실무-시스템서버-적용-사례&#34;&gt;실무 시스템/서버 적용 사례
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;서버는 RR 기반 멀티태스킹+우선순위 혼합 적용&lt;/li&gt;
+&lt;li&gt;실시간 시스템은 Priority 스케줄링 혹은 Rate-monotonic&lt;/li&gt;
+&lt;li&gt;대형 OS(리눅스 등)는 멀티레벨 피드백 큐 스케줄링 사용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;8-메모리-관리&#34;&gt;8. 메모리 관리
+&lt;/h2&gt;&lt;h3 id=&#34;기본-개념&#34;&gt;기본 개념
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;메모리 주소를 효율적으로 할당·회수하고 보호&lt;/li&gt;
+&lt;li&gt;실제 물리 메모리와 가상 메모리를 분리해 관리&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;페이징paging&#34;&gt;페이징(Paging)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;메모리를 고정 크기 블록(페이지)으로 분리하여 할당&lt;/li&gt;
+&lt;li&gt;페이지 단위로 물리 메모리 대응, 내부 단편화 최소화&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;세그먼테이션segmentation&#34;&gt;세그먼테이션(Segmentation)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;프로그램을 의미 단위(코드, 데이터, 스택 등)로 분할하여 관리&lt;/li&gt;
+&lt;li&gt;논리적 구조 반영이 용이하나 외부 단편화 발생 가능&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;가상-메모리&#34;&gt;가상 메모리
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;실제 메모리보다 큰 메모리 공간 제공&lt;/li&gt;
+&lt;li&gt;필요시 디스크에 ‘스왑(swapping)’하여 메모리 부족 해소&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;페이지-폴트page-fault&#34;&gt;페이지 폴트(Page Fault)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;페이지가 메모리에 없을 때 발생하는 인터럽트&lt;/li&gt;
+&lt;li&gt;OS가 디스크에서 적절한 페이지를 메모리로 로드&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;현대-os-메모리-관리-사례&#34;&gt;현대 OS 메모리 관리 사례
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;요구 페이징, 메모리 보호, 공유 메모리, 메모리 매핑 파일&lt;/li&gt;
+&lt;li&gt;리눅스, 윈도우 등에서 다양한 기법 조합 적용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;9-동기화와-병행성&#34;&gt;9. 동기화와 병행성
+&lt;/h2&gt;&lt;h3 id=&#34;임계-구역critical-section&#34;&gt;임계 구역(Critical Section)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;다중 스레드가 동시에 접근 시 문제가 생기는 공유 자원 접근 구간&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;동기화-도구&#34;&gt;동기화 도구
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;뮤텍스(Mutex)&lt;/strong&gt;: 상호 배제 자원 잠금&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;세마포어(Semaphore)&lt;/strong&gt;: 자원 수 계산 및 접근 제한&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;모니터(Monitor)&lt;/strong&gt;: 뮤텍스+조건변수, 구조화된 동기화 제공&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;동기화-필요-이유&#34;&gt;동기화 필요 이유
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;데이터 일관성 및 무결성 보장을 위해 필수&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;동기화-문제점&#34;&gt;동기화 문제점
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;데드락(Deadlock) : 자원 순환 대기로 작업 정지&lt;/li&gt;
+&lt;li&gt;라이브락(Livelock) : 반복 응답하지만 처리 못함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;병행-프로그래밍-실전&#34;&gt;병행 프로그래밍 실전
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;적절한 락 사용, 최소화&lt;/li&gt;
+&lt;li&gt;불변 객체 활용&lt;/li&gt;
+&lt;li&gt;원자성 보장 코드 작성&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;10-파일-시스템&#34;&gt;10. 파일 시스템
+&lt;/h2&gt;&lt;h3 id=&#34;파일-시스템-원리&#34;&gt;파일 시스템 원리
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;데이터 저장소를 파일과 폴더 구조로 추상화하여 관리&lt;/li&gt;
+&lt;li&gt;데이터 추가, 삭제, 검색 기능&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;파일-시스템-종류&#34;&gt;파일 시스템 종류
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;FAT(File Allocation Table): 간단, 플로피 디스크용&lt;/li&gt;
+&lt;li&gt;NTFS(New Technology File System): 윈도우 주력&lt;/li&gt;
+&lt;li&gt;ext3, ext4: 리눅스에서 널리 사용하는 저널링 파일 시스템&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;파일-입출력-및-권한-관리&#34;&gt;파일 입출력 및 권한 관리
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;OS API 통해 파일 열기, 읽기, 쓰기, 닫기 수행&lt;/li&gt;
+&lt;li&gt;권한은 소유자, 그룹, 기타 사용자 별로 읽기, 쓰기, 실행 구분&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;정리&#34;&gt;정리
+&lt;/h1&gt;&lt;p&gt;운영체제의 핵심 기능인 프로세스와 스레드 관리, 문맥 전환을 이해하고 스케줄링 알고리즘을 익히는 것은&lt;br&gt;
+효율적인 CPU 사용과 멀티태스킹 구현의 기본&lt;/p&gt;
+&lt;p&gt;메모리 관리 기법 - 자원 최적화와 시스템 안정성에 직결&lt;br&gt;
+동기화 이슈 - 병행 처리에서 데이터 일관성을 보장하는 필수 요소&lt;/p&gt;
+&lt;p&gt;파일 시스템 - 영속적 데이터 저장과 관리의 근간으로, 운영체제 전반의 이해를 완성하는 중요한 주제&lt;/p&gt;
+&lt;/div&gt;
+</description>
+        </item>
+        <item>
+        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 12주차</title>
+        <link>http://localhost:1313/posts/week12-retrospective/</link>
+        <pubDate>Sun, 07 Sep 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/week12-retrospective/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h1 id=&#34;12주차-학습-정리---spring-ai--tcpip&#34;&gt;12주차 학습 정리 - Spring AI &amp;amp; TCP/IP
+&lt;/h1&gt;&lt;h2 id=&#34;이번-주-키워드&#34;&gt;이번 주 키워드
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Spring AI 프레임워크&lt;/li&gt;
+&lt;li&gt;생성형 AI와 LLM 연동(RAG, Tool Calling)&lt;/li&gt;
+&lt;li&gt;Spring Boot와 AI 통합&lt;/li&gt;
+&lt;li&gt;TCP/IP 네트워크 기초와 실무&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-spring-ai란&#34;&gt;1. Spring AI란?
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Spring AI&lt;/strong&gt;는 자바 기반 스프링 생태계에서 생성형 AI 기능(LLM, 벡터DB 등)을 쉽고 일관되게 활용할 수 있도록 만든 프레임워크&lt;/li&gt;
+&lt;li&gt;OpenAI, Anthropic, Microsoft, Google 등 주요 AI 모델 및 Chroma, Pinecone 등 여러 벡터DB와 빠르게 연동 가능&lt;/li&gt;
+&lt;li&gt;기존 Spring Boot 환경에 &lt;strong&gt;자동 구성(Auto Configuration)&lt;/strong&gt;, 다양한 &lt;strong&gt;LLM API 지원&lt;/strong&gt;, &lt;strong&gt;RAG(검색 증강 생성)&lt;/strong&gt;,&lt;br&gt;
+&lt;strong&gt;툴 콜링&lt;/strong&gt;, &lt;strong&gt;실시간 스트리밍 API&lt;/strong&gt; 등 최신 AI 관련 기능을 간단하게 추가 가능&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-spring-ai의-주요-특징&#34;&gt;2. Spring AI의 주요 특징
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;자동 설정 &amp;amp; 스타터 의존성&lt;/strong&gt;: 복잡한 설정 없이 거의 바로 서비스 개발이 가능&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;다양한 AI/데이터베이스 연동&lt;/strong&gt;: 주요 AI 모델, 문서·테이블 기반 RAG 시스템, 실시간 챗봇 등 빠르게 구현&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;툴 호출 기능&lt;/strong&gt;: AI가 실시간으로 클라이언트 함수나 외부 API를 직접 실행할 수 있음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;출력 매핑·스트리밍 지원&lt;/strong&gt;: 생성형 응답을 자바 객체(POJO)로 바로 연결, 대형 모델 응답 스트리밍까지 지원&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;실무 활용 예시&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;내 문서/PDF 기반 QnA 챗봇&lt;/li&gt;
+&lt;li&gt;외부 API 연동형 생성형 응답 서비스&lt;/li&gt;
+&lt;li&gt;데이터베이스 문서 검색 + RAG&lt;/li&gt;
+&lt;li&gt;AI 결과 실시간 모니터링(Actuator, Observability)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3-tcpip-네트워크-기초&#34;&gt;3. TCP/IP 네트워크 기초
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;TCP/IP 4계층 모델&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Network Interface: 실제 신호 전달(Ethernet, MAC)&lt;/li&gt;
+&lt;li&gt;Internet(IP): 패킷 라우팅, 경로 지정&lt;/li&gt;
+&lt;li&gt;Transport(TCP/UDP):
+&lt;ul&gt;
+&lt;li&gt;TCP: 신뢰성, 순서 보장, 패킷 재전송, 오류 검출&lt;/li&gt;
+&lt;li&gt;UDP: 비신뢰, 빠른 전송&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Application Layer: HTTP, FTP, WebSocket 등 실제 서비스&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;작동 흐름&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;송신: Application 계층(HTTP 등) → Transport(TCP: 포트) → Internet(IP) → Network Interface로 캡슐화&lt;/li&gt;
+&lt;li&gt;수신: 반대로 해체(역캡슐화)해 최종 Application 데이터로&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Spring Boot/Spring AI 연동에 미치는 영향&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;모든 REST API/LLM 챗봇/WebSocket 등은 실제로 TCP/IP로 연결됨&lt;/li&gt;
+&lt;li&gt;HTTPS, WSS(WebSocket Secure)=TCP 기반 암호화 프로토콜&lt;/li&gt;
+&lt;li&gt;서버/클라이언트가 도메인, 포트, 프로토콜이 다르면 인증서, CORS, Origin 등의 네트워크/보안 설정을 항상 신경 써야 함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4-배운-점--느낀-점&#34;&gt;4. 배운 점 &amp;amp; 느낀 점
+&lt;/h2&gt;&lt;p&gt;지금 진행 중인 토이 프로젝트 배포 환경에서 프론트엔드와 백엔드 도메인이 달라서&lt;br&gt;
+CORS 에러, 인증서 적용, 보안 정책 등 여러 네트워크 문제를 직접 경험했다.&lt;br&gt;
+기존에는 http로만 단순히 API를 연결하는 게 전부처럼 느껴졌지만,&lt;br&gt;
+실제로 안정적인 서비스와 실시간 통신을 지원하려면&lt;br&gt;
+&lt;strong&gt;TCP/IP와 애플리케이션 계층(HTTP, WSS 등)의 동작 원리까지 제대로 이해하는 게 필수&lt;/strong&gt;라는 점을 절실히 알게 되었다.&lt;/p&gt;
+&lt;p&gt;이번에 Spring AI를 배우면서, 단순히 최신 프레임워크만 다루는 게 아니라&lt;br&gt;
+서버와 클라이언트가 어떻게 서로 데이터를 주고받고, 네트워크 내부에서 어떤 문제가 발생할 수 있는지&lt;br&gt;
+그리고 그 문제를 제대로 해결하기 위해서는 &lt;strong&gt;기초가 되는 TCP/IP와 같은 네트워크 구조까지 함께 신경 쓰는 것이 중요&lt;/strong&gt;하다는 사실을 다시 깨달았다.&lt;/p&gt;
+&lt;p&gt;Spring Boot와 Spring AI가 제공하는 높은 개발 생산성과 편의성에 기대는 것도 좋지만,&lt;br&gt;
+결국 실무에서는 &lt;strong&gt;네트워크 구조, 보안, 통신 정책까지 꼼꼼히 신경 써야 제대로 동작하는 백엔드 서비스&lt;/strong&gt;를 만들 수 있다는 점을 이번 주에 깊이 인식했다.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+        </item>
+        <item>
         <title>[커널아카데미] 백엔드 개발 부트캠프 13기 11주차</title>
         <link>http://localhost:1313/posts/week11-retrospective/</link>
         <pubDate>Sun, 31 Aug 2025 00:00:00 +0000</pubDate>

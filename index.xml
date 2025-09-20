@@ -6,7 +6,294 @@
         <description>Recent content on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Sun, 14 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 20 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 14주차</title>
+        <link>http://localhost:1313/posts/week14-retrospective/</link>
+        <pubDate>Sat, 20 Sep 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/week14-retrospective/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h1 id=&#34;네트워크-기초-및-심화-종합-정리&#34;&gt;네트워크 기초 및 심화 종합 정리
+&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&#34;1-네트워크란&#34;&gt;1. 네트워크란?
+&lt;/h2&gt;&lt;p&gt;컴퓨터와 장치들이 데이터를 주고받는 통신 체계&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;LAN(근거리), WAN(광역), 인터넷 등 다양한 형태와 규모가 존재&lt;/li&gt;
+&lt;li&gt;주 목적은 원격 자원 접근과 데이터 공유, 통신 서비스 제공&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-네트워크-주요-용어&#34;&gt;2. 네트워크 주요 용어
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;용어&lt;/th&gt;
+          &lt;th&gt;설명&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;IP 주소&lt;/td&gt;
+          &lt;td&gt;네트워크 상의 장치 식별을 위한 고유 주소&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MAC 주소&lt;/td&gt;
+          &lt;td&gt;물리적 네트워크 인터페이스의 고유 식별자&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;포트&lt;/td&gt;
+          &lt;td&gt;장치 내 서비스 구분을 위한 번호&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;소켓&lt;/td&gt;
+          &lt;td&gt;IP 주소와 포트 번호의 조합으로 된 네트워크 통신 종착점&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;패킷&lt;/td&gt;
+          &lt;td&gt;네트워크 상 데이터 전송 단위&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;프로토콜&lt;/td&gt;
+          &lt;td&gt;통신을 위한 규칙과 절차&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;라우터&lt;/td&gt;
+          &lt;td&gt;네트워크 간 데이터 전달 장치&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;스위치&lt;/td&gt;
+          &lt;td&gt;같은 네트워크 내 데이터 중계 장치&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;DNS&lt;/td&gt;
+          &lt;td&gt;도메인명을 IP 주소로 변환하는 서비스&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3-osi-7계층-모델-상세&#34;&gt;3. OSI 7계층 모델 상세
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;계층 번호&lt;/th&gt;
+          &lt;th&gt;이름&lt;/th&gt;
+          &lt;th&gt;주요 기능 및 설명&lt;/th&gt;
+          &lt;th&gt;주요 프로토콜 예&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;7&lt;/td&gt;
+          &lt;td&gt;응용 계층&lt;/td&gt;
+          &lt;td&gt;사용자와 직접 상호작용, 애플리케이션 서비스 제공&lt;/td&gt;
+          &lt;td&gt;HTTP, FTP, SMTP, DNS&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;6&lt;/td&gt;
+          &lt;td&gt;표현 계층&lt;/td&gt;
+          &lt;td&gt;데이터 표현과 암호화, 압축&lt;/td&gt;
+          &lt;td&gt;JPEG, ASCII, TLS&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;5&lt;/td&gt;
+          &lt;td&gt;세션 계층&lt;/td&gt;
+          &lt;td&gt;세션 설정, 유지, 종료&lt;/td&gt;
+          &lt;td&gt;NetBIOS, SAP&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;4&lt;/td&gt;
+          &lt;td&gt;전송 계층&lt;/td&gt;
+          &lt;td&gt;데이터 전송, 오류 제어, 흐름 제어&lt;/td&gt;
+          &lt;td&gt;TCP, UDP&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;3&lt;/td&gt;
+          &lt;td&gt;네트워크 계층&lt;/td&gt;
+          &lt;td&gt;패킷 라우팅, IP 주소 관리&lt;/td&gt;
+          &lt;td&gt;IP, ICMP&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;데이터 링크 계층&lt;/td&gt;
+          &lt;td&gt;프레임 전송, MAC 주소 관리, 에러 검출 및 수정&lt;/td&gt;
+          &lt;td&gt;Ethernet, PPP&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;물리 계층&lt;/td&gt;
+          &lt;td&gt;전기 신호, 케이블 등 물리 매체의 실제 전송&lt;/td&gt;
+          &lt;td&gt;Ethernet physical, USB&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;4-tcpip-4계층-모델-심화&#34;&gt;4. TCP/IP 4계층 모델 심화
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;계층&lt;/th&gt;
+          &lt;th&gt;역할&lt;/th&gt;
+          &lt;th&gt;상세 원리 및 주요 명령어/프로토콜&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;링크 계층&lt;/td&gt;
+          &lt;td&gt;물리 데이터 전송 및 에러 제어&lt;/td&gt;
+          &lt;td&gt;Ethernet, Wi-Fi, ARP; 주요 명령어: ifconfig, tcpdump&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;인터넷 계층&lt;/td&gt;
+          &lt;td&gt;IP 기반 패킷 전송 및 라우팅&lt;/td&gt;
+          &lt;td&gt;IPv4, IPv6, ICMP; 주요 명령어: ping, traceroute&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;전송 계층&lt;/td&gt;
+          &lt;td&gt;신뢰성 있는 데이터 전송, 오류 복구&lt;/td&gt;
+          &lt;td&gt;TCP(3-way handshake, seq/ack), UDP; netstat 사용&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;응용 계층&lt;/td&gt;
+          &lt;td&gt;애플리케이션 서비스 프로토콜&lt;/td&gt;
+          &lt;td&gt;HTTP/HTTPS(curl, Postman), FTP, DNS 조회 명령어&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;5-ip-주소-및-서브넷팅-상세&#34;&gt;5. IP 주소 및 서브넷팅 상세
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;IPv4: 32bit 주소, 4옥텟으로 표현 (ex. 192.168.0.1)&lt;/li&gt;
+&lt;li&gt;서브넷 마스크: 네트워크/호스트 구분 위해 사용&lt;/li&gt;
+&lt;li&gt;CIDR 표기법: 192.168.1.0/24 (앞 24비트 네트워크 부분)&lt;/li&gt;
+&lt;li&gt;IPv6: 128bit 주소, 넓은 주소 공간과 보안성 강화&lt;/li&gt;
+&lt;li&gt;명령어: &lt;code&gt;ipconfig&lt;/code&gt;(Windows), &lt;code&gt;ifconfig&lt;/code&gt;(Linux/Mac), &lt;code&gt;route&lt;/code&gt;, &lt;code&gt;netstat -r&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;6-포트와-소켓&#34;&gt;6. 포트와 소켓
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;포트 번호 범위: 0~65535
+&lt;ul&gt;
+&lt;li&gt;0~1023 웰노운 포트(HTTP 80, HTTPS 443 등)&lt;/li&gt;
+&lt;li&gt;1024~49151 등록 포트&lt;/li&gt;
+&lt;li&gt;49152~65535 동적/임시 포트&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;소켓 = IP 주소 + 포트 번호 (통신 단위)&lt;/li&gt;
+&lt;li&gt;주요 시스템 콜: &lt;code&gt;socket()&lt;/code&gt;, &lt;code&gt;bind()&lt;/code&gt;, &lt;code&gt;listen()&lt;/code&gt;, &lt;code&gt;accept()&lt;/code&gt;, &lt;code&gt;connect()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;소켓 상태: LISTEN, SYN_SENT, ESTABLISHED, CLOSE_WAIT, TIME_WAIT&lt;/li&gt;
+&lt;li&gt;명령어 예: &lt;code&gt;netstat -an&lt;/code&gt;, &lt;code&gt;ss -tuln&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;7-httphttps-심화&#34;&gt;7. HTTP/HTTPS 심화
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;HTTP: 텍스트 기반 무상태 프로토콜, GET/POST/PUT/DELETE 등 메서드 지원&lt;/li&gt;
+&lt;li&gt;HTTPS: TLS/SSL 암호화와 인증서 제공, 데이터 무결성 보장&lt;/li&gt;
+&lt;li&gt;HTTP/2: 헤더 압축, 멀티플렉싱, 서버 푸시&lt;/li&gt;
+&lt;li&gt;HTTP/3(QUIC): UDP 기반, 저지연 통신&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;8-네트워크-통신-흐름-심화&#34;&gt;8. 네트워크 통신 흐름 심화
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;클라이언트가 도메인명으로 DNS 질의&lt;/li&gt;
+&lt;li&gt;DNS가 IP 주소 반환&lt;/li&gt;
+&lt;li&gt;TCP 3-way handshake로 연결 수립&lt;/li&gt;
+&lt;li&gt;HTTP 요청 및 응답 교환&lt;/li&gt;
+&lt;li&gt;(HTTPS) TLS 인증서 교환 및 암호화 과정&lt;/li&gt;
+&lt;li&gt;연결 유지 혹은 종료(Keep-Alive 옵션)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;9-nat와-포트포워딩&#34;&gt;9. NAT와 포트포워딩
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;NAT: 사설 IP주소를 공인 IP주소로 변환, 네트워크 보안 및 주소 절약 목적&lt;/li&gt;
+&lt;li&gt;포트포워딩: 외부 요청을 내부 네트워크 특정 IP 및 포트로 전달&lt;/li&gt;
+&lt;li&gt;방화벽과 병행해 서비스 접근을 제어함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;10-실무와-면접-팁&#34;&gt;10. 실무와 면접 팁
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;TCP와 UDP의 특징과 용도 차이 숙지&lt;/li&gt;
+&lt;li&gt;방화벽, NAT 문제 발생 시 해결법 익히기&lt;/li&gt;
+&lt;li&gt;SSL/TLS 인증서 설정 시 유의점과 절차 이해&lt;/li&gt;
+&lt;li&gt;CORS 정책 문제 이해 및 해결 방법&lt;/li&gt;
+&lt;li&gt;소켓 프로그래밍 API 이해 및 활용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;11-확장-및-응용-사례&#34;&gt;11. 확장 및 응용 사례
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;RESTful API와 GraphQL의 네트워크 차이&lt;/li&gt;
+&lt;li&gt;WebSocket 기반 양방향 실시간 통신 설계 및 구현&lt;/li&gt;
+&lt;li&gt;스프링 WebFlux를 활용한 리액티브 네트워크 프로그래밍 이해&lt;/li&gt;
+&lt;li&gt;로드밸런싱 및 네트워크 보안 기법&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;12-주요-명령어-및-코드-예제&#34;&gt;12. 주요 명령어 및 코드 예제
+&lt;/h2&gt;&lt;h3 id=&#34;네트워크-주요-명령어&#34;&gt;네트워크 주요 명령어
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ipconfig          &lt;span style=&#34;color:#75715e&#34;&gt;# 윈도우 IP 정보&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ifconfig          &lt;span style=&#34;color:#75715e&#34;&gt;# 리눅스/Mac IP 정보&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ping google.com   &lt;span style=&#34;color:#75715e&#34;&gt;# 연결 테스트&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;traceroute google.com  &lt;span style=&#34;color:#75715e&#34;&gt;# 리눅스 경로 추적&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;tracert google.com     &lt;span style=&#34;color:#75715e&#34;&gt;# 윈도우 경로 추적&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;netstat -an       &lt;span style=&#34;color:#75715e&#34;&gt;# 소켓 및 포트 상태&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ss -tuln          &lt;span style=&#34;color:#75715e&#34;&gt;# 리눅스 소켓 상세 정보&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nslookup example.com   &lt;span style=&#34;color:#75715e&#34;&gt;# DNS 조회&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;java-tcp-서버-예제&#34;&gt;Java TCP 서버 예제
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; java.io.*;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; java.net.*;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;TcpServer&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;(String&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; args) &lt;span style=&#34;color:#66d9ef&#34;&gt;throws&lt;/span&gt; IOException {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ServerSocket serverSocket &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; ServerSocket(5000);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        System.&lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;서버 대기 중...&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        Socket clientSocket &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; serverSocket.&lt;span style=&#34;color:#a6e22e&#34;&gt;accept&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        BufferedReader in &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; BufferedReader(&lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; InputStreamReader(clientSocket.&lt;span style=&#34;color:#a6e22e&#34;&gt;getInputStream&lt;/span&gt;()));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        PrintWriter out &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; PrintWriter(clientSocket.&lt;span style=&#34;color:#a6e22e&#34;&gt;getOutputStream&lt;/span&gt;(), &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        String line;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; ((line &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; in.&lt;span style=&#34;color:#a6e22e&#34;&gt;readLine&lt;/span&gt;()) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            System.&lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;클라이언트: &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; line);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            out.&lt;span style=&#34;color:#a6e22e&#34;&gt;println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;echo: &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; line);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;bye&amp;#34;&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;equalsIgnoreCase&lt;/span&gt;(line)) &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        clientSocket.&lt;span style=&#34;color:#a6e22e&#34;&gt;close&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        serverSocket.&lt;span style=&#34;color:#a6e22e&#34;&gt;close&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;java-tcp-클라이언트-예제&#34;&gt;Java TCP 클라이언트 예제
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; java.io.*;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; java.net.*;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;TcpClient&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;(String&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; args) &lt;span style=&#34;color:#66d9ef&#34;&gt;throws&lt;/span&gt; IOException {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        Socket socket &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; Socket(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;localhost&amp;#34;&lt;/span&gt;, 5000);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        BufferedReader keyboard &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; BufferedReader(&lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; InputStreamReader(System.&lt;span style=&#34;color:#a6e22e&#34;&gt;in&lt;/span&gt;));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        PrintWriter out &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; PrintWriter(socket.&lt;span style=&#34;color:#a6e22e&#34;&gt;getOutputStream&lt;/span&gt;(), &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        BufferedReader in &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; BufferedReader(&lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; InputStreamReader(socket.&lt;span style=&#34;color:#a6e22e&#34;&gt;getInputStream&lt;/span&gt;()));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        String userInput;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; ((userInput &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; keyboard.&lt;span style=&#34;color:#a6e22e&#34;&gt;readLine&lt;/span&gt;()) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            out.&lt;span style=&#34;color:#a6e22e&#34;&gt;println&lt;/span&gt;(userInput);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            System.&lt;span style=&#34;color:#a6e22e&#34;&gt;out&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;서버 응답: &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; in.&lt;span style=&#34;color:#a6e22e&#34;&gt;readLine&lt;/span&gt;());
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;bye&amp;#34;&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;equalsIgnoreCase&lt;/span&gt;(userInput)) &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        socket.&lt;span style=&#34;color:#a6e22e&#34;&gt;close&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;13-네트워크-통신-과정-도식화&#34;&gt;13. 네트워크 통신 과정 도식화
+&lt;/h2&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[Application Layer (HTTP/FTP 등)]
+      ↓
+[Transport Layer (TCP/UDP) - 3-way Handshake]
+      ↓
+[Internet Layer (IP, 라우팅)]
+      ↓
+[Data Link Layer (MAC, 프레임)]
+      ↓
+[Physical Layer (전기 신호, 케이블)]
+      ↓
+(물리 전송 매체 → 수신 측은 역순으로 헤더 해체 후 응용까지 전달)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+        </item>
+        <item>
         <title>[커널아카데미] 백엔드 개발 부트캠프 13기 13주차</title>
         <link>http://localhost:1313/posts/week13-retrospective/</link>
         <pubDate>Sun, 14 Sep 2025 00:00:00 +0000</pubDate>
