@@ -6,7 +6,238 @@
         <description>Recent content on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Sat, 20 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 28 Sep 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[커널아카데미] 백엔드 개발 부트캠프 13기 15주차</title>
+        <link>http://localhost:1313/posts/week15-retrospective/</link>
+        <pubDate>Sun, 28 Sep 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/week15-retrospective/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h1 id=&#34;데이터베이스-기초-nosql-복잡-쿼리-orm-실습-종합-정리&#34;&gt;데이터베이스 기초, NoSQL, 복잡 쿼리, ORM 실습 종합 정리
+&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&#34;1-데이터베이스란&#34;&gt;1. 데이터베이스란?
+&lt;/h2&gt;&lt;p&gt;데이터를 체계적으로 저장·관리·검색할 수 있는 정보 저장소.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;RDB(Relational, 관계형)와 NoSQL(비관계형) 등 다양한 유형 존재.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-데이터베이스-주요-용어&#34;&gt;2. 데이터베이스 주요 용어
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;용어&lt;/th&gt;
+          &lt;th&gt;설명&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;DBMS&lt;/td&gt;
+          &lt;td&gt;데이터베이스 관리 시스템 (Oracle, MySQL 등)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;테이블&lt;/td&gt;
+          &lt;td&gt;데이터를 행/열로 저장하는 구조 단위&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;레코드/row&lt;/td&gt;
+          &lt;td&gt;한 행에 해당하는 데이터 집합&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;필드/column&lt;/td&gt;
+          &lt;td&gt;한 열에 해당하는 데이터 속성&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;쿼리(Query)&lt;/td&gt;
+          &lt;td&gt;데이터를 조회/추가/수정/삭제하는 명령문&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;스키마&lt;/td&gt;
+          &lt;td&gt;데이터베이스 구조와 설계 정보&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;인덱스&lt;/td&gt;
+          &lt;td&gt;조회 성능 향상을 위한 데이터 구조&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;뷰(View)&lt;/td&gt;
+          &lt;td&gt;결과 집합을 테이블처럼 보여주는 가상 테이블&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;트랜잭션&lt;/td&gt;
+          &lt;td&gt;일관성 보장 작업 단위(ACID 특징)&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3-sql-기본문법-및-실습-예제&#34;&gt;3. SQL 기본문법 및 실습 예제
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- 테이블 생성
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;CREATE&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;TABLE&lt;/span&gt; member (
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    id INT &lt;span style=&#34;color:#66d9ef&#34;&gt;PRIMARY&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;KEY&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    name VARCHAR(&lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    age INT
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- 삽입
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;INSERT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;INTO&lt;/span&gt; member (id, name, age) &lt;span style=&#34;color:#66d9ef&#34;&gt;VALUES&lt;/span&gt; (&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Alice&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;22&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- 조회
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; id, name, age &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; member;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- 수정
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;UPDATE&lt;/span&gt; member &lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; age &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;23&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;WHERE&lt;/span&gt; id &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- 삭제
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;DELETE&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; member &lt;span style=&#34;color:#66d9ef&#34;&gt;WHERE&lt;/span&gt; id &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;4-트랜잭션과-acid&#34;&gt;4. 트랜잭션과 ACID
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;원자성(Atomicity): 전체 작업 성공/실패 단일 처리&lt;/li&gt;
+&lt;li&gt;일관성(Consistency): 트랜잭션 전후 DB 상태 일관&lt;/li&gt;
+&lt;li&gt;격리성(Isolation): 동시에 여러 트랜잭션 충돌없이 동작&lt;/li&gt;
+&lt;li&gt;지속성(Durability): 작업 결과는 영구 저장&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;트랜잭션-예시&#34;&gt;트랜잭션 예시
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;BEGIN&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;UPDATE&lt;/span&gt; account &lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; balance &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; balance &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;WHERE&lt;/span&gt; id &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;UPDATE&lt;/span&gt; account &lt;span style=&#34;color:#66d9ef&#34;&gt;SET&lt;/span&gt; balance &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; balance &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;WHERE&lt;/span&gt; id &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;COMMIT&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- 실패시 ROLLBACK 가능
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;5-인덱스와-성능&#34;&gt;5. 인덱스와 성능
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;인덱스는 데이터 탐색 성능 증대 (빠른 조회)&lt;/li&gt;
+&lt;li&gt;과도한 인덱스는 쓰기 성능 저하, 히트율 관리가 중요&lt;/li&gt;
+&lt;li&gt;인덱스 종류: B-tree, 해시 등&lt;/li&gt;
+&lt;li&gt;튜닝 시 인덱스 활용도(조회/삽입/전체 스캔 빈도) 반드시 분석&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;6-정규화와-설계&#34;&gt;6. 정규화와 설계
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;정규화: 데이터 중복 최소화, 무결성 유지(1NF, 2NF, 3NF 등 단계적 설계)&lt;/li&gt;
+&lt;li&gt;과도한 정규화는 쿼리 복잡성 증가(JOIN 과다)&lt;/li&gt;
+&lt;li&gt;실전에서는 업무/성능 기준 반정규화 필요&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;7-복잡-쿼리-실습-예제&#34;&gt;7. 복잡 쿼리 실습 예제
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- 여러 테이블 JOIN 및 집계
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; u.name, &lt;span style=&#34;color:#66d9ef&#34;&gt;SUM&lt;/span&gt;(o.price) &lt;span style=&#34;color:#66d9ef&#34;&gt;AS&lt;/span&gt; total_price
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; users u
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;JOIN&lt;/span&gt; orders o &lt;span style=&#34;color:#66d9ef&#34;&gt;ON&lt;/span&gt; u.id &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; o.user_id
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;WHERE&lt;/span&gt; o.status &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;COMPLETE&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;GROUP&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;BY&lt;/span&gt; u.name
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;HAVING&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SUM&lt;/span&gt;(o.price) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;ORDER&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;BY&lt;/span&gt; total_price &lt;span style=&#34;color:#66d9ef&#34;&gt;DESC&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;-- 서브쿼리 및 윈도우함수 예시
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; name, age, RANK() OVER (&lt;span style=&#34;color:#66d9ef&#34;&gt;ORDER&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;BY&lt;/span&gt; age &lt;span style=&#34;color:#66d9ef&#34;&gt;DESC&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; rank
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; member
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;WHERE&lt;/span&gt; age &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;AVG&lt;/span&gt;(age) &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; member);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;8-nosql-vs-rdbms-비교&#34;&gt;8. NoSQL vs RDBMS 비교
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;항목&lt;/th&gt;
+          &lt;th&gt;RDBMS&lt;/th&gt;
+          &lt;th&gt;NoSQL (MongoDB 등)&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;구조&lt;/td&gt;
+          &lt;td&gt;테이블(행/열)&lt;/td&gt;
+          &lt;td&gt;컬렉션/문서 등(유연함)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;스키마&lt;/td&gt;
+          &lt;td&gt;엄격한 스키마(정형)&lt;/td&gt;
+          &lt;td&gt;느슨하거나 무스키마(비정형)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;트랜잭션&lt;/td&gt;
+          &lt;td&gt;ACID 완전 지원&lt;/td&gt;
+          &lt;td&gt;제한적/BASE 원칙&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;확장성&lt;/td&gt;
+          &lt;td&gt;수직적(Server 늘리기)&lt;/td&gt;
+          &lt;td&gt;수평적(Shard/Replica 분산)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;용도 예시&lt;/td&gt;
+          &lt;td&gt;금융, ERP, 통계 등&lt;/td&gt;
+          &lt;td&gt;채팅, 로그, IoT 실시간 저장&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;쿼리언어&lt;/td&gt;
+          &lt;td&gt;SQL&lt;/td&gt;
+          &lt;td&gt;다양한 API/클라이언트(Query, Find 등)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;정규화&lt;/td&gt;
+          &lt;td&gt;필수, 데이터 중복 최소화&lt;/td&gt;
+          &lt;td&gt;필요에 따라 중복 허용&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;nosql-예제mongodb&#34;&gt;NoSQL 예제(MongoDB)
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;db&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;users&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;insertOne&lt;/span&gt;({ &lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Alice&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;age&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;22&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;tags&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;student&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;admin&amp;#39;&lt;/span&gt;] })
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;db&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;users&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;find&lt;/span&gt;({ &lt;span style=&#34;color:#a6e22e&#34;&gt;age&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; { &lt;span style=&#34;color:#a6e22e&#34;&gt;$gt&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt; } })
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;db&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;users&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;updateOne&lt;/span&gt;({ &lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Alice&amp;#39;&lt;/span&gt; }, { &lt;span style=&#34;color:#a6e22e&#34;&gt;$set&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; { &lt;span style=&#34;color:#a6e22e&#34;&gt;age&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;23&lt;/span&gt; } })
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;db&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;users&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;deleteOne&lt;/span&gt;({ &lt;span style=&#34;color:#a6e22e&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Alice&amp;#39;&lt;/span&gt; })
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;9-orm-실습-예제java-jpa&#34;&gt;9. ORM 실습 예제(Java JPA)
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// 엔티티 클래스 예시&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; javax.persistence.*;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@Entity&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Member&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;@Id&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; Long id;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; String name;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; age;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// Getter/Setter 생략&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// 쿼리/저장 예시&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Member m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; Member();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;m.&lt;span style=&#34;color:#a6e22e&#34;&gt;setId&lt;/span&gt;(1L);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;m.&lt;span style=&#34;color:#a6e22e&#34;&gt;setName&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Alice&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;m.&lt;span style=&#34;color:#a6e22e&#34;&gt;setAge&lt;/span&gt;(22);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;entityManager.&lt;span style=&#34;color:#a6e22e&#34;&gt;persist&lt;/span&gt;(m);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// JPQL 조회&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;List&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Member&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; entityManager
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  .&lt;span style=&#34;color:#a6e22e&#34;&gt;createQuery&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;SELECT m FROM Member m WHERE m.age &amp;gt; 20&amp;#34;&lt;/span&gt;, Member.&lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  .&lt;span style=&#34;color:#a6e22e&#34;&gt;getResultList&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;10-db-구조-및-흐름-도식&#34;&gt;10. DB 구조 및 흐름 도식
+&lt;/h2&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[클라이언트 요청]
+  ↓
+[커넥션 &amp;amp; 트랜잭션 관리]
+  ↓
+[SQL/NoSQL 파싱·실행]
+  ↓
+[테이블/컬렉션 &amp;amp; 인덱스 조회/변경]
+  ↓
+[로그/저널 생성]
+  ↓
+[데이터 영구 저장 및 응답 반환]
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h2 id=&#34;11-실무면접-핵심-팁&#34;&gt;11. 실무/면접 핵심 팁
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;트랜잭션 분리레벨 요구/충돌 사례(Dirty Read, Lost Update 등)&lt;/li&gt;
+&lt;li&gt;인덱스/조회 성능, 튜닝 쿼리(EXPLAIN, AUTOTRACE 활용)&lt;/li&gt;
+&lt;li&gt;DB 설계 시 관계, 제약조건, 보안관리(NS, 권한체계) 고려&lt;/li&gt;
+&lt;li&gt;분산 DB/파티셔닝, 샤딩 구조 실전 적용 경험&lt;/li&gt;
+&lt;li&gt;ORM(JPA, MyBatis) 활용 이유와 한계(복잡 쿼리 vs 직접 SQL)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;/div&gt;
+</description>
+        </item>
+        <item>
         <title>[커널아카데미] 백엔드 개발 부트캠프 13기 14주차</title>
         <link>http://localhost:1313/posts/week14-retrospective/</link>
         <pubDate>Sat, 20 Sep 2025 00:00:00 +0000</pubDate>

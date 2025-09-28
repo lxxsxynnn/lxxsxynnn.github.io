@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 데이터베이스 기초, NoSQL, 복잡 쿼리, ORM 실습 종합 정리 1. 데이터베이스란? 데이터를 체계적으로 저장·관리·검색할 수 있는 정보 저장소.\nRDB(Relational, 관계형)와 NoSQL(비관계형) 등 다양한 유형 존재. 2. 데이터베이스 주요 용어 용어 설명 DBMS 데이터베이스 관리 시스템 (Oracle, MySQL 등) 테이블 데이터를 행/열로 저장하는 구조 단위 레코드/row 한 행에 해당하는 데이터 집합 필드/column 한 열에 해당하는 데이터 속성 쿼리(Query) 데이터를 조회/추가/수정/삭제하는 명령문 스키마 데이터베이스 구조와 설계 정보 인덱스 조회 성능 향상을 위한 데이터 구조 뷰(View) 결과 집합을 테이블처럼 보여주는 가상 테이블 트랜잭션 일관성 보장 작업 단위(ACID 특징) 3. SQL 기본문법 및 실습 예제 -- 테이블 생성 CREATE TABLE member ( id INT PRIMARY KEY, name VARCHAR(50), age INT ); -- 삽입 INSERT INTO member (id, name, age) VALUES (1, &#39;Alice&#39;, 22); -- 조회 SELECT id, name, age FROM member; -- 수정 UPDATE member SET age = 23 WHERE id = 1; -- 삭제 DELETE FROM member WHERE id = 1; 4. 트랜잭션과 ACID 원자성(Atomicity): 전체 작업 성공/실패 단일 처리 일관성(Consistency): 트랜잭션 전후 DB 상태 일관 격리성(Isolation): 동시에 여러 트랜잭션 충돌없이 동작 지속성(Durability): 작업 결과는 영구 저장 트랜잭션 예시 BEGIN; UPDATE account SET balance = balance - 100 WHERE id = 1; UPDATE account SET balance = balance + 100 WHERE id = 2; COMMIT; -- 실패시 ROLLBACK 가능 5. 인덱스와 성능 인덱스는 데이터 탐색 성능 증대 (빠른 조회) 과도한 인덱스는 쓰기 성능 저하, 히트율 관리가 중요 인덱스 종류: B-tree, 해시 등 튜닝 시 인덱스 활용도(조회/삽입/전체 스캔 빈도) 반드시 분석 6. 정규화와 설계 정규화: 데이터 중복 최소화, 무결성 유지(1NF, 2NF, 3NF 등 단계적 설계) 과도한 정규화는 쿼리 복잡성 증가(JOIN 과다) 실전에서는 업무/성능 기준 반정규화 필요 7. 복잡 쿼리 실습 예제 -- 여러 테이블 JOIN 및 집계 SELECT u.name, SUM(o.price) AS total_price FROM users u JOIN orders o ON u.id = o.user_id WHERE o.status = &#39;COMPLETE&#39; GROUP BY u.name HAVING SUM(o.price) &gt; 1000 ORDER BY total_price DESC; -- 서브쿼리 및 윈도우함수 예시 SELECT name, age, RANK() OVER (ORDER BY age DESC) as rank FROM member WHERE age &gt; (SELECT AVG(age) FROM member); 8. NoSQL vs RDBMS 비교 항목 RDBMS NoSQL (MongoDB 등) 구조 테이블(행/열) 컬렉션/문서 등(유연함) 스키마 엄격한 스키마(정형) 느슨하거나 무스키마(비정형) 트랜잭션 ACID 완전 지원 제한적/BASE 원칙 확장성 수직적(Server 늘리기) 수평적(Shard/Replica 분산) 용도 예시 금융, ERP, 통계 등 채팅, 로그, IoT 실시간 저장 쿼리언어 SQL 다양한 API/클라이언트(Query, Find 등) 정규화 필수, 데이터 중복 최소화 필요에 따라 중복 허용 NoSQL 예제(MongoDB) db.users.insertOne({ name: &#39;Alice&#39;, age: 22, tags: [&#39;student&#39;, &#39;admin&#39;] }) db.users.find({ age: { $gt: 20 } }) db.users.updateOne({ name: &#39;Alice&#39; }, { $set: { age: 23 } }) db.users.deleteOne({ name: &#39;Alice&#39; }) 9. ORM 실습 예제(Java JPA) // 엔티티 클래스 예시 import javax.persistence.*; @Entity public class Member { @Id private Long id; private String name; private int age; // Getter/Setter 생략 } // 쿼리/저장 예시 Member m = new Member(); m.setId(1L); m.setName(&#34;Alice&#34;); m.setAge(22); entityManager.persist(m); // JPQL 조회 List&lt;Member&gt; result = entityManager .createQuery(&#34;SELECT m FROM Member m WHERE m.age &gt; 20&#34;, Member.class) .getResultList(); 10. DB 구조 및 흐름 도식 [클라이언트 요청] ↓ [커넥션 &amp; 트랜잭션 관리] ↓ [SQL/NoSQL 파싱·실행] ↓ [테이블/컬렉션 &amp; 인덱스 조회/변경] ↓ [로그/저널 생성] ↓ [데이터 영구 저장 및 응답 반환] 11. 실무/면접 핵심 팁 트랜잭션 분리레벨 요구/충돌 사례(Dirty Read, Lost Update 등) 인덱스/조회 성능, 튜닝 쿼리(EXPLAIN, AUTOTRACE 활용) DB 설계 시 관계, 제약조건, 보안관리(NS, 권한체계) 고려 분산 DB/파티셔닝, 샤딩 구조 실전 적용 경험 ORM(JPA, MyBatis) 활용 이유와 한계(복잡 쿼리 vs 직접 SQL) ">
+<title>[커널아카데미] 백엔드 개발 부트캠프 13기 15주차</title>
+
+<link rel='canonical' href='http://localhost:1313/posts/week15-retrospective/'>
+
+<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="[커널아카데미] 백엔드 개발 부트캠프 13기 15주차">
+<meta property='og:description' content=" 데이터베이스 기초, NoSQL, 복잡 쿼리, ORM 실습 종합 정리 1. 데이터베이스란? 데이터를 체계적으로 저장·관리·검색할 수 있는 정보 저장소.\nRDB(Relational, 관계형)와 NoSQL(비관계형) 등 다양한 유형 존재. 2. 데이터베이스 주요 용어 용어 설명 DBMS 데이터베이스 관리 시스템 (Oracle, MySQL 등) 테이블 데이터를 행/열로 저장하는 구조 단위 레코드/row 한 행에 해당하는 데이터 집합 필드/column 한 열에 해당하는 데이터 속성 쿼리(Query) 데이터를 조회/추가/수정/삭제하는 명령문 스키마 데이터베이스 구조와 설계 정보 인덱스 조회 성능 향상을 위한 데이터 구조 뷰(View) 결과 집합을 테이블처럼 보여주는 가상 테이블 트랜잭션 일관성 보장 작업 단위(ACID 특징) 3. SQL 기본문법 및 실습 예제 -- 테이블 생성 CREATE TABLE member ( id INT PRIMARY KEY, name VARCHAR(50), age INT ); -- 삽입 INSERT INTO member (id, name, age) VALUES (1, &#39;Alice&#39;, 22); -- 조회 SELECT id, name, age FROM member; -- 수정 UPDATE member SET age = 23 WHERE id = 1; -- 삭제 DELETE FROM member WHERE id = 1; 4. 트랜잭션과 ACID 원자성(Atomicity): 전체 작업 성공/실패 단일 처리 일관성(Consistency): 트랜잭션 전후 DB 상태 일관 격리성(Isolation): 동시에 여러 트랜잭션 충돌없이 동작 지속성(Durability): 작업 결과는 영구 저장 트랜잭션 예시 BEGIN; UPDATE account SET balance = balance - 100 WHERE id = 1; UPDATE account SET balance = balance + 100 WHERE id = 2; COMMIT; -- 실패시 ROLLBACK 가능 5. 인덱스와 성능 인덱스는 데이터 탐색 성능 증대 (빠른 조회) 과도한 인덱스는 쓰기 성능 저하, 히트율 관리가 중요 인덱스 종류: B-tree, 해시 등 튜닝 시 인덱스 활용도(조회/삽입/전체 스캔 빈도) 반드시 분석 6. 정규화와 설계 정규화: 데이터 중복 최소화, 무결성 유지(1NF, 2NF, 3NF 등 단계적 설계) 과도한 정규화는 쿼리 복잡성 증가(JOIN 과다) 실전에서는 업무/성능 기준 반정규화 필요 7. 복잡 쿼리 실습 예제 -- 여러 테이블 JOIN 및 집계 SELECT u.name, SUM(o.price) AS total_price FROM users u JOIN orders o ON u.id = o.user_id WHERE o.status = &#39;COMPLETE&#39; GROUP BY u.name HAVING SUM(o.price) &gt; 1000 ORDER BY total_price DESC; -- 서브쿼리 및 윈도우함수 예시 SELECT name, age, RANK() OVER (ORDER BY age DESC) as rank FROM member WHERE age &gt; (SELECT AVG(age) FROM member); 8. NoSQL vs RDBMS 비교 항목 RDBMS NoSQL (MongoDB 등) 구조 테이블(행/열) 컬렉션/문서 등(유연함) 스키마 엄격한 스키마(정형) 느슨하거나 무스키마(비정형) 트랜잭션 ACID 완전 지원 제한적/BASE 원칙 확장성 수직적(Server 늘리기) 수평적(Shard/Replica 분산) 용도 예시 금융, ERP, 통계 등 채팅, 로그, IoT 실시간 저장 쿼리언어 SQL 다양한 API/클라이언트(Query, Find 등) 정규화 필수, 데이터 중복 최소화 필요에 따라 중복 허용 NoSQL 예제(MongoDB) db.users.insertOne({ name: &#39;Alice&#39;, age: 22, tags: [&#39;student&#39;, &#39;admin&#39;] }) db.users.find({ age: { $gt: 20 } }) db.users.updateOne({ name: &#39;Alice&#39; }, { $set: { age: 23 } }) db.users.deleteOne({ name: &#39;Alice&#39; }) 9. ORM 실습 예제(Java JPA) // 엔티티 클래스 예시 import javax.persistence.*; @Entity public class Member { @Id private Long id; private String name; private int age; // Getter/Setter 생략 } // 쿼리/저장 예시 Member m = new Member(); m.setId(1L); m.setName(&#34;Alice&#34;); m.setAge(22); entityManager.persist(m); // JPQL 조회 List&lt;Member&gt; result = entityManager .createQuery(&#34;SELECT m FROM Member m WHERE m.age &gt; 20&#34;, Member.class) .getResultList(); 10. DB 구조 및 흐름 도식 [클라이언트 요청] ↓ [커넥션 &amp; 트랜잭션 관리] ↓ [SQL/NoSQL 파싱·실행] ↓ [테이블/컬렉션 &amp; 인덱스 조회/변경] ↓ [로그/저널 생성] ↓ [데이터 영구 저장 및 응답 반환] 11. 실무/면접 핵심 팁 트랜잭션 분리레벨 요구/충돌 사례(Dirty Read, Lost Update 등) 인덱스/조회 성능, 튜닝 쿼리(EXPLAIN, AUTOTRACE 활용) DB 설계 시 관계, 제약조건, 보안관리(NS, 권한체계) 고려 분산 DB/파티셔닝, 샤딩 구조 실전 적용 경험 ORM(JPA, MyBatis) 활용 이유와 한계(복잡 쿼리 vs 직접 SQL) ">
+<meta property='og:url' content='http://localhost:1313/posts/week15-retrospective/'>
+<meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='패스트캠퍼스' /><meta property='article:tag' content='커널아카데미' /><meta property='article:tag' content='백엔드개발부트캠프' /><meta property='article:tag' content='국비지원교육' /><meta property='article:tag' content='내일배움카드' /><meta property='article:tag' content='KDT' /><meta property='article:published_time' content='2025-09-28T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-09-28T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="[커널아카데미] 백엔드 개발 부트캠프 13기 15주차">
+<meta name="twitter:description" content=" 데이터베이스 기초, NoSQL, 복잡 쿼리, ORM 실습 종합 정리 1. 데이터베이스란? 데이터를 체계적으로 저장·관리·검색할 수 있는 정보 저장소.\nRDB(Relational, 관계형)와 NoSQL(비관계형) 등 다양한 유형 존재. 2. 데이터베이스 주요 용어 용어 설명 DBMS 데이터베이스 관리 시스템 (Oracle, MySQL 등) 테이블 데이터를 행/열로 저장하는 구조 단위 레코드/row 한 행에 해당하는 데이터 집합 필드/column 한 열에 해당하는 데이터 속성 쿼리(Query) 데이터를 조회/추가/수정/삭제하는 명령문 스키마 데이터베이스 구조와 설계 정보 인덱스 조회 성능 향상을 위한 데이터 구조 뷰(View) 결과 집합을 테이블처럼 보여주는 가상 테이블 트랜잭션 일관성 보장 작업 단위(ACID 특징) 3. SQL 기본문법 및 실습 예제 -- 테이블 생성 CREATE TABLE member ( id INT PRIMARY KEY, name VARCHAR(50), age INT ); -- 삽입 INSERT INTO member (id, name, age) VALUES (1, &#39;Alice&#39;, 22); -- 조회 SELECT id, name, age FROM member; -- 수정 UPDATE member SET age = 23 WHERE id = 1; -- 삭제 DELETE FROM member WHERE id = 1; 4. 트랜잭션과 ACID 원자성(Atomicity): 전체 작업 성공/실패 단일 처리 일관성(Consistency): 트랜잭션 전후 DB 상태 일관 격리성(Isolation): 동시에 여러 트랜잭션 충돌없이 동작 지속성(Durability): 작업 결과는 영구 저장 트랜잭션 예시 BEGIN; UPDATE account SET balance = balance - 100 WHERE id = 1; UPDATE account SET balance = balance + 100 WHERE id = 2; COMMIT; -- 실패시 ROLLBACK 가능 5. 인덱스와 성능 인덱스는 데이터 탐색 성능 증대 (빠른 조회) 과도한 인덱스는 쓰기 성능 저하, 히트율 관리가 중요 인덱스 종류: B-tree, 해시 등 튜닝 시 인덱스 활용도(조회/삽입/전체 스캔 빈도) 반드시 분석 6. 정규화와 설계 정규화: 데이터 중복 최소화, 무결성 유지(1NF, 2NF, 3NF 등 단계적 설계) 과도한 정규화는 쿼리 복잡성 증가(JOIN 과다) 실전에서는 업무/성능 기준 반정규화 필요 7. 복잡 쿼리 실습 예제 -- 여러 테이블 JOIN 및 집계 SELECT u.name, SUM(o.price) AS total_price FROM users u JOIN orders o ON u.id = o.user_id WHERE o.status = &#39;COMPLETE&#39; GROUP BY u.name HAVING SUM(o.price) &gt; 1000 ORDER BY total_price DESC; -- 서브쿼리 및 윈도우함수 예시 SELECT name, age, RANK() OVER (ORDER BY age DESC) as rank FROM member WHERE age &gt; (SELECT AVG(age) FROM member); 8. NoSQL vs RDBMS 비교 항목 RDBMS NoSQL (MongoDB 등) 구조 테이블(행/열) 컬렉션/문서 등(유연함) 스키마 엄격한 스키마(정형) 느슨하거나 무스키마(비정형) 트랜잭션 ACID 완전 지원 제한적/BASE 원칙 확장성 수직적(Server 늘리기) 수평적(Shard/Replica 분산) 용도 예시 금융, ERP, 통계 등 채팅, 로그, IoT 실시간 저장 쿼리언어 SQL 다양한 API/클라이언트(Query, Find 등) 정규화 필수, 데이터 중복 최소화 필요에 따라 중복 허용 NoSQL 예제(MongoDB) db.users.insertOne({ name: &#39;Alice&#39;, age: 22, tags: [&#39;student&#39;, &#39;admin&#39;] }) db.users.find({ age: { $gt: 20 } }) db.users.updateOne({ name: &#39;Alice&#39; }, { $set: { age: 23 } }) db.users.deleteOne({ name: &#39;Alice&#39; }) 9. ORM 실습 예제(Java JPA) // 엔티티 클래스 예시 import javax.persistence.*; @Entity public class Member { @Id private Long id; private String name; private int age; // Getter/Setter 생략 } // 쿼리/저장 예시 Member m = new Member(); m.setId(1L); m.setName(&#34;Alice&#34;); m.setAge(22); entityManager.persist(m); // JPQL 조회 List&lt;Member&gt; result = entityManager .createQuery(&#34;SELECT m FROM Member m WHERE m.age &gt; 20&#34;, Member.class) .getResultList(); 10. DB 구조 및 흐름 도식 [클라이언트 요청] ↓ [커넥션 &amp; 트랜잭션 관리] ↓ [SQL/NoSQL 파싱·실행] ↓ [테이블/컬렉션 &amp; 인덱스 조회/변경] ↓ [로그/저널 생성] ↓ [데이터 영구 저장 및 응답 반환] 11. 실무/면접 핵심 팁 트랜잭션 분리레벨 요구/충돌 사례(Dirty Read, Lost Update 등) 인덱스/조회 성능, 튜닝 쿼리(EXPLAIN, AUTOTRACE 활용) DB 설계 시 관계, 제약조건, 보안관리(NS, 권한체계) 고려 분산 DB/파티셔닝, 샤딩 구조 실전 적용 경험 ORM(JPA, MyBatis) 활용 이유와 한계(복잡 쿼리 vs 직접 SQL) "><link rel="alternate" type="application/json" href="http://localhost:1313/posts/week15-retrospective/index.json">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/../assets/avatar_hu_6c8b5d6cd0da96b6.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Soyeon&#39;s Dev Log</a></h1>
+            <h2 class="site-description">백엔드 개발자 지망생의 기록</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>다크 모드</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%EA%B3%B5%EB%B6%80/" >
+                공부
+            </a>
+        
+            <a href="/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/" >
+                주간회고
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/week15-retrospective/">[커널아카데미] 백엔드 개발 부트캠프 13기 15주차</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-09-28</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <div style="margin: 0 40px;">
+<h1 id="데이터베이스-기초-nosql-복잡-쿼리-orm-실습-종합-정리">데이터베이스 기초, NoSQL, 복잡 쿼리, ORM 실습 종합 정리
+</h1><hr>
+<h2 id="1-데이터베이스란">1. 데이터베이스란?
+</h2><p>데이터를 체계적으로 저장·관리·검색할 수 있는 정보 저장소.</p>
+<ul>
+<li>RDB(Relational, 관계형)와 NoSQL(비관계형) 등 다양한 유형 존재.</li>
+</ul>
+<hr>
+<h2 id="2-데이터베이스-주요-용어">2. 데이터베이스 주요 용어
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>용어</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>DBMS</td>
+          <td>데이터베이스 관리 시스템 (Oracle, MySQL 등)</td>
+      </tr>
+      <tr>
+          <td>테이블</td>
+          <td>데이터를 행/열로 저장하는 구조 단위</td>
+      </tr>
+      <tr>
+          <td>레코드/row</td>
+          <td>한 행에 해당하는 데이터 집합</td>
+      </tr>
+      <tr>
+          <td>필드/column</td>
+          <td>한 열에 해당하는 데이터 속성</td>
+      </tr>
+      <tr>
+          <td>쿼리(Query)</td>
+          <td>데이터를 조회/추가/수정/삭제하는 명령문</td>
+      </tr>
+      <tr>
+          <td>스키마</td>
+          <td>데이터베이스 구조와 설계 정보</td>
+      </tr>
+      <tr>
+          <td>인덱스</td>
+          <td>조회 성능 향상을 위한 데이터 구조</td>
+      </tr>
+      <tr>
+          <td>뷰(View)</td>
+          <td>결과 집합을 테이블처럼 보여주는 가상 테이블</td>
+      </tr>
+      <tr>
+          <td>트랜잭션</td>
+          <td>일관성 보장 작업 단위(ACID 특징)</td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<h2 id="3-sql-기본문법-및-실습-예제">3. SQL 기본문법 및 실습 예제
+</h2><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 테이블 생성
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> member (
+</span></span><span style="display:flex;"><span>    id INT <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
+</span></span><span style="display:flex;"><span>    name VARCHAR(<span style="color:#ae81ff">50</span>),
+</span></span><span style="display:flex;"><span>    age INT
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 삽입
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> member (id, name, age) <span style="color:#66d9ef">VALUES</span> (<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;Alice&#39;</span>, <span style="color:#ae81ff">22</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 조회
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> id, name, age <span style="color:#66d9ef">FROM</span> member;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 수정
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">UPDATE</span> member <span style="color:#66d9ef">SET</span> age <span style="color:#f92672">=</span> <span style="color:#ae81ff">23</span> <span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 삭제
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">DELETE</span> <span style="color:#66d9ef">FROM</span> member <span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><hr>
+<h2 id="4-트랜잭션과-acid">4. 트랜잭션과 ACID
+</h2><ul>
+<li>원자성(Atomicity): 전체 작업 성공/실패 단일 처리</li>
+<li>일관성(Consistency): 트랜잭션 전후 DB 상태 일관</li>
+<li>격리성(Isolation): 동시에 여러 트랜잭션 충돌없이 동작</li>
+<li>지속성(Durability): 작업 결과는 영구 저장</li>
+</ul>
+<h3 id="트랜잭션-예시">트랜잭션 예시
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">BEGIN</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">UPDATE</span> account <span style="color:#66d9ef">SET</span> balance <span style="color:#f92672">=</span> balance <span style="color:#f92672">-</span> <span style="color:#ae81ff">100</span> <span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">UPDATE</span> account <span style="color:#66d9ef">SET</span> balance <span style="color:#f92672">=</span> balance <span style="color:#f92672">+</span> <span style="color:#ae81ff">100</span> <span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">COMMIT</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 실패시 ROLLBACK 가능
+</span></span></span></code></pre></div><hr>
+<h2 id="5-인덱스와-성능">5. 인덱스와 성능
+</h2><ul>
+<li>인덱스는 데이터 탐색 성능 증대 (빠른 조회)</li>
+<li>과도한 인덱스는 쓰기 성능 저하, 히트율 관리가 중요</li>
+<li>인덱스 종류: B-tree, 해시 등</li>
+<li>튜닝 시 인덱스 활용도(조회/삽입/전체 스캔 빈도) 반드시 분석</li>
+</ul>
+<hr>
+<h2 id="6-정규화와-설계">6. 정규화와 설계
+</h2><ul>
+<li>정규화: 데이터 중복 최소화, 무결성 유지(1NF, 2NF, 3NF 등 단계적 설계)</li>
+<li>과도한 정규화는 쿼리 복잡성 증가(JOIN 과다)</li>
+<li>실전에서는 업무/성능 기준 반정규화 필요</li>
+</ul>
+<hr>
+<h2 id="7-복잡-쿼리-실습-예제">7. 복잡 쿼리 실습 예제
+</h2><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#75715e">-- 여러 테이블 JOIN 및 집계
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> u.name, <span style="color:#66d9ef">SUM</span>(o.price) <span style="color:#66d9ef">AS</span> total_price
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> users u
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">JOIN</span> orders o <span style="color:#66d9ef">ON</span> u.id <span style="color:#f92672">=</span> o.user_id
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> o.status <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;COMPLETE&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> u.name
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">HAVING</span> <span style="color:#66d9ef">SUM</span>(o.price) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> total_price <span style="color:#66d9ef">DESC</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">-- 서브쿼리 및 윈도우함수 예시
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">SELECT</span> name, age, RANK() OVER (<span style="color:#66d9ef">ORDER</span> <span style="color:#66d9ef">BY</span> age <span style="color:#66d9ef">DESC</span>) <span style="color:#66d9ef">as</span> rank
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> member
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">WHERE</span> age <span style="color:#f92672">&gt;</span> (<span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">AVG</span>(age) <span style="color:#66d9ef">FROM</span> member);
+</span></span></code></pre></div><hr>
+<h2 id="8-nosql-vs-rdbms-비교">8. NoSQL vs RDBMS 비교
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th>RDBMS</th>
+          <th>NoSQL (MongoDB 등)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>구조</td>
+          <td>테이블(행/열)</td>
+          <td>컬렉션/문서 등(유연함)</td>
+      </tr>
+      <tr>
+          <td>스키마</td>
+          <td>엄격한 스키마(정형)</td>
+          <td>느슨하거나 무스키마(비정형)</td>
+      </tr>
+      <tr>
+          <td>트랜잭션</td>
+          <td>ACID 완전 지원</td>
+          <td>제한적/BASE 원칙</td>
+      </tr>
+      <tr>
+          <td>확장성</td>
+          <td>수직적(Server 늘리기)</td>
+          <td>수평적(Shard/Replica 분산)</td>
+      </tr>
+      <tr>
+          <td>용도 예시</td>
+          <td>금융, ERP, 통계 등</td>
+          <td>채팅, 로그, IoT 실시간 저장</td>
+      </tr>
+      <tr>
+          <td>쿼리언어</td>
+          <td>SQL</td>
+          <td>다양한 API/클라이언트(Query, Find 등)</td>
+      </tr>
+      <tr>
+          <td>정규화</td>
+          <td>필수, 데이터 중복 최소화</td>
+          <td>필요에 따라 중복 허용</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="nosql-예제mongodb">NoSQL 예제(MongoDB)
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">users</span>.<span style="color:#a6e22e">insertOne</span>({ <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Alice&#39;</span>, <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">22</span>, <span style="color:#a6e22e">tags</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;student&#39;</span>, <span style="color:#e6db74">&#39;admin&#39;</span>] })
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">users</span>.<span style="color:#a6e22e">find</span>({ <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">$gt</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">20</span> } })
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">users</span>.<span style="color:#a6e22e">updateOne</span>({ <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Alice&#39;</span> }, { <span style="color:#a6e22e">$set</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">23</span> } })
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">users</span>.<span style="color:#a6e22e">deleteOne</span>({ <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Alice&#39;</span> })
+</span></span></code></pre></div><hr>
+<h2 id="9-orm-실습-예제java-jpa">9. ORM 실습 예제(Java JPA)
+</h2><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 엔티티 클래스 예시</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> javax.persistence.*;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@Entity</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Member</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Id</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> Long id;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String name;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> age;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Getter/Setter 생략</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 쿼리/저장 예시</span>
+</span></span><span style="display:flex;"><span>Member m <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Member();
+</span></span><span style="display:flex;"><span>m.<span style="color:#a6e22e">setId</span>(1L);
+</span></span><span style="display:flex;"><span>m.<span style="color:#a6e22e">setName</span>(<span style="color:#e6db74">&#34;Alice&#34;</span>);
+</span></span><span style="display:flex;"><span>m.<span style="color:#a6e22e">setAge</span>(22);
+</span></span><span style="display:flex;"><span>entityManager.<span style="color:#a6e22e">persist</span>(m);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// JPQL 조회</span>
+</span></span><span style="display:flex;"><span>List<span style="color:#f92672">&lt;</span>Member<span style="color:#f92672">&gt;</span> result <span style="color:#f92672">=</span> entityManager
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">createQuery</span>(<span style="color:#e6db74">&#34;SELECT m FROM Member m WHERE m.age &gt; 20&#34;</span>, Member.<span style="color:#a6e22e">class</span>)
+</span></span><span style="display:flex;"><span>  .<span style="color:#a6e22e">getResultList</span>();
+</span></span></code></pre></div><hr>
+<h2 id="10-db-구조-및-흐름-도식">10. DB 구조 및 흐름 도식
+</h2><pre tabindex="0"><code>[클라이언트 요청]
+  ↓
+[커넥션 &amp; 트랜잭션 관리]
+  ↓
+[SQL/NoSQL 파싱·실행]
+  ↓
+[테이블/컬렉션 &amp; 인덱스 조회/변경]
+  ↓
+[로그/저널 생성]
+  ↓
+[데이터 영구 저장 및 응답 반환]
+</code></pre><hr>
+<h2 id="11-실무면접-핵심-팁">11. 실무/면접 핵심 팁
+</h2><ul>
+<li>트랜잭션 분리레벨 요구/충돌 사례(Dirty Read, Lost Update 등)</li>
+<li>인덱스/조회 성능, 튜닝 쿼리(EXPLAIN, AUTOTRACE 활용)</li>
+<li>DB 설계 시 관계, 제약조건, 보안관리(NS, 권한체계) 고려</li>
+<li>분산 DB/파티셔닝, 샤딩 구조 실전 적용 경험</li>
+<li>ORM(JPA, MyBatis) 활용 이유와 한계(복잡 쿼리 vs 직접 SQL)</li>
+</ul>
+<hr>
+</div>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4/">패스트캠퍼스</a>
+        
+            <a href="/tags/%EC%BB%A4%EB%84%90%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8/">커널아카데미</a>
+        
+            <a href="/tags/%EB%B0%B1%EC%97%94%EB%93%9C%EA%B0%9C%EB%B0%9C%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/">백엔드개발부트캠프</a>
+        
+            <a href="/tags/%EA%B5%AD%EB%B9%84%EC%A7%80%EC%9B%90%EA%B5%90%EC%9C%A1/">국비지원교육</a>
+        
+            <a href="/tags/%EB%82%B4%EC%9D%BC%EB%B0%B0%EC%9B%80%EC%B9%B4%EB%93%9C/">내일배움카드</a>
+        
+            <a href="/tags/kdt/">KDT</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">관련 글</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/week14-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 14주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week13-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 13주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week12-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 12주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week8-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 8주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/week7-retrospective/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[커널아카데미] 백엔드 개발 부트캠프 13기 7주차</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2025 Soyeon&#39;s Dev Log
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.748d0acf3bd5d18477b5028b83b70ecfa20eb15aefdff97697a330a2202721bf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
