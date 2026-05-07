@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>갭체크 on Soyeon&#39;s Dev Log</title>
+        <link>http://localhost:1313/tags/%EA%B0%AD%EC%B2%B4%ED%81%AC/</link>
+        <description>Recent content in 갭체크 on Soyeon&#39;s Dev Log</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>ko</language>
+        <lastBuildDate>Thu, 07 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/%EA%B0%AD%EC%B2%B4%ED%81%AC/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[코드트리 청약통장 1회차] 코딩테스트 준비, &#39;갭체크&#39;로 나의 약점 완벽 분석하기</title>
+        <link>http://localhost:1313/posts/codetree-subscription-1-gap-check/</link>
+        <pubDate>Thu, 07 May 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/codetree-subscription-1-gap-check/</guid>
+        <description>&lt;p&gt;코딩테스트 준비를 하면서 내가 어느 정도 수준인지 막연하게만 알고 있었는데, 이번에 &lt;strong&gt;코드트리 갭체크&lt;/strong&gt;를 통해 부족한 부분을 명확하게 확인할 수 있었습니다.&lt;/p&gt;
+&lt;p&gt;단순히 문제를 푸는 것을 넘어, &amp;lsquo;내가 무엇을 모르는지&amp;rsquo;를 아는 것이 얼마나 중요한지 깨달은 시간이었습니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;** 코드트리 바로가기**&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.codetree.ai&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;코드트리(Codetree)&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;갭체크를-하며-느낀-점-아는-것과-구현하는-것의-차이&#34;&gt;갭체크를 하며 느낀 점: &amp;ldquo;아는 것과 구현하는 것의 차이&amp;rdquo;
+&lt;/h2&gt;&lt;p&gt;처음에는 *&amp;ldquo;그래도 구현 문제 정도는 어느 정도 풀 수 있지 않을까?&amp;quot;*라고 자신했지만, 실전은 달랐습니다. 생각보다 훨씬 디테일한 부분에서 발목을 잡혔습니다.&lt;/p&gt;
+&lt;h3 id=&#34;1-원형-바구니-시뮬레이션&#34;&gt;1. 원형 바구니 시뮬레이션
+&lt;/h3&gt;&lt;p&gt;가장 기억에 남는 문제입니다. 단순히 반복문을 돌리면 될 것 같았지만, 아래 조건들이 얽히니 로직이 금세 꼬여버렸습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;시작 위치 갱신 및 시계/반시계 방향 처리&lt;/li&gt;
+&lt;li&gt;자기 자신 포함 여부에 따른 예외 처리&lt;/li&gt;
+&lt;li&gt;원형 인덱스 처리 (&lt;code&gt;% n&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;결국 구현은 마쳤지만 디버깅에 너무 많은 시간을 쏟았습니다. **&amp;ldquo;대충 흐름만 맞추면 된다&amp;rdquo;**는 안일한 접근 방식이 실전에서 얼마나 위험한지 뼈저리게 느꼈습니다.&lt;/p&gt;
+&lt;h3 id=&#34;2-비트마스크와-완전탐색&#34;&gt;2. 비트마스크와 완전탐색
+&lt;/h3&gt;&lt;p&gt;&amp;lsquo;음료수 문제&amp;rsquo;는 아예 접근조차 못 했습니다. 문제를 읽고도 어떤 알고리즘을 써야 할지, 전체 경우의 수를 어떻게 표현해야 할지 감이 오지 않았습니다. 나중에 해설을 보니 &lt;strong&gt;비트마스크를 활용한 완전탐색&lt;/strong&gt; 문제였습니다. 탐색 관련된 문제에 대한 경험치 부족을 실감했습니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;분석-결과-나의-약점-리포트&#34;&gt;분석 결과: 나의 약점 리포트
+&lt;/h2&gt;&lt;p&gt;갭체크 결과, 특히 아래 두 가지 개념이 명확한 약점으로 드러났습니다.&lt;/p&gt;
+&lt;h3 id=&#34;시뮬레이션-i-불안정&#34;&gt;시뮬레이션 I (불안정)
+&lt;/h3&gt;&lt;p&gt;&amp;ldquo;단순 구현&amp;quot;이라 생각했던 것들이 사실은 &lt;strong&gt;정교한 조건 처리 능력&lt;/strong&gt;을 요구했습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;부족한 점:&lt;/strong&gt; 방향 이동, 날짜/시간 계산, 진법 변환 등에서의 잦은 실수&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;깨달음:&lt;/strong&gt; 문법의 문제가 아니라, 문제를 끝까지 정확하게 설계하고 구현하는 능력이 부족했습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;완전탐색-i-부족&#34;&gt;완전탐색 I (부족)
+&lt;/h3&gt;&lt;p&gt;이 부분은 생각보다 더 심각했습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;부족한 점:&lt;/strong&gt; 탐색 범위 판단 및 경우의 수 산출 능력&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;깨달음:&lt;/strong&gt; &amp;ldquo;N개를 선택한다&amp;quot;는 조건을 보고 조합이나 비트마스크를 즉각적으로 떠올리지 못했습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;코드트리-갭체크의-좋았던-점&#34;&gt;코드트리 갭체크의 좋았던 점
+&lt;/h2&gt;&lt;p&gt;가장 만족스러웠던 부분은 단순히 점수만 보여주는 것이 아니라, &lt;strong&gt;학습의 이정표&lt;/strong&gt;를 제시해 준다는 점이었습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;구체적인 진단:&lt;/strong&gt; &amp;ldquo;시뮬레이션은 불안정&amp;rdquo;, &amp;ldquo;완전탐색은 부족&amp;quot;처럼 상태를 세분화하여 보여줌&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;학습 방향 제시:&lt;/strong&gt; 다음에 무엇을 공부해야 하는지, 어떤 문제를 더 풀어야 하는지 명확히 가이드함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;막연하게 &amp;ldquo;코테가 어렵다&amp;quot;고 느끼던 상태에서, **&amp;ldquo;어디서부터 다시 시작해야 할지&amp;rdquo;**가 보이니 공부 의욕이 더 생겼습니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;앞으로의-공부-방향&#34;&gt;앞으로의 공부 방향
+&lt;/h2&gt;&lt;p&gt;당분간은 어려운 문제를 많이 풀기보다, &lt;strong&gt;기초를 탄탄히 다지는 것&lt;/strong&gt;에 집중하려 합니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;구현 실수 제로화:&lt;/strong&gt; 시뮬레이션 문제를 반복 풀이하며 조건 처리 능력 향상&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;완전탐색 패턴 익히기:&lt;/strong&gt; 조합, 비트마스크 등 완전탐색의 정석 패턴 체득&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;정확도 우선:&lt;/strong&gt; 빨리 푸는 것보다 &lt;strong&gt;&amp;ldquo;조건을 단 한 번에 정확하게 구현하는 연습&amp;rdquo;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;마치며&#34;&gt;마치며
+&lt;/h2&gt;&lt;p&gt;이번 갭체크는 저의 현재 위치를 객관적으로 마주하게 해준 좋은 계기였습니다. 아직 갈 길이 멀지만, 약점을 알았으니 이제 메워나갈 일만 남았네요.&lt;/p&gt;
+&lt;p&gt;혹시 본인의 코딩테스트 실력이 어느 정도인지, 어디서부터 시작해야 할지 고민인 분들이라면 코드트리 갭체크를 강력히 추천합니다!&lt;/p&gt;
+&lt;p&gt;#코드트리 #코딩테스트 #코테공부 #코테준비 #알고리즘공부 #갭체크&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

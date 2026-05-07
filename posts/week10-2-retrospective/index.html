@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='http://localhost:1313/posts/week10-2-retrospective/'>
 
-<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="[커널아카데미] 백엔드 개발 부트캠프 13기 10주차(2)">
+<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="[커널아카데미] 백엔드 개발 부트캠프 13기 10주차(2)">
 <meta property='og:description' content=" 10주차 학습 정리 - 2 이번 주 키워드 JavaScript 기본 문법 (자료형, 호이스팅, 스코프) 객체와 프로토타입 (Object &amp; Prototype) DOM (Document Object Model) 조작 이벤트(Event) 처리 모델 1. JavaScript 기본 문법 Java와 이름은 비슷하지만 동작 방식이 매우 다른 웹 브라우저를 제어하기 위한 핵심 언어\n자료형(Data Types) &amp; 동적 타이핑 동적 타입 언어: 변수의 타입이 고정되어 있지 않고 할당되는 값에 따라 동적으로 결정됨 기본형: number, string, boolean, null, undefined 파생형: object (배열, 함수 포함) 함수의 typeof 결과는 &lsquo;function&rsquo;으로 특별 취급 타입 확인: typeof 연산자 사용 호이스팅(Hoisting) 변수/함수 선언이 범위의 최상단으로 끌어올려지는 현상 함수 선언: 선언 전에 호출 가능 var 변수: 선언 전에 접근하면 undefined 스코프(Scope) 전역 변수: 함수 외부에서 선언, window 객체의 속성 지역 변수: 함수 내부에서 var로 선언, 함수 내에서만 유효 ES5 기준: 블록({}) 단위 스코프 X 2. 객체와 프로토타입(Object &amp; Prototype) 객체 생성 객체 리터럴: {}로 생성, 속성과 메서드 추가 가능 생성자 함수: function Person(...), new 키워드로 객체 생성 this 키워드 함수를 호출한 객체를 가리킴(사용 위치에 따라 다름) 전역: window 객체 메서드 내: 해당 객체 생성자 함수 내: 생성될 객체 call(), apply()로 this 명시적 변경 가능 프로토타입(Prototype) JS 상속의 핵심 메커니즘 모든 객체는 생성자 함수의 prototype 객체를 가리키는 내부 링크(__proto__)를 가짐 생성자.prototype에 메서드를 추가 → 해당 생성자로 만들어진 모든 객체가 공유함(메모리 효율↑) 3. DOM(Document Object Model) 조작 DOM이란? 브라우저가 HTML 문서를 읽어 트리 구조의 객체로 메모리에 생성한 것 JS는 DOM을 통해 HTML 요소에 접근·조작 가능 요소 선택 document.getElementById('id') : id로 요소 선택(단일) document.querySelectorAll('selector') : CSS 선택자로 요소들 선택(복수) 요소 조작 및 추가 element.innerHTML : 요소 내부 HTML 변경 element.style.color : CSS 스타일 변경 document.createElement('tag') : 새 요소 생성 parentElement.appendChild(childElement) : 자식 요소를 부모에 추가 4. 이벤트(Event) 처리 기본 개념 이벤트: HTML 요소에서 발생하는 클릭, 마우스 오버 등의 사건 이벤트 핸들러: 이벤트 발생 시 실행할 함수 이벤트 모델 기본: element.onclick = function() { ... } 표준: element.addEventListener('click', handler) 여러 이벤트 핸들러 등록 가능 이벤트 전파(Event Propagation) 이벤트 버블링: 자식 요소에서 발생한 이벤트가 부모 요소로 올라가며 전파되는 현상 ">
 <meta property='og:url' content='http://localhost:1313/posts/week10-2-retrospective/'>
 <meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
@@ -56,7 +56,7 @@
                     
                     
                         
-                        <img src="/../assets/avatar_hu_6c8b5d6cd0da96b6.png" width="300"
+                        <img src="/../assets/avatar_hu_c27af72c615ceedd.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -72,6 +72,81 @@
         </div>
     </header><ol class="menu" id="main-menu">
         
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-code" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="7 8 3 12 7 16" /><polyline points="17 8 21 12 17 16" /><line x1="14" y1="4" x2="10" y2="20" /></svg>
+                
+                <span>코딩테스트</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/cs/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><line x1="3" y1="6" x2="3" y2="19" /><line x1="12" y1="6" x2="12" y2="19" /><line x1="21" y1="6" x2="21" y2="19" /></svg>
+                
+                <span>CS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="4" y="5" width="16" height="16" rx="2" /><line x1="16" y1="3" x2="16" y2="7" /><line x1="8" y1="3" x2="8" y2="7" /><line x1="4" y1="11" x2="20" y2="11" /><rect x="8" y1="15" width="2" height="2" /></svg>
+                
+                <span>주간회고</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>검색</span>
+            </a>
+        </li>
         
         <li class="menu-bottom-section">
             <ol class="menu">
@@ -116,7 +191,7 @@
                 공부
             </a>
         
-            <a href="/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/" >
+            <a href="/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/" style="background-color: #f4a261; color: #fff;">
                 주간회고
             </a>
         
@@ -379,7 +454,9 @@
     <section class="copyright">
         &copy; 
         
-        2025 Soyeon&#39;s Dev Log
+            2025 - 
+        
+        2026 Soyeon&#39;s Dev Log
     </section>
     
     <section class="powerby">
