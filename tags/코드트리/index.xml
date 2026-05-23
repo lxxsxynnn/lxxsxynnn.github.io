@@ -6,7 +6,66 @@
         <description>Recent content in 코드트리 on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Thu, 07 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/%EC%BD%94%EB%93%9C%ED%8A%B8%EB%A6%AC/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 23 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/%EC%BD%94%EB%93%9C%ED%8A%B8%EB%A6%AC/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[코드트리] 깃허브 연동과 알림톡으로 완성하는 코드트리 학습 루틴</title>
+        <link>http://localhost:1313/posts/codetree-subscription-3/</link>
+        <pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/codetree-subscription-3/</guid>
+        <description>&lt;p&gt;코딩테스트를 준비하면서 가장 중요한 건 감을 잃지 않게 조금씩 꾸준히 문제를 푸는 것이라고 생각하는데요,&lt;br&gt;
+코드트리에서는 루틴을 만들 수 있게 여러 기능을 활용하고 있습니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;👉 코드트리 바로가기&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.codetree.ai&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;코드트리(Codetree)&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-깃헙-연동-시각화된-성장의-기록&#34;&gt;1. 깃헙 연동: 시각화된 성장의 기록
+&lt;/h2&gt;&lt;p&gt;올해 목표 중 하나를 1일 1코테 풀기로 정하고 시험 준비같이 바쁜 일이 있는 게 아니면 꼭 지키려고 노력하고 있는데&lt;br&gt;
+이럴 때 깃헙 잔디 심기를 같이 활용하면 빈칸이 생기지 않게 하고 싶어서 더 열심히 하게 되더라구요&lt;/p&gt;
+&lt;p&gt;코드트리는 &lt;strong&gt;깃허브 연동 기능&lt;/strong&gt;을 제공하여, 제가 푼 문제들이 자동으로 제 저장소에 커밋되도록 설정할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;단순히 &amp;ldquo;오늘 공부했다&amp;quot;라는 느낌만 받는 것이 아니라, 내 깃허브 프로필에 초록색 잔디가 채워지는 것을 보며 시각적인 성취감을 느낄 수 있었습니다.&lt;/p&gt;
+&lt;p&gt;특히 별도의 확장 프로그램 설치 없이 연동이 가능하고 아직까지 오류 없이 잘 작동하고 있어서 크게 만족하고 있습니다.&lt;/p&gt;
+&lt;p&gt;연동 방법도 매우 간단한데요&lt;/p&gt;
+&lt;img src=&#34;코드트리1.png&#34; style=&#34;width:50%;&#34; /&gt;
+메뉴바에서 프로필 아이콘 클릭 &gt; [GitHub에 내 학습 기록 남기기] 버튼 클릭
+&lt;img src=&#34;코드트리2.png&#34; style=&#34;width:50%;&#34; /&gt;
+그 뒤에 깃헙 계정과 레포지토리를 연결하면 끝!
+&lt;img src=&#34;깃헙1.png&#34; style=&#34;width:50%;&#34; /&gt;
+&lt;img src=&#34;깃헙2.png&#34; style=&#34;width:50%;&#34; /&gt;
+&lt;p&gt;통과한 문제는 이렇게 레포지토리에 올라가고 잔디도 바로 심어집니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-알림톡리마인더-잊지-않게-도와주는-페이스메이커&#34;&gt;2. 알림톡(리마인더): 잊지 않게 도와주는 페이스메이커
+&lt;/h2&gt;&lt;p&gt;바쁜 일상을 보내다 보면 코딩테스트 공부를 깜빡하고 넘어가는 날이 생기기 마련입니다.&lt;br&gt;
+코드트리의 &lt;strong&gt;학습 리마인더 알림톡&lt;/strong&gt; 설정은 이런 상황에서 아주 훌륭한 &amp;lsquo;페이스메이커&amp;rsquo; 역할을 해줍니다.&lt;/p&gt;
+&lt;img src=&#34;코드트리3.png&#34; style=&#34;width:50%;&#34; /&gt;
+알림톡은 설정 &gt; 알림 &gt; 학습 리마인더 설정을 통해서 활성화할 수 있습니다.
+&lt;img src=&#34;알림톡1.png&#34; style=&#34;width:50%;&#34; /&gt;
+한 번 설정을 해두면 기본적으로 오전 중에 학습 독려 메시지가 발송이 되기 때문에&lt;br&gt;
+다른 일을 하다가도 잊지 않고 매일매일 코드트리에 접속을 할 수 있게 되는 것 같습니다.
+&lt;img src=&#34;알림톡2.png&#34; style=&#34;width:50%;&#34; /&gt;
+만약에 저녁까지 바빠서 문제를 풀지 못한다고 해도&lt;br&gt;
+사진과 같이 리마인드 알림톡이 한 번 더 오기 때문에&lt;br&gt;
+저 기능을 활용하고 나서는 문제 푸는 걸 놓친 날이 하루도 없었습니다.
+&lt;img src=&#34;알림톡3.png&#34; style=&#34;width:50%;&#34; /&gt;
+추가적으로 일일 학습 목표치를 설정할 수 있는데&lt;br&gt;
+이것도 초과로 달성하면 격려의 메세지가 날아왔어요.
+&lt;hr&gt;
+&lt;h2 id=&#34;타-서비스와의-비교-왜-코드트리인가&#34;&gt;타 서비스와의 비교: 왜 코드트리인가?
+&lt;/h2&gt;&lt;p&gt;기존에 다른 문제 풀이 플랫폼들도 이용해 보았지만, 코드트리는 &lt;strong&gt;&amp;lsquo;학습 경험의 연속성&amp;rsquo;&lt;/strong&gt; 측면에서 훨씬 뛰어납니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;타 서비스:&lt;/strong&gt; 단순히 문제 리스트만 나열되어 있어 스스로 진도를 짜야 하고, 외부 툴을 이용해 수동으로 기록을 남겨야 하는 번거로움이 있었습니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;코드트리:&lt;/strong&gt; 커리큘럼 기반의 학습 경로와 더불어 깃허브 연동, 알림톡 같은 동기부여 기능이 플랫폼 내에 잘 녹아들어 있어 학습자가 온전히 &amp;lsquo;공부 자체&amp;rsquo;에만 집중할 수 있는 환경을 만들어 줍니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;마치며&#34;&gt;마치며
+&lt;/h2&gt;&lt;p&gt;코딩테스트는 단순한 지식 싸움이 아니라 &lt;strong&gt;루틴 싸움&lt;/strong&gt;이라는 것을 다시 한번 느낍니다.&lt;br&gt;
+깃허브 연동과 알림톡 설정을 통해 나만의 공부 시스템을 구축하니 독학이 훨씬 수월해졌습니다.&lt;/p&gt;
+&lt;p&gt;앞으로도 코드트리와 함께 꾸준히 잔디를 심으며, 더 어려운 실전 문제들도 자신 있게 풀어낼 수 있는 실력을 길러보려 합니다!&lt;/p&gt;
+&lt;p&gt;#코드트리 #코딩테스트 #코테공부 #코테독학 #개발자루틴 #1일1코테&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>[코드트리] 시뮬레이션 알고리즘 약점 극복 공부 후기</title>
         <link>http://localhost:1313/posts/codetree-subscription-2/</link>
         <pubDate>Thu, 07 May 2026 00:00:00 +0000</pubDate>
@@ -15,7 +74,7 @@
         <description>&lt;p&gt;코딩테스트를 준비하면서 항상 막연하게 느꼈던 게 있었습니다.&lt;/p&gt;
 &lt;p&gt;&amp;ldquo;문제는 이해했는데 왜 구현 단계만 가면 자꾸 꼬일까?&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;이번에 코드트리의 갭체크와 시뮬레이션 유형 학습을 진행하면서 그 이유를 꽤 명확하게 알 수 있었습니다.&lt;br&gt;
-단순히 문법이나 알고리즘 개념을 아는 것과, 실제로 조건을 빠짐없이 구현하는 건 완전히 다른 문제였습니다.&lt;br&gt;&lt;/p&gt;
+단순히 문법이나 알고리즘 개념을 아는 것과, 실제로 조건을 빠짐없이 구현하는 건 완전히 다른 문제였습니다.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;👉 코드트리 바로가기&lt;br&gt;
 &lt;a class=&#34;link&#34; href=&#34;https://www.codetree.ai&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -25,9 +84,9 @@
 &lt;h2 id=&#34;시뮬레이션-문제를-풀며-가장-크게-느낀-점&#34;&gt;시뮬레이션 문제를 풀며 가장 크게 느낀 점
 &lt;/h2&gt;&lt;p&gt;이번에 공부한 유형은 &lt;strong&gt;시뮬레이션(Simulation)&lt;/strong&gt; 이었습니다.&lt;/p&gt;
 &lt;p&gt;처음에는 단순 구현 문제라고 생각했는데, 실제로 풀어보니 조건 하나만 빠져도 결과가 완전히 달라지는 유형이라 생각보다 훨씬 어려웠습니다.&lt;/p&gt;
-&lt;p&gt;특히 코드트리에서 좋았던 점은 단순히 문제만 던져주는 게 아니라,&lt;br&gt;
+&lt;p&gt;특히 코드트리에서 좋았던 점은 문제만 던져주는 게 아니라,&lt;br&gt;
 &amp;ldquo;왜 이런 방식으로 접근해야 하는지&amp;quot;를 먼저 설명해준다는 점이었습니다.&lt;/p&gt;
-&lt;p&gt;예를 들어 시간 계산 문제에서는 단순히 현재 시간을 1분씩 증가시키며 시뮬레이션하는 방법부터 설명해준 뒤,&lt;/p&gt;
+&lt;p&gt;예를 들어 시간 계산 문제에서는 현재 시간을 1분씩 증가시키며 시뮬레이션하는 방법부터 설명해준 뒤,&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(hour &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; 4 &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; mins &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; 1)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;;
@@ -41,34 +100,30 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이후에는 더 효율적인 사고 방식으로 확장했습니다.&lt;/p&gt;
-&lt;p&gt;단순 반복 시뮬레이션 대신,
-&amp;ldquo;0시 0분부터 특정 시각까지 몇 분이 흘렀는가?&amp;ldquo;를 계산해서 두 시간의 차이를 구하는 방식으로 접근을 바꾸는 식이었습니다.&lt;/p&gt;
-&lt;p&gt;처음에는 무조건 직접 시뮬레이션만 해야 한다고 생각했는데, 이런 식으로 문제를 더 단순한 수학적 형태로 바꾸는 사고 과정을 보면서 많이 배웠습니다.&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;0시 0분부터 특정 시각까지 몇 분이 흘렀는가?&amp;ldquo;를 계산해서 두 시간의 차이를 구하는 방식으로 접근을 바꾸는 식이었습니다.&lt;br&gt;
+처음에는 어떻게 접근해야 하나 막막했는데, 이런 식으로 문제를 더 단순한 수학적 형태로 바꾸는 사고 과정을 보면서 많이 배웠습니다.&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;점진적으로-확장되는-학습-방식이-좋았다&#34;&gt;점진적으로 확장되는 학습 방식이 좋았다
+&lt;h2 id=&#34;점진적으로-확장되는-학습-방식&#34;&gt;점진적으로 확장되는 학습 방식
 &lt;/h2&gt;&lt;p&gt;특히 인상 깊었던 건 코드트리의 학습 흐름이었습니다.&lt;/p&gt;
 &lt;p&gt;처음에는 정말 기초적인 구현부터 시작합니다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;시간 증가&lt;/li&gt;
 &lt;li&gt;좌표 이동&lt;/li&gt;
-&lt;li&gt;방향 전환&lt;/li&gt;
 &lt;li&gt;배열 순회&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;이런 단순한 문제를 먼저 풀게 하고, 이후에는 점점 조건을 추가하면서 난이도를 올려갑니다.&lt;/p&gt;
+&lt;p&gt;이런 간단한 문제를 먼저 풀게 하고, 이후에는 점점 조건을 추가하면서 난이도를 올려갑니다.&lt;/p&gt;
 &lt;p&gt;예를 들면:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;원형 배열 처리&lt;/li&gt;
 &lt;li&gt;시계/반시계 방향 이동&lt;/li&gt;
 &lt;li&gt;범위를 벗어나는 경우 처리&lt;/li&gt;
-&lt;li&gt;여러 조건이 동시에 적용되는 시뮬레이션&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;이런 식으로 확장되는데, 단순히 문제 수만 늘리는 느낌이 아니라
-&amp;ldquo;이전 문제의 개념을 응용해서 다음 문제를 푸는 구조&amp;quot;라 공부 흐름이 굉장히 자연스러웠습니다.&lt;/p&gt;
-&lt;p&gt;덕분에 단순 암기가 아니라, 구현 패턴 자체를 익히는 데 도움이 많이 됐습니다.&lt;/p&gt;
+&lt;p&gt;이런 식으로 확장되는데, &amp;ldquo;이전 문제의 개념을 응용해서 다음 문제를 푸는 구조&amp;quot;라 공부 흐름이 굉장히 자연스러웠습니다.&lt;br&gt;
+덕분에 구현 패턴 자체를 익히는 데 도움이 많이 됐습니다.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;아직-부족하다고-느낀-부분&#34;&gt;아직 부족하다고 느낀 부분
 &lt;/h2&gt;&lt;p&gt;이번 학습을 하면서 특히 부족하다고 느낀 건 예외 처리 경험이었습니다.&lt;/p&gt;
-&lt;p&gt;특히 아래 상황에서 자주 실수했습니다.&lt;/p&gt;
+&lt;p&gt;특히 자주 실수하는 부분이 있었는데,&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;인덱스 범위 초과&lt;/li&gt;
 &lt;li&gt;오프셋(offset) 계산 실수&lt;/li&gt;
@@ -76,13 +131,15 @@
 &lt;li&gt;&lt;code&gt;+1&lt;/code&gt;, &lt;code&gt;-1&lt;/code&gt; 처리&lt;/li&gt;
 &lt;li&gt;원형 배열에서 &lt;code&gt;% n&lt;/code&gt; 처리&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;문제를 풀다 보면 로직 자체는 맞는데, 이런 경계 조건 때문에 오답이 계속 발생했습니다.&lt;/p&gt;
-&lt;p&gt;예를 들어 원형 배열 문제에서도 단순히 &lt;code&gt;% n&lt;/code&gt;만 사용하면 될 줄 알았는데, 음수 방향 이동까지 고려해야 해서 아래처럼 처리해야 했습니다.&lt;/p&gt;
+&lt;p&gt;문제를 풀면서 로직 자체는 맞지만 경계 조건 때문에 오답이 계속 발생했습니다.&lt;/p&gt;
+&lt;p&gt;원형 배열 문제에서도 단순히 &lt;code&gt;% n&lt;/code&gt;만 사용하면 될 줄 알았는데,&lt;br&gt;
+아래와 같이 음수 방향 이동까지 고려해야 해야 하는 부분을 간과했었습니다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;start &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (start &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; direction &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; n) &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; n;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이런 부분은 단순 개념 암기로 해결되는 게 아니라, 실제로 많이 구현해보면서 몸으로 익혀야 한다는 걸 느꼈습니다.&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;특히 배열을 사용할 때는 음의 수 처리나 배열 범위 초과 오류가 나지 않게 주의를 기울여야겠다는 생각을 했고,&lt;br&gt;
+알고리즘을 많이 구현해보면서 몸으로 익혀야 한다는 걸 느꼈습니다.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;갭체크를-통해-느낀-내-약점&#34;&gt;갭체크를 통해 느낀 내 약점
-&lt;/h2&gt;&lt;p&gt;갭체크 결과를 보면서 가장 공감됐던 부분은
+&lt;/h2&gt;&lt;p&gt;갭체크 결과를 보면서 가장 공감됐던 부분은&lt;br&gt;
 &amp;ldquo;구현은 가능하지만 안정성이 부족하다&amp;quot;는 분석이었습니다.&lt;/p&gt;
 &lt;p&gt;문제를 읽고 아이디어를 떠올리는 건 어느 정도 가능했지만,&lt;/p&gt;
 &lt;ul&gt;
@@ -92,25 +149,24 @@
 &lt;li&gt;디버깅 시간 증가&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;같은 문제로 인해 완성도가 떨어졌습니다.&lt;/p&gt;
-&lt;p&gt;특히 시뮬레이션 유형은 작은 실수 하나가 전체 결과를 틀리게 만들기 때문에, 단순 알고리즘 지식보다 꼼꼼함과 구현 경험이 훨씬 중요하다는 걸 체감했습니다.&lt;/p&gt;
+&lt;p&gt;작은 실수 하나가 전체 결과에 영향을 주기 때문에, 알고리즘 지식도 중요하지만 꼼꼼함과 구현 경험 역시 중요하다는 걸 체감했습니다.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;앞으로의-공부-방향&#34;&gt;앞으로의 공부 방향
 &lt;/h2&gt;&lt;p&gt;당분간은 시뮬레이션 유형을 반복해서 풀면서 구현 안정성을 높이는 데 집중하려고 합니다.&lt;/p&gt;
-&lt;p&gt;특히 다음 부분을 많이 연습할 생각입니다.&lt;/p&gt;
+&lt;p&gt;다음 부분을 중심으로 많이 연습할 생각입니다.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;인덱스/오프셋 처리 익숙해지기&lt;/li&gt;
 &lt;li&gt;원형 배열과 방향 처리 반복 연습&lt;/li&gt;
 &lt;li&gt;조건을 빠짐없이 체크하는 습관 만들기&lt;/li&gt;
 &lt;li&gt;구현 전에 흐름을 먼저 그림으로 정리하기&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;무작정 문제 수를 늘리기보다,
+&lt;p&gt;무작정 문제 수를 늘리기보다,&lt;br&gt;
 &amp;ldquo;왜 여기서 틀렸는지&amp;quot;를 정확히 분석하면서 푸는 게 훨씬 중요하다는 걸 느꼈습니다.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;마무리&#34;&gt;마무리
-&lt;/h2&gt;&lt;p&gt;이번 코드트리 학습을 통해 단순히 문제를 푸는 것보다,
-&amp;ldquo;어떤 방식으로 사고해야 하는지&amp;quot;를 배우는 게 정말 중요하다는 걸 느꼈습니다.&lt;/p&gt;
-&lt;p&gt;특히 시뮬레이션 유형은 작은 예외 처리 하나가 정답 여부를 결정하기 때문에, 결국 구현 경험이 가장 중요한 것 같습니다.&lt;/p&gt;
-&lt;p&gt;아직 인덱스 처리나 경계 조건 같은 부분은 많이 부족하지만, 반복 학습을 통해 조금씩 안정적으로 구현할 수 있도록 계속 연습해보려고 합니다.&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;이번 코드트리 학습을 통해 어떤 방식으로 사고해야 하는지를 배우는 게 정말 중요하다는 걸 느꼈습니다.&lt;br&gt;
+특히 시뮬레이션 유형은 작은 예외 처리 하나가 정답 여부를 결정하기 때문에, 구현 경험이 가장 중요한 것 같습니다.&lt;br&gt;
+아직 인덱스 처리나 경계 조건 같은 부분이 많이 부족하지만, 반복 학습을 통해 조금씩 안정적으로 구현할 수 있도록 계속 연습해보려고 합니다.&lt;/p&gt;
 </description>
         </item>
         <item>
