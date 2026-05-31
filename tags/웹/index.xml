@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>웹 on Soyeon&#39;s Dev Log</title>
-        <link>http://localhost:1313/tags/%EC%9B%B9/</link>
+        <link>https://lxxsxynnn.github.io/tags/%EC%9B%B9/</link>
         <description>Recent content in 웹 on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Sun, 17 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/%EC%9B%B9/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 17 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://lxxsxynnn.github.io/tags/%EC%9B%B9/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>[커널아카데미] 백엔드 개발 부트캠프 13기 9주차</title>
-        <link>http://localhost:1313/posts/week9-retrospective/</link>
+        <link>https://lxxsxynnn.github.io/posts/week9-retrospective/</link>
         <pubDate>Sun, 17 Aug 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/posts/week9-retrospective/</guid>
+        <guid>https://lxxsxynnn.github.io/posts/week9-retrospective/</guid>
         <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
 &lt;h1 id=&#34;9주차-학습-정리&#34;&gt;9주차 학습 정리
 &lt;/h1&gt;&lt;h2 id=&#34;이번-주-키워드&#34;&gt;이번 주 키워드

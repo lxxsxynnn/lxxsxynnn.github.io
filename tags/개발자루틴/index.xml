@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>개발자루틴 on Soyeon&#39;s Dev Log</title>
-        <link>http://localhost:1313/tags/%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A3%A8%ED%8B%B4/</link>
+        <link>https://lxxsxynnn.github.io/tags/%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A3%A8%ED%8B%B4/</link>
         <description>Recent content in 개발자루틴 on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Sat, 23 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A3%A8%ED%8B%B4/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 23 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://lxxsxynnn.github.io/tags/%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A3%A8%ED%8B%B4/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>[코드트리] 깃허브 연동과 알림톡으로 완성하는 코드트리 학습 루틴</title>
-        <link>http://localhost:1313/posts/codetree-subscription-3/</link>
+        <link>https://lxxsxynnn.github.io/posts/codetree-subscription-3/</link>
         <pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/posts/codetree-subscription-3/</guid>
+        <guid>https://lxxsxynnn.github.io/posts/codetree-subscription-3/</guid>
         <description>&lt;p&gt;코딩테스트를 준비하면서 가장 중요한 건 감을 잃지 않게 조금씩 꾸준히 문제를 푸는 것이라고 생각하는데요,&lt;br&gt;
 코드트리에서는 루틴을 만들 수 있게 여러 기능을 활용하고 있습니다.&lt;/p&gt;
 &lt;blockquote&gt;
@@ -27,35 +27,36 @@
 &lt;p&gt;단순히 &amp;ldquo;오늘 공부했다&amp;quot;라는 느낌만 받는 것이 아니라, 내 깃허브 프로필에 초록색 잔디가 채워지는 것을 보며 시각적인 성취감을 느낄 수 있었습니다.&lt;/p&gt;
 &lt;p&gt;특히 별도의 확장 프로그램 설치 없이 연동이 가능하고 아직까지 오류 없이 잘 작동하고 있어서 크게 만족하고 있습니다.&lt;/p&gt;
 &lt;p&gt;연동 방법도 매우 간단한데요&lt;/p&gt;
-&lt;img src=&#34;코드트리1.png&#34; style=&#34;width:50%;&#34; /&gt;
-메뉴바에서 프로필 아이콘 클릭 &gt; [GitHub에 내 학습 기록 남기기] 버튼 클릭
-&lt;img src=&#34;코드트리2.png&#34; style=&#34;width:50%;&#34; /&gt;
-그 뒤에 깃헙 계정과 레포지토리를 연결하면 끝!
-&lt;img src=&#34;깃헙1.png&#34; style=&#34;width:50%;&#34; /&gt;
-&lt;img src=&#34;깃헙2.png&#34; style=&#34;width:50%;&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;https://lxxsxynnn.github.io/images/codetree-1.png&#34; style=&#34;width:50%;&#34; /&gt;&lt;br&gt;&lt;br&gt;
+메뉴바에서 프로필 아이콘 클릭 &amp;gt; [GitHub에 내 학습 기록 남기기] 버튼 클릭&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lxxsxynnn.github.io/images/codetree-2.png&#34; style=&#34;width:50%;&#34; /&gt;&lt;br&gt;&lt;br&gt;
+그 뒤에 깃헙 계정과 레포지토리를 연결하면 끝!&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lxxsxynnn.github.io/images/github-1.png&#34; style=&#34;width:50%;&#34; /&gt;&lt;br&gt;
+&lt;img src=&#34;https://lxxsxynnn.github.io/images/github-2.png&#34; style=&#34;width:50%;&#34; /&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;통과한 문제는 이렇게 레포지토리에 올라가고 잔디도 바로 심어집니다.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;2-알림톡리마인더-잊지-않게-도와주는-페이스메이커&#34;&gt;2. 알림톡(리마인더): 잊지 않게 도와주는 페이스메이커
 &lt;/h2&gt;&lt;p&gt;바쁜 일상을 보내다 보면 코딩테스트 공부를 깜빡하고 넘어가는 날이 생기기 마련입니다.&lt;br&gt;
 코드트리의 &lt;strong&gt;학습 리마인더 알림톡&lt;/strong&gt; 설정은 이런 상황에서 아주 훌륭한 &amp;lsquo;페이스메이커&amp;rsquo; 역할을 해줍니다.&lt;/p&gt;
-&lt;img src=&#34;코드트리3.png&#34; style=&#34;width:50%;&#34; /&gt;
-알림톡은 설정 &gt; 알림 &gt; 학습 리마인더 설정을 통해서 활성화할 수 있습니다.
-&lt;img src=&#34;알림톡1.png&#34; style=&#34;width:50%;&#34; /&gt;
+&lt;p&gt;&lt;img src=&#34;https://lxxsxynnn.github.io/images/codetree-3.png&#34; style=&#34;width:50%;&#34; /&gt;&lt;br&gt;&lt;br&gt;
+알림톡은 설정 &amp;gt; 알림 &amp;gt; 학습 리마인더 설정을 통해서 활성화할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lxxsxynnn.github.io/images/alrimtalk-1.png&#34; style=&#34;width:50%;&#34; /&gt;&lt;br&gt;&lt;br&gt;
 한 번 설정을 해두면 기본적으로 오전 중에 학습 독려 메시지가 발송이 되기 때문에&lt;br&gt;
-다른 일을 하다가도 잊지 않고 매일매일 코드트리에 접속을 할 수 있게 되는 것 같습니다.
-&lt;img src=&#34;알림톡2.png&#34; style=&#34;width:50%;&#34; /&gt;
+다른 일을 하다가도 잊지 않고 매일매일 코드트리에 접속을 할 수 있게 되는 것 같습니다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lxxsxynnn.github.io/images/alrimtalk-2.png&#34; style=&#34;width:50%;&#34; /&gt;&lt;br&gt;&lt;br&gt;
 만약에 저녁까지 바빠서 문제를 풀지 못한다고 해도&lt;br&gt;
 사진과 같이 리마인드 알림톡이 한 번 더 오기 때문에&lt;br&gt;
-저 기능을 활용하고 나서는 문제 푸는 걸 놓친 날이 하루도 없었습니다.
-&lt;img src=&#34;알림톡3.png&#34; style=&#34;width:50%;&#34; /&gt;
+저 기능을 활용하고 나서는 문제 푸는 걸 놓친 날이 하루도 없었습니다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://lxxsxynnn.github.io/images/alrimtalk-3.png&#34; style=&#34;width:50%;&#34; /&gt;&lt;br&gt;&lt;br&gt;
 추가적으로 일일 학습 목표치를 설정할 수 있는데&lt;br&gt;
-이것도 초과로 달성하면 격려의 메세지가 날아왔어요.
+이것도 초과로 달성하면 격려의 메세지가 날아왔어요.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;타-서비스와의-비교-왜-코드트리인가&#34;&gt;타 서비스와의 비교: 왜 코드트리인가?
 &lt;/h2&gt;&lt;p&gt;기존에 다른 문제 풀이 플랫폼들도 이용해 보았지만, 코드트리는 &lt;strong&gt;&amp;lsquo;학습 경험의 연속성&amp;rsquo;&lt;/strong&gt; 측면에서 훨씬 뛰어납니다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;타 서비스:&lt;/strong&gt; 단순히 문제 리스트만 나열되어 있어 스스로 진도를 짜야 하고, 외부 툴을 이용해 수동으로 기록을 남겨야 하는 번거로움이 있었습니다.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;코드트리:&lt;/strong&gt; 커리큘럼 기반의 학습 경로와 더불어 깃허브 연동, 알림톡 같은 동기부여 기능이 플랫폼 내에 잘 녹아들어 있어 학습자가 온전히 &amp;lsquo;공부 자체&amp;rsquo;에만 집중할 수 있는 환경을 만들어 줍니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;코드트리:&lt;/strong&gt; 커리큘럼 기반의 학습 경로와 더불어 깃허브 연동, 알림톡 같은 동기부여 기능이 플랫폼 내에 잘 녹아들어 있어 &lt;br&gt;
+학습자가 온전히 &amp;lsquo;공부 자체&amp;rsquo;에만 집중할 수 있는 환경을 만들어 줍니다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;마치며&#34;&gt;마치며

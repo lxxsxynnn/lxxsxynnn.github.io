@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+    <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 11주차 학습 정리 이번 주 키워드 Spring Boot 자동 설정 JPA와 ORM Spring Data JPA (Repository, 쿼리 메서드) 필터(Filter)와 인터셉터(Interceptor) 1. 의존성 관리와 자동 설정 스타터(Starters): 기능별 의존성 묶음 pom.xml에 추가 시 관련 라이브러리들이 자동으로 추가됨 @SpringBootApplication : @Configuration + @ComponentScan + @EnableAutoConfiguration의 조합 자동 설정(Auto-configuration) @EnableAutoConfiguration이 핵심 기능 클래스패스 등 특정 조건에 따라 필요한 빈(Bean)을 자동으로 설정 @Conditional : 조건부 빈 등록 기능\n@ConditionalOnClass(클래스 존재 시), @ConditionalOnBean(빈 존재 시) 등 다양한 조건을 제공 2. ORM과 JPA ORM(Object-Relational Mapping): 객체와 관계형 DB 테이블을 매핑하는 기술\n객체 모델과 관계형 모델의 개념 차이를 해소\n">
 <title>[커널아카데미] 백엔드 개발 부트캠프 13기 11주차</title>
 
-<link rel='canonical' href='http://localhost:1313/posts/week11-retrospective/'>
+<link rel='canonical' href='https://lxxsxynnn.github.io/posts/week11-retrospective/'>
 
 <link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="[커널아카데미] 백엔드 개발 부트캠프 13기 11주차">
 <meta property='og:description' content=" 11주차 학습 정리 이번 주 키워드 Spring Boot 자동 설정 JPA와 ORM Spring Data JPA (Repository, 쿼리 메서드) 필터(Filter)와 인터셉터(Interceptor) 1. 의존성 관리와 자동 설정 스타터(Starters): 기능별 의존성 묶음 pom.xml에 추가 시 관련 라이브러리들이 자동으로 추가됨 @SpringBootApplication : @Configuration + @ComponentScan + @EnableAutoConfiguration의 조합 자동 설정(Auto-configuration) @EnableAutoConfiguration이 핵심 기능 클래스패스 등 특정 조건에 따라 필요한 빈(Bean)을 자동으로 설정 @Conditional : 조건부 빈 등록 기능\n@ConditionalOnClass(클래스 존재 시), @ConditionalOnBean(빈 존재 시) 등 다양한 조건을 제공 2. ORM과 JPA ORM(Object-Relational Mapping): 객체와 관계형 DB 테이블을 매핑하는 기술\n객체 모델과 관계형 모델의 개념 차이를 해소\n">
-<meta property='og:url' content='http://localhost:1313/posts/week11-retrospective/'>
+<meta property='og:url' content='https://lxxsxynnn.github.io/posts/week11-retrospective/'>
 <meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='패스트캠퍼스' /><meta property='article:tag' content='커널아카데미' /><meta property='article:tag' content='백엔드개발부트캠프' /><meta property='article:published_time' content='2025-08-31T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-08-31T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="[커널아카데미] 백엔드 개발 부트캠프 13기 11주차">
-<meta name="twitter:description" content=" 11주차 학습 정리 이번 주 키워드 Spring Boot 자동 설정 JPA와 ORM Spring Data JPA (Repository, 쿼리 메서드) 필터(Filter)와 인터셉터(Interceptor) 1. 의존성 관리와 자동 설정 스타터(Starters): 기능별 의존성 묶음 pom.xml에 추가 시 관련 라이브러리들이 자동으로 추가됨 @SpringBootApplication : @Configuration + @ComponentScan + @EnableAutoConfiguration의 조합 자동 설정(Auto-configuration) @EnableAutoConfiguration이 핵심 기능 클래스패스 등 특정 조건에 따라 필요한 빈(Bean)을 자동으로 설정 @Conditional : 조건부 빈 등록 기능\n@ConditionalOnClass(클래스 존재 시), @ConditionalOnBean(빈 존재 시) 등 다양한 조건을 제공 2. ORM과 JPA ORM(Object-Relational Mapping): 객체와 관계형 DB 테이블을 매핑하는 기술\n객체 모델과 관계형 모델의 개념 차이를 해소\n"><link rel="alternate" type="application/json" href="http://localhost:1313/posts/week11-retrospective/index.json">
+<meta name="twitter:description" content=" 11주차 학습 정리 이번 주 키워드 Spring Boot 자동 설정 JPA와 ORM Spring Data JPA (Repository, 쿼리 메서드) 필터(Filter)와 인터셉터(Interceptor) 1. 의존성 관리와 자동 설정 스타터(Starters): 기능별 의존성 묶음 pom.xml에 추가 시 관련 라이브러리들이 자동으로 추가됨 @SpringBootApplication : @Configuration + @ComponentScan + @EnableAutoConfiguration의 조합 자동 설정(Auto-configuration) @EnableAutoConfiguration이 핵심 기능 클래스패스 등 특정 조건에 따라 필요한 빈(Bean)을 자동으로 설정 @Conditional : 조건부 빈 등록 기능\n@ConditionalOnClass(클래스 존재 시), @ConditionalOnBean(빈 존재 시) 등 다양한 조건을 제공 2. ORM과 JPA ORM(Object-Relational Mapping): 객체와 관계형 DB 테이블을 매핑하는 기술\n객체 모델과 관계형 모델의 개념 차이를 해소\n"><link rel="alternate" type="application/json" href="https://lxxsxynnn.github.io/posts/week11-retrospective/index.json">
     </head>
     <body class="
     article-page
@@ -535,7 +535,7 @@ JpaRepository와 같은 저장소 기능 제공</p>
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.748d0acf3bd5d18477b5028b83b70ecfa20eb15aefdff97697a330a2202721bf.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

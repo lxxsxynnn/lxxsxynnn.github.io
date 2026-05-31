@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>시뮬레이션 on Soyeon&#39;s Dev Log</title>
-        <link>http://localhost:1313/tags/%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98/</link>
+        <link>https://lxxsxynnn.github.io/tags/%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98/</link>
         <description>Recent content in 시뮬레이션 on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Thu, 07 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 07 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://lxxsxynnn.github.io/tags/%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>[코드트리] 시뮬레이션 알고리즘 약점 극복 공부 후기</title>
-        <link>http://localhost:1313/posts/codetree-subscription-2/</link>
+        <link>https://lxxsxynnn.github.io/posts/codetree-subscription-2/</link>
         <pubDate>Thu, 07 May 2026 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/posts/codetree-subscription-2/</guid>
+        <guid>https://lxxsxynnn.github.io/posts/codetree-subscription-2/</guid>
         <description>&lt;p&gt;코딩테스트를 준비하면서 항상 막연하게 느꼈던 게 있었습니다.&lt;/p&gt;
 &lt;p&gt;&amp;ldquo;문제는 이해했는데 왜 구현 단계만 가면 자꾸 꼬일까?&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;이번에 코드트리의 갭체크와 시뮬레이션 유형 학습을 진행하면서 그 이유를 꽤 명확하게 알 수 있었습니다.&lt;br&gt;

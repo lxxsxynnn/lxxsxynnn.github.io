@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>CS on Soyeon&#39;s Dev Log</title>
-        <link>http://localhost:1313/categories/cs/</link>
+        <link>https://lxxsxynnn.github.io/categories/cs/</link>
         <description>Recent content in CS on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>ko</language><atom:link href="http://localhost:1313/categories/cs/index.xml" rel="self" type="application/rss+xml" />
+        <language>ko</language><atom:link href="https://lxxsxynnn.github.io/categories/cs/index.xml" rel="self" type="application/rss+xml" />
     </channel>
 </rss>

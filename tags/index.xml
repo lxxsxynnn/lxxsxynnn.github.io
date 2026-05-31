@@ -2,208 +2,232 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Tags on Soyeon&#39;s Dev Log</title>
-        <link>http://localhost:1313/tags/</link>
+        <link>https://lxxsxynnn.github.io/tags/</link>
         <description>Recent content in Tags on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Sat, 23 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>1일1코테</title>
-        <link>http://localhost:1313/tags/1%EC%9D%BC1%EC%BD%94%ED%85%8C/</link>
-        <pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate>
+        <lastBuildDate>Sun, 31 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://lxxsxynnn.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>공부습관</title>
+        <link>https://lxxsxynnn.github.io/tags/%EA%B3%B5%EB%B6%80%EC%8A%B5%EA%B4%80/</link>
+        <pubDate>Sun, 31 May 2026 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/1%EC%9D%BC1%EC%BD%94%ED%85%8C/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/%EA%B3%B5%EB%B6%80%EC%8A%B5%EA%B4%80/</guid>
         <description></description>
         </item>
         <item>
-        <title>개발자루틴</title>
-        <link>http://localhost:1313/tags/%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A3%A8%ED%8B%B4/</link>
-        <pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate>
+        <title>복습</title>
+        <link>https://lxxsxynnn.github.io/tags/%EB%B3%B5%EC%8A%B5/</link>
+        <pubDate>Sun, 31 May 2026 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A3%A8%ED%8B%B4/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/%EB%B3%B5%EC%8A%B5/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>오답노트</title>
+        <link>https://lxxsxynnn.github.io/tags/%EC%98%A4%EB%8B%B5%EB%85%B8%ED%8A%B8/</link>
+        <pubDate>Sun, 31 May 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://lxxsxynnn.github.io/tags/%EC%98%A4%EB%8B%B5%EB%85%B8%ED%8A%B8/</guid>
         <description></description>
         </item>
         <item>
         <title>코드트리</title>
-        <link>http://localhost:1313/tags/%EC%BD%94%EB%93%9C%ED%8A%B8%EB%A6%AC/</link>
-        <pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate>
+        <link>https://lxxsxynnn.github.io/tags/%EC%BD%94%EB%93%9C%ED%8A%B8%EB%A6%AC/</link>
+        <pubDate>Sun, 31 May 2026 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/%EC%BD%94%EB%93%9C%ED%8A%B8%EB%A6%AC/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/%EC%BD%94%EB%93%9C%ED%8A%B8%EB%A6%AC/</guid>
         <description></description>
         </item>
         <item>
         <title>코딩테스트</title>
-        <link>http://localhost:1313/tags/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/</link>
-        <pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate>
+        <link>https://lxxsxynnn.github.io/tags/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/</link>
+        <pubDate>Sun, 31 May 2026 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/</guid>
         <description></description>
         </item>
         <item>
         <title>코테공부</title>
-        <link>http://localhost:1313/tags/%EC%BD%94%ED%85%8C%EA%B3%B5%EB%B6%80/</link>
+        <link>https://lxxsxynnn.github.io/tags/%EC%BD%94%ED%85%8C%EA%B3%B5%EB%B6%80/</link>
+        <pubDate>Sun, 31 May 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://lxxsxynnn.github.io/tags/%EC%BD%94%ED%85%8C%EA%B3%B5%EB%B6%80/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>1일1코테</title>
+        <link>https://lxxsxynnn.github.io/tags/1%EC%9D%BC1%EC%BD%94%ED%85%8C/</link>
         <pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/%EC%BD%94%ED%85%8C%EA%B3%B5%EB%B6%80/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/1%EC%9D%BC1%EC%BD%94%ED%85%8C/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>개발자루틴</title>
+        <link>https://lxxsxynnn.github.io/tags/%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A3%A8%ED%8B%B4/</link>
+        <pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://lxxsxynnn.github.io/tags/%EA%B0%9C%EB%B0%9C%EC%9E%90%EB%A3%A8%ED%8B%B4/</guid>
         <description></description>
         </item>
         <item>
         <title>코테독학</title>
-        <link>http://localhost:1313/tags/%EC%BD%94%ED%85%8C%EB%8F%85%ED%95%99/</link>
+        <link>https://lxxsxynnn.github.io/tags/%EC%BD%94%ED%85%8C%EB%8F%85%ED%95%99/</link>
         <pubDate>Sat, 23 May 2026 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/%EC%BD%94%ED%85%8C%EB%8F%85%ED%95%99/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/%EC%BD%94%ED%85%8C%EB%8F%85%ED%95%99/</guid>
         <description></description>
         </item>
         <item>
         <title>갭체크</title>
-        <link>http://localhost:1313/tags/%EA%B0%AD%EC%B2%B4%ED%81%AC/</link>
+        <link>https://lxxsxynnn.github.io/tags/%EA%B0%AD%EC%B2%B4%ED%81%AC/</link>
         <pubDate>Thu, 07 May 2026 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/%EA%B0%AD%EC%B2%B4%ED%81%AC/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/%EA%B0%AD%EC%B2%B4%ED%81%AC/</guid>
         <description></description>
         </item>
         <item>
         <title>시뮬레이션</title>
-        <link>http://localhost:1313/tags/%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98/</link>
+        <link>https://lxxsxynnn.github.io/tags/%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98/</link>
         <pubDate>Thu, 07 May 2026 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98/</guid>
         <description></description>
         </item>
         <item>
         <title>알고리즘 기초</title>
-        <link>http://localhost:1313/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EA%B8%B0%EC%B4%88/</link>
+        <link>https://lxxsxynnn.github.io/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EA%B8%B0%EC%B4%88/</link>
         <pubDate>Thu, 07 May 2026 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EA%B8%B0%EC%B4%88/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EA%B8%B0%EC%B4%88/</guid>
         <description></description>
         </item>
         <item>
         <title>알고리즘공부</title>
-        <link>http://localhost:1313/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EA%B3%B5%EB%B6%80/</link>
+        <link>https://lxxsxynnn.github.io/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EA%B3%B5%EB%B6%80/</link>
         <pubDate>Thu, 07 May 2026 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EA%B3%B5%EB%B6%80/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EA%B3%B5%EB%B6%80/</guid>
         <description></description>
         </item>
         <item>
         <title>코테준비</title>
-        <link>http://localhost:1313/tags/%EC%BD%94%ED%85%8C%EC%A4%80%EB%B9%84/</link>
+        <link>https://lxxsxynnn.github.io/tags/%EC%BD%94%ED%85%8C%EC%A4%80%EB%B9%84/</link>
         <pubDate>Thu, 07 May 2026 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/%EC%BD%94%ED%85%8C%EC%A4%80%EB%B9%84/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/%EC%BD%94%ED%85%8C%EC%A4%80%EB%B9%84/</guid>
         <description></description>
         </item>
         <item>
         <title>KDT</title>
-        <link>http://localhost:1313/tags/kdt/</link>
+        <link>https://lxxsxynnn.github.io/tags/kdt/</link>
         <pubDate>Sun, 28 Sep 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/kdt/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/kdt/</guid>
         <description></description>
         </item>
         <item>
         <title>국비지원교육</title>
-        <link>http://localhost:1313/tags/%EA%B5%AD%EB%B9%84%EC%A7%80%EC%9B%90%EA%B5%90%EC%9C%A1/</link>
+        <link>https://lxxsxynnn.github.io/tags/%EA%B5%AD%EB%B9%84%EC%A7%80%EC%9B%90%EA%B5%90%EC%9C%A1/</link>
         <pubDate>Sun, 28 Sep 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/%EA%B5%AD%EB%B9%84%EC%A7%80%EC%9B%90%EA%B5%90%EC%9C%A1/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/%EA%B5%AD%EB%B9%84%EC%A7%80%EC%9B%90%EA%B5%90%EC%9C%A1/</guid>
         <description></description>
         </item>
         <item>
         <title>내일배움카드</title>
-        <link>http://localhost:1313/tags/%EB%82%B4%EC%9D%BC%EB%B0%B0%EC%9B%80%EC%B9%B4%EB%93%9C/</link>
+        <link>https://lxxsxynnn.github.io/tags/%EB%82%B4%EC%9D%BC%EB%B0%B0%EC%9B%80%EC%B9%B4%EB%93%9C/</link>
         <pubDate>Sun, 28 Sep 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/%EB%82%B4%EC%9D%BC%EB%B0%B0%EC%9B%80%EC%B9%B4%EB%93%9C/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/%EB%82%B4%EC%9D%BC%EB%B0%B0%EC%9B%80%EC%B9%B4%EB%93%9C/</guid>
         <description></description>
         </item>
         <item>
         <title>백엔드개발부트캠프</title>
-        <link>http://localhost:1313/tags/%EB%B0%B1%EC%97%94%EB%93%9C%EA%B0%9C%EB%B0%9C%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/</link>
+        <link>https://lxxsxynnn.github.io/tags/%EB%B0%B1%EC%97%94%EB%93%9C%EA%B0%9C%EB%B0%9C%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/</link>
         <pubDate>Sun, 28 Sep 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/%EB%B0%B1%EC%97%94%EB%93%9C%EA%B0%9C%EB%B0%9C%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/%EB%B0%B1%EC%97%94%EB%93%9C%EA%B0%9C%EB%B0%9C%EB%B6%80%ED%8A%B8%EC%BA%A0%ED%94%84/</guid>
         <description></description>
         </item>
         <item>
         <title>커널아카데미</title>
-        <link>http://localhost:1313/tags/%EC%BB%A4%EB%84%90%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8/</link>
+        <link>https://lxxsxynnn.github.io/tags/%EC%BB%A4%EB%84%90%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8/</link>
         <pubDate>Sun, 28 Sep 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/%EC%BB%A4%EB%84%90%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/%EC%BB%A4%EB%84%90%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8/</guid>
         <description></description>
         </item>
         <item>
         <title>패스트캠퍼스</title>
-        <link>http://localhost:1313/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4/</link>
+        <link>https://lxxsxynnn.github.io/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4/</link>
         <pubDate>Sun, 28 Sep 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/%ED%8C%A8%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%8D%BC%EC%8A%A4/</guid>
         <description></description>
         </item>
         <item>
         <title>DOM</title>
-        <link>http://localhost:1313/tags/dom/</link>
+        <link>https://lxxsxynnn.github.io/tags/dom/</link>
         <pubDate>Sun, 24 Aug 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/dom/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/dom/</guid>
         <description></description>
         </item>
         <item>
         <title>JavaScript</title>
-        <link>http://localhost:1313/tags/javascript/</link>
+        <link>https://lxxsxynnn.github.io/tags/javascript/</link>
         <pubDate>Sun, 24 Aug 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/javascript/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/javascript/</guid>
         <description></description>
         </item>
         <item>
         <title>JS</title>
-        <link>http://localhost:1313/tags/js/</link>
+        <link>https://lxxsxynnn.github.io/tags/js/</link>
         <pubDate>Sun, 24 Aug 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/js/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/js/</guid>
         <description></description>
         </item>
         <item>
         <title>이벤트</title>
-        <link>http://localhost:1313/tags/%EC%9D%B4%EB%B2%A4%ED%8A%B8/</link>
+        <link>https://lxxsxynnn.github.io/tags/%EC%9D%B4%EB%B2%A4%ED%8A%B8/</link>
         <pubDate>Sun, 24 Aug 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/%EC%9D%B4%EB%B2%A4%ED%8A%B8/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/%EC%9D%B4%EB%B2%A4%ED%8A%B8/</guid>
         <description></description>
         </item>
         <item>
         <title>프로토타입</title>
-        <link>http://localhost:1313/tags/%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85/</link>
+        <link>https://lxxsxynnn.github.io/tags/%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85/</link>
         <pubDate>Sun, 24 Aug 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85/</guid>
         <description></description>
         </item>
         <item>
         <title>MVC</title>
-        <link>http://localhost:1313/tags/mvc/</link>
+        <link>https://lxxsxynnn.github.io/tags/mvc/</link>
         <pubDate>Sun, 17 Aug 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/mvc/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/mvc/</guid>
         <description></description>
         </item>
         <item>
         <title>Spring</title>
-        <link>http://localhost:1313/tags/spring/</link>
+        <link>https://lxxsxynnn.github.io/tags/spring/</link>
         <pubDate>Sun, 17 Aug 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/spring/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/spring/</guid>
         <description></description>
         </item>
         <item>
         <title>웹</title>
-        <link>http://localhost:1313/tags/%EC%9B%B9/</link>
+        <link>https://lxxsxynnn.github.io/tags/%EC%9B%B9/</link>
         <pubDate>Sun, 17 Aug 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/%EC%9B%B9/</guid>
+        <guid>https://lxxsxynnn.github.io/tags/%EC%9B%B9/</guid>
         <description></description>
         </item>
         
