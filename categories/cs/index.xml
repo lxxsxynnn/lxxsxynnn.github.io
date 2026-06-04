@@ -2,9 +2,92 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>CS on Soyeon&#39;s Dev Log</title>
-        <link>https://lxxsxynnn.github.io/categories/cs/</link>
+        <link>http://localhost:1313/categories/cs/</link>
         <description>Recent content in CS on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>ko</language><atom:link href="https://lxxsxynnn.github.io/categories/cs/index.xml" rel="self" type="application/rss+xml" />
+        <language>ko</language>
+        <lastBuildDate>Mon, 01 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/cs/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[CS 스터디] 운영체제</title>
+        <link>http://localhost:1313/posts/cs-study-1/</link>
+        <pubDate>Mon, 01 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/cs-study-1/</guid>
+        <description>&lt;h3 id=&#34;1-운영체제란&#34;&gt;1. 운영체제란
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;운영체제(Operating System, OS)&lt;/strong&gt; : 하드웨어 바로 위에 설치되어, 하드웨어 계층과 다른 소프트웨어 계층을 연결하는 핵심 소프트웨어 계층&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;역할&lt;/strong&gt;: 컴퓨터 시스템의 자원(CPU, 메모리, 입출력 장치 등)을 효율적으로 관리하고, 사용자가 컴퓨터를 편리하게 사용할 수 있는 환경을 제공&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;예시&lt;/strong&gt;: Windows, macOS, Linux, Unix 등&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;사용자
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;응용 프로그램
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;유틸리티
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;#34;운영체제&amp;#34; ← 하드웨어와 소프트웨어의 가교 역할
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;하드웨어
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-운영체제의-목적&#34;&gt;2. 운영체제의 목적
+&lt;/h3&gt;&lt;p&gt;운영체제는 한정된 자원 안에서 정확하고 빠르게 문제를 해결하는 것을 목표로 함&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;주요 평가 지표&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;처리 능력 향상 (Throughput)&lt;/strong&gt;: 일정 시간 내에 시스템이 처리하는 일의 양을 최대화&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;반환 시간 단축 (Turnaround Time)&lt;/strong&gt;: 사용자가 작업을 요청한 시점부터 완료될 때까지 걸리는 시간을 최소화&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;가용성 향상 (Availability)&lt;/strong&gt;: 사용자가 필요할 때 즉시 자원을 사용할 수 있도록 관리&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;신뢰도 향상 (Reliability)&lt;/strong&gt;: 입력된 값에 대해 항상 정확하고 일관된 결과를 제공&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;3-cpu와-메모리-구조&#34;&gt;3. CPU와 메모리 구조
+&lt;/h3&gt;&lt;p&gt;컴퓨터의 핵심은 연산을 담당하는 &lt;strong&gt;CPU&lt;/strong&gt;와 데이터를 저장하는 &lt;strong&gt;메모리&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;cpu-processor&#34;&gt;CPU (Processor)
+&lt;/h4&gt;&lt;p&gt;컴퓨터에서 프로그램을 실행하는 데 필요한 복잡한 연산을 처리하고 명령을 수행하는 &amp;lsquo;두뇌&amp;rsquo; 역할&lt;/p&gt;
+&lt;h4 id=&#34;메모리-memory&#34;&gt;메모리 (Memory)
+&lt;/h4&gt;&lt;p&gt;데이터를 저장하기 위한 기억장치로, 속도와 용도에 따라 계층 구조를 가짐&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;주기억장치&lt;/strong&gt;: RAM 등 휘발성 메모리로, CPU가 직접 접근하여 데이터를 읽고 씀&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;보조기억장치&lt;/strong&gt;: SSD, HDD 등 비휘발성 메모리로, 데이터를 영구적으로 저장함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;메모리 계층 구조 (상단일수록 속도가 빠르고 용량이 작음)&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[  레지스터 ]  ──┐ CPU 내부
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[   캐시   ]  ──┘
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[   RAM   ]  ── 주기억장치
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[ 하드디스크 ]  ── 보조기억장치
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;레지스터&lt;/strong&gt;: CPU 내부에서 연산에 필요한 데이터를 아주 짧은 시간 동안 저장&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;캐시 메모리&lt;/strong&gt;: CPU와 RAM 사이의 속도 차이를 줄여 성능을 높이는 완충 공간&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RAM&lt;/strong&gt;: 프로그램 실행 시 필요한 정보를 로드하는 공간, 전원이 꺼지면 데이터가 사라지는 휘발성이 있음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;디스크(SSD/HDD)&lt;/strong&gt;: 운영체제, 프로그램, 사용자 데이터를 영구 저장하는 비휘발성 저장소&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;프로그램 실행 과정&lt;/strong&gt;: 사용자가 프로그램을 실행하면, OS는 디스크의 프로그램을 메모리로 로드&lt;br&gt;
+이때 메모리에 로드되어 실행 중인 상태를 &lt;strong&gt;프로세스&lt;/strong&gt;라고 함&lt;/p&gt;
+&lt;h3 id=&#34;4-커널과-시스템-콜&#34;&gt;4. 커널과 시스템 콜
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;커널(Kernel)&lt;/strong&gt;: 운영체제의 핵심부로, 하드웨어와 프로세스 사이에서 자원 관리 및 보안과 같은 중추적인 역할을 수행&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  응용 프로그램
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ↕️
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     커널 (CPU 스케줄링, 메모리 관리, 입출력 제어 등)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ↕️      ↕️      ↕️
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; CPU    메모리   외부기기
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;모드-전환-mode-bit&#34;&gt;모드 전환 (Mode Bit)
+&lt;/h4&gt;&lt;p&gt;운영체제는 시스템의 중요한 자원을 보호하기 위해 실행 모드를 두 가지로 분리함&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;커널 모드 (Kernel Mode)&lt;/strong&gt;: 하드웨어에 직접 접근하여 모든 자원을 제어할 수 있는 모드&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;사용자 모드 (User Mode)&lt;/strong&gt;: 일반 응용 프로그램이 실행되는 모드로, 시스템 자원에 직접 접근이 제한됨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;시스템-콜-system-call&#34;&gt;시스템 콜 (System Call)
+&lt;/h4&gt;&lt;p&gt;사용자 모드의 프로그램이 하드웨어 자원이나 커널의 기능이 필요할 때, 커널에 서비스를 요청하는 통로&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;예시&lt;/strong&gt;: &lt;code&gt;fork()&lt;/code&gt; (프로세스 생성), &lt;code&gt;wait()&lt;/code&gt; (자식 프로세스 대기), &lt;code&gt;read()&lt;/code&gt;/&lt;code&gt;write()&lt;/code&gt; (파일 조작)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;매개변수 전달 방식&lt;/strong&gt;:
+&lt;ol&gt;
+&lt;li&gt;레지스터를 통해 직접 전달&lt;/li&gt;
+&lt;li&gt;메모리 주소값을 레지스터에 저장하여 전달&lt;/li&gt;
+&lt;li&gt;스택(Stack)을 이용해 전달&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
     </channel>
 </rss>

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
-    <head><meta charset='utf-8'>
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 이번 주 키워드 쓰레드(Thread) 람다 스트림 쓰레드(Thread) 프로세스(Process): 실행 중인 프로그램 쓰레드(Thread): 프로세스 내에서 실제 작업을 수행하는 최소 단위 멀티쓰레딩: 하나의 프로세스에서 여러 쓰레드가 병렬로 작업, 효율성과 응답성 향상 멀티쓰레딩의 장점과 단점 장점 CPU 사용률 증가 자원 활용 효율적 사용자 응답성 증가 코드 모듈화, 관리 용이 단점 자원 공유 시 동기화 문제 교착상태(Deadlock) 위험 교착상태: 여러 쓰레드가 서로 필요한 자원을 점유하며 서로 대기, 작업이 중단된 상태\n">
 <title>[커널아카데미] 백엔드 개발 부트캠프 13기 5주차</title>
 
-<link rel='canonical' href='https://lxxsxynnn.github.io/posts/week5-retrospective/'>
+<link rel='canonical' href='http://localhost:1313/posts/week5-retrospective/'>
 
 <link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="[커널아카데미] 백엔드 개발 부트캠프 13기 5주차">
 <meta property='og:description' content=" 이번 주 키워드 쓰레드(Thread) 람다 스트림 쓰레드(Thread) 프로세스(Process): 실행 중인 프로그램 쓰레드(Thread): 프로세스 내에서 실제 작업을 수행하는 최소 단위 멀티쓰레딩: 하나의 프로세스에서 여러 쓰레드가 병렬로 작업, 효율성과 응답성 향상 멀티쓰레딩의 장점과 단점 장점 CPU 사용률 증가 자원 활용 효율적 사용자 응답성 증가 코드 모듈화, 관리 용이 단점 자원 공유 시 동기화 문제 교착상태(Deadlock) 위험 교착상태: 여러 쓰레드가 서로 필요한 자원을 점유하며 서로 대기, 작업이 중단된 상태\n">
-<meta property='og:url' content='https://lxxsxynnn.github.io/posts/week5-retrospective/'>
+<meta property='og:url' content='http://localhost:1313/posts/week5-retrospective/'>
 <meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
 <meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='패스트캠퍼스' /><meta property='article:tag' content='커널아카데미' /><meta property='article:tag' content='백엔드개발부트캠프' /><meta property='article:tag' content='국비지원교육' /><meta property='article:tag' content='내일배움카드' /><meta property='article:tag' content='KDT' /><meta property='article:published_time' content='2025-07-20T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-07-20T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="[커널아카데미] 백엔드 개발 부트캠프 13기 5주차">
-<meta name="twitter:description" content=" 이번 주 키워드 쓰레드(Thread) 람다 스트림 쓰레드(Thread) 프로세스(Process): 실행 중인 프로그램 쓰레드(Thread): 프로세스 내에서 실제 작업을 수행하는 최소 단위 멀티쓰레딩: 하나의 프로세스에서 여러 쓰레드가 병렬로 작업, 효율성과 응답성 향상 멀티쓰레딩의 장점과 단점 장점 CPU 사용률 증가 자원 활용 효율적 사용자 응답성 증가 코드 모듈화, 관리 용이 단점 자원 공유 시 동기화 문제 교착상태(Deadlock) 위험 교착상태: 여러 쓰레드가 서로 필요한 자원을 점유하며 서로 대기, 작업이 중단된 상태\n"><link rel="alternate" type="application/json" href="https://lxxsxynnn.github.io/posts/week5-retrospective/index.json">
+<meta name="twitter:description" content=" 이번 주 키워드 쓰레드(Thread) 람다 스트림 쓰레드(Thread) 프로세스(Process): 실행 중인 프로그램 쓰레드(Thread): 프로세스 내에서 실제 작업을 수행하는 최소 단위 멀티쓰레딩: 하나의 프로세스에서 여러 쓰레드가 병렬로 작업, 효율성과 응답성 향상 멀티쓰레딩의 장점과 단점 장점 CPU 사용률 증가 자원 활용 효율적 사용자 응답성 증가 코드 모듈화, 관리 용이 단점 자원 공유 시 동기화 문제 교착상태(Deadlock) 위험 교착상태: 여러 쓰레드가 서로 필요한 자원을 점유하며 서로 대기, 작업이 중단된 상태\n"><link rel="alternate" type="application/json" href="http://localhost:1313/posts/week5-retrospective/index.json">
     </head>
     <body class="
     article-page
@@ -752,7 +752,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.748d0acf3bd5d18477b5028b83b70ecfa20eb15aefdff97697a330a2202721bf.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

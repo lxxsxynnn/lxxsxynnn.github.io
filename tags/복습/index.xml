@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>복습 on Soyeon&#39;s Dev Log</title>
-        <link>https://lxxsxynnn.github.io/tags/%EB%B3%B5%EC%8A%B5/</link>
+        <link>http://localhost:1313/tags/%EB%B3%B5%EC%8A%B5/</link>
         <description>Recent content in 복습 on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Sun, 31 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://lxxsxynnn.github.io/tags/%EB%B3%B5%EC%8A%B5/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 31 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/%EB%B3%B5%EC%8A%B5/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>[코드트리] 북마크 기능으로 나만의 복습 루틴 &amp; 오답노트 만들기</title>
-        <link>https://lxxsxynnn.github.io/posts/codetree-subscription-4/</link>
+        <link>http://localhost:1313/posts/codetree-subscription-4/</link>
         <pubDate>Sun, 31 May 2026 00:00:00 +0000</pubDate>
         
-        <guid>https://lxxsxynnn.github.io/posts/codetree-subscription-4/</guid>
+        <guid>http://localhost:1313/posts/codetree-subscription-4/</guid>
         <description>&lt;p&gt;코딩테스트 공부를 하다 보면 가장 애매한 게 &amp;lsquo;어떻게 푸는지 알 것 같은데 구현에서 막히는 문제&amp;rsquo;나 &amp;lsquo;한 번 풀었는데 며칠 뒤에 다시 보니 기억 안 나는 문제&amp;rsquo;들인 것 같습니다.&lt;/p&gt;
 &lt;p&gt;그동안 갭체크로 제 실력을 점검하고 코드트리 트레일을 따라 문제를 풀어보고 있었는데,&lt;br&gt;
 이렇게 애매하게 머리에 남는 개념들을 확실히 정리할 수 있게 코드트리의 북마크 기능을 활용해 봤습니다.&lt;/p&gt;
@@ -22,12 +22,12 @@
 &lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;코드트리-북마크-기능-소개-및-활용법&#34;&gt;코드트리 북마크 기능 소개 및 활용법
-&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://lxxsxynnn.github.io/images/bookmark1.png&#34; style=&#34;width:50%;&#34; /&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/bookmark1.png&#34; style=&#34;width:50%;&#34; /&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;코드트리에서 문제를 풀다 보면 문제 제목 옆에 작은 북마크 버튼이 있습니다.&lt;br&gt;
 이 버튼을 누르면 해당 문제를 폴더에 저장할 수 있고, 저장된 문제들은 내가 원하는 폴더를 생성해서 따로 관리할 수도 있습니다.&lt;/p&gt;
 &lt;p&gt;본인의 학습 상태에 맞게 폴더를 분류해두면 나중에 다시 찾아볼 때 훨씬 편리합니다.&lt;/p&gt;
 &lt;h2 id=&#34;나의-북마크-활용-ai-도움과-복습에-집중하기&#34;&gt;나의 북마크 활용: &amp;lsquo;AI 도움&amp;rsquo;과 &amp;lsquo;복습&amp;rsquo;에 집중하기
-&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://lxxsxynnn.github.io/images/bookmark2.png&#34; style=&#34;width:50%;&#34; /&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/bookmark2.png&#34; style=&#34;width:50%;&#34; /&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;저는 현재 새로운 진도를 나가면서 가끔 여유가 될 때 기존에 풀었던 문제들을 완벽하게 내 것으로 만드는 복습도 병행 중인데요,&lt;br&gt;
 북마크 폴더도 &amp;lsquo;다시 볼 것들&amp;rsquo;이라는 제목으로 만들어서 문제들을 모아보고 있습니다.&lt;/p&gt;
 &lt;p&gt;북마크에 스크랩하는 문제들의 기준은 보통 아래의 경우들인데,&lt;/p&gt;
