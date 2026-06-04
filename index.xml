@@ -6,7 +6,191 @@
         <description>Recent content on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Mon, 01 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 02 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[CS 스터디] 프로세스와 스레드</title>
+        <link>http://localhost:1313/posts/cs-study-2/</link>
+        <pubDate>Tue, 02 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/cs-study-2/</guid>
+        <description>&lt;h3 id=&#34;1-프로세스와-스레드&#34;&gt;1. 프로세스와 스레드
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;프로세스(Process)&lt;/strong&gt;: 컴퓨터에서 실행 중인 프로그램. OS로부터 독립된 메모리 영역(코드, 데이터, 스택, 힙)을 할당받음&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;프로그램&lt;/strong&gt;: 특정 작업을 수행하기 위한 명령어 집합 (정적 상태)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;메모리 영역 구조&lt;/strong&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    [ 높은 주소 ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ┌────────────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  │    스택     │ ← 지역 변수, 함수의 매개변수, 반환 주소 (LIFO)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ├────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  │      ↓     │ ← 빈 공간 (Stack 영역)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ├────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  │      ↑     │ ← 빈 공간 (Heap 영역)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ├────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  │      힙     │ ← 동적 메모리 할당 (malloc, new 등 / FIFO)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ├────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  │    데이터    │ ← 전역 변수, 정적 변수 (BSS/Data 영역으로 세분화)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ├────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  │    코드     │ ← 실행할 기계어 명령어 (Text 영역)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  └────────────┘
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ↑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    [ 낮은 주소 ]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;스택 오버플로우&lt;/strong&gt;: 스택 영역이 힙 영역을 침범&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;힙 오버플로우&lt;/strong&gt;: 힙 영역이 스택 영역을 침범&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;스레드(Thread)&lt;/strong&gt;: 프로세스 내에서 실제로 작업을 수행하는 실행 흐름의 단위&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;특징&lt;/strong&gt;: 프로세스 내 힙, 데이터, 코드 영역 공유. 개별 스택 영역 할당&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;스레드 모델&lt;/strong&gt;:
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;다대일 모델&lt;/strong&gt;: 사용자 스레드 n개 - 커널 스레드 1개. 병렬성 이용 불가&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;일대일 모델&lt;/strong&gt;: 사용자 스레드 1개 - 커널 스레드 1개. 성능 저하 가능성 존재&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;다대다 모델&lt;/strong&gt;: n개 사용자 스레드 - m개 커널 스레드 매핑 (m &amp;lt;= n)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-pcb-process-control-block&#34;&gt;2. PCB (Process Control Block)
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;PCB&lt;/strong&gt;: OS가 프로세스를 제어하기 위해 정보를 저장하는 블록&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;저장 정보&lt;/strong&gt;: 포인터, 프로세스 상태, PID(고유 ID), PC(다음 실행 명령어 주소), 레지스터, 메모리 제한, 열린 파일 목록 등&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-프로세스의-생성과-종료&#34;&gt;3. 프로세스의 생성과 종료
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;생성&lt;/strong&gt;: 부모 프로세스에서 &lt;code&gt;fork()&lt;/code&gt; 호출. 부모는 자식의 PID를, 자식은 0을 반환&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;종료 조건&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;exit()&lt;/code&gt; 호출을 통한 정상 종료&lt;/li&gt;
+&lt;li&gt;제한 시간 초과, 파일 검색 실패, 메모리 부족 등 오류 발생&lt;/li&gt;
+&lt;li&gt;부모 프로세스가 자식을 강제 종료 (자원 초과 사용 등)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4-프로세스-상태와-변화&#34;&gt;4. 프로세스 상태와 변화
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       [생성(New)]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            ↓ 승인(Admit)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       [준비(Ready)] &amp;lt;─────── 인터럽트/타임아웃 ────────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            ↓ 디스패치(Dispatch)                     │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       [실행(Running)] ────────────────────&amp;gt; [종료(Terminated)]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            │                                    완료
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            └──────── 입출력/이벤트 대기 ────────&amp;gt; [대기(Waiting)]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                                   │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;lt;──────── 입출력/이벤트 완료 ──────────────┘
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;상태 변화&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;생성 → 준비&lt;/strong&gt;: OS 승인을 받아 준비 큐(Ready Queue)에 추가됨&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;준비 → 실행&lt;/strong&gt;: 우선순위가 높은 프로세스가 디스패치되어 CPU 점유&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;실행 → 준비&lt;/strong&gt;: 타임 슬라이스 만료(Timeout)로 인한 상태 복귀&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;실행 → 대기&lt;/strong&gt;: 입출력 또는 특정 이벤트 대기 발생&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;대기 → 준비&lt;/strong&gt;: 대기 중인 이벤트가 완료되어 다시 CPU 할당 대기&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;5-멀티-프로세스와-멀티-스레드&#34;&gt;5. 멀티 프로세스와 멀티 스레드
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;동시성(Concurrency)&lt;/strong&gt;: 싱글 코어에서 작업을 번갈아 처리 (논리적 동시)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;병렬성(Parallelism)&lt;/strong&gt;: 멀티 코어에서 작업을 동시 처리 (물리적 동시)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;구분&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;멀티 프로세스&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;멀티 스레드&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;안정성&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;높음 (한 프로세스 고장이 파급되지 않음)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;낮음 (한 스레드 오류가 프로세스 전체 영향)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;자원 효율&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;낮음 (개별 메모리 할당으로 비용 높음)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;높음 (메모리 공유로 자원 절약)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;콘텍스트 스위칭&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;무거움 (메모리 영역 교체 오버헤드 큼)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;가벼움 (공유 자원이 많아 전환 빠름)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;통신(IPC)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;복잡함 (별도 통신 메커니즘 필요)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;단순함 (공유 메모리 직접 접근)&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;6-문맥-교환-context-switching&#34;&gt;6. 문맥 교환 (Context Switching)
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;문맥 교환&lt;/strong&gt;: 인터럽트 발생 시 현재 프로세스 상태를 PCB에 저장하고 새 프로세스의 PCB 정보를 로드하는 과정&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;저장 위치&lt;/strong&gt;: PCB 내 프로그램 카운터(PC)와 스택 포인터(SP)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;프로세스 P0            운영체제(커널)            프로세스 P1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │                     │                     │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   실행중                   │                     │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │   인터럽트/시스템 콜     │                     │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├────────────────────&amp;gt;│                     │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │                     │ P0 상태를 PCB0에 저장   │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   대기중                   │                     │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │                     │ PCB1에서 P1 상태 로드  │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │                     │                     │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │&amp;lt;────────────────────┤                     │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │                     │                   실행중
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │                     │                     │
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;7-프로세스-동기화&#34;&gt;7. 프로세스 동기화
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;임계 영역(Critical Section)&lt;/strong&gt;: 공유 자원에 접근하여 실행 순서에 따라 결과가 변하는 코드 영역&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;동기화 조건&lt;/strong&gt;: 상호 배제(Mutual Exclusion), 진행(Progress), 한정된 대기(Bounded Waiting)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;기법&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;뮤텍스(Mutex)&lt;/strong&gt;: 락(Lock) 기반 제어. 대기 시 스핀락(Spin-lock) 사용 가능&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;세마포어(Semaphore)&lt;/strong&gt;: 카운트 기반 신호(Signaling) 제어&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;주요 개념&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;동기/비동기&lt;/strong&gt;: 작업 순서 보장 여부&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;블로킹/넌블로킹&lt;/strong&gt;: 작업 수행 시 대기 여부&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;8-교착-상태-deadlock&#34;&gt;8. 교착 상태 (Deadlock)
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;정의&lt;/strong&gt;: 프로세스들이 서로가 점유한 자원을 무한히 기다리는 상태&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;필요 충분 조건&lt;/strong&gt;: 상호 배제, 점유와 대기, 비선점, 환형 대기&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;해결 방안(부정)&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;상호 배제 부정&lt;/strong&gt;: 자원 공유 허용&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;점유와 대기 부정&lt;/strong&gt;: 실행 전 필요 자원 일괄 할당&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;비선점 부정&lt;/strong&gt;: 자원 요청 시 점유 자원 반납&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;환형 대기 부정&lt;/strong&gt;: 자원 번호 순서대로 요청&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;9-스레드-안전-thread-safe&#34;&gt;9. 스레드 안전 (Thread Safe)
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;정의&lt;/strong&gt;: 멀티 스레드 환경에서 공유 자원 접근 시 데이터 일관성이 보장되는 상태&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;달성 조건&lt;/strong&gt;: 상호 배제, 원자 연산(Atomic Operation), 재진입성(Reentrancy), 스레드 지역 저장소(TLS)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;10-ipc-inter-process-communication&#34;&gt;10. IPC (Inter-Process Communication)
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;공유 메모리&lt;/strong&gt;: 프로세스 간 공유 메모리 구간 설정 (가장 빠름)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;소켓&lt;/strong&gt;: 네트워크 기반 통신 (원격 시스템 가능)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;세마포어&lt;/strong&gt;: 동기화를 통한 자원 관리&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;파이프&lt;/strong&gt;: FIFO 단방향 통신 (양방향 시 파이프 2개 필요)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;메시지 큐&lt;/strong&gt;: 큐 자료구조 기반 메시지 전달&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;11-좀비-및-고아-프로세스&#34;&gt;11. 좀비 및 고아 프로세스
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;좀비 프로세스&lt;/strong&gt;: 자식 종료 후 부모가 상태를 회수하지 않아 시스템에 남은 상태&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;고아 프로세스&lt;/strong&gt;: 부모가 먼저 종료된 상태(PID를 1로 바꿔주면 자식이 좀비 프로세스가 되는 걸 막을 수 있음)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>[CS 스터디] 운영체제</title>
         <link>http://localhost:1313/posts/cs-study-1/</link>
         <pubDate>Mon, 01 Jun 2026 00:00:00 +0000</pubDate>
