@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 1. 캐시 메모리와 지역성 캐시 메모리 (Cache Memory): CPU의 처리 속도와 메인 메모리(RAM)의 접근 속도 차이를 줄이기 위해 사용하는 고속 저장소\n원리: 자주 사용하는 데이터를 속도가 빠른 캐시에 미리 복사해 두어, 매번 메인 메모리까지 가지 않고도 데이터를 빠르게 읽어올 수 있게 함 구조: 주로 L1, L2, L3 캐시로 나뉘며 숫자가 작을수록 CPU와 가깝고 속도가 빠름 참조 지역성 (Locality of Reference) 캐시는 한정된 공간이므로, 어떤 데이터를 저장할지가 매우 중요함. 이때 기준이 되는 것이 지역성\n">
+<title>[CS 스터디] 캐시 메모리</title>
+
+<link rel='canonical' href='http://localhost:1313/posts/cs-study-6/'>
+
+<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="[CS 스터디] 캐시 메모리">
+<meta property='og:description' content=" 1. 캐시 메모리와 지역성 캐시 메모리 (Cache Memory): CPU의 처리 속도와 메인 메모리(RAM)의 접근 속도 차이를 줄이기 위해 사용하는 고속 저장소\n원리: 자주 사용하는 데이터를 속도가 빠른 캐시에 미리 복사해 두어, 매번 메인 메모리까지 가지 않고도 데이터를 빠르게 읽어올 수 있게 함 구조: 주로 L1, L2, L3 캐시로 나뉘며 숫자가 작을수록 CPU와 가깝고 속도가 빠름 참조 지역성 (Locality of Reference) 캐시는 한정된 공간이므로, 어떤 데이터를 저장할지가 매우 중요함. 이때 기준이 되는 것이 지역성\n">
+<meta property='og:url' content='http://localhost:1313/posts/cs-study-6/'>
+<meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2026-06-05T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-06-05T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="[CS 스터디] 캐시 메모리">
+<meta name="twitter:description" content=" 1. 캐시 메모리와 지역성 캐시 메모리 (Cache Memory): CPU의 처리 속도와 메인 메모리(RAM)의 접근 속도 차이를 줄이기 위해 사용하는 고속 저장소\n원리: 자주 사용하는 데이터를 속도가 빠른 캐시에 미리 복사해 두어, 매번 메인 메모리까지 가지 않고도 데이터를 빠르게 읽어올 수 있게 함 구조: 주로 L1, L2, L3 캐시로 나뉘며 숫자가 작을수록 CPU와 가깝고 속도가 빠름 참조 지역성 (Locality of Reference) 캐시는 한정된 공간이므로, 어떤 데이터를 저장할지가 매우 중요함. 이때 기준이 되는 것이 지역성\n"><link rel="alternate" type="application/json" href="http://localhost:1313/posts/cs-study-6/index.json">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/../assets/avatar_hu_c27af72c615ceedd.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Soyeon&#39;s Dev Log</a></h1>
+            <h2 class="site-description">백엔드 개발자 지망생의 기록</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-code" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="7 8 3 12 7 16" /><polyline points="17 8 21 12 17 16" /><line x1="14" y1="4" x2="10" y2="20" /></svg>
+                
+                <span>코딩테스트</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/cs/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><line x1="3" y1="6" x2="3" y2="19" /><line x1="12" y1="6" x2="12" y2="19" /><line x1="21" y1="6" x2="21" y2="19" /></svg>
+                
+                <span>CS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="4" y="5" width="16" height="16" rx="2" /><line x1="16" y1="3" x2="16" y2="7" /><line x1="8" y1="3" x2="8" y2="7" /><line x1="4" y1="11" x2="20" y2="11" /><rect x="8" y1="15" width="2" height="2" /></svg>
+                
+                <span>주간회고</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>검색</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>다크 모드</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/cs/" style="background-color: #e9c46a; color: #fff;">
+                CS
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/cs-study-6/">[CS 스터디] 캐시 메모리</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-06-05</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <div style="margin: 0 40px;">
+<h3 id="1-캐시-메모리와-지역성">1. 캐시 메모리와 지역성
+</h3><p><strong>캐시 메모리 (Cache Memory)</strong>: CPU의 처리 속도와 메인 메모리(RAM)의 접근 속도 차이를 줄이기 위해 사용하는 고속 저장소</p>
+<ul>
+<li><strong>원리</strong>: 자주 사용하는 데이터를 속도가 빠른 캐시에 미리 복사해 두어, 매번 메인 메모리까지 가지 않고도 데이터를 빠르게 읽어올 수 있게 함</li>
+<li><strong>구조</strong>: 주로 L1, L2, L3 캐시로 나뉘며 숫자가 작을수록 CPU와 가깝고 속도가 빠름</li>
+</ul>
+<h4 id="참조-지역성-locality-of-reference"><strong>참조 지역성 (Locality of Reference)</strong>
+</h4><p>캐시는 한정된 공간이므로, 어떤 데이터를 저장할지가 매우 중요함. 이때 기준이 되는 것이 <strong>지역성</strong></p>
+<ol>
+<li><strong>시간 지역성 (Temporal Locality)</strong>: 최근에 참조된 데이터는 가까운 미래에 다시 참조될 가능성이 높다는 원리
+<ul>
+<li>예: 반복문의 인덱스 변수(<code>i</code>), 누적 합계 변수 등</li>
+</ul>
+</li>
+<li><strong>공간 지역성 (Spatial Locality)</strong>: 참조된 데이터와 인접한 주소의 데이터가 곧 참조될 가능성이 높다는 원리
+<ul>
+<li>예: 배열(Array) 데이터의 순차적 접근</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="2-캐시-히트와-캐시-미스">2. 캐시 히트와 캐시 미스
+</h3><ul>
+<li><strong>캐시 히트 (Cache Hit)</strong>: CPU가 요청한 데이터가 캐시에 있는 경우. 즉시 반환하여 성능이 극대화됨</li>
+<li><strong>캐시 미스 (Cache Miss)</strong>: 요청한 데이터가 캐시에 없어 메인 메모리에서 가져와야 하는 경우. 지연 시간(Latency)이 발생함</li>
+<li><strong>적중률 (Hit Ratio)</strong>: (캐시 히트 횟수) / (전체 참조 횟수). 일반적으로 90% 이상의 적중률을 가짐</li>
+</ul>
+<hr>
+<h3 id="3-캐시-메모리의-매핑-방식">3. 캐시 메모리의 매핑 방식
+</h3><p>메인 메모리는 캐시보다 훨씬 크기 때문에, 수많은 메모리 블록이 좁은 캐시 공간을 나누어 써야 함<br>
+이때 어떤 규칙으로 데이터를 배치할지 결정하는 것이 매핑 방식</p>
+<h4 id="1-직접-매핑-direct-mapping"><strong>1) 직접 매핑 (Direct Mapping)</strong>
+</h4><ul>
+<li><strong>비유</strong>: <strong>&ldquo;지정된 우편함&rdquo;</strong> (101호, 201호, 301호는 무조건 1번 우편함만 사용)</li>
+<li><strong>원리</strong>: 메모리 주소에 따라 캐시 내의 저장 위치가 미리 딱 정해져 있는 방식</li>
+<li><strong>특징</strong>: 위치가 정해져 있어 찾기 매우 빠르지만,<br>
+같은 칸을 사용하는 다른 주소의 데이터가 들어오면 기존 데이터를 계속 밀어내야 하는 **충돌(Collision)**이 잦음</li>
+</ul>
+<h4 id="2-연관-매핑-associative-mapping"><strong>2) 연관 매핑 (Associative Mapping)</strong>
+</h4><ul>
+<li><strong>비유</strong>: <strong>&ldquo;빈 방 아무 데나 들어가는 호텔&rdquo;</strong></li>
+<li><strong>원리</strong>: 정해진 위치 없이 캐시의 빈 공간 어디든 데이터를 저장할 수 있는 방식</li>
+<li><strong>특징</strong>: 빈 공간을 알뜰하게 써서 충돌은 적지만, 나중에 특정 데이터를 찾을 때 캐시 전체를 다 뒤져봐야 하므로 검색 속도가 느림</li>
+</ul>
+<h4 id="3-세트-연관-매핑-set-associative-mapping"><strong>3) 세트 연관 매핑 (Set-Associative Mapping)</strong>
+</h4><ul>
+<li><strong>비유</strong>: <strong>&ldquo;구역이 정해진 전용 주차장&rdquo;</strong></li>
+<li><strong>원리</strong>: 캐시를 여러 개의 **세트(Set)**로 나누고, 특정 주소는 지정된 세트 내의 아무 칸에나 들어갈 수 있게 한 방식</li>
+<li><strong>특징</strong>: 직접 매핑의 <strong>빠른 속도</strong>와 연관 매핑의 <strong>높은 효율</strong>을 절충한 방식으로, 현대 CPU에서 가장 널리 사용됨<br>
+(예: &ldquo;A구역(세트)에 주차하되, 그 안에서는 빈 칸 아무 데나 쓰세요&rdquo;)</li>
+</ul>
+<hr>
+<h3 id="4-매핑-방식-요약-비교">4. 매핑 방식 요약 비교
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: left">구분</th>
+          <th style="text-align: left">직접 매핑</th>
+          <th style="text-align: left">연관 매핑</th>
+          <th style="text-align: left">세트 연관 매핑</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>매핑 위치</strong></td>
+          <td style="text-align: left">지정된 하나의 라인</td>
+          <td style="text-align: left">모든 라인 가능</td>
+          <td style="text-align: left">지정된 세트 내 모든 라인</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>장점</strong></td>
+          <td style="text-align: left">구현 단순, 속도 빠름</td>
+          <td style="text-align: left">적중률 매우 높음</td>
+          <td style="text-align: left">적중률과 속도의 균형</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>단점</strong></td>
+          <td style="text-align: left">충돌 미스 잦음</td>
+          <td style="text-align: left">검색 속도 느림, 고비용</td>
+          <td style="text-align: left">구현 복잡도 중간</td>
+      </tr>
+  </tbody>
+</table></div>
+</div>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Soyeon&#39;s Dev Log
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.748d0acf3bd5d18477b5028b83b70ecfa20eb15aefdff97697a330a2202721bf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

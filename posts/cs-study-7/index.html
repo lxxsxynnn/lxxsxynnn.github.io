@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="1. 요약 메모리 및 시스템 기초 메모리 계층 구조: 속도, 용량, 비용의 효율성을 위해 계층화함 (레지스터 &gt; 캐시 &gt; RAM &gt; HDD/SSD) 캐시 메모리: CPU와 RAM 사이의 속도 차이를 극복하기 위한 고속 메모리 시스템 콜: 프로세스가 운영체제 커널의 서비스를 요청하기 위한 인터페이스 프로세스와 스레드 프로세스: 실행 중인 프로그램의 인스턴스\n독립된 메모리 공간(코드, 데이터, 힙, 스택)과 PCB를 가짐 스레드: 프로세스 내 실행 흐름의 단위. 스택을 제외한 나머지 메모리 영역을 공유함 멀티 프로세스 vs 멀티 스레드: 멀티 프로세스: 안정성이 높지만 문맥 교환 오버헤드와 IPC 비용이 큼 멀티 스레드: 자원 공유로 효율적이나 동기화 이슈(Race Condition) 주의 필요 콘텍스트 스위칭: CPU 제어권을 넘길 때 현재 상태를 저장하고 새 상태를 로드하는 과정\n(스레드 간 전환이 프로세스 간 전환보다 빠름) 동기화 및 교착 상태 프로세스 동기화: 공유 자원 접근 시 데이터 일관성을 보장하기 위한 기법(뮤텍스, 세마포어 등) 교착 상태(Deadlock): 서로 자원을 점유한 채 대기하며 진행이 멈춘 상태 4가지 발생 조건: 상호 배제, 점유와 대기, 비선점, 환형 대기 스케줄링 및 메모리 관리 CPU 스케줄링: 비선점형: FCFS, SJF (뺏기 불가능) 선점형: RR, SRTF (OS가 강제 회수 가능) 메모리 할당: 페이징: 고정 크기로 분할. 외부 단편화 해결, 내부 단편화 가능성 세그먼테이션: 논리 단위로 분할. 내부 단편화 해결, 외부 단편화 가능성 가상 메모리: 물리 메모리 한계를 극복하기 위해 보조 기억 장치를 활용하는 기술 요구 페이징: 필요한 페이지만 메모리에 로드 스레싱: 페이지 폴트 과다로 인해 CPU 사용률이 급감하는 현상 2. 면접 대비 (Q&amp;A) 시스템 콜을 설명해보세요. 운영체제의 커널이 제공하는 서비스에 접근하기 위해 프로그램이 사용하는 인터페이스입니다.\n프로세스 제어, 파일 및 장치 조작 등 시스템 자원을 안전하게 관리하기 위해 유저 모드에서 커널 모드로 전환할 때 사용됩니다. 프로세스의 메모리 구조를 설명해보세요. 프로세스는 크게 네 가지 영역으로 구성됩니다. 코드(Code): 실행할 기계어 명령어가 저장되는 영역 데이터(Data): 전역 변수, 정적 변수 등이 저장되는 영역 힙(Heap): 런타임에 동적으로 할당되는 메모리 영역 스택(Stack): 함수 호출 시 지역 변수, 매개변수, 복귀 주소 등이 저장되는 영역 프로세스와 스레드의 차이점을 설명해보세요. 프로세스는 운영체제로부터 자원을 할당받는 독립적인 실행 단위이며, 스레드는 프로세스 내에서 실행되는 여러 흐름의 단위입니다.\n프로세스는 각각 독립된 메모리 공간을 가지지만, 스레드는 프로세스의 힙, 데이터, 코드 영역을 공유하고 자신만의 스택과 레지스터 정보만 가집니다. 스택 오버플로우와 힙 오버플로우에 관해 설명해보세요. 스택 오버플로우는 재귀 호출이 너무 깊어지거나 지역 변수가 너무 커서 스택 영역의 한계를 넘는 현상입니다.\n힙 오버플로우는 사용자가 동적으로 할당한 메모리가 힙 영역의 범위를 초과하여 인접한 메모리 영역을 침범하는 현상입니다. PCB가 무엇인지 설명해보세요. Process Control Block의 약자로, 운영체제가 각 프로세스를 관리하기 위해 유지하는 자료구조입니다.\n프로세스 상태, PID, 프로그램 카운터(PC), 레지스터 값, 스케줄링 정보 등이 포함되어 있습니다. 멀티 프로세스와 멀티 스레드의 차이점을 설명해보세요. 멀티 프로세스는 각 프로세스가 독립적이어서 하나가 실패해도 다른 프로세스에 영향을 주지 않아 안정적이지만, 문맥 교환 비용이 크고 IPC를 통한 통신이 복잡합니다.\n멀티 스레드는 자원을 공유하므로 통신이 빠르고 비용이 적지만, 하나의 스레드 장애가 전체 프로세스에 영향을 줄 수 있고 동기화 처리가 중요합니다. 동시성과 병렬성을 비교해 설명해보세요. 동시성(Concurrency)은 싱글 코어에서 여러 작업을 빠르게 번갈아 실행하여 '동시에 실행되는 것처럼 보이게' 하는 논리적인 개념입니다.\n병렬성(Parallelism)은 멀티 코어에서 실제로 여러 작업을 '동시에' 처리하는 물리적인 개념입니다. 콘텍스트 스위칭이 무엇인지 설명해보세요. CPU가 현재 실행 중인 프로세스나 스레드의 상태를 저장하고, 다음으로 실행할 프로세스나 스레드의 상태를 복구하여 제어권을 넘기는 과정입니다.\n이 과정에서 CPU는 아무런 일을 하지 못하므로 오버헤드가 발생합니다. 멀티 프로세서에서 콘텍스트 스위칭과 멀티 스레드에서 콘텍스트 스위칭의 차이점을 설명해보세요. 멀티 스레드 간의 콘텍스트 스위칭은 프로세스 내의 공유 자원(데이터, 힙 등)을 그대로 유지하고 스택과 레지스터만 교체하면 되므로,\n주소 공간 자체를 바꿔야 하는 멀티 프로세스 간의 전환보다 오버헤드가 훨씬 적습니다. 프로세스 동기화에 대해 설명해보세요. 여러 프로세스나 스레드가 공유 자원에 동시에 접근할 때(Race Condition), 데이터의 일관성을 유지하기 위해 실행 순서를 조절하거나 자원 접근을 제한하는 것을 말합니다. 뮤텍스와 세마포어의 차이점을 설명해보세요. 뮤텍스는 오직 하나의 쓰레드만이 공유 자원을 점유할 수 있는 'Binary Lock' 개념입니다.\n세마포어는 공유 자원에 접근할 수 있는 프로세스/스레드의 개수를 지정(Counter)할 수 있으며,\n뮤텍스는 락을 건 스레드만 해제할 수 있지만 세마포어는 다른 프로세스에서도 신호를 줄 수 있습니다. 스레드 안전(Thread Safe)의 의미가 무엇이며 이를 구현하는 방법은 무엇인가요? 멀티 스레드 환경에서 여러 스레드가 동시에 함수나 변수에 접근해도 프로그램의 실행 결과가 올바르게 유지되는 상태를 말합니다.\n이를 위해 Mutex나 Semaphore를 이용한 상호 배제, Atomic 연산 사용, 공유 자원 사용 최소화 등의 방법을 사용합니다. 비선점형 스케줄링 알고리즘과 선점형 스케줄링 알고리즘을 설명해보세요. 비선점형(Non-preemptive)은 프로세스가 CPU를 할당받으면 작업이 끝날 때까지 CPU를 뺏기지 않는 방식(예: FCFS, SJF)입니다.\n선점형(Preemptive)은 OS가 우선순위나 타임 슬라이스에 따라 실행 중인 프로세스로부터 CPU를 강제로 뺏어 다른 프로세스에 할당할 수 있는 방식(예: Round Robin, SRTF)입니다. OS의 메모리 관리 전략 중 페이징과 세그멘테이션을 비교해서 설명해보세요. 페이징은 물리 메모리를 일정한 크기(프레임)로 나누어 할당하는 방식으로 외부 단편화는 해결하지만 내부 단편화가 발생할 수 있습니다.\n세그멘테이션은 메모리를 논리적 단위(함수, 배열 등)인 세그먼트로 나누어 할당하는 방식으로 내부 단편화는 해결하지만 외부 단편화가 발생할 수 있습니다. 가상 메모리가 무엇인지와 가상 메모리가 필요한 이유를 설명해보세요. 물리 메모리 크기의 한계를 극복하기 위해 보조 기억 장치(디스크)의 일부를 메모리처럼 사용하는 기술입니다.\n실제 메모리보다 큰 프로그램을 실행할 수 있게 해주고, 각 프로세스에 독립적인 가상 주소 공간을 제공하여 메모리 관리를 효율적으로 만듭니다. 스레싱(Thrashing)이 무엇인가요? 페이지 폴트가 너무 자주 발생하여 CPU가 실제 작업을 처리하는 시간보다 페이지를 교체하는 데 더 많은 시간을 소비하게 되는 현상입니다.\n이로 인해 CPU 이용률이 급격히 떨어지게 됩니다. 캐시 메모리에 대해 설명해보세요. CPU와 메인 메모리(RAM) 사이의 속도 차이를 완화하기 위해 사용되는 작고 빠른 메모리입니다.\n'참조 지역성' 원리를 이용하여 자주 사용될 것으로 예상되는 데이터를 미리 저장해둠으로써 시스템의 전반적인 성능을 향상시킵니다. ">
+<title>[CS 스터디] 면접 대비</title>
+
+<link rel='canonical' href='http://localhost:1313/posts/cs-study-7/'>
+
+<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="[CS 스터디] 면접 대비">
+<meta property='og:description' content="1. 요약 메모리 및 시스템 기초 메모리 계층 구조: 속도, 용량, 비용의 효율성을 위해 계층화함 (레지스터 &gt; 캐시 &gt; RAM &gt; HDD/SSD) 캐시 메모리: CPU와 RAM 사이의 속도 차이를 극복하기 위한 고속 메모리 시스템 콜: 프로세스가 운영체제 커널의 서비스를 요청하기 위한 인터페이스 프로세스와 스레드 프로세스: 실행 중인 프로그램의 인스턴스\n독립된 메모리 공간(코드, 데이터, 힙, 스택)과 PCB를 가짐 스레드: 프로세스 내 실행 흐름의 단위. 스택을 제외한 나머지 메모리 영역을 공유함 멀티 프로세스 vs 멀티 스레드: 멀티 프로세스: 안정성이 높지만 문맥 교환 오버헤드와 IPC 비용이 큼 멀티 스레드: 자원 공유로 효율적이나 동기화 이슈(Race Condition) 주의 필요 콘텍스트 스위칭: CPU 제어권을 넘길 때 현재 상태를 저장하고 새 상태를 로드하는 과정\n(스레드 간 전환이 프로세스 간 전환보다 빠름) 동기화 및 교착 상태 프로세스 동기화: 공유 자원 접근 시 데이터 일관성을 보장하기 위한 기법(뮤텍스, 세마포어 등) 교착 상태(Deadlock): 서로 자원을 점유한 채 대기하며 진행이 멈춘 상태 4가지 발생 조건: 상호 배제, 점유와 대기, 비선점, 환형 대기 스케줄링 및 메모리 관리 CPU 스케줄링: 비선점형: FCFS, SJF (뺏기 불가능) 선점형: RR, SRTF (OS가 강제 회수 가능) 메모리 할당: 페이징: 고정 크기로 분할. 외부 단편화 해결, 내부 단편화 가능성 세그먼테이션: 논리 단위로 분할. 내부 단편화 해결, 외부 단편화 가능성 가상 메모리: 물리 메모리 한계를 극복하기 위해 보조 기억 장치를 활용하는 기술 요구 페이징: 필요한 페이지만 메모리에 로드 스레싱: 페이지 폴트 과다로 인해 CPU 사용률이 급감하는 현상 2. 면접 대비 (Q&amp;A) 시스템 콜을 설명해보세요. 운영체제의 커널이 제공하는 서비스에 접근하기 위해 프로그램이 사용하는 인터페이스입니다.\n프로세스 제어, 파일 및 장치 조작 등 시스템 자원을 안전하게 관리하기 위해 유저 모드에서 커널 모드로 전환할 때 사용됩니다. 프로세스의 메모리 구조를 설명해보세요. 프로세스는 크게 네 가지 영역으로 구성됩니다. 코드(Code): 실행할 기계어 명령어가 저장되는 영역 데이터(Data): 전역 변수, 정적 변수 등이 저장되는 영역 힙(Heap): 런타임에 동적으로 할당되는 메모리 영역 스택(Stack): 함수 호출 시 지역 변수, 매개변수, 복귀 주소 등이 저장되는 영역 프로세스와 스레드의 차이점을 설명해보세요. 프로세스는 운영체제로부터 자원을 할당받는 독립적인 실행 단위이며, 스레드는 프로세스 내에서 실행되는 여러 흐름의 단위입니다.\n프로세스는 각각 독립된 메모리 공간을 가지지만, 스레드는 프로세스의 힙, 데이터, 코드 영역을 공유하고 자신만의 스택과 레지스터 정보만 가집니다. 스택 오버플로우와 힙 오버플로우에 관해 설명해보세요. 스택 오버플로우는 재귀 호출이 너무 깊어지거나 지역 변수가 너무 커서 스택 영역의 한계를 넘는 현상입니다.\n힙 오버플로우는 사용자가 동적으로 할당한 메모리가 힙 영역의 범위를 초과하여 인접한 메모리 영역을 침범하는 현상입니다. PCB가 무엇인지 설명해보세요. Process Control Block의 약자로, 운영체제가 각 프로세스를 관리하기 위해 유지하는 자료구조입니다.\n프로세스 상태, PID, 프로그램 카운터(PC), 레지스터 값, 스케줄링 정보 등이 포함되어 있습니다. 멀티 프로세스와 멀티 스레드의 차이점을 설명해보세요. 멀티 프로세스는 각 프로세스가 독립적이어서 하나가 실패해도 다른 프로세스에 영향을 주지 않아 안정적이지만, 문맥 교환 비용이 크고 IPC를 통한 통신이 복잡합니다.\n멀티 스레드는 자원을 공유하므로 통신이 빠르고 비용이 적지만, 하나의 스레드 장애가 전체 프로세스에 영향을 줄 수 있고 동기화 처리가 중요합니다. 동시성과 병렬성을 비교해 설명해보세요. 동시성(Concurrency)은 싱글 코어에서 여러 작업을 빠르게 번갈아 실행하여 '동시에 실행되는 것처럼 보이게' 하는 논리적인 개념입니다.\n병렬성(Parallelism)은 멀티 코어에서 실제로 여러 작업을 '동시에' 처리하는 물리적인 개념입니다. 콘텍스트 스위칭이 무엇인지 설명해보세요. CPU가 현재 실행 중인 프로세스나 스레드의 상태를 저장하고, 다음으로 실행할 프로세스나 스레드의 상태를 복구하여 제어권을 넘기는 과정입니다.\n이 과정에서 CPU는 아무런 일을 하지 못하므로 오버헤드가 발생합니다. 멀티 프로세서에서 콘텍스트 스위칭과 멀티 스레드에서 콘텍스트 스위칭의 차이점을 설명해보세요. 멀티 스레드 간의 콘텍스트 스위칭은 프로세스 내의 공유 자원(데이터, 힙 등)을 그대로 유지하고 스택과 레지스터만 교체하면 되므로,\n주소 공간 자체를 바꿔야 하는 멀티 프로세스 간의 전환보다 오버헤드가 훨씬 적습니다. 프로세스 동기화에 대해 설명해보세요. 여러 프로세스나 스레드가 공유 자원에 동시에 접근할 때(Race Condition), 데이터의 일관성을 유지하기 위해 실행 순서를 조절하거나 자원 접근을 제한하는 것을 말합니다. 뮤텍스와 세마포어의 차이점을 설명해보세요. 뮤텍스는 오직 하나의 쓰레드만이 공유 자원을 점유할 수 있는 'Binary Lock' 개념입니다.\n세마포어는 공유 자원에 접근할 수 있는 프로세스/스레드의 개수를 지정(Counter)할 수 있으며,\n뮤텍스는 락을 건 스레드만 해제할 수 있지만 세마포어는 다른 프로세스에서도 신호를 줄 수 있습니다. 스레드 안전(Thread Safe)의 의미가 무엇이며 이를 구현하는 방법은 무엇인가요? 멀티 스레드 환경에서 여러 스레드가 동시에 함수나 변수에 접근해도 프로그램의 실행 결과가 올바르게 유지되는 상태를 말합니다.\n이를 위해 Mutex나 Semaphore를 이용한 상호 배제, Atomic 연산 사용, 공유 자원 사용 최소화 등의 방법을 사용합니다. 비선점형 스케줄링 알고리즘과 선점형 스케줄링 알고리즘을 설명해보세요. 비선점형(Non-preemptive)은 프로세스가 CPU를 할당받으면 작업이 끝날 때까지 CPU를 뺏기지 않는 방식(예: FCFS, SJF)입니다.\n선점형(Preemptive)은 OS가 우선순위나 타임 슬라이스에 따라 실행 중인 프로세스로부터 CPU를 강제로 뺏어 다른 프로세스에 할당할 수 있는 방식(예: Round Robin, SRTF)입니다. OS의 메모리 관리 전략 중 페이징과 세그멘테이션을 비교해서 설명해보세요. 페이징은 물리 메모리를 일정한 크기(프레임)로 나누어 할당하는 방식으로 외부 단편화는 해결하지만 내부 단편화가 발생할 수 있습니다.\n세그멘테이션은 메모리를 논리적 단위(함수, 배열 등)인 세그먼트로 나누어 할당하는 방식으로 내부 단편화는 해결하지만 외부 단편화가 발생할 수 있습니다. 가상 메모리가 무엇인지와 가상 메모리가 필요한 이유를 설명해보세요. 물리 메모리 크기의 한계를 극복하기 위해 보조 기억 장치(디스크)의 일부를 메모리처럼 사용하는 기술입니다.\n실제 메모리보다 큰 프로그램을 실행할 수 있게 해주고, 각 프로세스에 독립적인 가상 주소 공간을 제공하여 메모리 관리를 효율적으로 만듭니다. 스레싱(Thrashing)이 무엇인가요? 페이지 폴트가 너무 자주 발생하여 CPU가 실제 작업을 처리하는 시간보다 페이지를 교체하는 데 더 많은 시간을 소비하게 되는 현상입니다.\n이로 인해 CPU 이용률이 급격히 떨어지게 됩니다. 캐시 메모리에 대해 설명해보세요. CPU와 메인 메모리(RAM) 사이의 속도 차이를 완화하기 위해 사용되는 작고 빠른 메모리입니다.\n'참조 지역성' 원리를 이용하여 자주 사용될 것으로 예상되는 데이터를 미리 저장해둠으로써 시스템의 전반적인 성능을 향상시킵니다. ">
+<meta property='og:url' content='http://localhost:1313/posts/cs-study-7/'>
+<meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2026-06-05T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-06-05T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="[CS 스터디] 면접 대비">
+<meta name="twitter:description" content="1. 요약 메모리 및 시스템 기초 메모리 계층 구조: 속도, 용량, 비용의 효율성을 위해 계층화함 (레지스터 &gt; 캐시 &gt; RAM &gt; HDD/SSD) 캐시 메모리: CPU와 RAM 사이의 속도 차이를 극복하기 위한 고속 메모리 시스템 콜: 프로세스가 운영체제 커널의 서비스를 요청하기 위한 인터페이스 프로세스와 스레드 프로세스: 실행 중인 프로그램의 인스턴스\n독립된 메모리 공간(코드, 데이터, 힙, 스택)과 PCB를 가짐 스레드: 프로세스 내 실행 흐름의 단위. 스택을 제외한 나머지 메모리 영역을 공유함 멀티 프로세스 vs 멀티 스레드: 멀티 프로세스: 안정성이 높지만 문맥 교환 오버헤드와 IPC 비용이 큼 멀티 스레드: 자원 공유로 효율적이나 동기화 이슈(Race Condition) 주의 필요 콘텍스트 스위칭: CPU 제어권을 넘길 때 현재 상태를 저장하고 새 상태를 로드하는 과정\n(스레드 간 전환이 프로세스 간 전환보다 빠름) 동기화 및 교착 상태 프로세스 동기화: 공유 자원 접근 시 데이터 일관성을 보장하기 위한 기법(뮤텍스, 세마포어 등) 교착 상태(Deadlock): 서로 자원을 점유한 채 대기하며 진행이 멈춘 상태 4가지 발생 조건: 상호 배제, 점유와 대기, 비선점, 환형 대기 스케줄링 및 메모리 관리 CPU 스케줄링: 비선점형: FCFS, SJF (뺏기 불가능) 선점형: RR, SRTF (OS가 강제 회수 가능) 메모리 할당: 페이징: 고정 크기로 분할. 외부 단편화 해결, 내부 단편화 가능성 세그먼테이션: 논리 단위로 분할. 내부 단편화 해결, 외부 단편화 가능성 가상 메모리: 물리 메모리 한계를 극복하기 위해 보조 기억 장치를 활용하는 기술 요구 페이징: 필요한 페이지만 메모리에 로드 스레싱: 페이지 폴트 과다로 인해 CPU 사용률이 급감하는 현상 2. 면접 대비 (Q&amp;A) 시스템 콜을 설명해보세요. 운영체제의 커널이 제공하는 서비스에 접근하기 위해 프로그램이 사용하는 인터페이스입니다.\n프로세스 제어, 파일 및 장치 조작 등 시스템 자원을 안전하게 관리하기 위해 유저 모드에서 커널 모드로 전환할 때 사용됩니다. 프로세스의 메모리 구조를 설명해보세요. 프로세스는 크게 네 가지 영역으로 구성됩니다. 코드(Code): 실행할 기계어 명령어가 저장되는 영역 데이터(Data): 전역 변수, 정적 변수 등이 저장되는 영역 힙(Heap): 런타임에 동적으로 할당되는 메모리 영역 스택(Stack): 함수 호출 시 지역 변수, 매개변수, 복귀 주소 등이 저장되는 영역 프로세스와 스레드의 차이점을 설명해보세요. 프로세스는 운영체제로부터 자원을 할당받는 독립적인 실행 단위이며, 스레드는 프로세스 내에서 실행되는 여러 흐름의 단위입니다.\n프로세스는 각각 독립된 메모리 공간을 가지지만, 스레드는 프로세스의 힙, 데이터, 코드 영역을 공유하고 자신만의 스택과 레지스터 정보만 가집니다. 스택 오버플로우와 힙 오버플로우에 관해 설명해보세요. 스택 오버플로우는 재귀 호출이 너무 깊어지거나 지역 변수가 너무 커서 스택 영역의 한계를 넘는 현상입니다.\n힙 오버플로우는 사용자가 동적으로 할당한 메모리가 힙 영역의 범위를 초과하여 인접한 메모리 영역을 침범하는 현상입니다. PCB가 무엇인지 설명해보세요. Process Control Block의 약자로, 운영체제가 각 프로세스를 관리하기 위해 유지하는 자료구조입니다.\n프로세스 상태, PID, 프로그램 카운터(PC), 레지스터 값, 스케줄링 정보 등이 포함되어 있습니다. 멀티 프로세스와 멀티 스레드의 차이점을 설명해보세요. 멀티 프로세스는 각 프로세스가 독립적이어서 하나가 실패해도 다른 프로세스에 영향을 주지 않아 안정적이지만, 문맥 교환 비용이 크고 IPC를 통한 통신이 복잡합니다.\n멀티 스레드는 자원을 공유하므로 통신이 빠르고 비용이 적지만, 하나의 스레드 장애가 전체 프로세스에 영향을 줄 수 있고 동기화 처리가 중요합니다. 동시성과 병렬성을 비교해 설명해보세요. 동시성(Concurrency)은 싱글 코어에서 여러 작업을 빠르게 번갈아 실행하여 '동시에 실행되는 것처럼 보이게' 하는 논리적인 개념입니다.\n병렬성(Parallelism)은 멀티 코어에서 실제로 여러 작업을 '동시에' 처리하는 물리적인 개념입니다. 콘텍스트 스위칭이 무엇인지 설명해보세요. CPU가 현재 실행 중인 프로세스나 스레드의 상태를 저장하고, 다음으로 실행할 프로세스나 스레드의 상태를 복구하여 제어권을 넘기는 과정입니다.\n이 과정에서 CPU는 아무런 일을 하지 못하므로 오버헤드가 발생합니다. 멀티 프로세서에서 콘텍스트 스위칭과 멀티 스레드에서 콘텍스트 스위칭의 차이점을 설명해보세요. 멀티 스레드 간의 콘텍스트 스위칭은 프로세스 내의 공유 자원(데이터, 힙 등)을 그대로 유지하고 스택과 레지스터만 교체하면 되므로,\n주소 공간 자체를 바꿔야 하는 멀티 프로세스 간의 전환보다 오버헤드가 훨씬 적습니다. 프로세스 동기화에 대해 설명해보세요. 여러 프로세스나 스레드가 공유 자원에 동시에 접근할 때(Race Condition), 데이터의 일관성을 유지하기 위해 실행 순서를 조절하거나 자원 접근을 제한하는 것을 말합니다. 뮤텍스와 세마포어의 차이점을 설명해보세요. 뮤텍스는 오직 하나의 쓰레드만이 공유 자원을 점유할 수 있는 'Binary Lock' 개념입니다.\n세마포어는 공유 자원에 접근할 수 있는 프로세스/스레드의 개수를 지정(Counter)할 수 있으며,\n뮤텍스는 락을 건 스레드만 해제할 수 있지만 세마포어는 다른 프로세스에서도 신호를 줄 수 있습니다. 스레드 안전(Thread Safe)의 의미가 무엇이며 이를 구현하는 방법은 무엇인가요? 멀티 스레드 환경에서 여러 스레드가 동시에 함수나 변수에 접근해도 프로그램의 실행 결과가 올바르게 유지되는 상태를 말합니다.\n이를 위해 Mutex나 Semaphore를 이용한 상호 배제, Atomic 연산 사용, 공유 자원 사용 최소화 등의 방법을 사용합니다. 비선점형 스케줄링 알고리즘과 선점형 스케줄링 알고리즘을 설명해보세요. 비선점형(Non-preemptive)은 프로세스가 CPU를 할당받으면 작업이 끝날 때까지 CPU를 뺏기지 않는 방식(예: FCFS, SJF)입니다.\n선점형(Preemptive)은 OS가 우선순위나 타임 슬라이스에 따라 실행 중인 프로세스로부터 CPU를 강제로 뺏어 다른 프로세스에 할당할 수 있는 방식(예: Round Robin, SRTF)입니다. OS의 메모리 관리 전략 중 페이징과 세그멘테이션을 비교해서 설명해보세요. 페이징은 물리 메모리를 일정한 크기(프레임)로 나누어 할당하는 방식으로 외부 단편화는 해결하지만 내부 단편화가 발생할 수 있습니다.\n세그멘테이션은 메모리를 논리적 단위(함수, 배열 등)인 세그먼트로 나누어 할당하는 방식으로 내부 단편화는 해결하지만 외부 단편화가 발생할 수 있습니다. 가상 메모리가 무엇인지와 가상 메모리가 필요한 이유를 설명해보세요. 물리 메모리 크기의 한계를 극복하기 위해 보조 기억 장치(디스크)의 일부를 메모리처럼 사용하는 기술입니다.\n실제 메모리보다 큰 프로그램을 실행할 수 있게 해주고, 각 프로세스에 독립적인 가상 주소 공간을 제공하여 메모리 관리를 효율적으로 만듭니다. 스레싱(Thrashing)이 무엇인가요? 페이지 폴트가 너무 자주 발생하여 CPU가 실제 작업을 처리하는 시간보다 페이지를 교체하는 데 더 많은 시간을 소비하게 되는 현상입니다.\n이로 인해 CPU 이용률이 급격히 떨어지게 됩니다. 캐시 메모리에 대해 설명해보세요. CPU와 메인 메모리(RAM) 사이의 속도 차이를 완화하기 위해 사용되는 작고 빠른 메모리입니다.\n'참조 지역성' 원리를 이용하여 자주 사용될 것으로 예상되는 데이터를 미리 저장해둠으로써 시스템의 전반적인 성능을 향상시킵니다. "><link rel="alternate" type="application/json" href="http://localhost:1313/posts/cs-study-7/index.json">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/../assets/avatar_hu_c27af72c615ceedd.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Soyeon&#39;s Dev Log</a></h1>
+            <h2 class="site-description">백엔드 개발자 지망생의 기록</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-code" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="7 8 3 12 7 16" /><polyline points="17 8 21 12 17 16" /><line x1="14" y1="4" x2="10" y2="20" /></svg>
+                
+                <span>코딩테스트</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/cs/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><line x1="3" y1="6" x2="3" y2="19" /><line x1="12" y1="6" x2="12" y2="19" /><line x1="21" y1="6" x2="21" y2="19" /></svg>
+                
+                <span>CS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="4" y="5" width="16" height="16" rx="2" /><line x1="16" y1="3" x2="16" y2="7" /><line x1="8" y1="3" x2="8" y2="7" /><line x1="4" y1="11" x2="20" y2="11" /><rect x="8" y1="15" width="2" height="2" /></svg>
+                
+                <span>주간회고</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>검색</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>다크 모드</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/cs/" style="background-color: #e9c46a; color: #fff;">
+                CS
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/cs-study-7/">[CS 스터디] 면접 대비</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-06-05</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="1-요약">1. 요약
+</h3><h4 id="메모리-및-시스템-기초">메모리 및 시스템 기초
+</h4><ul>
+<li><strong>메모리 계층 구조</strong>: 속도, 용량, 비용의 효율성을 위해 계층화함
+(레지스터 &gt; 캐시 &gt; RAM &gt; HDD/SSD)</li>
+<li><strong>캐시 메모리</strong>: CPU와 RAM 사이의 속도 차이를 극복하기 위한 고속 메모리</li>
+<li><strong>시스템 콜</strong>: 프로세스가 운영체제 커널의 서비스를 요청하기 위한 인터페이스</li>
+</ul>
+<h4 id="프로세스와-스레드">프로세스와 스레드
+</h4><ul>
+<li><strong>프로세스</strong>: 실행 중인 프로그램의 인스턴스<br>
+독립된 메모리 공간(코드, 데이터, 힙, 스택)과 PCB를 가짐</li>
+<li><strong>스레드</strong>: 프로세스 내 실행 흐름의 단위. 스택을 제외한 나머지 메모리 영역을 공유함</li>
+<li><strong>멀티 프로세스 vs 멀티 스레드</strong>:
+<ul>
+<li><strong>멀티 프로세스</strong>: 안정성이 높지만 문맥 교환 오버헤드와 IPC 비용이 큼</li>
+<li><strong>멀티 스레드</strong>: 자원 공유로 효율적이나 동기화 이슈(Race Condition) 주의 필요</li>
+</ul>
+</li>
+<li><strong>콘텍스트 스위칭</strong>: CPU 제어권을 넘길 때 현재 상태를 저장하고 새 상태를 로드하는 과정<br>
+(스레드 간 전환이 프로세스 간 전환보다 빠름)</li>
+</ul>
+<h4 id="동기화-및-교착-상태">동기화 및 교착 상태
+</h4><ul>
+<li><strong>프로세스 동기화</strong>: 공유 자원 접근 시 데이터 일관성을 보장하기 위한 기법(뮤텍스, 세마포어 등)</li>
+<li><strong>교착 상태(Deadlock)</strong>: 서로 자원을 점유한 채 대기하며 진행이 멈춘 상태
+<ul>
+<li><strong>4가지 발생 조건</strong>: 상호 배제, 점유와 대기, 비선점, 환형 대기</li>
+</ul>
+</li>
+</ul>
+<h4 id="스케줄링-및-메모리-관리">스케줄링 및 메모리 관리
+</h4><ul>
+<li><strong>CPU 스케줄링</strong>:
+<ul>
+<li><strong>비선점형</strong>: FCFS, SJF (뺏기 불가능)</li>
+<li><strong>선점형</strong>: RR, SRTF (OS가 강제 회수 가능)</li>
+</ul>
+</li>
+<li><strong>메모리 할당</strong>:
+<ul>
+<li><strong>페이징</strong>: 고정 크기로 분할. 외부 단편화 해결, 내부 단편화 가능성</li>
+<li><strong>세그먼테이션</strong>: 논리 단위로 분할. 내부 단편화 해결, 외부 단편화 가능성</li>
+</ul>
+</li>
+<li><strong>가상 메모리</strong>: 물리 메모리 한계를 극복하기 위해 보조 기억 장치를 활용하는 기술
+<ul>
+<li><strong>요구 페이징</strong>: 필요한 페이지만 메모리에 로드</li>
+<li><strong>스레싱</strong>: 페이지 폴트 과다로 인해 CPU 사용률이 급감하는 현상</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-면접-대비-qa">2. 면접 대비 (Q&amp;A)
+</h3><details>
+<summary><b>시스템 콜을 설명해보세요.</b></summary>
+운영체제의 커널이 제공하는 서비스에 접근하기 위해 프로그램이 사용하는 인터페이스입니다.<br>
+프로세스 제어, 파일 및 장치 조작 등 시스템 자원을 안전하게 관리하기 위해 유저 모드에서 커널 모드로 전환할 때 사용됩니다.
+</details>
+<details>
+<summary><b>프로세스의 메모리 구조를 설명해보세요.</b></summary>
+프로세스는 크게 네 가지 영역으로 구성됩니다.
+<ul>
+  <li><b>코드(Code):</b> 실행할 기계어 명령어가 저장되는 영역</li>
+  <li><b>데이터(Data):</b> 전역 변수, 정적 변수 등이 저장되는 영역</li>
+  <li><b>힙(Heap):</b> 런타임에 동적으로 할당되는 메모리 영역</li>
+  <li><b>스택(Stack):</b> 함수 호출 시 지역 변수, 매개변수, 복귀 주소 등이 저장되는 영역</li>
+</ul>
+</details>
+<details>
+<summary><b>프로세스와 스레드의 차이점을 설명해보세요.</b></summary>
+프로세스는 운영체제로부터 자원을 할당받는 독립적인 실행 단위이며, 스레드는 프로세스 내에서 실행되는 여러 흐름의 단위입니다.<br>
+프로세스는 각각 독립된 메모리 공간을 가지지만, 스레드는 프로세스의 힙, 데이터, 코드 영역을 공유하고 자신만의 스택과 레지스터 정보만 가집니다.
+</details>
+<details>
+<summary><b>스택 오버플로우와 힙 오버플로우에 관해 설명해보세요.</b></summary>
+스택 오버플로우는 재귀 호출이 너무 깊어지거나 지역 변수가 너무 커서 스택 영역의 한계를 넘는 현상입니다.<br>
+힙 오버플로우는 사용자가 동적으로 할당한 메모리가 힙 영역의 범위를 초과하여 인접한 메모리 영역을 침범하는 현상입니다.
+</details>
+<details>
+<summary><b>PCB가 무엇인지 설명해보세요.</b></summary>
+Process Control Block의 약자로, 운영체제가 각 프로세스를 관리하기 위해 유지하는 자료구조입니다.<br>
+프로세스 상태, PID, 프로그램 카운터(PC), 레지스터 값, 스케줄링 정보 등이 포함되어 있습니다.
+</details>
+<details>
+<summary><b>멀티 프로세스와 멀티 스레드의 차이점을 설명해보세요.</b></summary>
+멀티 프로세스는 각 프로세스가 독립적이어서 하나가 실패해도 다른 프로세스에 영향을 주지 않아 안정적이지만, 문맥 교환 비용이 크고 IPC를 통한 통신이 복잡합니다.<br>
+멀티 스레드는 자원을 공유하므로 통신이 빠르고 비용이 적지만, 하나의 스레드 장애가 전체 프로세스에 영향을 줄 수 있고 동기화 처리가 중요합니다.
+</details>
+<details>
+<summary><b>동시성과 병렬성을 비교해 설명해보세요.</b></summary>
+동시성(Concurrency)은 싱글 코어에서 여러 작업을 빠르게 번갈아 실행하여 '동시에 실행되는 것처럼 보이게' 하는 논리적인 개념입니다.<br>
+병렬성(Parallelism)은 멀티 코어에서 실제로 여러 작업을 '동시에' 처리하는 물리적인 개념입니다.
+</details>
+<details>
+<summary><b>콘텍스트 스위칭이 무엇인지 설명해보세요.</b></summary>
+CPU가 현재 실행 중인 프로세스나 스레드의 상태를 저장하고, 다음으로 실행할 프로세스나 스레드의 상태를 복구하여 제어권을 넘기는 과정입니다.<br>
+이 과정에서 CPU는 아무런 일을 하지 못하므로 오버헤드가 발생합니다.
+</details>
+<details>
+<summary><b>멀티 프로세서에서 콘텍스트 스위칭과 멀티 스레드에서 콘텍스트 스위칭의 차이점을 설명해보세요.</b></summary>
+멀티 스레드 간의 콘텍스트 스위칭은 프로세스 내의 공유 자원(데이터, 힙 등)을 그대로 유지하고 스택과 레지스터만 교체하면 되므로,<br>
+주소 공간 자체를 바꿔야 하는 멀티 프로세스 간의 전환보다 오버헤드가 훨씬 적습니다.
+</details>
+<details>
+<summary><b>프로세스 동기화에 대해 설명해보세요.</b></summary>
+여러 프로세스나 스레드가 공유 자원에 동시에 접근할 때(Race Condition), 데이터의 일관성을 유지하기 위해 실행 순서를 조절하거나 자원 접근을 제한하는 것을 말합니다.
+</details>
+<details>
+<summary><b>뮤텍스와 세마포어의 차이점을 설명해보세요.</b></summary>
+뮤텍스는 오직 하나의 쓰레드만이 공유 자원을 점유할 수 있는 'Binary Lock' 개념입니다.<br>
+세마포어는 공유 자원에 접근할 수 있는 프로세스/스레드의 개수를 지정(Counter)할 수 있으며,<br>
+뮤텍스는 락을 건 스레드만 해제할 수 있지만 세마포어는 다른 프로세스에서도 신호를 줄 수 있습니다.
+</details>
+<details>
+<summary><b>스레드 안전(Thread Safe)의 의미가 무엇이며 이를 구현하는 방법은 무엇인가요?</b></summary>
+멀티 스레드 환경에서 여러 스레드가 동시에 함수나 변수에 접근해도 프로그램의 실행 결과가 올바르게 유지되는 상태를 말합니다.<br>
+이를 위해 Mutex나 Semaphore를 이용한 상호 배제, Atomic 연산 사용, 공유 자원 사용 최소화 등의 방법을 사용합니다.
+</details>
+<details>
+<summary><b>비선점형 스케줄링 알고리즘과 선점형 스케줄링 알고리즘을 설명해보세요.</b></summary>
+비선점형(Non-preemptive)은 프로세스가 CPU를 할당받으면 작업이 끝날 때까지 CPU를 뺏기지 않는 방식(예: FCFS, SJF)입니다.<br>
+선점형(Preemptive)은 OS가 우선순위나 타임 슬라이스에 따라 실행 중인 프로세스로부터 CPU를 강제로 뺏어 다른 프로세스에 할당할 수 있는 방식(예: Round Robin, SRTF)입니다.
+</details>
+<details>
+<summary><b>OS의 메모리 관리 전략 중 페이징과 세그멘테이션을 비교해서 설명해보세요.</b></summary>
+페이징은 물리 메모리를 일정한 크기(프레임)로 나누어 할당하는 방식으로 외부 단편화는 해결하지만 내부 단편화가 발생할 수 있습니다.<br>
+세그멘테이션은 메모리를 논리적 단위(함수, 배열 등)인 세그먼트로 나누어 할당하는 방식으로 내부 단편화는 해결하지만 외부 단편화가 발생할 수 있습니다.
+</details>
+<details>
+<summary><b>가상 메모리가 무엇인지와 가상 메모리가 필요한 이유를 설명해보세요.</b></summary>
+물리 메모리 크기의 한계를 극복하기 위해 보조 기억 장치(디스크)의 일부를 메모리처럼 사용하는 기술입니다.<br>
+실제 메모리보다 큰 프로그램을 실행할 수 있게 해주고, 각 프로세스에 독립적인 가상 주소 공간을 제공하여 메모리 관리를 효율적으로 만듭니다.
+</details>
+<details>
+<summary><b>스레싱(Thrashing)이 무엇인가요?</b></summary>
+페이지 폴트가 너무 자주 발생하여 CPU가 실제 작업을 처리하는 시간보다 페이지를 교체하는 데 더 많은 시간을 소비하게 되는 현상입니다.<br>
+이로 인해 CPU 이용률이 급격히 떨어지게 됩니다.
+</details>
+<details>
+<summary><b>캐시 메모리에 대해 설명해보세요.</b></summary>
+CPU와 메인 메모리(RAM) 사이의 속도 차이를 완화하기 위해 사용되는 작고 빠른 메모리입니다.<br>
+'참조 지역성' 원리를 이용하여 자주 사용될 것으로 예상되는 데이터를 미리 저장해둠으로써 시스템의 전반적인 성능을 향상시킵니다.
+</details>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Soyeon&#39;s Dev Log
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.748d0acf3bd5d18477b5028b83b70ecfa20eb15aefdff97697a330a2202721bf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
