@@ -6,7 +6,175 @@
         <description>Recent content in 코딩테스트 on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Sun, 31 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 08 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[코드트리] 갭체크로 한 달 만에 약점 유형 극복한 후기</title>
+        <link>http://localhost:1313/posts/codetree-subscription-5/</link>
+        <pubDate>Mon, 08 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/codetree-subscription-5/</guid>
+        <description>&lt;p&gt;지난 5월 초에 코드트리 갭체크로 약점을 진단받고, 한 달 동안 코드트리에서 추천해준 학습 경로를 따라 꾸준히 공부했습니다.&lt;/p&gt;
+&lt;p&gt;그동안의 공부가 실제로 결과로 이어졌는지 궁금해서 오늘 2차 갭체크를 다시 받아봤는데요, 1차 결과랑 같이 비교해보니 변화가 꽤 뚜렷하게 보였습니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;👉 코드트리 바로가기&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.codetree.ai&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;코드트리(Codetree)&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1차-vs-2차-갭체크-비포--애프터&#34;&gt;1차 vs 2차 갭체크: 비포 &amp;amp; 애프터
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/gapcheck-before1.png&#34; style=&#34;width:50%;&#34; /&gt;&lt;img src=&#34;http://localhost:1313/images/gapcheck-before2.png&#34; style=&#34;width:50%;&#34; /&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src=&#34;http://localhost:1313/images/gapcheck-after1.png&#34; style=&#34;width:50%;&#34; /&gt;&lt;img src=&#34;http://localhost:1313/images/gapcheck-after2.png&#34; style=&#34;width:50%;&#34; /&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;결과 화면을 열자마자 약점으로 잡힌 영역 자체가 한 달 전이랑 달라졌다는 게 한 눈에 들어왔습니다.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;영역&lt;/th&gt;
+          &lt;th&gt;1차 (2026-05-07)&lt;/th&gt;
+          &lt;th&gt;2차 (2026-06-08)&lt;/th&gt;
+          &lt;th&gt;변화&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;시뮬레이션 I&lt;/td&gt;
+          &lt;td&gt;🟠 불안정&lt;/td&gt;
+          &lt;td&gt;✅ 약점 목록에서 제외&lt;/td&gt;
+          &lt;td&gt;안정화 달성&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;완전탐색 I&lt;/td&gt;
+          &lt;td&gt;🔴 부족&lt;/td&gt;
+          &lt;td&gt;🟠 불안정&lt;/td&gt;
+          &lt;td&gt;한 단계 상승&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;완전탐색 II&lt;/td&gt;
+          &lt;td&gt;(미진단)&lt;/td&gt;
+          &lt;td&gt;🔴 부족&lt;/td&gt;
+          &lt;td&gt;신규 진단&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;코드트리의-진단-변화-완전탐색-i&#34;&gt;코드트리의 진단 변화 (완전탐색 I)
+&lt;/h3&gt;&lt;h4 id=&#34;1차-진단-부족&#34;&gt;1차 진단 (부족)
+&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;문제의 모든 가능한 경우를 꼼꼼히 탐색하는 기본 원리조차 확실하게 이해하지 못해, 단순한 문제에서도 완전 탐색 알고리즘을 올바르게 적용하기 어려운 상태&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;2차-진단-불안정&#34;&gt;2차 진단 (불안정)
+&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;기본적인 완전 탐색 알고리즘은 구현할 수 있으나, 모든 경우의 수를 효과적으로 나열하고 불필요한 중복 연산을 제거하는 최적화 기법 적용에는 미흡한 상황&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;한 달 전에는 &amp;ldquo;기본 원리부터 모른다&amp;quot;는 진단이었는데, 이번에는 &amp;ldquo;구현은 되는데 최적화가 부족하다&amp;quot;로 바뀐 게 신기했습니다.&lt;br&gt;
+한 칸이지만 분명히 위로 올라왔다는 게 글로 적혀 있으니 그동안 푼 문제들이 머릿속에 헛돌고 있던 건 아니었구나 싶었습니다.&lt;/p&gt;
+&lt;h3 id=&#34;풀이-속도-변화&#34;&gt;풀이 속도 변화
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;문제 번호&lt;/th&gt;
+          &lt;th&gt;1차 소요 시간&lt;/th&gt;
+          &lt;th&gt;2차 소요 시간&lt;/th&gt;
+          &lt;th&gt;평균 대비&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;1번&lt;/td&gt;
+          &lt;td&gt;40초&lt;/td&gt;
+          &lt;td&gt;38초&lt;/td&gt;
+          &lt;td&gt;상위 89.8%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2번&lt;/td&gt;
+          &lt;td&gt;2분 13초&lt;/td&gt;
+          &lt;td&gt;2분 55초&lt;/td&gt;
+          &lt;td&gt;상위 76.5%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;3번&lt;/td&gt;
+          &lt;td&gt;—&lt;/td&gt;
+          &lt;td&gt;1분 23초&lt;/td&gt;
+          &lt;td&gt;상위 90.7%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;4번&lt;/td&gt;
+          &lt;td&gt;4분 42초&lt;/td&gt;
+          &lt;td&gt;33초&lt;/td&gt;
+          &lt;td&gt;상위 96.8%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;5번&lt;/td&gt;
+          &lt;td&gt;20분 (미해결)&lt;/td&gt;
+          &lt;td&gt;17분 18초 해결&lt;/td&gt;
+          &lt;td&gt;상위 13.5%&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;지난-한-달-코드트리에서-무엇을-했나&#34;&gt;지난 한 달, 코드트리에서 무엇을 했나
+&lt;/h2&gt;&lt;p&gt;막연히 &amp;ldquo;더 열심히 풀자&amp;quot;가 아니라, 코드트리 안의 기능들을 하나씩 붙여가면서 약점을 메워왔습니다.&lt;/p&gt;
+&lt;h3 id=&#34;-추천-학습-경로-따라가기-시뮬레이션-집중-학습&#34;&gt;① 추천 학습 경로 따라가기 (시뮬레이션 집중 학습)
+&lt;/h3&gt;&lt;p&gt;1차 갭체크 결과 화면을 보면 트레일(T0~T6) 형태로 학습 경로를 바로 추천해줍니다.&lt;br&gt;
+저는 시뮬레이션 트레일부터 먼저 잡고 다음 순서로 따라갔습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;시간 계산 → 좌표 이동 → 배열 순회 (기본기)&lt;/li&gt;
+&lt;li&gt;원형 배열 → 시계/반시계 방향 처리 → 범위 초과 예외 (응용)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;앞 문제에서 익힌 개념을 다음 문제에서 다시 쓰는 식이라서, 어디까지 알고 어디서부터 모르는지가 자연스럽게 정리됐던 것 같습니다.&lt;/p&gt;
+&lt;h3 id=&#34;-깃허브-연동--알림톡으로-1일-1코테-루틴-만들기&#34;&gt;② 깃허브 연동 + 알림톡으로 1일 1코테 루틴 만들기
+&lt;/h3&gt;&lt;p&gt;학습 경로가 아무리 잘 짜여 있어도 매일 안 풀면 의미가 없어서, 루틴을 만들어주는 기능 두 개를 적극적으로 활용했습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;깃허브 연동으로 푼 문제가 자동 커밋 → 잔디 심는 재미 때문에 하루도 안빠지고 문제를 풀었습니다!&lt;/li&gt;
+&lt;li&gt;학습 리마인더 알림톡이 아침/저녁으로 와서 한 달 동안 빠진 날이 없었어요&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;ldquo;오늘 풀까 말까&amp;rdquo; 고민할 틈 자체를 안 주는 게 이 두 기능의 장점인 것 같아요.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;약점이-강점으로-바뀌고-있다고-느낀-순간&#34;&gt;&amp;ldquo;약점이 강점으로 바뀌고 있다&amp;quot;고 느낀 순간
+&lt;/h2&gt;&lt;p&gt;이번에 2차 갭체크를 풀면서 한 달 전이랑 달라졌다는 걸 체감한 순간이 몇 번 있었습니다.&lt;/p&gt;
+&lt;h3 id=&#34;4번-문제--4분-42초가-33초가-되던-순간&#34;&gt;4번 문제 — 4분 42초가 33초가 되던 순간
+&lt;/h3&gt;&lt;p&gt;1차 때 4분 42초가 걸렸던 시뮬레이션 유형이 이번엔 33초 만에 풀렸습니다.&lt;br&gt;
+문제를 읽자마자 &amp;ldquo;아 이거 원형 배열 패턴이네&amp;rdquo; 하면서 손이 먼저 움직였는데, 한 달 전에 같은 유형 앞에서 한참 헤매던 게 생각나서 좀 신기했습니다.&lt;/p&gt;
+&lt;h3 id=&#34;5번-문제--포기에서-완주로&#34;&gt;5번 문제 — &amp;lsquo;포기&amp;rsquo;에서 &amp;lsquo;완주&amp;rsquo;로
+&lt;/h3&gt;&lt;p&gt;가장 의미 있었던 건 5번 문제였는데요.&lt;br&gt;
+1차 때 20분을 들이고도 못 풀었던 그 유형을 이번엔 17분 18초 만에 끝까지 풀어냈습니다.&lt;/p&gt;
+&lt;p&gt;평균 대비 속도(13.5%)는 여전히 느리지만, &amp;ldquo;시간 안에 못 끝낸다&amp;quot;에서 &amp;ldquo;느려도 끝까지 풀어낸다&amp;quot;로 바뀐 게 더 큰 변화였습니다.&lt;br&gt;
+시뮬레이션을 풀면서 익숙해진 &amp;lsquo;경우를 빠뜨리지 않고 나열하는 감각&amp;rsquo;이 완전탐색 쪽에도 영향을 준 것 같습니다.&lt;/p&gt;
+&lt;h3 id=&#34;시뮬레이션-i이-약점-목록에서-사라진-순간&#34;&gt;시뮬레이션 I이 약점 목록에서 사라진 순간
+&lt;/h3&gt;&lt;p&gt;마지막으로 결과 화면을 봤을 때 시뮬레이션 I 항목이 아예 사라진 걸 보고 가장 뿌듯했습니다.&lt;br&gt;
+한 달 전엔 가장 불안한 영역이라고 진단받았던 게 약점 목록에서 빠져 있는 걸 보니, 그동안 따라간 학습 경로가 맞는 방향이었구나 싶었습니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;코드트리에서-달성할-최종-학습-목표와-다짐&#34;&gt;코드트리에서 달성할 최종 학습 목표와 다짐
+&lt;/h2&gt;&lt;p&gt;이번 갭체크 비교를 해보고 나니 &amp;ldquo;코테를 더 잘하고 싶다&amp;quot;는 막연한 바람이 좀 더 구체적인 로드맵으로 정리됐습니다.&lt;/p&gt;
+&lt;h3 id=&#34;단기-목표-7월&#34;&gt;단기 목표 (~7월)
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;완전탐색 I 안정화: 가지치기·중복 제거 등 최적화 기법 익히기&lt;/li&gt;
+&lt;li&gt;완전탐색 II 입문: 백트래킹, 조합·순열 탐색 패턴 손에 붙이기&lt;/li&gt;
+&lt;li&gt;시뮬레이션 안정 유지: 주기적으로 복습하면서 감 안 잃기&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;중기-목표-9월&#34;&gt;중기 목표 (~9월)
+&lt;/h3&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;DP I 진입: 완전탐색이 안정되면 자연스럽게 다음 트레일로 넘어가기&lt;/li&gt;
+&lt;li&gt;트레일 T6 완주: 코드트리 트레일을 끝까지 따라가서 빈 칸 메우기&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;최종-목표&#34;&gt;최종 목표
+&lt;/h3&gt;&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;갭체크 전 영역 &amp;lsquo;안정&amp;rsquo; 달성 — 약점 목록이 비어 있는 결과 화면 보기&lt;/li&gt;
+&lt;li&gt;실전 코딩테스트 합격&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;다짐&#34;&gt;다짐
+&lt;/h3&gt;&lt;p&gt;1차 갭체크가 약점을 알게 해준 시간이었다면, 이번 2차는 그동안의 공부 방향이 맞았는지 확인해준 시간이었습니다.&lt;br&gt;
+다음에 3차, 4차 갭체크를 받을 때도 비포 &amp;amp; 애프터 비교가 가능할 정도로 꾸준히 풀어보려고 합니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;마치며&#34;&gt;마치며
+&lt;/h2&gt;&lt;p&gt;코딩테스트 공부는 양으로 밀어붙이기 쉬운데, 방향이 어긋나면 시간만 흘러간다는 걸 이번에 다시 느꼈어요.&lt;br&gt;
+코드트리 갭체크를 한 달 간격으로 두 번 받아보니 약점 진단 → 추천 경로 → 루틴 기능 → 재진단으로 이어지는 흐름이 잘 짜여 있다는 게 보입니다.&lt;/p&gt;
+&lt;p&gt;본인의 약점을 객관적으로 확인하고 싶거나, 지금 하는 공부가 맞는 방향인지 헷갈리는 분들은 한 번 갭체크부터 받아보는 걸 추천드려요!&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;👉 코드트리에서 갭체크 받아보기&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.codetree.ai&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;코드트리(Codetree)&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
         <title>[코드트리] 북마크 기능으로 나만의 복습 루틴 &amp; 오답노트 만들기</title>
         <link>http://localhost:1313/posts/codetree-subscription-4/</link>
         <pubDate>Sun, 31 May 2026 00:00:00 +0000</pubDate>
@@ -216,10 +384,10 @@
         </item>
         <item>
         <title>[코드트리] 코딩테스트 준비, &#39;갭체크&#39;로 나의 약점 완벽 분석하기</title>
-        <link>http://localhost:1313/posts/codetree-subscription-1-gap-check/</link>
+        <link>http://localhost:1313/posts/codetree-subscription-1/</link>
         <pubDate>Thu, 07 May 2026 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/posts/codetree-subscription-1-gap-check/</guid>
+        <guid>http://localhost:1313/posts/codetree-subscription-1/</guid>
         <description>&lt;p&gt;코딩테스트 준비를 하면서 내가 어느 정도 수준인지 막연하게만 알고 있었는데, 이번에 &lt;strong&gt;코드트리 갭체크&lt;/strong&gt;를 통해 부족한 부분을 명확하게 확인할 수 있었습니다.&lt;/p&gt;
 &lt;p&gt;단순히 문제를 푸는 것을 넘어, &amp;lsquo;내가 무엇을 모르는지&amp;rsquo;를 아는 것이 얼마나 중요한지 깨달은 시간이었습니다.&lt;/p&gt;
 &lt;blockquote&gt;

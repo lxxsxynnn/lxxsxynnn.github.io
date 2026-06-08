@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 1. TCP (Transmission Control Protocol) 전송 계층(L4)에 속하는 프로토콜로, 연결형 서비스와 데이터의 신뢰성을 보장함\n쉽게 이해하기: TCP는 &ldquo;등기우편&quot;과 같음. 상대방이 받았는지 확인하고, 순서대로 전달되며, 분실되면 다시 보냄. 대신 느림.\n주요 특징: 송신부와 수신부의 연결을 먼저 확인하는 연결형 서비스 가상 회선 방식의 패킷 교환 (모든 패킷이 같은 경로로 이동) 패킷의 전송 순서 보장 및 수신 여부 확인 1:1 통신만 가능 데이터 손실이 없어 신뢰성이 높음 절차가 많아 속도가 느림 패킷 교환 방식 비교 [ 가상 회선 방식 (TCP) ] [ 데이터그램 방식 (UDP) ] 송신부 → [P1][P2][P3] → 수신부 송신부 → [P1] → 경로A → 수신부 → [P2] → 경로B → 수신부 (모두 같은 경로) → [P3] → 경로C → 수신부 (순서 보장) (순서가 뒤바뀔 수 있음) 2. TCP 핸드셰이킹 (Handshaking) 연결형 서비스를 위해 송신부와 수신부가 연결을 맺고 끊는 과정\n">
+<title>[CS 스터디] TCP와 UDP</title>
+
+<link rel='canonical' href='http://localhost:1313/posts/cs-study-9/'>
+
+<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="[CS 스터디] TCP와 UDP">
+<meta property='og:description' content=" 1. TCP (Transmission Control Protocol) 전송 계층(L4)에 속하는 프로토콜로, 연결형 서비스와 데이터의 신뢰성을 보장함\n쉽게 이해하기: TCP는 &ldquo;등기우편&quot;과 같음. 상대방이 받았는지 확인하고, 순서대로 전달되며, 분실되면 다시 보냄. 대신 느림.\n주요 특징: 송신부와 수신부의 연결을 먼저 확인하는 연결형 서비스 가상 회선 방식의 패킷 교환 (모든 패킷이 같은 경로로 이동) 패킷의 전송 순서 보장 및 수신 여부 확인 1:1 통신만 가능 데이터 손실이 없어 신뢰성이 높음 절차가 많아 속도가 느림 패킷 교환 방식 비교 [ 가상 회선 방식 (TCP) ] [ 데이터그램 방식 (UDP) ] 송신부 → [P1][P2][P3] → 수신부 송신부 → [P1] → 경로A → 수신부 → [P2] → 경로B → 수신부 (모두 같은 경로) → [P3] → 경로C → 수신부 (순서 보장) (순서가 뒤바뀔 수 있음) 2. TCP 핸드셰이킹 (Handshaking) 연결형 서비스를 위해 송신부와 수신부가 연결을 맺고 끊는 과정\n">
+<meta property='og:url' content='http://localhost:1313/posts/cs-study-9/'>
+<meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2026-06-08T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-06-08T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="[CS 스터디] TCP와 UDP">
+<meta name="twitter:description" content=" 1. TCP (Transmission Control Protocol) 전송 계층(L4)에 속하는 프로토콜로, 연결형 서비스와 데이터의 신뢰성을 보장함\n쉽게 이해하기: TCP는 &ldquo;등기우편&quot;과 같음. 상대방이 받았는지 확인하고, 순서대로 전달되며, 분실되면 다시 보냄. 대신 느림.\n주요 특징: 송신부와 수신부의 연결을 먼저 확인하는 연결형 서비스 가상 회선 방식의 패킷 교환 (모든 패킷이 같은 경로로 이동) 패킷의 전송 순서 보장 및 수신 여부 확인 1:1 통신만 가능 데이터 손실이 없어 신뢰성이 높음 절차가 많아 속도가 느림 패킷 교환 방식 비교 [ 가상 회선 방식 (TCP) ] [ 데이터그램 방식 (UDP) ] 송신부 → [P1][P2][P3] → 수신부 송신부 → [P1] → 경로A → 수신부 → [P2] → 경로B → 수신부 (모두 같은 경로) → [P3] → 경로C → 수신부 (순서 보장) (순서가 뒤바뀔 수 있음) 2. TCP 핸드셰이킹 (Handshaking) 연결형 서비스를 위해 송신부와 수신부가 연결을 맺고 끊는 과정\n"><link rel="alternate" type="application/json" href="http://localhost:1313/posts/cs-study-9/index.json">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/../assets/avatar_hu_c27af72c615ceedd.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Soyeon&#39;s Dev Log</a></h1>
+            <h2 class="site-description">백엔드 개발자 지망생의 기록</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-code" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="7 8 3 12 7 16" /><polyline points="17 8 21 12 17 16" /><line x1="14" y1="4" x2="10" y2="20" /></svg>
+                
+                <span>코딩테스트</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/cs/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><line x1="3" y1="6" x2="3" y2="19" /><line x1="12" y1="6" x2="12" y2="19" /><line x1="21" y1="6" x2="21" y2="19" /></svg>
+                
+                <span>CS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="4" y="5" width="16" height="16" rx="2" /><line x1="16" y1="3" x2="16" y2="7" /><line x1="8" y1="3" x2="8" y2="7" /><line x1="4" y1="11" x2="20" y2="11" /><rect x="8" y1="15" width="2" height="2" /></svg>
+                
+                <span>주간회고</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>검색</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>다크 모드</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/cs/" style="background-color: #e9c46a; color: #fff;">
+                CS
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/cs-study-9/">[CS 스터디] TCP와 UDP</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-06-08</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <div style="margin: 0 40px;">
+<h3 id="1-tcp-transmission-control-protocol">1. TCP (Transmission Control Protocol)
+</h3><p>전송 계층(L4)에 속하는 프로토콜로, <strong>연결형 서비스</strong>와 <strong>데이터의 신뢰성</strong>을 보장함</p>
+<blockquote>
+<p><strong>쉽게 이해하기</strong>: TCP는 &ldquo;등기우편&quot;과 같음. 상대방이 받았는지 확인하고, 순서대로 전달되며, 분실되면 다시 보냄. 대신 느림.</p>
+</blockquote>
+<ul>
+<li><strong>주요 특징</strong>:
+<ul>
+<li>송신부와 수신부의 연결을 먼저 확인하는 <strong>연결형 서비스</strong></li>
+<li><strong>가상 회선 방식</strong>의 패킷 교환 (모든 패킷이 같은 경로로 이동)</li>
+<li>패킷의 <strong>전송 순서 보장</strong> 및 <strong>수신 여부 확인</strong></li>
+<li><strong>1:1 통신</strong>만 가능</li>
+<li>데이터 손실이 없어 <strong>신뢰성이 높음</strong></li>
+<li>절차가 많아 <strong>속도가 느림</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="패킷-교환-방식-비교"><strong>패킷 교환 방식 비교</strong>
+</h4><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>   [ 가상 회선 방식 (TCP) ]              [ 데이터그램 방식 (UDP) ]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   송신부 → [P1][P2][P3] → 수신부          송신부 → [P1] → 경로A → 수신부
+</span></span><span style="display:flex;"><span>                                                → [P2] → 경로B → 수신부
+</span></span><span style="display:flex;"><span>        (모두 같은 경로)                          → [P3] → 경로C → 수신부
+</span></span><span style="display:flex;"><span>        (순서 보장)                              (순서가 뒤바뀔 수 있음)
+</span></span></code></pre></div><hr>
+<h3 id="2-tcp-핸드셰이킹-handshaking">2. TCP 핸드셰이킹 (Handshaking)
+</h3><p>연결형 서비스를 위해 송신부와 수신부가 <strong>연결을 맺고 끊는 과정</strong></p>
+<blockquote>
+<p><strong>쉽게 이해하기</strong>: 전화 통화를 시작할 때 &ldquo;여보세요?&rdquo; → &ldquo;네 잘 들려요&rdquo; → &ldquo;좋아요 얘기 시작합시다&quot;처럼 서로 연결을 확인하는 절차</p>
+</blockquote>
+<h4 id="주요-플래그flag"><strong>주요 플래그(Flag)</strong>
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>플래그</th>
+          <th>의미</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>SYN</strong></td>
+          <td>연결 생성 요청 (Synchronize)</td>
+      </tr>
+      <tr>
+          <td><strong>ACK</strong></td>
+          <td>데이터 수신 확인 (Acknowledge)</td>
+      </tr>
+      <tr>
+          <td><strong>FIN</strong></td>
+          <td>연결 종료 요청 (Finish)</td>
+      </tr>
+      <tr>
+          <td><strong>RST</strong></td>
+          <td>연결 재설정 (Reset)</td>
+      </tr>
+      <tr>
+          <td><strong>PSH</strong></td>
+          <td>빠른 응답이 필요한 데이터 즉시 전송 (Push)</td>
+      </tr>
+      <tr>
+          <td><strong>URG</strong></td>
+          <td>우선순위가 높은 긴급 데이터 전송 (Urgent)</td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="3-way-handshake-연결-수립"><strong>3-way Handshake (연결 수립)</strong>
+</h4><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>   [ 송신부 (Client) ]                          [ 수신부 (Server) ]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>         │                                              │
+</span></span><span style="display:flex;"><span>   ① ────│──── SYN, seq=N ────────────────────────────&gt;│
+</span></span><span style="display:flex;"><span>   SYN_SENT                                             │
+</span></span><span style="display:flex;"><span>         │                                              │ SYN_RECEIVED
+</span></span><span style="display:flex;"><span>   ②    │&lt;──── SYN + ACK, seq=M, ack=N+1 ──────────────│
+</span></span><span style="display:flex;"><span>         │                                              │
+</span></span><span style="display:flex;"><span>   ESTABLISHED                                          │
+</span></span><span style="display:flex;"><span>   ③ ────│──── ACK, ack=M+1 ────────────────────────&gt;│
+</span></span><span style="display:flex;"><span>         │                                              │ ESTABLISHED
+</span></span><span style="display:flex;"><span>         │           ===== 연결 완료 =====              │
+</span></span></code></pre></div><ol>
+<li><strong>송신부 → 수신부</strong>: 연결 요청(SYN)과 임의의 숫자 <strong>N</strong>을 보냄 → <code>SYN_SENT</code> 상태</li>
+<li><strong>수신부 → 송신부</strong>: 요청 수락(SYN + ACK)과 <strong>N+1</strong>, 임의의 숫자 <strong>M</strong>을 보냄 → <code>SYN_RECEIVED</code> 상태</li>
+<li><strong>송신부 → 수신부</strong>: 수락 확인(ACK)과 <strong>M+1</strong>을 보냄 → 양쪽 모두 <code>ESTABLISHED</code> 상태</li>
+</ol>
+<h4 id="4-way-handshake-연결-종료"><strong>4-way Handshake (연결 종료)</strong>
+</h4><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>   [ 송신부 (Client) ]                          [ 수신부 (Server) ]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>         │                                              │
+</span></span><span style="display:flex;"><span>   ① ────│──── FIN ───────────────────────────────────&gt;│
+</span></span><span style="display:flex;"><span>   FIN_WAIT1                                            │
+</span></span><span style="display:flex;"><span>         │                                              │ CLOSE_WAIT
+</span></span><span style="display:flex;"><span>   ②    │&lt;──── ACK ───────────────────────────────────│ (종료 준비)
+</span></span><span style="display:flex;"><span>   FIN_WAIT2                                            │
+</span></span><span style="display:flex;"><span>         │                                              │
+</span></span><span style="display:flex;"><span>   ③    │&lt;──── FIN ───────────────────────────────────│ LAST_ACK
+</span></span><span style="display:flex;"><span>         │                                              │
+</span></span><span style="display:flex;"><span>   TIME_WAIT                                            │
+</span></span><span style="display:flex;"><span>   ④ ────│──── ACK ───────────────────────────────────&gt;│
+</span></span><span style="display:flex;"><span>         │                                              │ CLOSED
+</span></span><span style="display:flex;"><span>   (일정 시간 대기 후)                                   │
+</span></span><span style="display:flex;"><span>   CLOSED                                               │
+</span></span></code></pre></div><ol>
+<li><strong>송신부 → 수신부</strong>: 연결 종료 요청(FIN) → <code>FIN_WAIT1</code> 상태</li>
+<li><strong>수신부 → 송신부</strong>: 응답(ACK) → 수신부는 <code>CLOSE_WAIT</code>, 송신부는 <code>FIN_WAIT2</code> 상태</li>
+<li><strong>수신부 → 송신부</strong>: 종료 준비 완료 후 FIN 전송 → <code>LAST_ACK</code> 상태</li>
+<li><strong>송신부 → 수신부</strong>: 응답(ACK) → <code>TIME_WAIT</code> 상태, 일정 시간 후 <code>CLOSED</code></li>
+</ol>
+<blockquote>
+<p><strong>TIME_WAIT을 두는 이유</strong>: 마지막 ACK가 유실되거나 늦게 도착하는 패킷에 대비하기 위함</p>
+</blockquote>
+<hr>
+<h3 id="3-tcp-제어-방법">3. TCP 제어 방법
+</h3><h4 id="-흐름-제어-flow-control"><strong>① 흐름 제어 (Flow Control)</strong>
+</h4><p>송신부와 수신부의 <strong>처리 속도 차이</strong>로 발생하는 데이터 손실을 방지</p>
+<blockquote>
+<p><strong>쉽게 이해하기</strong>: 친구에게 공을 던지는데, 친구가 받는 속도보다 빠르게 던지면 공이 떨어짐. 친구가 받을 수 있는 속도에 맞춰서 던지는 것</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>정지-대기 (Stop-and-Wait)</strong>:
+데이터 1개를 보내고 ACK를 받은 후에야 다음 데이터를 보냄
+→ 간단하지만 <strong>매우 비효율적</strong></p>
+</li>
+<li>
+<p><strong>슬라이딩 윈도우 (Sliding Window)</strong>:
+수신부가 정한 <strong>윈도우 크기</strong>만큼 ACK를 기다리지 않고 연속 전송
+→ 동적으로 데이터 흐름 제어 가능
+→ 윈도우 크기는 3-way 핸드셰이킹 시 결정됨</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>   [ 슬라이딩 윈도우 동작 ]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   윈도우 크기 = 4
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   [P1][P2][P3][P4] P5  P6  P7  P8       ← 처음
+</span></span><span style="display:flex;"><span>    └──── 전송 ────┘
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   P1 [P2][P3][P4][P5] P6  P7  P8       ← P1의 ACK 도착 시 윈도우 이동
+</span></span><span style="display:flex;"><span>       └──── 전송 ────┘
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   P1  P2 [P3][P4][P5][P6] P7  P8       ← P2의 ACK 도착 시 윈도우 이동
+</span></span><span style="display:flex;"><span>           └──── 전송 ────┘
+</span></span></code></pre></div><h4 id="-혼잡-제어-congestion-control"><strong>② 혼잡 제어 (Congestion Control)</strong>
+</h4><p>송신부의 전송 속도와 <strong>네트워크 속도 차이</strong>로 발생하는 데이터 손실을 방지
+(혼잡: 네트워크에 패킷이 과도하게 많아진 상태)</p>
+<blockquote>
+<p><strong>쉽게 이해하기</strong>: 도로에 차가 너무 많으면 정체가 일어남. 차를 천천히 보내야 하는 상황</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>AIMD (Additive Increase / Multiplicative Decrease)</strong>:</p>
+<ul>
+<li>정상일 땐 윈도우 크기를 <strong>1씩 더해가며</strong> 증가</li>
+<li>손실 발생 시 윈도우 크기를 <strong>1/2로 감소</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>느린 시작 (Slow Start)</strong>:</p>
+<ul>
+<li>윈도우 크기를 1로 시작 → ACK 받을 때마다 <strong>2배씩 증가</strong> (지수 함수)</li>
+<li>혼잡 발생 시 윈도우 크기를 1로 초기화</li>
+</ul>
+</li>
+<li>
+<p><strong>혼잡 회피 (Congestion Avoidance)</strong>:</p>
+<ul>
+<li>임계점(ssthresh)에 도달하면 <strong>선형 증가</strong>로 전환</li>
+<li>타임아웃 발생 시 임계점을 현재 윈도우의 1/2로 설정 후 초기화</li>
+</ul>
+</li>
+<li>
+<p><strong>빠른 회복 (Fast Recovery)</strong>:</p>
+<ul>
+<li>혼잡 시 윈도우를 절반으로 줄인 뒤 <strong>선형 증가</strong></li>
+<li>첫 혼잡 시에는 AIMD 방식으로 동작</li>
+</ul>
+</li>
+<li>
+<p><strong>빠른 재전송 (Fast Retransmit)</strong>:</p>
+<ul>
+<li>Duplicate ACK가 3번 발생하면 즉시 재전송</li>
+<li>윈도우 크기를 1/2로 줄임</li>
+</ul>
+</li>
+</ul>
+<h4 id="tcp-tahoe-vs-tcp-reno"><strong>TCP Tahoe vs TCP Reno</strong>
+</h4><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>   [ TCP Tahoe ]                          [ TCP Reno ]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   윈도우 크기                              윈도우 크기
+</span></span><span style="display:flex;"><span>     │      /\                              │      /\        /\
+</span></span><span style="display:flex;"><span>   6 │     /  \                           6 │     /  \      /  \
+</span></span><span style="display:flex;"><span>     │    /    \                            │    /    \    /
+</span></span><span style="display:flex;"><span>   4 │ ssthresh \                         4 │ ssthresh \  / ssthresh 변경
+</span></span><span style="display:flex;"><span>     │  /        \                          │  /        \/
+</span></span><span style="display:flex;"><span>   2 │ /          \    /\                 2 │ /
+</span></span><span style="display:flex;"><span>     │/            \  /  \                  │/
+</span></span><span style="display:flex;"><span>   1 │              \/    \               1 │
+</span></span><span style="display:flex;"><span>     └─────────────────────→ 시간            └─────────────────────→ 시간
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   * 혼잡 발생 시 → 윈도우 1로 초기화        * 3 Dup ACK → 윈도우 1/2, 선형 증가
+</span></span><span style="display:flex;"><span>   * ssthresh = 혼잡 시점의 1/2              * 타임아웃 → 윈도우 1로 초기화
+</span></span><span style="display:flex;"><span>                                              (ssthresh는 유지)
+</span></span></code></pre></div><ul>
+<li><strong>TCP Tahoe</strong>: 모든 혼잡(Timeout, 3 Dup ACK)에 대해 <strong>윈도우 크기를 1로 초기화</strong></li>
+<li><strong>TCP Reno</strong>: 3 Duplicate ACK와 타임아웃을 <strong>구분해서 대응</strong>
+<ul>
+<li>3 Dup ACK → 윈도우 1/2 후 선형 증가 (빠른 회복)</li>
+<li>타임아웃 → 윈도우 1로 초기화 (ssthresh는 유지)</li>
+</ul>
+</li>
+</ul>
+<h4 id="-오류-제어-error-control"><strong>③ 오류 제어 (Error Control)</strong>
+</h4><p>통신 중 오류·유실 발생 시 <strong>신뢰성 보장</strong>을 위한 제어</p>
+<ul>
+<li>
+<p><strong>오류를 감지하는 방법</strong>:</p>
+<ul>
+<li>수신부가 잘못된 데이터를 받았다는 <strong>NAK</strong> 메시지</li>
+<li><strong>3 Duplicate ACK</strong> 발생</li>
+<li>ACK를 받지 못해 <strong>타임아웃</strong> 발생</li>
+</ul>
+</li>
+<li>
+<p><strong>재전송 방식 (ARQ: Automatic Repeat reQuest)</strong>:</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>   [ Go-Back-N ARQ ]                      [ Selective-Repeat ARQ ]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   송신: [0][1][2][3][4][5]                송신: [0][1][2][3][4][5]
+</span></span><span style="display:flex;"><span>              ✗ (2번 유실)                          ✗ (2번 유실)
+</span></span><span style="display:flex;"><span>   수신: [0][1] ──── ACK 2 ────&gt;           수신: [0][1][_][3][4][5]
+</span></span><span style="display:flex;"><span>                                                 └─ ACK 2만 요청 ─┐
+</span></span><span style="display:flex;"><span>   재전송: [2][3][4][5] ←── 모두           재전송: [2] ←── 2번만
+</span></span><span style="display:flex;"><span>            다시 보냄                                다시 보냄
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   * 단순하지만 비효율                       * 효율적이지만 재정렬 필요
+</span></span></code></pre></div><ul>
+<li><strong>정지-대기</strong>: 타임아웃 발생 시 해당 패킷 재전송</li>
+<li><strong>Go-Back-N ARQ</strong>: 누락된 패킷부터 <strong>이후 모든 패킷 재전송</strong></li>
+<li><strong>Selective-Repeat ARQ</strong>: 누락된 패킷만 <strong>선택적으로 재전송</strong> (재정렬 로직 필요)</li>
+</ul>
+<hr>
+<h3 id="4-udp-user-datagram-protocol">4. UDP (User Datagram Protocol)
+</h3><p>전송 계층(L4)에 속하는 프로토콜로, <strong>비연결형 서비스</strong>와 <strong>빠른 전송</strong>을 지원</p>
+<blockquote>
+<p><strong>쉽게 이해하기</strong>: UDP는 &ldquo;전단지 뿌리기&quot;와 같음. 받는 사람이 받았는지 신경 쓰지 않고 빠르게 던짐. 영상 스트리밍, 게임처럼 약간의 손실보다 속도가 중요한 곳에 사용</p>
+</blockquote>
+<ul>
+<li><strong>주요 특징</strong>:
+<ul>
+<li>연결 과정 없는 <strong>비연결형 서비스</strong></li>
+<li><strong>데이터그램 방식</strong> (패킷마다 다른 경로 가능)</li>
+<li>패킷의 <strong>전송 순서 보장 X</strong></li>
+<li><strong>수신 여부 확인 X</strong></li>
+<li><strong>1:1, 1:N, N:N 통신</strong> 모두 가능</li>
+<li>신뢰성은 낮지만 <strong>속도가 빠름</strong></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="5-tcp-vs-udp-비교">5. TCP vs UDP 비교
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>구분</th>
+          <th>TCP</th>
+          <th>UDP</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>연결 방식</strong></td>
+          <td>연결형 (3-way 핸드셰이크)</td>
+          <td>비연결형</td>
+      </tr>
+      <tr>
+          <td><strong>패킷 교환 방식</strong></td>
+          <td>가상 회선 방식</td>
+          <td>데이터그램 방식</td>
+      </tr>
+      <tr>
+          <td><strong>전송 순서</strong></td>
+          <td>보장</td>
+          <td>보장하지 않음</td>
+      </tr>
+      <tr>
+          <td><strong>수신 여부 확인</strong></td>
+          <td>O</td>
+          <td>X</td>
+      </tr>
+      <tr>
+          <td><strong>통신 방식</strong></td>
+          <td>1:1</td>
+          <td>1:1, 1:N, N:N</td>
+      </tr>
+      <tr>
+          <td><strong>신뢰성</strong></td>
+          <td>높음</td>
+          <td>낮음</td>
+      </tr>
+      <tr>
+          <td><strong>속도</strong></td>
+          <td>느림</td>
+          <td>빠름</td>
+      </tr>
+      <tr>
+          <td><strong>사용 예시</strong></td>
+          <td>웹(HTTP), 이메일, 파일 전송</td>
+          <td>영상 스트리밍, 온라인 게임, DNS</td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<h3 id="6-udp의-오류-검출-체크섬">6. UDP의 오류 검출 (체크섬)
+</h3><p>UDP는 신뢰성이 낮지만, <strong>체크섬(Checksum)</strong> 방식으로 최소한의 오류 검출 가능</p>
+<blockquote>
+<p><strong>쉽게 이해하기</strong>: 영수증의 합계 금액과 같음. 항목들을 더한 값이 일치하지 않으면 뭔가 잘못된 것</p>
+</blockquote>
+<h4 id="체크섬-동작-과정"><strong>체크섬 동작 과정</strong>
+</h4><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>   [ 송신부 ]                                    [ 수신부 ]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   ① UDP 헤더 + IP 정보 + 데이터               ① 받은 모든 값 + 체크섬을
+</span></span><span style="display:flex;"><span>      를 모두 더함                                   다시 더함
+</span></span><span style="display:flex;"><span>                                                ↓
+</span></span><span style="display:flex;"><span>   ② 캐리(오버플로우) 발생 시                   ② 비트가 모두 1이면
+</span></span><span style="display:flex;"><span>      캐리를 떼서 다시 더함                          → 정상
+</span></span><span style="display:flex;"><span>                                                    아니면 → 오류
+</span></span><span style="display:flex;"><span>   ③ 1의 보수를 취해 체크섬 생성
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   ④ UDP 헤더의 체크섬 영역에 넣어 전송   ───────&gt;
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>체크섬 생성</strong>:</p>
+<ol>
+<li>UDP 헤더 + IP 헤더 일부(발신/수신 IP, 프로토콜 ID) + 데이터를 모두 더함</li>
+<li>캐리(오버플로우) 발생 시 떼어내 다시 더함</li>
+<li><strong>1의 보수</strong>를 취해 체크섬 생성</li>
+</ol>
+</li>
+<li>
+<p><strong>체크섬 검증</strong>:</p>
+<ul>
+<li>수신부는 체크섬 포함 모든 값을 더해 <strong>비트가 모두 1</strong>이 나오는지 확인</li>
+<li>모두 1이면 정상, 아니면 오류</li>
+</ul>
+</li>
+<li>
+<p><strong>한계점</strong>:</p>
+<ul>
+<li>데이터를 단순히 더해 비교하므로 <strong>100% 검출 불가</strong></li>
+<li>순서가 바뀌어도 합이 같으면 검출 못 함</li>
+<li>UDP의 체크섬은 <strong>선택 사항</strong> (값이 0이면 검증 안 함)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="7-주요-용어-정리">7. 주요 용어 정리
+</h3><ul>
+<li><strong>세그먼트 (Segment)</strong>: TCP에서 사용하는 데이터 전송 단위</li>
+<li><strong>데이터그램 (Datagram)</strong>: UDP에서 사용하는 독립적인 데이터 단위</li>
+<li><strong>핸드셰이킹 (Handshaking)</strong>: 통신을 시작·종료할 때 양쪽이 신호를 주고받아 연결을 제어하는 과정</li>
+<li><strong>윈도우 크기 (Window Size)</strong>: ACK 없이도 연속해서 보낼 수 있는 데이터의 최대 개수</li>
+<li><strong>ssthresh (Slow Start Threshold)</strong>: 느린 시작에서 혼잡 회피로 전환되는 임계점</li>
+<li><strong>ARQ (Automatic Repeat reQuest)</strong>: 오류 발생 시 자동으로 재전송을 요청하는 방식</li>
+<li><strong>체크섬 (Checksum)</strong>: 데이터의 무결성을 검증하기 위한 간단한 합계 값</li>
+</ul>
+</div>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Soyeon&#39;s Dev Log
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.748d0acf3bd5d18477b5028b83b70ecfa20eb15aefdff97697a330a2202721bf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

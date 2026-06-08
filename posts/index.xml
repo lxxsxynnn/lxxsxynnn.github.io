@@ -6,188 +6,642 @@
         <description>Recent content in Posts on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Fri, 05 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>[CS 스터디] 네트워크</title>
-        <link>http://localhost:1313/posts/cs-study-8/</link>
-        <pubDate>Fri, 05 Jun 2026 00:00:00 +0000</pubDate>
+        <lastBuildDate>Mon, 08 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[CS 스터디] TCP와 UDP</title>
+        <link>http://localhost:1313/posts/cs-study-9/</link>
+        <pubDate>Mon, 08 Jun 2026 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/posts/cs-study-8/</guid>
-        <description>&lt;h3 id=&#34;1-프로세스와-스레드&#34;&gt;1. 프로세스와 스레드
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;프로세스(Process)&lt;/strong&gt;: 컴퓨터에서 실행 중인 프로그램. OS로부터 독립된 메모리 영역(코드, 데이터, 스택, 힙)을 할당받음&lt;/p&gt;
+        <guid>http://localhost:1313/posts/cs-study-9/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h3 id=&#34;1-tcp-transmission-control-protocol&#34;&gt;1. TCP (Transmission Control Protocol)
+&lt;/h3&gt;&lt;p&gt;전송 계층(L4)에 속하는 프로토콜로, &lt;strong&gt;연결형 서비스&lt;/strong&gt;와 &lt;strong&gt;데이터의 신뢰성&lt;/strong&gt;을 보장함&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;쉽게 이해하기&lt;/strong&gt;: TCP는 &amp;ldquo;등기우편&amp;quot;과 같음. 상대방이 받았는지 확인하고, 순서대로 전달되며, 분실되면 다시 보냄. 대신 느림.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;프로그램&lt;/strong&gt;: 특정 작업을 수행하기 위한 명령어 집합 (정적 상태)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;메모리 영역 구조&lt;/strong&gt;:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    [ 높은 주소 ]
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ↓
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ┌────────────┐
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  │    스택     │ ← 지역 변수, 함수의 매개변수, 반환 주소 (LIFO)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ├────────────┤
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  │      ↓     │ ← 빈 공간 (Stack 영역)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ├────────────┤
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  │      ↑     │ ← 빈 공간 (Heap 영역)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ├────────────┤
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  │      힙     │ ← 동적 메모리 할당 (malloc, new 등 / FIFO)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ├────────────┤
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  │    데이터    │ ← 전역 변수, 정적 변수 (BSS/Data 영역으로 세분화)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ├────────────┤
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  │    코드     │ ← 실행할 기계어 명령어 (Text 영역)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  └────────────┘
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ↑
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    [ 낮은 주소 ]
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;스택 오버플로우&lt;/strong&gt;: 스택 영역이 힙 영역을 침범&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;힙 오버플로우&lt;/strong&gt;: 힙 영역이 스택 영역을 침범&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;스레드(Thread)&lt;/strong&gt;: 프로세스 내에서 실제로 작업을 수행하는 실행 흐름의 단위&lt;/p&gt;
+&lt;li&gt;&lt;strong&gt;주요 특징&lt;/strong&gt;:
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;특징&lt;/strong&gt;: 프로세스 내 힙, 데이터, 코드 영역 공유. 개별 스택 영역 할당&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;스레드 모델&lt;/strong&gt;:
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;다대일 모델&lt;/strong&gt;: 사용자 스레드 n개 - 커널 스레드 1개. 병렬성 이용 불가&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;일대일 모델&lt;/strong&gt;: 사용자 스레드 1개 - 커널 스레드 1개. 성능 저하 가능성 존재&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;다대다 모델&lt;/strong&gt;: n개 사용자 스레드 - m개 커널 스레드 매핑 (m &amp;lt;= n)&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;2-pcb-process-control-block&#34;&gt;2. PCB (Process Control Block)
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;PCB&lt;/strong&gt;: OS가 프로세스를 제어하기 위해 정보를 저장하는 블록&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;저장 정보&lt;/strong&gt;: 포인터, 프로세스 상태, PID(고유 ID), PC(다음 실행 명령어 주소), 레지스터, 메모리 제한, 열린 파일 목록 등&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;3-프로세스의-생성과-종료&#34;&gt;3. 프로세스의 생성과 종료
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;생성&lt;/strong&gt;: 부모 프로세스에서 &lt;code&gt;fork()&lt;/code&gt; 호출. 부모는 자식의 PID를, 자식은 0을 반환&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;종료 조건&lt;/strong&gt;:
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;exit()&lt;/code&gt; 호출을 통한 정상 종료&lt;/li&gt;
-&lt;li&gt;제한 시간 초과, 파일 검색 실패, 메모리 부족 등 오류 발생&lt;/li&gt;
-&lt;li&gt;부모 프로세스가 자식을 강제 종료 (자원 초과 사용 등)&lt;/li&gt;
+&lt;li&gt;송신부와 수신부의 연결을 먼저 확인하는 &lt;strong&gt;연결형 서비스&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;가상 회선 방식&lt;/strong&gt;의 패킷 교환 (모든 패킷이 같은 경로로 이동)&lt;/li&gt;
+&lt;li&gt;패킷의 &lt;strong&gt;전송 순서 보장&lt;/strong&gt; 및 &lt;strong&gt;수신 여부 확인&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;1:1 통신&lt;/strong&gt;만 가능&lt;/li&gt;
+&lt;li&gt;데이터 손실이 없어 &lt;strong&gt;신뢰성이 높음&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;절차가 많아 &lt;strong&gt;속도가 느림&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;4-프로세스-상태와-변화&#34;&gt;4. 프로세스 상태와 변화
-&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       [생성(New)]
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            ↓ 승인(Admit)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       [준비(Ready)] &amp;lt;─────── 인터럽트/타임아웃 ────────┐
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            ↓ 디스패치(Dispatch)                     │
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       [실행(Running)] ────────────────────&amp;gt; [종료(Terminated)]
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            │                                    완료
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            └──────── 입출력/이벤트 대기 ────────&amp;gt; [대기(Waiting)]
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                                   │
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;lt;──────── 입출력/이벤트 완료 ──────────────┘
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;상태 변화&lt;/strong&gt;:
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;생성 → 준비&lt;/strong&gt;: OS 승인을 받아 준비 큐(Ready Queue)에 추가됨&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;준비 → 실행&lt;/strong&gt;: 우선순위가 높은 프로세스가 디스패치되어 CPU 점유&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;실행 → 준비&lt;/strong&gt;: 타임 슬라이스 만료(Timeout)로 인한 상태 복귀&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;실행 → 대기&lt;/strong&gt;: 입출력 또는 특정 이벤트 대기 발생&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;대기 → 준비&lt;/strong&gt;: 대기 중인 이벤트가 완료되어 다시 CPU 할당 대기&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;5-멀티-프로세스와-멀티-스레드&#34;&gt;5. 멀티 프로세스와 멀티 스레드
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;동시성(Concurrency)&lt;/strong&gt;: 싱글 코어에서 작업을 번갈아 처리 (논리적 동시)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;병렬성(Parallelism)&lt;/strong&gt;: 멀티 코어에서 작업을 동시 처리 (물리적 동시)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;table&gt;
+&lt;h4 id=&#34;패킷-교환-방식-비교&#34;&gt;&lt;strong&gt;패킷 교환 방식 비교&lt;/strong&gt;
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [ 가상 회선 방식 (TCP) ]              [ 데이터그램 방식 (UDP) ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   송신부 → [P1][P2][P3] → 수신부          송신부 → [P1] → 경로A → 수신부
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                                → [P2] → 경로B → 수신부
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        (모두 같은 경로)                          → [P3] → 경로C → 수신부
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        (순서 보장)                              (순서가 뒤바뀔 수 있음)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;2-tcp-핸드셰이킹-handshaking&#34;&gt;2. TCP 핸드셰이킹 (Handshaking)
+&lt;/h3&gt;&lt;p&gt;연결형 서비스를 위해 송신부와 수신부가 &lt;strong&gt;연결을 맺고 끊는 과정&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;쉽게 이해하기&lt;/strong&gt;: 전화 통화를 시작할 때 &amp;ldquo;여보세요?&amp;rdquo; → &amp;ldquo;네 잘 들려요&amp;rdquo; → &amp;ldquo;좋아요 얘기 시작합시다&amp;quot;처럼 서로 연결을 확인하는 절차&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;주요-플래그flag&#34;&gt;&lt;strong&gt;주요 플래그(Flag)&lt;/strong&gt;
+&lt;/h4&gt;&lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;구분&lt;/th&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;멀티 프로세스&lt;/th&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;멀티 스레드&lt;/th&gt;
+          &lt;th&gt;플래그&lt;/th&gt;
+          &lt;th&gt;의미&lt;/th&gt;
       &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;안정성&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;높음 (한 프로세스 고장이 파급되지 않음)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;낮음 (한 스레드 오류가 프로세스 전체 영향)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;SYN&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;연결 생성 요청 (Synchronize)&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;자원 효율&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;낮음 (개별 메모리 할당으로 비용 높음)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;높음 (메모리 공유로 자원 절약)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;ACK&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;데이터 수신 확인 (Acknowledge)&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;콘텍스트 스위칭&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;무거움 (메모리 영역 교체 오버헤드 큼)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;가벼움 (공유 자원이 많아 전환 빠름)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;FIN&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;연결 종료 요청 (Finish)&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;통신(IPC)&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;복잡함 (별도 통신 메커니즘 필요)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;단순함 (공유 메모리 직접 접근)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;RST&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;연결 재설정 (Reset)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;PSH&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;빠른 응답이 필요한 데이터 즉시 전송 (Push)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;URG&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;우선순위가 높은 긴급 데이터 전송 (Urgent)&lt;/td&gt;
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id=&#34;6-문맥-교환-context-switching&#34;&gt;6. 문맥 교환 (Context Switching)
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;문맥 교환&lt;/strong&gt;: 인터럽트 발생 시 현재 프로세스 상태를 PCB에 저장하고 새 프로세스의 PCB 정보를 로드하는 과정&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;저장 위치&lt;/strong&gt;: PCB 내 프로그램 카운터(PC)와 스택 포인터(SP)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;프로세스 P0            운영체제(커널)            프로세스 P1
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │                     │                     │
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   실행중                   │                     │
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │   인터럽트/시스템 콜     │                     │
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├────────────────────&amp;gt;│                     │
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │                     │ P0 상태를 PCB0에 저장   │
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   대기중                   │                     │
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │                     │ PCB1에서 P1 상태 로드  │
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │                     │                     │
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │&amp;lt;────────────────────┤                     │
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │                     │                   실행중
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │                     │                     │
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;7-프로세스-동기화&#34;&gt;7. 프로세스 동기화
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;임계 영역(Critical Section)&lt;/strong&gt;: 공유 자원에 접근하여 실행 순서에 따라 결과가 변하는 코드 영역&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;동기화 조건&lt;/strong&gt;: 상호 배제(Mutual Exclusion), 진행(Progress), 한정된 대기(Bounded Waiting)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;기법&lt;/strong&gt;:
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;뮤텍스(Mutex)&lt;/strong&gt;: 락(Lock) 기반 제어. 대기 시 스핀락(Spin-lock) 사용 가능&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;세마포어(Semaphore)&lt;/strong&gt;: 카운트 기반 신호(Signaling) 제어&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;주요 개념&lt;/strong&gt;:
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;동기/비동기&lt;/strong&gt;: 작업 순서 보장 여부&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;블로킹/넌블로킹&lt;/strong&gt;: 작업 수행 시 대기 여부&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;8-교착-상태-deadlock&#34;&gt;8. 교착 상태 (Deadlock)
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;정의&lt;/strong&gt;: 프로세스들이 서로가 점유한 자원을 무한히 기다리는 상태&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;필요 충분 조건&lt;/strong&gt;: 상호 배제, 점유와 대기, 비선점, 환형 대기&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;해결 방안(부정)&lt;/strong&gt;:
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;상호 배제 부정&lt;/strong&gt;: 자원 공유 허용&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;점유와 대기 부정&lt;/strong&gt;: 실행 전 필요 자원 일괄 할당&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;비선점 부정&lt;/strong&gt;: 자원 요청 시 점유 자원 반납&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;환형 대기 부정&lt;/strong&gt;: 자원 번호 순서대로 요청&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;9-스레드-안전-thread-safe&#34;&gt;9. 스레드 안전 (Thread Safe)
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;정의&lt;/strong&gt;: 멀티 스레드 환경에서 공유 자원 접근 시 데이터 일관성이 보장되는 상태&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;달성 조건&lt;/strong&gt;: 상호 배제, 원자 연산(Atomic Operation), 재진입성(Reentrancy), 스레드 지역 저장소(TLS)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;10-ipc-inter-process-communication&#34;&gt;10. IPC (Inter-Process Communication)
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;공유 메모리&lt;/strong&gt;: 프로세스 간 공유 메모리 구간 설정 (가장 빠름)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;소켓&lt;/strong&gt;: 네트워크 기반 통신 (원격 시스템 가능)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;세마포어&lt;/strong&gt;: 동기화를 통한 자원 관리&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;파이프&lt;/strong&gt;: FIFO 단방향 통신 (양방향 시 파이프 2개 필요)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;메시지 큐&lt;/strong&gt;: 큐 자료구조 기반 메시지 전달&lt;/li&gt;
+&lt;h4 id=&#34;3-way-handshake-연결-수립&#34;&gt;&lt;strong&gt;3-way Handshake (연결 수립)&lt;/strong&gt;
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [ 송신부 (Client) ]                          [ 수신부 (Server) ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         │                                              │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ① ────│──── SYN, seq=N ────────────────────────────&amp;gt;│
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   SYN_SENT                                             │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         │                                              │ SYN_RECEIVED
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ②    │&amp;lt;──── SYN + ACK, seq=M, ack=N+1 ──────────────│
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         │                                              │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ESTABLISHED                                          │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ③ ────│──── ACK, ack=M+1 ────────────────────────&amp;gt;│
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         │                                              │ ESTABLISHED
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         │           ===== 연결 완료 =====              │
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;송신부 → 수신부&lt;/strong&gt;: 연결 요청(SYN)과 임의의 숫자 &lt;strong&gt;N&lt;/strong&gt;을 보냄 → &lt;code&gt;SYN_SENT&lt;/code&gt; 상태&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;수신부 → 송신부&lt;/strong&gt;: 요청 수락(SYN + ACK)과 &lt;strong&gt;N+1&lt;/strong&gt;, 임의의 숫자 &lt;strong&gt;M&lt;/strong&gt;을 보냄 → &lt;code&gt;SYN_RECEIVED&lt;/code&gt; 상태&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;송신부 → 수신부&lt;/strong&gt;: 수락 확인(ACK)과 &lt;strong&gt;M+1&lt;/strong&gt;을 보냄 → 양쪽 모두 &lt;code&gt;ESTABLISHED&lt;/code&gt; 상태&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id=&#34;11-좀비-및-고아-프로세스&#34;&gt;11. 좀비 및 고아 프로세스
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;좀비 프로세스&lt;/strong&gt;: 자식 종료 후 부모가 상태를 회수하지 않아 시스템에 남은 상태&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;고아 프로세스&lt;/strong&gt;: 부모가 먼저 종료된 상태(PID를 1로 바꿔주면 자식이 좀비 프로세스가 되는 걸 막을 수 있음)&lt;/li&gt;
+&lt;h4 id=&#34;4-way-handshake-연결-종료&#34;&gt;&lt;strong&gt;4-way Handshake (연결 종료)&lt;/strong&gt;
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [ 송신부 (Client) ]                          [ 수신부 (Server) ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         │                                              │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ① ────│──── FIN ───────────────────────────────────&amp;gt;│
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   FIN_WAIT1                                            │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         │                                              │ CLOSE_WAIT
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ②    │&amp;lt;──── ACK ───────────────────────────────────│ (종료 준비)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   FIN_WAIT2                                            │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         │                                              │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ③    │&amp;lt;──── FIN ───────────────────────────────────│ LAST_ACK
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         │                                              │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   TIME_WAIT                                            │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ④ ────│──── ACK ───────────────────────────────────&amp;gt;│
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         │                                              │ CLOSED
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   (일정 시간 대기 후)                                   │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   CLOSED                                               │
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;송신부 → 수신부&lt;/strong&gt;: 연결 종료 요청(FIN) → &lt;code&gt;FIN_WAIT1&lt;/code&gt; 상태&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;수신부 → 송신부&lt;/strong&gt;: 응답(ACK) → 수신부는 &lt;code&gt;CLOSE_WAIT&lt;/code&gt;, 송신부는 &lt;code&gt;FIN_WAIT2&lt;/code&gt; 상태&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;수신부 → 송신부&lt;/strong&gt;: 종료 준비 완료 후 FIN 전송 → &lt;code&gt;LAST_ACK&lt;/code&gt; 상태&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;송신부 → 수신부&lt;/strong&gt;: 응답(ACK) → &lt;code&gt;TIME_WAIT&lt;/code&gt; 상태, 일정 시간 후 &lt;code&gt;CLOSED&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;TIME_WAIT을 두는 이유&lt;/strong&gt;: 마지막 ACK가 유실되거나 늦게 도착하는 패킷에 대비하기 위함&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3-tcp-제어-방법&#34;&gt;3. TCP 제어 방법
+&lt;/h3&gt;&lt;h4 id=&#34;-흐름-제어-flow-control&#34;&gt;&lt;strong&gt;① 흐름 제어 (Flow Control)&lt;/strong&gt;
+&lt;/h4&gt;&lt;p&gt;송신부와 수신부의 &lt;strong&gt;처리 속도 차이&lt;/strong&gt;로 발생하는 데이터 손실을 방지&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;쉽게 이해하기&lt;/strong&gt;: 친구에게 공을 던지는데, 친구가 받는 속도보다 빠르게 던지면 공이 떨어짐. 친구가 받을 수 있는 속도에 맞춰서 던지는 것&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;정지-대기 (Stop-and-Wait)&lt;/strong&gt;:
+데이터 1개를 보내고 ACK를 받은 후에야 다음 데이터를 보냄
+→ 간단하지만 &lt;strong&gt;매우 비효율적&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;슬라이딩 윈도우 (Sliding Window)&lt;/strong&gt;:
+수신부가 정한 &lt;strong&gt;윈도우 크기&lt;/strong&gt;만큼 ACK를 기다리지 않고 연속 전송
+→ 동적으로 데이터 흐름 제어 가능
+→ 윈도우 크기는 3-way 핸드셰이킹 시 결정됨&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [ 슬라이딩 윈도우 동작 ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   윈도우 크기 = 4
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [P1][P2][P3][P4] P5  P6  P7  P8       ← 처음
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    └──── 전송 ────┘
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   P1 [P2][P3][P4][P5] P6  P7  P8       ← P1의 ACK 도착 시 윈도우 이동
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       └──── 전송 ────┘
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   P1  P2 [P3][P4][P5][P6] P7  P8       ← P2의 ACK 도착 시 윈도우 이동
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           └──── 전송 ────┘
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;-혼잡-제어-congestion-control&#34;&gt;&lt;strong&gt;② 혼잡 제어 (Congestion Control)&lt;/strong&gt;
+&lt;/h4&gt;&lt;p&gt;송신부의 전송 속도와 &lt;strong&gt;네트워크 속도 차이&lt;/strong&gt;로 발생하는 데이터 손실을 방지
+(혼잡: 네트워크에 패킷이 과도하게 많아진 상태)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;쉽게 이해하기&lt;/strong&gt;: 도로에 차가 너무 많으면 정체가 일어남. 차를 천천히 보내야 하는 상황&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;AIMD (Additive Increase / Multiplicative Decrease)&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;정상일 땐 윈도우 크기를 &lt;strong&gt;1씩 더해가며&lt;/strong&gt; 증가&lt;/li&gt;
+&lt;li&gt;손실 발생 시 윈도우 크기를 &lt;strong&gt;1/2로 감소&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;느린 시작 (Slow Start)&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;윈도우 크기를 1로 시작 → ACK 받을 때마다 &lt;strong&gt;2배씩 증가&lt;/strong&gt; (지수 함수)&lt;/li&gt;
+&lt;li&gt;혼잡 발생 시 윈도우 크기를 1로 초기화&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;혼잡 회피 (Congestion Avoidance)&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;임계점(ssthresh)에 도달하면 &lt;strong&gt;선형 증가&lt;/strong&gt;로 전환&lt;/li&gt;
+&lt;li&gt;타임아웃 발생 시 임계점을 현재 윈도우의 1/2로 설정 후 초기화&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;빠른 회복 (Fast Recovery)&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;혼잡 시 윈도우를 절반으로 줄인 뒤 &lt;strong&gt;선형 증가&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;첫 혼잡 시에는 AIMD 방식으로 동작&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;빠른 재전송 (Fast Retransmit)&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Duplicate ACK가 3번 발생하면 즉시 재전송&lt;/li&gt;
+&lt;li&gt;윈도우 크기를 1/2로 줄임&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;tcp-tahoe-vs-tcp-reno&#34;&gt;&lt;strong&gt;TCP Tahoe vs TCP Reno&lt;/strong&gt;
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [ TCP Tahoe ]                          [ TCP Reno ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   윈도우 크기                              윈도우 크기
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     │      /\                              │      /\        /\
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   6 │     /  \                           6 │     /  \      /  \
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     │    /    \                            │    /    \    /
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   4 │ ssthresh \                         4 │ ssthresh \  / ssthresh 변경
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     │  /        \                          │  /        \/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   2 │ /          \    /\                 2 │ /
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     │/            \  /  \                  │/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   1 │              \/    \               1 │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     └─────────────────────→ 시간            └─────────────────────→ 시간
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   * 혼잡 발생 시 → 윈도우 1로 초기화        * 3 Dup ACK → 윈도우 1/2, 선형 증가
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   * ssthresh = 혼잡 시점의 1/2              * 타임아웃 → 윈도우 1로 초기화
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                              (ssthresh는 유지)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;TCP Tahoe&lt;/strong&gt;: 모든 혼잡(Timeout, 3 Dup ACK)에 대해 &lt;strong&gt;윈도우 크기를 1로 초기화&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;TCP Reno&lt;/strong&gt;: 3 Duplicate ACK와 타임아웃을 &lt;strong&gt;구분해서 대응&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;3 Dup ACK → 윈도우 1/2 후 선형 증가 (빠른 회복)&lt;/li&gt;
+&lt;li&gt;타임아웃 → 윈도우 1로 초기화 (ssthresh는 유지)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;-오류-제어-error-control&#34;&gt;&lt;strong&gt;③ 오류 제어 (Error Control)&lt;/strong&gt;
+&lt;/h4&gt;&lt;p&gt;통신 중 오류·유실 발생 시 &lt;strong&gt;신뢰성 보장&lt;/strong&gt;을 위한 제어&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;오류를 감지하는 방법&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;수신부가 잘못된 데이터를 받았다는 &lt;strong&gt;NAK&lt;/strong&gt; 메시지&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;3 Duplicate ACK&lt;/strong&gt; 발생&lt;/li&gt;
+&lt;li&gt;ACK를 받지 못해 &lt;strong&gt;타임아웃&lt;/strong&gt; 발생&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;재전송 방식 (ARQ: Automatic Repeat reQuest)&lt;/strong&gt;:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [ Go-Back-N ARQ ]                      [ Selective-Repeat ARQ ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   송신: [0][1][2][3][4][5]                송신: [0][1][2][3][4][5]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;              ✗ (2번 유실)                          ✗ (2번 유실)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   수신: [0][1] ──── ACK 2 ────&amp;gt;           수신: [0][1][_][3][4][5]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                                 └─ ACK 2만 요청 ─┐
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   재전송: [2][3][4][5] ←── 모두           재전송: [2] ←── 2번만
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            다시 보냄                                다시 보냄
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   * 단순하지만 비효율                       * 효율적이지만 재정렬 필요
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;정지-대기&lt;/strong&gt;: 타임아웃 발생 시 해당 패킷 재전송&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Go-Back-N ARQ&lt;/strong&gt;: 누락된 패킷부터 &lt;strong&gt;이후 모든 패킷 재전송&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Selective-Repeat ARQ&lt;/strong&gt;: 누락된 패킷만 &lt;strong&gt;선택적으로 재전송&lt;/strong&gt; (재정렬 로직 필요)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;4-udp-user-datagram-protocol&#34;&gt;4. UDP (User Datagram Protocol)
+&lt;/h3&gt;&lt;p&gt;전송 계층(L4)에 속하는 프로토콜로, &lt;strong&gt;비연결형 서비스&lt;/strong&gt;와 &lt;strong&gt;빠른 전송&lt;/strong&gt;을 지원&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;쉽게 이해하기&lt;/strong&gt;: UDP는 &amp;ldquo;전단지 뿌리기&amp;quot;와 같음. 받는 사람이 받았는지 신경 쓰지 않고 빠르게 던짐. 영상 스트리밍, 게임처럼 약간의 손실보다 속도가 중요한 곳에 사용&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;주요 특징&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;연결 과정 없는 &lt;strong&gt;비연결형 서비스&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;데이터그램 방식&lt;/strong&gt; (패킷마다 다른 경로 가능)&lt;/li&gt;
+&lt;li&gt;패킷의 &lt;strong&gt;전송 순서 보장 X&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;수신 여부 확인 X&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;1:1, 1:N, N:N 통신&lt;/strong&gt; 모두 가능&lt;/li&gt;
+&lt;li&gt;신뢰성은 낮지만 &lt;strong&gt;속도가 빠름&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;5-tcp-vs-udp-비교&#34;&gt;5. TCP vs UDP 비교
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;구분&lt;/th&gt;
+          &lt;th&gt;TCP&lt;/th&gt;
+          &lt;th&gt;UDP&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;연결 방식&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;연결형 (3-way 핸드셰이크)&lt;/td&gt;
+          &lt;td&gt;비연결형&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;패킷 교환 방식&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;가상 회선 방식&lt;/td&gt;
+          &lt;td&gt;데이터그램 방식&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;전송 순서&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;보장&lt;/td&gt;
+          &lt;td&gt;보장하지 않음&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;수신 여부 확인&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;O&lt;/td&gt;
+          &lt;td&gt;X&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;통신 방식&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;1:1&lt;/td&gt;
+          &lt;td&gt;1:1, 1:N, N:N&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;신뢰성&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;높음&lt;/td&gt;
+          &lt;td&gt;낮음&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;속도&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;느림&lt;/td&gt;
+          &lt;td&gt;빠름&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;사용 예시&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;웹(HTTP), 이메일, 파일 전송&lt;/td&gt;
+          &lt;td&gt;영상 스트리밍, 온라인 게임, DNS&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;6-udp의-오류-검출-체크섬&#34;&gt;6. UDP의 오류 검출 (체크섬)
+&lt;/h3&gt;&lt;p&gt;UDP는 신뢰성이 낮지만, &lt;strong&gt;체크섬(Checksum)&lt;/strong&gt; 방식으로 최소한의 오류 검출 가능&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;쉽게 이해하기&lt;/strong&gt;: 영수증의 합계 금액과 같음. 항목들을 더한 값이 일치하지 않으면 뭔가 잘못된 것&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;체크섬-동작-과정&#34;&gt;&lt;strong&gt;체크섬 동작 과정&lt;/strong&gt;
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [ 송신부 ]                                    [ 수신부 ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ① UDP 헤더 + IP 정보 + 데이터               ① 받은 모든 값 + 체크섬을
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      를 모두 더함                                   다시 더함
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                                ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ② 캐리(오버플로우) 발생 시                   ② 비트가 모두 1이면
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      캐리를 떼서 다시 더함                          → 정상
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                                    아니면 → 오류
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ③ 1의 보수를 취해 체크섬 생성
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ④ UDP 헤더의 체크섬 영역에 넣어 전송   ───────&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;체크섬 생성&lt;/strong&gt;:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;UDP 헤더 + IP 헤더 일부(발신/수신 IP, 프로토콜 ID) + 데이터를 모두 더함&lt;/li&gt;
+&lt;li&gt;캐리(오버플로우) 발생 시 떼어내 다시 더함&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;1의 보수&lt;/strong&gt;를 취해 체크섬 생성&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;체크섬 검증&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;수신부는 체크섬 포함 모든 값을 더해 &lt;strong&gt;비트가 모두 1&lt;/strong&gt;이 나오는지 확인&lt;/li&gt;
+&lt;li&gt;모두 1이면 정상, 아니면 오류&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;한계점&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;데이터를 단순히 더해 비교하므로 &lt;strong&gt;100% 검출 불가&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;순서가 바뀌어도 합이 같으면 검출 못 함&lt;/li&gt;
+&lt;li&gt;UDP의 체크섬은 &lt;strong&gt;선택 사항&lt;/strong&gt; (값이 0이면 검증 안 함)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;7-주요-용어-정리&#34;&gt;7. 주요 용어 정리
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;세그먼트 (Segment)&lt;/strong&gt;: TCP에서 사용하는 데이터 전송 단위&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;데이터그램 (Datagram)&lt;/strong&gt;: UDP에서 사용하는 독립적인 데이터 단위&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;핸드셰이킹 (Handshaking)&lt;/strong&gt;: 통신을 시작·종료할 때 양쪽이 신호를 주고받아 연결을 제어하는 과정&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;윈도우 크기 (Window Size)&lt;/strong&gt;: ACK 없이도 연속해서 보낼 수 있는 데이터의 최대 개수&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ssthresh (Slow Start Threshold)&lt;/strong&gt;: 느린 시작에서 혼잡 회피로 전환되는 임계점&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ARQ (Automatic Repeat reQuest)&lt;/strong&gt;: 오류 발생 시 자동으로 재전송을 요청하는 방식&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;체크섬 (Checksum)&lt;/strong&gt;: 데이터의 무결성을 검증하기 위한 간단한 합계 값&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</description>
+        </item>
+        <item>
+        <title>[코드트리] 갭체크로 한 달 만에 약점 유형 극복한 후기</title>
+        <link>http://localhost:1313/posts/codetree-subscription-5/</link>
+        <pubDate>Mon, 08 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/codetree-subscription-5/</guid>
+        <description>&lt;p&gt;지난 5월 초에 코드트리 갭체크로 약점을 진단받고, 한 달 동안 코드트리에서 추천해준 학습 경로를 따라 꾸준히 공부했습니다.&lt;/p&gt;
+&lt;p&gt;그동안의 공부가 실제로 결과로 이어졌는지 궁금해서 오늘 2차 갭체크를 다시 받아봤는데요, 1차 결과랑 같이 비교해보니 변화가 꽤 뚜렷하게 보였습니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;👉 코드트리 바로가기&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.codetree.ai&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;코드트리(Codetree)&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1차-vs-2차-갭체크-비포--애프터&#34;&gt;1차 vs 2차 갭체크: 비포 &amp;amp; 애프터
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/gapcheck-before1.png&#34; style=&#34;width:50%;&#34; /&gt;&lt;img src=&#34;http://localhost:1313/images/gapcheck-before2.png&#34; style=&#34;width:50%;&#34; /&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src=&#34;http://localhost:1313/images/gapcheck-after1.png&#34; style=&#34;width:50%;&#34; /&gt;&lt;img src=&#34;http://localhost:1313/images/gapcheck-after2.png&#34; style=&#34;width:50%;&#34; /&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;결과 화면을 열자마자 약점으로 잡힌 영역 자체가 한 달 전이랑 달라졌다는 게 한 눈에 들어왔습니다.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;영역&lt;/th&gt;
+          &lt;th&gt;1차 (2026-05-07)&lt;/th&gt;
+          &lt;th&gt;2차 (2026-06-08)&lt;/th&gt;
+          &lt;th&gt;변화&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;시뮬레이션 I&lt;/td&gt;
+          &lt;td&gt;🟠 불안정&lt;/td&gt;
+          &lt;td&gt;✅ 약점 목록에서 제외&lt;/td&gt;
+          &lt;td&gt;안정화 달성&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;완전탐색 I&lt;/td&gt;
+          &lt;td&gt;🔴 부족&lt;/td&gt;
+          &lt;td&gt;🟠 불안정&lt;/td&gt;
+          &lt;td&gt;한 단계 상승&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;완전탐색 II&lt;/td&gt;
+          &lt;td&gt;(미진단)&lt;/td&gt;
+          &lt;td&gt;🔴 부족&lt;/td&gt;
+          &lt;td&gt;신규 진단&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;코드트리의-진단-변화-완전탐색-i&#34;&gt;코드트리의 진단 변화 (완전탐색 I)
+&lt;/h3&gt;&lt;h4 id=&#34;1차-진단-부족&#34;&gt;1차 진단 (부족)
+&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;문제의 모든 가능한 경우를 꼼꼼히 탐색하는 기본 원리조차 확실하게 이해하지 못해, 단순한 문제에서도 완전 탐색 알고리즘을 올바르게 적용하기 어려운 상태&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;2차-진단-불안정&#34;&gt;2차 진단 (불안정)
+&lt;/h4&gt;&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;기본적인 완전 탐색 알고리즘은 구현할 수 있으나, 모든 경우의 수를 효과적으로 나열하고 불필요한 중복 연산을 제거하는 최적화 기법 적용에는 미흡한 상황&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;한 달 전에는 &amp;ldquo;기본 원리부터 모른다&amp;quot;는 진단이었는데, 이번에는 &amp;ldquo;구현은 되는데 최적화가 부족하다&amp;quot;로 바뀐 게 신기했습니다.&lt;br&gt;
+한 칸이지만 분명히 위로 올라왔다는 게 글로 적혀 있으니 그동안 푼 문제들이 머릿속에 헛돌고 있던 건 아니었구나 싶었습니다.&lt;/p&gt;
+&lt;h3 id=&#34;풀이-속도-변화&#34;&gt;풀이 속도 변화
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;문제 번호&lt;/th&gt;
+          &lt;th&gt;1차 소요 시간&lt;/th&gt;
+          &lt;th&gt;2차 소요 시간&lt;/th&gt;
+          &lt;th&gt;평균 대비&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;1번&lt;/td&gt;
+          &lt;td&gt;40초&lt;/td&gt;
+          &lt;td&gt;38초&lt;/td&gt;
+          &lt;td&gt;상위 89.8%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2번&lt;/td&gt;
+          &lt;td&gt;2분 13초&lt;/td&gt;
+          &lt;td&gt;2분 55초&lt;/td&gt;
+          &lt;td&gt;상위 76.5%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;3번&lt;/td&gt;
+          &lt;td&gt;—&lt;/td&gt;
+          &lt;td&gt;1분 23초&lt;/td&gt;
+          &lt;td&gt;상위 90.7%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;4번&lt;/td&gt;
+          &lt;td&gt;4분 42초&lt;/td&gt;
+          &lt;td&gt;33초&lt;/td&gt;
+          &lt;td&gt;상위 96.8%&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;5번&lt;/td&gt;
+          &lt;td&gt;20분 (미해결)&lt;/td&gt;
+          &lt;td&gt;17분 18초 해결&lt;/td&gt;
+          &lt;td&gt;상위 13.5%&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;지난-한-달-코드트리에서-무엇을-했나&#34;&gt;지난 한 달, 코드트리에서 무엇을 했나
+&lt;/h2&gt;&lt;p&gt;막연히 &amp;ldquo;더 열심히 풀자&amp;quot;가 아니라, 코드트리 안의 기능들을 하나씩 붙여가면서 약점을 메워왔습니다.&lt;/p&gt;
+&lt;h3 id=&#34;-추천-학습-경로-따라가기-시뮬레이션-집중-학습&#34;&gt;① 추천 학습 경로 따라가기 (시뮬레이션 집중 학습)
+&lt;/h3&gt;&lt;p&gt;1차 갭체크 결과 화면을 보면 트레일(T0~T6) 형태로 학습 경로를 바로 추천해줍니다.&lt;br&gt;
+저는 시뮬레이션 트레일부터 먼저 잡고 다음 순서로 따라갔습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;시간 계산 → 좌표 이동 → 배열 순회 (기본기)&lt;/li&gt;
+&lt;li&gt;원형 배열 → 시계/반시계 방향 처리 → 범위 초과 예외 (응용)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;앞 문제에서 익힌 개념을 다음 문제에서 다시 쓰는 식이라서, 어디까지 알고 어디서부터 모르는지가 자연스럽게 정리됐던 것 같습니다.&lt;/p&gt;
+&lt;h3 id=&#34;-깃허브-연동--알림톡으로-1일-1코테-루틴-만들기&#34;&gt;② 깃허브 연동 + 알림톡으로 1일 1코테 루틴 만들기
+&lt;/h3&gt;&lt;p&gt;학습 경로가 아무리 잘 짜여 있어도 매일 안 풀면 의미가 없어서, 루틴을 만들어주는 기능 두 개를 적극적으로 활용했습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;깃허브 연동으로 푼 문제가 자동 커밋 → 잔디 심는 재미 때문에 하루도 안빠지고 문제를 풀었습니다!&lt;/li&gt;
+&lt;li&gt;학습 리마인더 알림톡이 아침/저녁으로 와서 한 달 동안 빠진 날이 없었어요&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;ldquo;오늘 풀까 말까&amp;rdquo; 고민할 틈 자체를 안 주는 게 이 두 기능의 장점인 것 같아요.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;약점이-강점으로-바뀌고-있다고-느낀-순간&#34;&gt;&amp;ldquo;약점이 강점으로 바뀌고 있다&amp;quot;고 느낀 순간
+&lt;/h2&gt;&lt;p&gt;이번에 2차 갭체크를 풀면서 한 달 전이랑 달라졌다는 걸 체감한 순간이 몇 번 있었습니다.&lt;/p&gt;
+&lt;h3 id=&#34;4번-문제--4분-42초가-33초가-되던-순간&#34;&gt;4번 문제 — 4분 42초가 33초가 되던 순간
+&lt;/h3&gt;&lt;p&gt;1차 때 4분 42초가 걸렸던 시뮬레이션 유형이 이번엔 33초 만에 풀렸습니다.&lt;br&gt;
+문제를 읽자마자 &amp;ldquo;아 이거 원형 배열 패턴이네&amp;rdquo; 하면서 손이 먼저 움직였는데, 한 달 전에 같은 유형 앞에서 한참 헤매던 게 생각나서 좀 신기했습니다.&lt;/p&gt;
+&lt;h3 id=&#34;5번-문제--포기에서-완주로&#34;&gt;5번 문제 — &amp;lsquo;포기&amp;rsquo;에서 &amp;lsquo;완주&amp;rsquo;로
+&lt;/h3&gt;&lt;p&gt;가장 의미 있었던 건 5번 문제였는데요.&lt;br&gt;
+1차 때 20분을 들이고도 못 풀었던 그 유형을 이번엔 17분 18초 만에 끝까지 풀어냈습니다.&lt;/p&gt;
+&lt;p&gt;평균 대비 속도(13.5%)는 여전히 느리지만, &amp;ldquo;시간 안에 못 끝낸다&amp;quot;에서 &amp;ldquo;느려도 끝까지 풀어낸다&amp;quot;로 바뀐 게 더 큰 변화였습니다.&lt;br&gt;
+시뮬레이션을 풀면서 익숙해진 &amp;lsquo;경우를 빠뜨리지 않고 나열하는 감각&amp;rsquo;이 완전탐색 쪽에도 영향을 준 것 같습니다.&lt;/p&gt;
+&lt;h3 id=&#34;시뮬레이션-i이-약점-목록에서-사라진-순간&#34;&gt;시뮬레이션 I이 약점 목록에서 사라진 순간
+&lt;/h3&gt;&lt;p&gt;마지막으로 결과 화면을 봤을 때 시뮬레이션 I 항목이 아예 사라진 걸 보고 가장 뿌듯했습니다.&lt;br&gt;
+한 달 전엔 가장 불안한 영역이라고 진단받았던 게 약점 목록에서 빠져 있는 걸 보니, 그동안 따라간 학습 경로가 맞는 방향이었구나 싶었습니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;코드트리에서-달성할-최종-학습-목표와-다짐&#34;&gt;코드트리에서 달성할 최종 학습 목표와 다짐
+&lt;/h2&gt;&lt;p&gt;이번 갭체크 비교를 해보고 나니 &amp;ldquo;코테를 더 잘하고 싶다&amp;quot;는 막연한 바람이 좀 더 구체적인 로드맵으로 정리됐습니다.&lt;/p&gt;
+&lt;h3 id=&#34;단기-목표-7월&#34;&gt;단기 목표 (~7월)
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;완전탐색 I 안정화: 가지치기·중복 제거 등 최적화 기법 익히기&lt;/li&gt;
+&lt;li&gt;완전탐색 II 입문: 백트래킹, 조합·순열 탐색 패턴 손에 붙이기&lt;/li&gt;
+&lt;li&gt;시뮬레이션 안정 유지: 주기적으로 복습하면서 감 안 잃기&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;중기-목표-9월&#34;&gt;중기 목표 (~9월)
+&lt;/h3&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;DP I 진입: 완전탐색이 안정되면 자연스럽게 다음 트레일로 넘어가기&lt;/li&gt;
+&lt;li&gt;트레일 T6 완주: 코드트리 트레일을 끝까지 따라가서 빈 칸 메우기&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;최종-목표&#34;&gt;최종 목표
+&lt;/h3&gt;&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;갭체크 전 영역 &amp;lsquo;안정&amp;rsquo; 달성 — 약점 목록이 비어 있는 결과 화면 보기&lt;/li&gt;
+&lt;li&gt;실전 코딩테스트 합격&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;다짐&#34;&gt;다짐
+&lt;/h3&gt;&lt;p&gt;1차 갭체크가 약점을 알게 해준 시간이었다면, 이번 2차는 그동안의 공부 방향이 맞았는지 확인해준 시간이었습니다.&lt;br&gt;
+다음에 3차, 4차 갭체크를 받을 때도 비포 &amp;amp; 애프터 비교가 가능할 정도로 꾸준히 풀어보려고 합니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;마치며&#34;&gt;마치며
+&lt;/h2&gt;&lt;p&gt;코딩테스트 공부는 양으로 밀어붙이기 쉬운데, 방향이 어긋나면 시간만 흘러간다는 걸 이번에 다시 느꼈어요.&lt;br&gt;
+코드트리 갭체크를 한 달 간격으로 두 번 받아보니 약점 진단 → 추천 경로 → 루틴 기능 → 재진단으로 이어지는 흐름이 잘 짜여 있다는 게 보입니다.&lt;/p&gt;
+&lt;p&gt;본인의 약점을 객관적으로 확인하고 싶거나, 지금 하는 공부가 맞는 방향인지 헷갈리는 분들은 한 번 갭체크부터 받아보는 걸 추천드려요!&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;👉 코드트리에서 갭체크 받아보기&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.codetree.ai&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;코드트리(Codetree)&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>[CS 스터디] 네트워크 계층</title>
+        <link>http://localhost:1313/posts/cs-study-8/</link>
+        <pubDate>Fri, 05 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/cs-study-8/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h3 id=&#34;1-osi-7계층-osi-7-layer-model&#34;&gt;1. OSI 7계층 (OSI 7 Layer Model)
+&lt;/h3&gt;&lt;p&gt;네트워크 통신이 이뤄지는 과정을 7단계로 나눈 네트워크 표준 모델&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;데이터 흐름&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;송신부&lt;/strong&gt;: 높은 계층(L7)에서 낮은 계층(L1)으로 데이터를 전달함&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;수신부&lt;/strong&gt;: 가장 낮은 계층(L1)에 도달한 데이터를 다시 높은 계층(L7)으로 전달함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;캡슐화 및 역캡슐화&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;각 계층은 독립적이며, 데이터를 송신할 때 각 계층에서 필요한 정보를 추가하여 데이터를 가공함&lt;/li&gt;
+&lt;li&gt;제어 정보를 담은 &lt;strong&gt;헤더(Header)&lt;/strong&gt; 나 &lt;strong&gt;트레일러(Trailer)&lt;/strong&gt; 를 붙이는 과정을 &lt;strong&gt;캡슐화(Encapsulation)&lt;/strong&gt; 라고 함&lt;/li&gt;
+&lt;li&gt;수신 측의 같은 계층에서는 해당 정보를 확인하고 제거하며 상위 계층으로 전달하는 &lt;strong&gt;역캡슐화(Decapsulation)&lt;/strong&gt; 를 수행함&lt;/li&gt;
+&lt;li&gt;이를 통해 데이터 호환성을 높이고 오류의 영향을 최소화할 수 있음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;계층-구조-및-캡슐화-흐름-도식화&#34;&gt;&lt;strong&gt;계층 구조 및 캡슐화 흐름 도식화&lt;/strong&gt;
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      [ 송신부 (Sender) ]                          [ 수신부 (Receiver) ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    L7. 응용       [ Data ]             │        L7. 응용       [ Data ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                     ↓                 │                         ↑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    L6. 표현    [H6][ Data ]            │        L6. 표현    [H6][ Data ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                     ↓                 │        (역캡슐화)          ↑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    L5. 세션    [H5][ Data ]          (수신)      L5. 세션    [H5][ Data ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                     ↓                 │                          ↑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    L4. 전송    [H4][ Data ]            │        L4. 전송    [H4][ Data ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (캡슐화)       ↓                   │                         ↑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    L3. 네트워크 [H3][ Data ]            │        L3. 네트워크  [H3][ Data ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                     ↓                 │                         ↑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    L2. 데이터  [H2][ Data ][T2]         │        L2. 데이터  [H2][ Data ][T2]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                     ↓                 │                         ↑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    L1. 물리    [ 010101... ]  ───── (전송) ────&amp;gt;  L1. 물리    [ 010101... ]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;계층별 역할&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;7계층 (응용)&lt;/strong&gt;: HTTP, FTP 등의 프로토콜을 응용 프로그램의 UI를 통해 제공&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;6계층 (표현)&lt;/strong&gt;: 데이터를 표준화된 형식으로 변경 및 암호화, 압축 수행&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;5계층 (세션)&lt;/strong&gt;: 세션의 유지 및 해제 등 응용 프로그램 간 통신 제어와 동기화&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;4계층 (전송)&lt;/strong&gt;: 신뢰성 있는 데이터를 전달하기 위한 계층. TCP/UDP 전송 방식과 포트 번호 결정&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;3계층 (네트워크)&lt;/strong&gt;: 데이터를 목적지까지 보내기 위한 최적 경로를 선택하는 &lt;strong&gt;라우팅&lt;/strong&gt; 수행 (IP, 라우터)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;2계층 (데이터 링크)&lt;/strong&gt;: 데이터 흐름 관리 및 오류 검출, 복구 수행 (MAC, 스위치)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;1계층 (물리)&lt;/strong&gt;: 데이터를 비트 단위(0과 1)로 변환하여 전송하거나 전기 신호를 데이터로 복원 (허브, 리피터)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;2-tcpip-4계층-tcpip-4-layer-model&#34;&gt;2. TCP/IP 4계층 (TCP/IP 4 Layer Model)
+&lt;/h3&gt;&lt;p&gt;인터넷에서 데이터를 주고받기 위한 실제 네트워크 프로토콜 스택&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;특징&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;TCP(패킷 전송 보장)와 IP(빠른 경로 전송)를 중심으로 OSI 7계층을 단순화한 모델&lt;/li&gt;
+&lt;li&gt;각 계층마다 데이터를 부르는 전송 단위(PDU)가 다름&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;계층별-데이터-흐름-및-전송-단위&#34;&gt;&lt;strong&gt;계층별 데이터 흐름 및 전송 단위&lt;/strong&gt;
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    [ 계층 (Layer) ]           [ 전송 단위 (PDU) ]        [ 주요 프로토콜 ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   4. 응용 (Application)   ──       Data        ──    HTTP, HTTPS, DNS, FTP
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   3. 전송 (Transport)     ──     Segment       ──    TCP, UDP
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   2. 인터넷 (Internet)     ──  Packet/Datagram  ──    IP, ICMP, ARP
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   1. 네트워크 인터페이스      ──      Frame        ──    Ethernet, Wi-Fi, MAC
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;계층별 상세&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;4. 응용 계층&lt;/strong&gt;: 사용자와 소프트웨어를 연결해 주는 계층으로 다양한 서비스 제공&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;3. 전송 계층&lt;/strong&gt;: 데이터의 신뢰성을 보장하며, 포트 번호를 통해 적절한 응용 프로그램에 데이터 전달&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;2. 인터넷 계층&lt;/strong&gt;: 데이터를 최종 목적지까지 도달하게 함&lt;br&gt;
+전송 계층 데이터에 헤더를 붙여 &lt;strong&gt;패킷&lt;/strong&gt;으로 캡슐화&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;1. 네트워크 인터페이스 계층&lt;/strong&gt;: 데이터를 전기 신호로 변환하고 MAC 주소를 사용하여 물리적 기기에 데이터 전달&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3-주요-용어-정리&#34;&gt;3. 주요 용어 정리
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;패킷 (Packet)&lt;/strong&gt;: 네트워크에서 분할하여 전송하는 데이터의 기본 단위&lt;br&gt;
+송수신 주소 정보 포함&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MAC 주소&lt;/strong&gt;: 하드웨어 고유의 48비트 주소&lt;br&gt;
+네트워크 인터페이스 계층(L1/L2)에서 사용&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;IP 주소&lt;/strong&gt;: 네트워크 장치를 식별하기 위한 논리적 주소&lt;br&gt;
+&lt;strong&gt;네트워크부&lt;/strong&gt;(네트워크 구분)와 &lt;strong&gt;호스트부&lt;/strong&gt;(기기 구분)로 나뉨&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;서브넷 마스크 (Subnet Mask)&lt;/strong&gt;: IP 주소에서 네트워크 영역과 호스트 영역을 구분하기 위해 사용하는 비트 마스크&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
 </description>
         </item>
         <item>
@@ -196,182 +650,334 @@
         <pubDate>Fri, 05 Jun 2026 00:00:00 +0000</pubDate>
         
         <guid>http://localhost:1313/posts/cs-study-7/</guid>
-        <description>&lt;h3 id=&#34;1-프로세스와-스레드&#34;&gt;1. 프로세스와 스레드
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;프로세스(Process)&lt;/strong&gt;: 컴퓨터에서 실행 중인 프로그램. OS로부터 독립된 메모리 영역(코드, 데이터, 스택, 힙)을 할당받음&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;프로그램&lt;/strong&gt;: 특정 작업을 수행하기 위한 명령어 집합 (정적 상태)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;메모리 영역 구조&lt;/strong&gt;:&lt;/li&gt;
+        <description>&lt;h3 id=&#34;1-요약&#34;&gt;1. 요약
+&lt;/h3&gt;&lt;h4 id=&#34;메모리-및-시스템-기초&#34;&gt;메모리 및 시스템 기초
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;메모리 계층 구조&lt;/strong&gt;: 속도, 용량, 비용의 효율성을 위해 계층화함
+(레지스터 &amp;gt; 캐시 &amp;gt; RAM &amp;gt; HDD/SSD)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;캐시 메모리&lt;/strong&gt;: CPU와 RAM 사이의 속도 차이를 극복하기 위한 고속 메모리&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;시스템 콜&lt;/strong&gt;: 프로세스가 운영체제 커널의 서비스를 요청하기 위한 인터페이스&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    [ 높은 주소 ]
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ↓
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ┌────────────┐
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  │    스택     │ ← 지역 변수, 함수의 매개변수, 반환 주소 (LIFO)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ├────────────┤
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  │      ↓     │ ← 빈 공간 (Stack 영역)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ├────────────┤
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  │      ↑     │ ← 빈 공간 (Heap 영역)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ├────────────┤
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  │      힙     │ ← 동적 메모리 할당 (malloc, new 등 / FIFO)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ├────────────┤
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  │    데이터    │ ← 전역 변수, 정적 변수 (BSS/Data 영역으로 세분화)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ├────────────┤
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  │    코드     │ ← 실행할 기계어 명령어 (Text 영역)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  └────────────┘
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ↑
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    [ 낮은 주소 ]
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;스택 오버플로우&lt;/strong&gt;: 스택 영역이 힙 영역을 침범&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;힙 오버플로우&lt;/strong&gt;: 힙 영역이 스택 영역을 침범&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;스레드(Thread)&lt;/strong&gt;: 프로세스 내에서 실제로 작업을 수행하는 실행 흐름의 단위&lt;/p&gt;
+&lt;h4 id=&#34;프로세스와-스레드&#34;&gt;프로세스와 스레드
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;프로세스&lt;/strong&gt;: 실행 중인 프로그램의 인스턴스&lt;br&gt;
+독립된 메모리 공간(코드, 데이터, 힙, 스택)과 PCB를 가짐&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;스레드&lt;/strong&gt;: 프로세스 내 실행 흐름의 단위. 스택을 제외한 나머지 메모리 영역을 공유함&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;멀티 프로세스 vs 멀티 스레드&lt;/strong&gt;:
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;특징&lt;/strong&gt;: 프로세스 내 힙, 데이터, 코드 영역 공유. 개별 스택 영역 할당&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;스레드 모델&lt;/strong&gt;:
+&lt;li&gt;&lt;strong&gt;멀티 프로세스&lt;/strong&gt;: 안정성이 높지만 문맥 교환 오버헤드와 IPC 비용이 큼&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;멀티 스레드&lt;/strong&gt;: 자원 공유로 효율적이나 동기화 이슈(Race Condition) 주의 필요&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;콘텍스트 스위칭&lt;/strong&gt;: CPU 제어권을 넘길 때 현재 상태를 저장하고 새 상태를 로드하는 과정&lt;br&gt;
+(스레드 간 전환이 프로세스 간 전환보다 빠름)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;동기화-및-교착-상태&#34;&gt;동기화 및 교착 상태
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;프로세스 동기화&lt;/strong&gt;: 공유 자원 접근 시 데이터 일관성을 보장하기 위한 기법(뮤텍스, 세마포어 등)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;교착 상태(Deadlock)&lt;/strong&gt;: 서로 자원을 점유한 채 대기하며 진행이 멈춘 상태
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;4가지 발생 조건&lt;/strong&gt;: 상호 배제, 점유와 대기, 비선점, 환형 대기&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;스케줄링-및-메모리-관리&#34;&gt;스케줄링 및 메모리 관리
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;CPU 스케줄링&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;비선점형&lt;/strong&gt;: FCFS, SJF (뺏기 불가능)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;선점형&lt;/strong&gt;: RR, SRTF (OS가 강제 회수 가능)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;메모리 할당&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;페이징&lt;/strong&gt;: 고정 크기로 분할. 외부 단편화 해결, 내부 단편화 가능성&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;세그먼테이션&lt;/strong&gt;: 논리 단위로 분할. 내부 단편화 해결, 외부 단편화 가능성&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;가상 메모리&lt;/strong&gt;: 물리 메모리 한계를 극복하기 위해 보조 기억 장치를 활용하는 기술
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;요구 페이징&lt;/strong&gt;: 필요한 페이지만 메모리에 로드&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;스레싱&lt;/strong&gt;: 페이지 폴트 과다로 인해 CPU 사용률이 급감하는 현상&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;2-면접-대비-qa&#34;&gt;2. 면접 대비 (Q&amp;amp;A)
+&lt;/h3&gt;&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;시스템 콜을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+운영체제의 커널이 제공하는 서비스에 접근하기 위해 프로그램이 사용하는 인터페이스입니다.&lt;br&gt;
+프로세스 제어, 파일 및 장치 조작 등 시스템 자원을 안전하게 관리하기 위해 유저 모드에서 커널 모드로 전환할 때 사용됩니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;프로세스의 메모리 구조를 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+프로세스는 크게 네 가지 영역으로 구성됩니다.
+&lt;ul&gt;
+  &lt;li&gt;&lt;b&gt;코드(Code):&lt;/b&gt; 실행할 기계어 명령어가 저장되는 영역&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;데이터(Data):&lt;/b&gt; 전역 변수, 정적 변수 등이 저장되는 영역&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;힙(Heap):&lt;/b&gt; 런타임에 동적으로 할당되는 메모리 영역&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;스택(Stack):&lt;/b&gt; 함수 호출 시 지역 변수, 매개변수, 복귀 주소 등이 저장되는 영역&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;프로세스와 스레드의 차이점을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+프로세스는 운영체제로부터 자원을 할당받는 독립적인 실행 단위이며, 스레드는 프로세스 내에서 실행되는 여러 흐름의 단위입니다.&lt;br&gt;
+프로세스는 각각 독립된 메모리 공간을 가지지만, 스레드는 프로세스의 힙, 데이터, 코드 영역을 공유하고 자신만의 스택과 레지스터 정보만 가집니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;스택 오버플로우와 힙 오버플로우에 관해 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+스택 오버플로우는 재귀 호출이 너무 깊어지거나 지역 변수가 너무 커서 스택 영역의 한계를 넘는 현상입니다.&lt;br&gt;
+힙 오버플로우는 사용자가 동적으로 할당한 메모리가 힙 영역의 범위를 초과하여 인접한 메모리 영역을 침범하는 현상입니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;PCB가 무엇인지 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+Process Control Block의 약자로, 운영체제가 각 프로세스를 관리하기 위해 유지하는 자료구조입니다.&lt;br&gt;
+프로세스 상태, PID, 프로그램 카운터(PC), 레지스터 값, 스케줄링 정보 등이 포함되어 있습니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;멀티 프로세스와 멀티 스레드의 차이점을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+멀티 프로세스는 각 프로세스가 독립적이어서 하나가 실패해도 다른 프로세스에 영향을 주지 않아 안정적이지만, 문맥 교환 비용이 크고 IPC를 통한 통신이 복잡합니다.&lt;br&gt;
+멀티 스레드는 자원을 공유하므로 통신이 빠르고 비용이 적지만, 하나의 스레드 장애가 전체 프로세스에 영향을 줄 수 있고 동기화 처리가 중요합니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;동시성과 병렬성을 비교해 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+동시성(Concurrency)은 싱글 코어에서 여러 작업을 빠르게 번갈아 실행하여 &#39;동시에 실행되는 것처럼 보이게&#39; 하는 논리적인 개념입니다.&lt;br&gt;
+병렬성(Parallelism)은 멀티 코어에서 실제로 여러 작업을 &#39;동시에&#39; 처리하는 물리적인 개념입니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;콘텍스트 스위칭이 무엇인지 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+CPU가 현재 실행 중인 프로세스나 스레드의 상태를 저장하고, 다음으로 실행할 프로세스나 스레드의 상태를 복구하여 제어권을 넘기는 과정입니다.&lt;br&gt;
+이 과정에서 CPU는 아무런 일을 하지 못하므로 오버헤드가 발생합니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;멀티 프로세서에서 콘텍스트 스위칭과 멀티 스레드에서 콘텍스트 스위칭의 차이점을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+멀티 스레드 간의 콘텍스트 스위칭은 프로세스 내의 공유 자원(데이터, 힙 등)을 그대로 유지하고 스택과 레지스터만 교체하면 되므로,&lt;br&gt;
+주소 공간 자체를 바꿔야 하는 멀티 프로세스 간의 전환보다 오버헤드가 훨씬 적습니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;프로세스 동기화에 대해 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+여러 프로세스나 스레드가 공유 자원에 동시에 접근할 때(Race Condition), 데이터의 일관성을 유지하기 위해 실행 순서를 조절하거나 자원 접근을 제한하는 것을 말합니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;뮤텍스와 세마포어의 차이점을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+뮤텍스는 오직 하나의 쓰레드만이 공유 자원을 점유할 수 있는 &#39;Binary Lock&#39; 개념입니다.&lt;br&gt;
+세마포어는 공유 자원에 접근할 수 있는 프로세스/스레드의 개수를 지정(Counter)할 수 있으며,&lt;br&gt;
+뮤텍스는 락을 건 스레드만 해제할 수 있지만 세마포어는 다른 프로세스에서도 신호를 줄 수 있습니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;스레드 안전(Thread Safe)의 의미가 무엇이며 이를 구현하는 방법은 무엇인가요?&lt;/b&gt;&lt;/summary&gt;
+멀티 스레드 환경에서 여러 스레드가 동시에 함수나 변수에 접근해도 프로그램의 실행 결과가 올바르게 유지되는 상태를 말합니다.&lt;br&gt;
+이를 위해 Mutex나 Semaphore를 이용한 상호 배제, Atomic 연산 사용, 공유 자원 사용 최소화 등의 방법을 사용합니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;비선점형 스케줄링 알고리즘과 선점형 스케줄링 알고리즘을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+비선점형(Non-preemptive)은 프로세스가 CPU를 할당받으면 작업이 끝날 때까지 CPU를 뺏기지 않는 방식(예: FCFS, SJF)입니다.&lt;br&gt;
+선점형(Preemptive)은 OS가 우선순위나 타임 슬라이스에 따라 실행 중인 프로세스로부터 CPU를 강제로 뺏어 다른 프로세스에 할당할 수 있는 방식(예: Round Robin, SRTF)입니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;OS의 메모리 관리 전략 중 페이징과 세그멘테이션을 비교해서 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+페이징은 물리 메모리를 일정한 크기(프레임)로 나누어 할당하는 방식으로 외부 단편화는 해결하지만 내부 단편화가 발생할 수 있습니다.&lt;br&gt;
+세그멘테이션은 메모리를 논리적 단위(함수, 배열 등)인 세그먼트로 나누어 할당하는 방식으로 내부 단편화는 해결하지만 외부 단편화가 발생할 수 있습니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;가상 메모리가 무엇인지와 가상 메모리가 필요한 이유를 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+물리 메모리 크기의 한계를 극복하기 위해 보조 기억 장치(디스크)의 일부를 메모리처럼 사용하는 기술입니다.&lt;br&gt;
+실제 메모리보다 큰 프로그램을 실행할 수 있게 해주고, 각 프로세스에 독립적인 가상 주소 공간을 제공하여 메모리 관리를 효율적으로 만듭니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;스레싱(Thrashing)이 무엇인가요?&lt;/b&gt;&lt;/summary&gt;
+페이지 폴트가 너무 자주 발생하여 CPU가 실제 작업을 처리하는 시간보다 페이지를 교체하는 데 더 많은 시간을 소비하게 되는 현상입니다.&lt;br&gt;
+이로 인해 CPU 이용률이 급격히 떨어지게 됩니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;캐시 메모리에 대해 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+CPU와 메인 메모리(RAM) 사이의 속도 차이를 완화하기 위해 사용되는 작고 빠른 메모리입니다.&lt;br&gt;
+&#39;참조 지역성&#39; 원리를 이용하여 자주 사용될 것으로 예상되는 데이터를 미리 저장해둠으로써 시스템의 전반적인 성능을 향상시킵니다.
+&lt;/details&gt;
+</description>
+        </item>
+        <item>
+        <title>[CS 스터디] 캐시 메모리</title>
+        <link>http://localhost:1313/posts/cs-study-6/</link>
+        <pubDate>Fri, 05 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/cs-study-6/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h3 id=&#34;1-캐시-메모리와-지역성&#34;&gt;1. 캐시 메모리와 지역성
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;캐시 메모리 (Cache Memory)&lt;/strong&gt;: CPU의 처리 속도와 메인 메모리(RAM)의 접근 속도 차이를 줄이기 위해 사용하는 고속 저장소&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;원리&lt;/strong&gt;: 자주 사용하는 데이터를 속도가 빠른 캐시에 미리 복사해 두어, 매번 메인 메모리까지 가지 않고도 데이터를 빠르게 읽어올 수 있게 함&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;구조&lt;/strong&gt;: 주로 L1, L2, L3 캐시로 나뉘며 숫자가 작을수록 CPU와 가깝고 속도가 빠름&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;참조-지역성-locality-of-reference&#34;&gt;&lt;strong&gt;참조 지역성 (Locality of Reference)&lt;/strong&gt;
+&lt;/h4&gt;&lt;p&gt;캐시는 한정된 공간이므로, 어떤 데이터를 저장할지가 매우 중요함. 이때 기준이 되는 것이 &lt;strong&gt;지역성&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;다대일 모델&lt;/strong&gt;: 사용자 스레드 n개 - 커널 스레드 1개. 병렬성 이용 불가&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;일대일 모델&lt;/strong&gt;: 사용자 스레드 1개 - 커널 스레드 1개. 성능 저하 가능성 존재&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;다대다 모델&lt;/strong&gt;: n개 사용자 스레드 - m개 커널 스레드 매핑 (m &amp;lt;= n)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;시간 지역성 (Temporal Locality)&lt;/strong&gt;: 최근에 참조된 데이터는 가까운 미래에 다시 참조될 가능성이 높다는 원리
+&lt;ul&gt;
+&lt;li&gt;예: 반복문의 인덱스 변수(&lt;code&gt;i&lt;/code&gt;), 누적 합계 변수 등&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;공간 지역성 (Spatial Locality)&lt;/strong&gt;: 참조된 데이터와 인접한 주소의 데이터가 곧 참조될 가능성이 높다는 원리
+&lt;ul&gt;
+&lt;li&gt;예: 배열(Array) 데이터의 순차적 접근&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;2-pcb-process-control-block&#34;&gt;2. PCB (Process Control Block)
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;PCB&lt;/strong&gt;: OS가 프로세스를 제어하기 위해 정보를 저장하는 블록&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;저장 정보&lt;/strong&gt;: 포인터, 프로세스 상태, PID(고유 ID), PC(다음 실행 명령어 주소), 레지스터, 메모리 제한, 열린 파일 목록 등&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;3-프로세스의-생성과-종료&#34;&gt;3. 프로세스의 생성과 종료
+&lt;hr&gt;
+&lt;h3 id=&#34;2-캐시-히트와-캐시-미스&#34;&gt;2. 캐시 히트와 캐시 미스
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;생성&lt;/strong&gt;: 부모 프로세스에서 &lt;code&gt;fork()&lt;/code&gt; 호출. 부모는 자식의 PID를, 자식은 0을 반환&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;종료 조건&lt;/strong&gt;:
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;exit()&lt;/code&gt; 호출을 통한 정상 종료&lt;/li&gt;
-&lt;li&gt;제한 시간 초과, 파일 검색 실패, 메모리 부족 등 오류 발생&lt;/li&gt;
-&lt;li&gt;부모 프로세스가 자식을 강제 종료 (자원 초과 사용 등)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;캐시 히트 (Cache Hit)&lt;/strong&gt;: CPU가 요청한 데이터가 캐시에 있는 경우. 즉시 반환하여 성능이 극대화됨&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;캐시 미스 (Cache Miss)&lt;/strong&gt;: 요청한 데이터가 캐시에 없어 메인 메모리에서 가져와야 하는 경우. 지연 시간(Latency)이 발생함&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;적중률 (Hit Ratio)&lt;/strong&gt;: (캐시 히트 횟수) / (전체 참조 횟수). 일반적으로 90% 이상의 적중률을 가짐&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3-캐시-메모리의-매핑-방식&#34;&gt;3. 캐시 메모리의 매핑 방식
+&lt;/h3&gt;&lt;p&gt;메인 메모리는 캐시보다 훨씬 크기 때문에, 수많은 메모리 블록이 좁은 캐시 공간을 나누어 써야 함&lt;br&gt;
+이때 어떤 규칙으로 데이터를 배치할지 결정하는 것이 매핑 방식&lt;/p&gt;
+&lt;h4 id=&#34;1-직접-매핑-direct-mapping&#34;&gt;&lt;strong&gt;1) 직접 매핑 (Direct Mapping)&lt;/strong&gt;
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;비유&lt;/strong&gt;: &lt;strong&gt;&amp;ldquo;지정된 우편함&amp;rdquo;&lt;/strong&gt; (101호, 201호, 301호는 무조건 1번 우편함만 사용)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;원리&lt;/strong&gt;: 메모리 주소에 따라 캐시 내의 저장 위치가 미리 딱 정해져 있는 방식&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;특징&lt;/strong&gt;: 위치가 정해져 있어 찾기 매우 빠르지만,&lt;br&gt;
+같은 칸을 사용하는 다른 주소의 데이터가 들어오면 기존 데이터를 계속 밀어내야 하는 **충돌(Collision)**이 잦음&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;4-프로세스-상태와-변화&#34;&gt;4. 프로세스 상태와 변화
-&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       [생성(New)]
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            ↓ 승인(Admit)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       [준비(Ready)] &amp;lt;─────── 인터럽트/타임아웃 ────────┐
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            ↓ 디스패치(Dispatch)                     │
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       [실행(Running)] ────────────────────&amp;gt; [종료(Terminated)]
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            │                                    완료
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            └──────── 입출력/이벤트 대기 ────────&amp;gt; [대기(Waiting)]
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                                   │
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &amp;lt;──────── 입출력/이벤트 완료 ──────────────┘
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;상태 변화&lt;/strong&gt;:
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;생성 → 준비&lt;/strong&gt;: OS 승인을 받아 준비 큐(Ready Queue)에 추가됨&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;준비 → 실행&lt;/strong&gt;: 우선순위가 높은 프로세스가 디스패치되어 CPU 점유&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;실행 → 준비&lt;/strong&gt;: 타임 슬라이스 만료(Timeout)로 인한 상태 복귀&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;실행 → 대기&lt;/strong&gt;: 입출력 또는 특정 이벤트 대기 발생&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;대기 → 준비&lt;/strong&gt;: 대기 중인 이벤트가 완료되어 다시 CPU 할당 대기&lt;/li&gt;
+&lt;h4 id=&#34;2-연관-매핑-associative-mapping&#34;&gt;&lt;strong&gt;2) 연관 매핑 (Associative Mapping)&lt;/strong&gt;
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;비유&lt;/strong&gt;: &lt;strong&gt;&amp;ldquo;빈 방 아무 데나 들어가는 호텔&amp;rdquo;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;원리&lt;/strong&gt;: 정해진 위치 없이 캐시의 빈 공간 어디든 데이터를 저장할 수 있는 방식&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;특징&lt;/strong&gt;: 빈 공간을 알뜰하게 써서 충돌은 적지만, 나중에 특정 데이터를 찾을 때 캐시 전체를 다 뒤져봐야 하므로 검색 속도가 느림&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
+&lt;h4 id=&#34;3-세트-연관-매핑-set-associative-mapping&#34;&gt;&lt;strong&gt;3) 세트 연관 매핑 (Set-Associative Mapping)&lt;/strong&gt;
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;비유&lt;/strong&gt;: &lt;strong&gt;&amp;ldquo;구역이 정해진 전용 주차장&amp;rdquo;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;원리&lt;/strong&gt;: 캐시를 여러 개의 **세트(Set)**로 나누고, 특정 주소는 지정된 세트 내의 아무 칸에나 들어갈 수 있게 한 방식&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;특징&lt;/strong&gt;: 직접 매핑의 &lt;strong&gt;빠른 속도&lt;/strong&gt;와 연관 매핑의 &lt;strong&gt;높은 효율&lt;/strong&gt;을 절충한 방식으로, 현대 CPU에서 가장 널리 사용됨&lt;br&gt;
+(예: &amp;ldquo;A구역(세트)에 주차하되, 그 안에서는 빈 칸 아무 데나 쓰세요&amp;rdquo;)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;5-멀티-프로세스와-멀티-스레드&#34;&gt;5. 멀티 프로세스와 멀티 스레드
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;동시성(Concurrency)&lt;/strong&gt;: 싱글 코어에서 작업을 번갈아 처리 (논리적 동시)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;병렬성(Parallelism)&lt;/strong&gt;: 멀티 코어에서 작업을 동시 처리 (물리적 동시)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;table&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;4-매핑-방식-요약-비교&#34;&gt;4. 매핑 방식 요약 비교
+&lt;/h3&gt;&lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
           &lt;th style=&#34;text-align: left&#34;&gt;구분&lt;/th&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;멀티 프로세스&lt;/th&gt;
-          &lt;th style=&#34;text-align: left&#34;&gt;멀티 스레드&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;직접 매핑&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;연관 매핑&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;세트 연관 매핑&lt;/th&gt;
       &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;안정성&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;높음 (한 프로세스 고장이 파급되지 않음)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;낮음 (한 스레드 오류가 프로세스 전체 영향)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;매핑 위치&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;지정된 하나의 라인&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;모든 라인 가능&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;지정된 세트 내 모든 라인&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;자원 효율&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;낮음 (개별 메모리 할당으로 비용 높음)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;높음 (메모리 공유로 자원 절약)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;장점&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;구현 단순, 속도 빠름&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;적중률 매우 높음&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;적중률과 속도의 균형&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;콘텍스트 스위칭&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;무거움 (메모리 영역 교체 오버헤드 큼)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;가벼움 (공유 자원이 많아 전환 빠름)&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;통신(IPC)&lt;/strong&gt;&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;복잡함 (별도 통신 메커니즘 필요)&lt;/td&gt;
-          &lt;td style=&#34;text-align: left&#34;&gt;단순함 (공유 메모리 직접 접근)&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;단점&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;충돌 미스 잦음&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;검색 속도 느림, 고비용&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;구현 복잡도 중간&lt;/td&gt;
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id=&#34;6-문맥-교환-context-switching&#34;&gt;6. 문맥 교환 (Context Switching)
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;문맥 교환&lt;/strong&gt;: 인터럽트 발생 시 현재 프로세스 상태를 PCB에 저장하고 새 프로세스의 PCB 정보를 로드하는 과정&lt;/p&gt;
+&lt;/div&gt;
+</description>
+        </item>
+        <item>
+        <title>[CS 스터디] 가상 메모리</title>
+        <link>http://localhost:1313/posts/cs-study-5/</link>
+        <pubDate>Thu, 04 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/cs-study-5/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h3 id=&#34;1-가상-메모리-virtual-memory&#34;&gt;1. 가상 메모리 (Virtual Memory)
+&lt;/h3&gt;&lt;p&gt;물리적 메모리(RAM)의 한계를 극복하기 위해, 디스크의 일부 영역(백킹 스토어)을 메모리처럼 활용하여 프로세스를 실행하는 기술&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;저장 위치&lt;/strong&gt;: PCB 내 프로그램 카운터(PC)와 스택 포인터(SP)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;프로세스 P0            운영체제(커널)            프로세스 P1
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │                     │                     │
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   실행중                   │                     │
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │   인터럽트/시스템 콜     │                     │
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├────────────────────&amp;gt;│                     │
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │                     │ P0 상태를 PCB0에 저장   │
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   대기중                   │                     │
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │                     │ PCB1에서 P1 상태 로드  │
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │                     │                     │
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │&amp;lt;────────────────────┤                     │
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │                     │                   실행중
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │                     │                     │
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;7-프로세스-동기화&#34;&gt;7. 프로세스 동기화
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;임계 영역(Critical Section)&lt;/strong&gt;: 공유 자원에 접근하여 실행 순서에 따라 결과가 변하는 코드 영역&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;동기화 조건&lt;/strong&gt;: 상호 배제(Mutual Exclusion), 진행(Progress), 한정된 대기(Bounded Waiting)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;기법&lt;/strong&gt;:
+&lt;li&gt;&lt;strong&gt;특징&lt;/strong&gt;: 사용자나 프로세스에게는 프로세스 전체가 메모리에 로드된 것처럼 보이지만, 실제로는 당장 실행에 필요한 일부만 메모리에 올라가 있음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;장점&lt;/strong&gt;:
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;뮤텍스(Mutex)&lt;/strong&gt;: 락(Lock) 기반 제어. 대기 시 스핀락(Spin-lock) 사용 가능&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;세마포어(Semaphore)&lt;/strong&gt;: 카운트 기반 신호(Signaling) 제어&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;주요 개념&lt;/strong&gt;:
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;동기/비동기&lt;/strong&gt;: 작업 순서 보장 여부&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;블로킹/넌블로킹&lt;/strong&gt;: 작업 수행 시 대기 여부&lt;/li&gt;
+&lt;li&gt;프로그램이 물리적 메모리 크기에 대한 제약을 덜 받음 (메모리보다 큰 프로그램 실행 가능)&lt;/li&gt;
+&lt;li&gt;동시에 더 많은 프로그램을 실행할 수 있어 &lt;strong&gt;CPU 이용률과 처리율(Throughput) 향상&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;필요한 영역만 로드하므로 전체 프로세스를 스와핑하는 횟수가 줄어들어 &lt;strong&gt;I/O 오버헤드 감소&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;8-교착-상태-deadlock&#34;&gt;8. 교착 상태 (Deadlock)
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;정의&lt;/strong&gt;: 프로세스들이 서로가 점유한 자원을 무한히 기다리는 상태&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;2-요구-페이징-demand-paging&#34;&gt;2. 요구 페이징 (Demand Paging)
+&lt;/h3&gt;&lt;p&gt;프로세스 실행 시 모든 페이지를 한 번에 메모리에 올리지 않고, &lt;strong&gt;실제로 요청이 들어온(필요한) 페이지만 메모리에 로드&lt;/strong&gt;하는 방식&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;필요 충분 조건&lt;/strong&gt;: 상호 배제, 점유와 대기, 비선점, 환형 대기&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;해결 방안(부정)&lt;/strong&gt;:
+&lt;li&gt;&lt;strong&gt;유효-무효 비트 (Valid-Invalid Bit)&lt;/strong&gt;: 페이지 테이블에 존재하며, 해당 페이지가 현재 물리 메모리에 있는지 여부를 나타냄
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;상호 배제 부정&lt;/strong&gt;: 자원 공유 허용&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;점유와 대기 부정&lt;/strong&gt;: 실행 전 필요 자원 일괄 할당&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;비선점 부정&lt;/strong&gt;: 자원 요청 시 점유 자원 반납&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;환형 대기 부정&lt;/strong&gt;: 자원 번호 순서대로 요청&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Valid&lt;/strong&gt;: 페이지가 물리 메모리에 로드되어 있음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Invalid&lt;/strong&gt;: 페이지가 아직 물리 메모리에 없거나(디스크에 존재), 유효하지 않은 주소 영역임&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;9-스레드-안전-thread-safe&#34;&gt;9. 스레드 안전 (Thread Safe)
-&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;정의&lt;/strong&gt;: 멀티 스레드 환경에서 공유 자원 접근 시 데이터 일관성이 보장되는 상태&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;달성 조건&lt;/strong&gt;: 상호 배제, 원자 연산(Atomic Operation), 재진입성(Reentrancy), 스레드 지역 저장소(TLS)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;10-ipc-inter-process-communication&#34;&gt;10. IPC (Inter-Process Communication)
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;공유 메모리&lt;/strong&gt;: 프로세스 간 공유 메모리 구간 설정 (가장 빠름)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;소켓&lt;/strong&gt;: 네트워크 기반 통신 (원격 시스템 가능)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;세마포어&lt;/strong&gt;: 동기화를 통한 자원 관리&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;파이프&lt;/strong&gt;: FIFO 단방향 통신 (양방향 시 파이프 2개 필요)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;메시지 큐&lt;/strong&gt;: 큐 자료구조 기반 메시지 전달&lt;/li&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3-페이지-폴트-page-fault&#34;&gt;3. 페이지 폴트 (Page Fault)
+&lt;/h3&gt;&lt;p&gt;CPU가 참조하려는 페이지가 물리 메모리에 없는 상황 (페이지 테이블의 비트가 &amp;lsquo;Invalid&amp;rsquo;인 경우)&lt;/p&gt;
+&lt;h4 id=&#34;페이지-폴트-발생-시-처리-과정-도식화&#34;&gt;&lt;strong&gt;페이지 폴트 발생 시 처리 과정 도식화&lt;/strong&gt;
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    [ CPU ] ── (1) 논리 주소 참조 ──&amp;gt; [ 페이지 테이블 ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                      (Valid/Invalid 비트 확인)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                           │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        (2) Invalid (페이지 폴트 발생 - Trap)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                           ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                     [ 운영체제 (OS) ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                           │ (3) 보호 영역 접근인지 확인 후,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                           │     디스크에서 해당 페이지 탐색
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                           ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                [ 백킹 스토어 (디스크 영역) ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                           │ (4) 물리 메모리의 빈 프레임에
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                           │     해당 페이지를 로드 (Swap-in)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                           ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                     [ 물리 메모리 ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                           │ (5) 페이지 테이블 업데이트
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                           │     (프레임 번호 기록 및 Valid 비트로 변경)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                           ↓
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    [ CPU ] &amp;lt;── (6) 명령 재시작 ────── [ 페이지 테이블 ]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;주소 참조&lt;/strong&gt;: CPU가 프로세스를 실행하며 페이지 테이블을 통해 메모리를 참조함&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;트랩(Trap) 발생&lt;/strong&gt;: 참조한 페이지가 Invalid 상태면 페이지 폴트 트랩이 발생해 제어권이 OS로 넘어감&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;디스크 탐색&lt;/strong&gt;: OS는 디스크에서 해당 프로세스의 페이지를 찾음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;페이지 로드&lt;/strong&gt;: 빈 프레임이 있다면 해당 프레임에 페이지를 올림&lt;br&gt;
+(빈 프레임이 없다면 &lt;strong&gt;페이지 교체 알고리즘(LRU, FIFO 등)&lt;/strong&gt; 을 통해 기존 페이지를 쫓아냄)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;테이블 갱신&lt;/strong&gt;: 페이지 테이블에 물리 주소를 기록하고 상태를 Valid로 변경&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;명령 재시작&lt;/strong&gt;: 인터럽트되었던 명령을 다시 실행함&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id=&#34;11-좀비-및-고아-프로세스&#34;&gt;11. 좀비 및 고아 프로세스
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;좀비 프로세스&lt;/strong&gt;: 자식 종료 후 부모가 상태를 회수하지 않아 시스템에 남은 상태&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;고아 프로세스&lt;/strong&gt;: 부모가 먼저 종료된 상태(PID를 1로 바꿔주면 자식이 좀비 프로세스가 되는 걸 막을 수 있음)&lt;/li&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;4-스레싱-thrashing&#34;&gt;4. 스레싱 (Thrashing)
+&lt;/h3&gt;&lt;p&gt;물리 메모리에 올라간 다중 프로그래밍의 정도(Degree of Multiprogramming)가 너무 높아져서,&lt;br&gt;
+프로세스들이 실행보다 &lt;strong&gt;페이지 교체(Swap-in/out)에 더 많은 시간을 소비하여 CPU 이용률이 급격히 떨어지는 현상&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;발생 원인&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;메모리에 올라간 프로세스 수가 너무 많아 각 프로세스에 할당된 프레임 수가 절대적으로 부족할 때 발생&lt;/li&gt;
+&lt;li&gt;페이지 폴트가 빈번하게 발생하여 CPU는 쉬고 디스크 I/O 작업만 계속됨&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;스레싱-예방-및-해결-방안&#34;&gt;&lt;strong&gt;스레싱 예방 및 해결 방안&lt;/strong&gt;
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;워킹 세트 (Working Set) 모델&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;프로세스가 일정 시간 동안 자주 참조하는 페이지들의 집합(워킹 세트)을 메모리에 한꺼번에 올려둠&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;지역성(Locality)&lt;/strong&gt; 을 기반으로 하여 프레임에 고정시키므로 빈번한 페이지 폴트를 방지함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PFF (Page-Fault Frequency) 방식&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;프로세스별 페이지 폴트 빈도의 상한선과 하한선을 설정&lt;/li&gt;
+&lt;li&gt;상한선을 초과하면 빈 프레임을 더 할당하고, 하한선 미만이면 할당된 프레임을 회수하여 적절한 프레임 수를 유지함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
 </description>
         </item>
         <item>
@@ -426,11 +1032,11 @@
 &lt;/h4&gt;&lt;p&gt;프로세스의 논리 메모리를 고정된 크기인 **페이지(Page)**로 나누고, 물리 메모리를 동일한 크기의 **프레임(Frame)**으로 나누어 관리함&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    [ 논리 메모리 ]        [ 페이지 테이블 ]        [ 물리 메모리 ]
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ┌──────────┐          ┌──────┬──────┐          ┌──────────┐
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │ 페이지 0  │ ── 0 ──&amp;gt; │  0   │  5   │ ── 5 ──&amp;gt; │ 프레임 5  │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │ 페이지 0   │ ── 0 ──&amp;gt; │  0   │  5   │ ── 5 ──&amp;gt; │ 프레임 5  │
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├──────────┤          ├──────┼──────┤          ├──────────┤
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │ 페이지 1  │ ── 1 ──&amp;gt; │  1   │  2   │ ── 2 ──&amp;gt; │ 프레임 2  │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │ 페이지 1   │ ── 1 ──&amp;gt; │  1   │  2   │ ── 2 ──&amp;gt; │ 프레임 2  │
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├──────────┤          ├──────┼──────┤          ├──────────┤
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │ 페이지 2  │ ── 2 ──&amp;gt; │  2   │  8   │ ── 8 ──&amp;gt; │ 프레임 8  │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │ 페이지 2   │ ── 2 ──&amp;gt; │  2   │  8   │ ── 8 ──&amp;gt; │ 프레임 8  │
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    └──────────┘          └──────┴──────┘          └──────────┘
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;장점&lt;/strong&gt;: 물리적 메모리에 연속적으로 올릴 필요가 없어 &lt;strong&gt;외부 단편화가 완벽히 해결&lt;/strong&gt;됨&lt;/li&gt;
@@ -446,7 +1052,7 @@
 &lt;/h4&gt;&lt;p&gt;프로세스를 논리적인 의미 단위인 &lt;strong&gt;세그먼트(Segment)&lt;/strong&gt;(Code, Data, Stack, Main 등)로 분할함&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    [ 논리 메모리 ]        [ 세그먼트 테이블 ]       [ 물리 메모리 ]
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ┌──────────┐          ┌──────┬──────┬──────┐    ┌──────────┐
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │  Main    │ ── 0 ──&amp;gt; │ 번호 │ limit│ base │    │  Stack   │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │  Main    │ ── 0 ──&amp;gt; │ 번호  │ limit│ base │    │  Stack   │
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├──────────┤          ├──────┼──────┼──────┤    ├──────────┤
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │  Data    │ ── 1 ──&amp;gt; │  0   │ 1000 │ 2000 │    │          │
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├──────────┤          ├──────┼──────┼──────┤    ├──────────┤
@@ -477,43 +1083,6 @@
 </description>
         </item>
         <item>
-        <title>[CS 스터디] 캐시 메모리</title>
-        <link>http://localhost:1313/posts/cs-study-6/</link>
-        <pubDate>Thu, 04 Jun 2026 00:00:00 +0000</pubDate>
-        
-        <guid>http://localhost:1313/posts/cs-study-6/</guid>
-        <description>&lt;h3 id=&#34;1&#34;&gt;1.
-&lt;/h3&gt;</description>
-        </item>
-        <item>
-        <title>[CS 스터디] 가상 메모리</title>
-        <link>http://localhost:1313/posts/cs-study-5/</link>
-        <pubDate>Wed, 03 Jun 2026 00:00:00 +0000</pubDate>
-        
-        <guid>http://localhost:1313/posts/cs-study-5/</guid>
-        <description>&lt;h3 id=&#34;1-가상-메모리&#34;&gt;1. 가상 메모리
-&lt;/h3&gt;&lt;p&gt;프로세스의 일부만 메모리에 로드하고 나머지는 디스크에 둔 채로 프로세스를 실행하는 방식
-사용자에게는 프로세스 전체가 메모리에 로드된 것처럼 보이지만 실제로는 전체가 로드된 게 아님&lt;/p&gt;
-&lt;p&gt;프로그램이 메모리 크기에 대한 제약을 덜 받을 수 있음
-동시에 많은 프로그램을 실행하므로 CPU 이용률과 처리율을 높일 수 있음
-필요한 영역만 메모리에 로드해 스와핑 횟수를 줄여서 프로그램 실행 속도를 높일 수 있음&lt;/p&gt;
-&lt;h3 id=&#34;2-요구-페이징&#34;&gt;2. 요구 페이징
-&lt;/h3&gt;&lt;p&gt;프로세스에서 필요한 페이지만 메모리에 로드하는 방식
-메모리에 초기 필요한 영역만 올린 후 다른 영역은 요청이 올 때 메모리에 로드함&lt;/p&gt;
-&lt;p&gt;페이지 폴트: 프로그램을 실행하다 물리 메모리에 필요한 페이지가 없는 상황
-디스크에서 필요한 페이지를 스왑인 함
-페이지에 해당하는 메모리 영역이 물리 메모리에 있는지는 페이지 테이블로 파악 가능&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;페이지 폴트 발생 시 처리 과정 도식화
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;3-스레싱&#34;&gt;3. 스레싱
-&lt;/h3&gt;&lt;p&gt;동시에 일정 수 이상의 프로그램을 실행했을 때 오히려 CPU 이용률이 떨어지는 상황
-일정 수 이상으로 다중 프로그래밍 -&amp;gt; 페이지 폴트가 자주 발생 -&amp;gt; 디스크 영역에서 필요한 페이지를 스왑 인하고 불필요한 페이지를 스왑 아웃 하는 작업 빈번
--&amp;gt; CPU 이용률 떨어지게 됨&lt;/p&gt;
-&lt;p&gt;스레싱을 예방하려면 워킹 세트를 설정
-지역성을 기반으로 자주 사용하는 페이지를 저장해 두는 것
-자주 사용하는 페이지를 물리 메모리의 프레임에 고정하면 페이지 폴트가 빈번하게 발생하는 현상 방지 가능&lt;/p&gt;
-</description>
-        </item>
-        <item>
         <title>[CS 스터디] 스케줄링</title>
         <link>http://localhost:1313/posts/cs-study-3/</link>
         <pubDate>Wed, 03 Jun 2026 00:00:00 +0000</pubDate>
@@ -533,7 +1102,7 @@
 &lt;/h3&gt;&lt;p&gt;스케줄링은 범위와 목적에 따라 크게 세 가지 단계로 구분됨&lt;/p&gt;
 &lt;h4 id=&#34;장기-스케줄러-long-term-scheduler&#34;&gt;&lt;strong&gt;장기 스케줄러 (Long-term Scheduler)&lt;/strong&gt;
 &lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;역할&lt;/strong&gt;: 준비 큐에 어떤 프로세스를 넣을지 결정하여 **메모리에 올라가는 프로세스의 수(Degree of Multiprogramming)**를 조절&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;역할&lt;/strong&gt;: 준비 큐에 어떤 프로세스를 넣을지 결정하여 &lt;strong&gt;메모리에 올라가는 프로세스의 수(Degree of Multiprogramming)&lt;/strong&gt; 를 조절&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;특징&lt;/strong&gt;: 잡(Job) 스케줄러라고도 하며, 현대의 시분할 시스템에서는 대부분 사용하지 않고 프로세스 생성 시 바로 준비 상태로 진입함&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;중기-스케줄러-mid-term-scheduler&#34;&gt;&lt;strong&gt;중기 스케줄러 (Mid-term Scheduler)&lt;/strong&gt;
@@ -545,7 +1114,7 @@
 &lt;h4 id=&#34;단기-스케줄러-short-term-scheduler&#34;&gt;&lt;strong&gt;단기 스케줄러 (Short-term Scheduler)&lt;/strong&gt;
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;역할&lt;/strong&gt;: 준비 큐에 있는 프로세스 중 어떤 프로세스를 다음에 실행할지 결정 (CPU 스케줄링)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;특징&lt;/strong&gt;: 미리 정해진 스케줄링 알고리즘에 따라 프로세스를 선택하고 CPU에 **디스패치(Dispatch)**함&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;특징&lt;/strong&gt;: 미리 정해진 스케줄링 알고리즘에 따라 프로세스를 선택하고 CPU에 &lt;strong&gt;디스패치(Dispatch)&lt;/strong&gt; 함&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;3-cpu-스케줄링-과정&#34;&gt;3. CPU 스케줄링 과정
@@ -1115,10 +1684,10 @@
         </item>
         <item>
         <title>[코드트리] 코딩테스트 준비, &#39;갭체크&#39;로 나의 약점 완벽 분석하기</title>
-        <link>http://localhost:1313/posts/codetree-subscription-1-gap-check/</link>
+        <link>http://localhost:1313/posts/codetree-subscription-1/</link>
         <pubDate>Thu, 07 May 2026 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/posts/codetree-subscription-1-gap-check/</guid>
+        <guid>http://localhost:1313/posts/codetree-subscription-1/</guid>
         <description>&lt;p&gt;코딩테스트 준비를 하면서 내가 어느 정도 수준인지 막연하게만 알고 있었는데, 이번에 &lt;strong&gt;코드트리 갭체크&lt;/strong&gt;를 통해 부족한 부분을 명확하게 확인할 수 있었습니다.&lt;/p&gt;
 &lt;p&gt;단순히 문제를 푸는 것을 넘어, &amp;lsquo;내가 무엇을 모르는지&amp;rsquo;를 아는 것이 얼마나 중요한지 깨달은 시간이었습니다.&lt;/p&gt;
 &lt;blockquote&gt;
