@@ -6,7 +6,126 @@
         <description>Recent content in CS on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Mon, 08 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/cs/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 09 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/cs/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[CS 스터디] HTTP</title>
+        <link>http://localhost:1313/posts/cs-study-10/</link>
+        <pubDate>Tue, 09 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/cs-study-10/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h3 id=&#34;1-http&#34;&gt;1. HTTP
+&lt;/h3&gt;&lt;p&gt;웹에서 클라이언트와 서버가 데이터를 주고받기 위해 사용하는 프로토콜&lt;br&gt;
+TCP/IP 4계층 중 응용 계층에 해당함&lt;/p&gt;
+&lt;h4 id=&#34;특징&#34;&gt;특징
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;1. 비연결성(Connectionless)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;클라이언트가 요청을 보내고 서버가 응답을 마치면 곧바로 연결을 끊는 방식&lt;br&gt;
+하나의 서버가 불특정 다수의 클라이언트를 상대해야 하는 환경에서 자원을 효율적으로 쓸 수 있음&lt;/p&gt;
+&lt;p&gt;다만 연결이 끊긴 뒤에는 서버가 클라이언트를 기억하지 못하므로&lt;br&gt;
+같은 클라이언트가 연속으로 요청을 보낼 때마다 매번 연결과 해제를 반복하게 되어 오히려 비용이 커짐&lt;/p&gt;
+&lt;p&gt;이 문제를 줄이기 위해 &lt;strong&gt;HTTP Keep-Alive&lt;/strong&gt;를 사용&lt;br&gt;
+응답이 끝난 뒤에도 일정 시간 동안 연결을 열어 두기 때문에, 이어지는 요청은 연결 과정을 건너뛰고 바로 전달할 수 있음&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. 무상태(Stateless)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;서버가 클라이언트의 이전 상태를 따로 기억하지 않는 방식&lt;br&gt;
+이전 요청의 맥락을 이어가려면 그 정보를 어딘가에 보관해야 하므로, 다음 두 가지 방법을 함께 사용함&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;쿠키&lt;/strong&gt;: 필요한 데이터를 클라이언트가 직접 들고 다니며 매 요청에 실어 보냄&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;세션&lt;/strong&gt;: 서버가 클라이언트의 상태를 저장해 두고 식별자만 주고받음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;상태를 갖지 않기 때문에 어떤 서버가 요청을 받든 동일하게 응답할 수 있음&lt;br&gt;
+→ 특정 서버에 장애가 생기더라도 다른 서버가 대신 처리할 수 있고, 서버 수를 자유롭게 늘릴 수 있음&lt;/p&gt;
+&lt;h4 id=&#34;http-메시지&#34;&gt;HTTP 메시지
+&lt;/h4&gt;&lt;p&gt;HTTP에서는 클라이언트와 서버가 통신하기 위해 정해진 형식의 &lt;strong&gt;HTTP 메시지&lt;/strong&gt;를 주고받음&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [클라이언트]                                  [서버]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |                                           |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |  ───────── 요청(Request) 메시지 ────────▶  |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |           - 요청 라인                      |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |           - 헤더                          |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |           - 빈 줄                         |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |           - 바디                          |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |                                           |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |  ◀──────── 응답(Response) 메시지 ────────  |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |           - 상태 라인                      |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |           - 헤더                          |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |           - 빈 줄                         |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |           - 바디                          |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |                                           |
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;요청 라인&lt;/strong&gt;: 요청 URI, 요청 메서드(GET, POST 등), HTTP 버전을 담음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;상태 라인&lt;/strong&gt;: 요청에 대한 HTTP 상태 코드와 HTTP 버전을 담음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;헤더&lt;/strong&gt;: 키-값 쌍으로 이루어진 여러 개의 항목으로 구성됨&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;빈 줄&lt;/strong&gt;: 헤더의 끝을 표시하며 헤더와 바디를 구분하는 역할을 함&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;바디&lt;/strong&gt;: 실제로 주고받을 데이터가 들어가는 영역. 요청에서는 주로 POST와 같이 데이터를 전송해야 하는 메서드에서만 채워지고, 그 외 메서드에서는 비어 있음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-https&#34;&gt;2. HTTPS
+&lt;/h3&gt;&lt;p&gt;HTTP에 보안 계층인 SSL/TLS를 더해 통신 내용을 암호화한 프로토콜&lt;br&gt;
+중간에서 데이터를 가로채더라도 내용을 알아볼 수 없도록 함&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;SSL(Secure Sockets Layer)&lt;/strong&gt;: 넷스케이프에서 처음 만든 암호화 프로토콜&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;TLS(Transport Layer Security)&lt;/strong&gt;: SSL의 취약점을 보완한 후속 표준&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        [ HTTP ]                          [ HTTPS ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ┌──────────────────────────┐    ┌──────────────────────────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   │ 응용 계층 (HTTP)           │    │ 응용 계층 (HTTP)           │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ├──────────────────────────┤    ├──────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   │                          │    │ 보안 계층 (SSL/TLS)        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ├──────────────────────────┤    ├──────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   │ 전송 계층 (TCP)            │    │ 전송 계층 (TCP)            │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ├──────────────────────────┤    ├──────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   │ 인터넷 계층 (IP)            │    │ 인터넷 계층 (IP)           │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ├──────────────────────────┤    ├──────────────────────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   │ 네트워크 인터페이스 계층       │    │ 네트워크 인터페이스 계층       │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   └──────────────────────────┘    └──────────────────────────┘
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;송신할 때는 응용 계층의 데이터가 SSL/TLS를 거치며 암호화된 뒤 전송 계층으로 내려감&lt;br&gt;
+수신할 때는 전송 계층에서 올라온 데이터가 SSL/TLS에서 복호화된 뒤 응용 계층으로 전달됨&lt;br&gt;
+즉 보안 계층이 응용 계층과 전송 계층 사이에서 암/복호화를 전담함&lt;/p&gt;
+&lt;h4 id=&#34;cf-암호화-방식&#34;&gt;cf) 암호화 방식
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;대칭 키 암호화 방식&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;암호화와 복호화에 같은 키(대칭 키)를 사용하는 방식&lt;br&gt;
+연산이 단순해서 속도는 빠르지만 키 자체를 안전하게 전달하는 일이 관건이 됨&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;수신자가 자신의 대칭 키를 송신자에게 전달&lt;/li&gt;
+&lt;li&gt;송신자는 받은 키로 데이터를 암호화해 보냄&lt;/li&gt;
+&lt;li&gt;수신자는 같은 키로 데이터를 복호화함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;송신자가 다르면 사용하는 키도 달라지며, 키가 노출되면 통신 내용이 그대로 드러나므로 키 관리에 특히 주의해야 함&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;공개 키 암호화 방식&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;암호화에 쓰는 키와 복호화에 쓰는 키가 다른 방식&lt;br&gt;
+공개해도 되는 &lt;strong&gt;공개 키&lt;/strong&gt;로 암호화하고, 본인만 가지고 있는 &lt;strong&gt;비밀 키&lt;/strong&gt;로 복호화함&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;수신자는 누구에게나 공개 키를 나눠줌&lt;/li&gt;
+&lt;li&gt;송신자는 받은 공개 키로 데이터를 암호화해 보냄&lt;/li&gt;
+&lt;li&gt;수신자는 자신만 가진 비밀 키로 데이터를 복호화함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;공개 키만 가지고는 원문을 복원할 수 없기 때문에, 키가 노출되어도 통신의 비밀성이 깨지지 않음&lt;/p&gt;
+&lt;h3 id=&#34;3-웹-페이지-접속-과정&#34;&gt;3. 웹 페이지 접속 과정
+&lt;/h3&gt;&lt;p&gt;URL을 입력하고 화면이 그려지기까지 클라이언트와 여러 서버 사이에 일어나는 흐름&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [사용자]        [웹 브라우저]          [DNS 서버]         [웹 서버]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      |               |                  |                 |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      |── ① URL 입력 ─▶|                  |                 |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      |               |                  |                 |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      |               |── ② IP 주소 요청 ─▶|                 |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      |               |                  |                 |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      |               |◀─ ③ IP 주소 응답 ──|                 |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      |               |                  |                 |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      |               |───── ④ TCP/IP 연결 + HTTP 요청 ─────▶|
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      |               |                  |                 |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      |               |◀──────── ⑤ HTTP 응답(웹 페이지) ──────|
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      |               |                  |                 |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      |◀─ ⑥ 화면 출력 ──|                  |                 |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      |               |                  |                 |
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;사용자가 웹 브라우저 주소창에 URL을 입력함&lt;/li&gt;
+&lt;li&gt;웹 브라우저는 URL에 포함된 도메인의 IP 주소를 DNS 서버에 질의함&lt;/li&gt;
+&lt;li&gt;DNS 서버는 해당 도메인에 매핑된 IP 주소를 웹 브라우저에 돌려줌&lt;/li&gt;
+&lt;li&gt;웹 브라우저는 받은 IP로 웹 서버와 TCP/IP 연결을 맺고 HTTP 요청을 전송함&lt;/li&gt;
+&lt;li&gt;웹 서버는 요청을 처리한 뒤 웹 페이지와 필요한 리소스를 응답으로 보냄&lt;/li&gt;
+&lt;li&gt;웹 브라우저는 응답을 해석해 사용자 화면에 페이지를 그려 줌&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        </item>
+        <item>
         <title>[CS 스터디] TCP와 UDP</title>
         <link>http://localhost:1313/posts/cs-study-9/</link>
         <pubDate>Mon, 08 Jun 2026 00:00:00 +0000</pubDate>
