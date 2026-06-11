@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1a3a3ada-abdf-4cf4-92b4-b2c5c5b74b48" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/404.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/archives/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/archives/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/categories/cs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/categories/cs/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/categories/cs/index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/categories/cs/index.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/categories/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/categories/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/categories/index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/categories/index.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/categories/공부/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/categories/공부/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/categories/공부/page/2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/categories/공부/page/2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/categories/주간회고/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/categories/주간회고/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/categories/주간회고/page/2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/categories/주간회고/page/2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/categories/코딩테스트/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/categories/코딩테스트/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/index.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/page/2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/page/2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/page/3/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/page/3/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/posts/index.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/page/2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/page/2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/posts/page/3/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/posts/page/3/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/search/index.json" beforeDir="false" afterPath="$PROJECT_DIR$/search/index.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sitemap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sitemap.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/1일1코테/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/1일1코테/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/dom/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/dom/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/javascript/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/javascript/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/js/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/js/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/kdt/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/kdt/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/kdt/page/2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/kdt/page/2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/mvc/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/mvc/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/page/2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/page/2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/page/3/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/page/3/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/spring/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/spring/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/개발자루틴/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/개발자루틴/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/갭체크/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/갭체크/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/공부습관/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/공부습관/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/국비지원교육/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/국비지원교육/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/국비지원교육/page/2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/국비지원교육/page/2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/내일배움카드/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/내일배움카드/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/내일배움카드/page/2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/내일배움카드/page/2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/백엔드개발부트캠프/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/백엔드개발부트캠프/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/백엔드개발부트캠프/page/2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/백엔드개발부트캠프/page/2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/복습/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/복습/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/시뮬레이션/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/시뮬레이션/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/알고리즘-기초/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/알고리즘-기초/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/알고리즘공부/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/알고리즘공부/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/오답노트/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/오답노트/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/웹/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/웹/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/이벤트/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/이벤트/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/커널아카데미/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/커널아카데미/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/커널아카데미/page/2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/커널아카데미/page/2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/코드트리/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/코드트리/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/코딩테스트/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/코딩테스트/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/코테공부/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/코테공부/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/코테독학/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/코테독학/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/코테준비/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/코테준비/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/패스트캠퍼스/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/패스트캠퍼스/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/패스트캠퍼스/page/2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/패스트캠퍼스/page/2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tags/프로토타입/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tags/프로토타입/index.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="3ElN38nFslhG0dRL0IdgDBX2Mw8" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="showExcludedFiles" value="false" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/admin/git/my-tech-blog/public",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1a3a3ada-abdf-4cf4-92b4-b2c5c5b74b48" name="Changes" comment="" />
+      <created>1780748994227</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1780748994227</updated>
+      <workItem from="1780748994871" duration="27000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

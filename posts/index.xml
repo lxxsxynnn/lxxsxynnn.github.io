@@ -6,7 +6,6 @@
         <description>Recent content in Posts on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-<<<<<<< HEAD
         <lastBuildDate>Wed, 10 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>[CS 스터디] REST</title>
         <link>http://localhost:1313/posts/cs-study-11/</link>
@@ -156,9 +155,6 @@ PUT이 자원 전체를 교체하는 데 비해, PATCH는 변경할 필드만 �
 </description>
         </item>
         <item>
-=======
-        <lastBuildDate>Tue, 09 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" /><item>
->>>>>>> d0658e32dc249fbcda0ca5e55a06f8e03878f50e
         <title>[CS 스터디] HTTP</title>
         <link>http://localhost:1313/posts/cs-study-10/</link>
         <pubDate>Tue, 09 Jun 2026 00:00:00 +0000</pubDate>
@@ -188,7 +184,6 @@ TCP/IP 4계층 중 응용 계층에 해당함&lt;/p&gt;
 &lt;h4 id=&#34;http-메시지&#34;&gt;HTTP 메시지
 &lt;/h4&gt;&lt;p&gt;HTTP에서는 클라이언트와 서버가 통신하기 위해 정해진 형식의 &lt;strong&gt;HTTP 메시지&lt;/strong&gt;를 주고받음&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [클라이언트]                                  [서버]
-<<<<<<< HEAD
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |                                         |
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |  ───────── 요청(Request) 메시지 ────────▶  |
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |           - 요청 라인                     |
@@ -202,21 +197,6 @@ TCP/IP 4계층 중 응용 계층에 해당함&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |           - 빈 줄                        |
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |           - 바디                         |
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |                                         |
-=======
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |                                           |
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |  ───────── 요청(Request) 메시지 ────────▶  |
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |           - 요청 라인                      |
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |           - 헤더                          |
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |           - 빈 줄                         |
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |           - 바디                          |
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |                                           |
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |  ◀──────── 응답(Response) 메시지 ────────  |
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |           - 상태 라인                      |
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |           - 헤더                          |
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |           - 빈 줄                         |
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |           - 바디                          |
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       |                                           |
->>>>>>> d0658e32dc249fbcda0ca5e55a06f8e03878f50e
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;요청 라인&lt;/strong&gt;: 요청 URI, 요청 메서드(GET, POST 등), HTTP 버전을 담음&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;상태 라인&lt;/strong&gt;: 요청에 대한 HTTP 상태 코드와 HTTP 버전을 담음&lt;/li&gt;
