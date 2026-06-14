@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="1. 요약 TCP 연결형 서비스: 송신부와 수신부의 연결을 확인한 뒤 데이터를 주고받는 연결 지향형 프로토콜 가상 회선 패킷 교환 방식: 패킷이 전달되는 회선이 정해져 있어 순서대로 도착함 신뢰성 보장: 데이터의 손실이나 순서 오류 없이 전달됨을 보장하므로 신뢰성이 높음 핸드셰이킹: 연결 시 3-way 핸드셰이킹, 해제 시 4-way 핸드셰이킹을 사용 신뢰성 보장 방법: 흐름 제어: 수신부와 송신부 간의 데이터 처리 속도 차이를 조절 혼잡 제어: 송신부의 데이터 전달 속도와 네트워크 속도의 차이를 조절 오류 제어: 데이터의 오류를 검출하고 손실된 패킷을 재전송 UDP 비연결형 서비스: 송신부와 수신부의 연결을 보장하지 않는 비연결형 프로토콜 데이터그램 패킷 교환 방식: 패킷이 서로 다른 회선으로 전달될 수 있음 낮은 신뢰성: 흐름·혼잡 제어와 재전송이 없어 신뢰성은 낮지만 그만큼 오버헤드가 적어 빠름 오류 검출: 체크섬(checksum) 필드를 이용해 최소한의 오류 검출만 지원 HTTP 클라이언트-서버 구조의 통신 프로토콜: 인터넷에서 데이터를 전송하기 위해 사용됨 특징: 비연결성: 서버에서 응답을 받으면 연결을 끊음 무상태: 서버가 클라이언트의 이전 상태를 식별하거나 기억하지 않음 쿠키와 세션: 비연결성과 무상태의 단점을 보완하기 위한 수단 쿠키: 클라이언트 로컬에 저장되는 키-값 형태의 작은 데이터 파일 세션: 서버에 저장되는 연결 관련 정보 HTTPS HTTP + SSL/TLS: SSL/TLS를 이용해 HTTP의 보안을 강화한 웹 통신 프로토콜 SSL/TLS의 위치: 전송 계층과 응용 계층 사이에 위치하는 보안 통신 계층 TCP Keep Alive와 HTTP Keep Alive TCP Keep Alive: 연결된 세션을 유지하기 위한 방식\n일정 시간 동안 패킷 교환이 없으면 연결 유지 여부를 확인하는 패킷을 보냄 HTTP Keep Alive: 일정 시간 동안 TCP 연결을 유지해 여러 HTTP 요청·응답에 재사용하는 방식\n정해진 시간이 끝나면 연결이 해제됨 REST REST: URI로 자원을 명시하고 HTTP 메서드로 CRUD 연산을 수행하는 소프트웨어 아키텍처 장점: HTTP 프로토콜을 그대로 사용하므로 별도의 인프라 구축이 필요 없음 HTTP를 따르는 모든 플랫폼에서 사용 가능 단점: 사용 가능한 HTTP 메서드가 한정적이라 표현할 수 있는 동작이 제한적임 구성 요소: 자원(Resource): URI를 통해 클라이언트가 서버의 자원을 식별하고 조작을 요청함 행위(Verb): HTTP 메서드로 자원에 대한 연산을 표현 표현(Representation): JSON, XML 등의 형식으로 데이터를 주고받음 HTTP 메서드 POST: Create 연산, 새로운 자원을 생성할 때 사용 GET: Read 연산, 서버에서 자원을 조회할 때 사용 PUT: Update 연산, 자원을 갱신(또는 없으면 생성)할 때 사용 DELETE: Delete 연산, 자원을 삭제할 때 사용 2. 면접 대비 (Q&amp;A) TCP의 특징을 설명해보세요. TCP는 송신부와 수신부의 연결을 확인한 뒤 데이터를 주고받는 연결 지향형 프로토콜입니다.\n패킷이 전달되는 경로가 고정되는 가상 회선 패킷 교환 방식을 사용하며, 데이터의 손실이나 순서 오류 없이 전달됨을 보장하므로 신뢰성이 높습니다.\n연결 시에는 3-way 핸드셰이크, 해제 시에는 4-way 핸드셰이크를 통해 통신을 시작·종료합니다. TCP의 연결 및 해제 과정을 설명해보세요. 연결은 3-way 핸드셰이크로 이루어집니다. 클라이언트가 SYN을 보내면 서버가 SYN+ACK으로 응답하고, 클라이언트가 다시 ACK을 보내 연결이 확립됩니다.\n해제는 4-way 핸드셰이크로 이루어집니다. 종료를 요청하는 측에서 FIN을 보내고 상대가 ACK으로 응답한 뒤, 상대도 FIN을 보내면 마지막으로 ACK을 응답하여 연결이 종료됩니다. TCP에서 데이터의 신뢰성을 보장하기 위한 방법을 설명해보세요. 크게 세 가지 제어 방식을 사용합니다. 흐름 제어(Flow Control): 수신부의 처리 속도에 맞춰 송신부의 전송 속도를 조절합니다. 슬라이딩 윈도우 방식이 대표적입니다. 혼잡 제어(Congestion Control): 네트워크의 혼잡 상태에 따라 송신부의 전송량을 조절합니다. 오류 제어(Error Control): 체크섬으로 오류를 검출하고, ACK과 재전송 메커니즘으로 손실된 데이터를 복구합니다. UDP의 특징을 설명해보세요. UDP는 연결 과정 없이 데이터를 전송하는 비연결형 프로토콜입니다.\n패킷마다 서로 다른 경로로 전달될 수 있는 데이터그램 방식을 사용하며, 흐름·혼잡 제어나 재전송이 없어 신뢰성은 낮지만 그만큼 오버헤드가 적어 빠르고 효율적입니다.\n체크섬 필드를 통해 최소한의 오류 검출만 지원합니다. TCP와 UDP의 차이점을 설명해보세요. TCP는 연결 지향형으로 신뢰성을 보장하지만, 연결 설정과 제어로 인한 오버헤드가 크고 상대적으로 속도가 느립니다.\nUDP는 비연결형으로 신뢰성은 낮지만, 헤더가 작고 제어 절차가 없어 빠르고 가볍습니다.\n신뢰성이 중요한 파일 전송이나 웹 통신에는 TCP가, 실시간성이 중요한 영상·음성 스트리밍이나 게임 등에는 UDP가 주로 사용됩니다. UDP에서 오류 검출 방법을 설명해보세요. UDP 헤더의 체크섬(checksum) 필드를 이용해 오류를 검출합니다.\n송신 측에서 데이터의 비트들을 계산한 값을 체크섬에 담아 보내면, 수신 측이 동일한 방식으로 다시 계산해 값이 일치하는지 확인합니다. 값이 다르면 전송 중 데이터가 변경된 것으로 판단해 해당 패킷을 폐기합니다. HTTP에 대해 설명해보세요. HTTP는 인터넷에서 클라이언트와 서버가 데이터를 주고받기 위해 사용하는 응용 계층 프로토콜입니다.\n요청에 대한 응답을 받으면 연결을 끊는 비연결성과, 클라이언트의 이전 상태를 기억하지 않는 무상태성이라는 특징이 있습니다.\n이러한 단점은 쿠키와 세션을 통해 보완합니다. HTTP Keep Alive와 TCP Keep Alive를 설명해보세요. TCP Keep Alive는 이미 연결된 세션을 유지하기 위한 메커니즘으로, 일정 시간 동안 패킷 교환이 없으면 연결이 살아있는지 확인하는 패킷을 보냅니다.\nHTTP Keep Alive는 한 번 맺은 TCP 연결을 일정 시간 동안 유지해 여러 HTTP 요청·응답을 재사용할 수 있도록 하는 방식이며, 정해진 시간이 지나면 연결이 해제됩니다.\n같은 'Keep Alive'라는 이름을 쓰지만, TCP Keep Alive는 연결의 생존 여부 확인에 초점이 있고 HTTP Keep Alive는 연결의 재사용에 초점이 있습니다. 쿠키와 세션의 차이점을 설명해보세요. 쿠키는 클라이언트(브라우저) 측에 저장되는 키-값 형태의 작은 데이터 파일로, 매 요청에 자동으로 함께 전송됩니다.\n세션은 서버 측에 저장되는 연결 관련 정보로, 클라이언트는 세션 ID만 쿠키 등으로 보관해 자신을 식별합니다.\n쿠키는 클라이언트에 노출되어 상대적으로 보안이 약한 반면, 세션은 서버에 저장되어 보안성이 높지만 서버 자원을 차지합니다. HTTP와 HTTPS의 차이점을 설명해보세요. HTTPS는 HTTP에 SSL/TLS 보안 계층을 추가해 통신 내용을 암호화한 프로토콜입니다.\nHTTP가 평문으로 데이터를 주고받아 도청과 변조에 취약한 반면, HTTPS는 암호화를 통해 데이터의 기밀성과 무결성을 보장합니다.\n기본 포트도 HTTP는 80, HTTPS는 443으로 다릅니다. HTTPS에서 사용하는 암호화 방식을 설명해보세요. HTTPS는 대칭 키 암호화와 공개 키 암호화를 결합해 사용합니다.\n초기 핸드셰이크 단계에서는 공개 키 암호화 방식으로 대칭 키를 안전하게 교환하고, 이후 실제 데이터 통신에는 속도가 빠른 대칭 키 암호화를 사용합니다.\n이렇게 하면 공개 키 방식의 안전한 키 교환과 대칭 키 방식의 빠른 처리 속도라는 장점을 모두 활용할 수 있습니다. 사용자가 URL을 입력한 후 화면이 출력되기까지의 과정을 설명해보세요. 사용자가 URL을 입력하면 웹 브라우저는 입력된 도메인의 IP 주소를 DNS 서버에 질의합니다.\nDNS로부터 받은 IP 주소를 이용해 웹 서버와 TCP/IP 연결을 맺고 HTTP 요청을 전송하면, 서버는 요청을 처리하고 HTML·CSS·JS 등 리소스를 응답으로 돌려줍니다.\n브라우저는 받은 응답을 파싱·렌더링해 사용자 화면에 페이지를 출력합니다. REST의 장단점을 설명해보세요. 장점은 HTTP 프로토콜을 그대로 활용하므로 별도의 인프라가 필요 없고, HTTP를 따르는 모든 플랫폼에서 사용할 수 있으며, URI와 메서드만 봐도 요청의 의도를 파악하기 쉽다는 점입니다.\n단점은 자원에 대한 동작을 HTTP 메서드로만 표현해야 하므로 사용할 수 있는 연산이 한정적이고, 복잡한 동작이나 트랜잭션 단위 작업을 표현하기 어렵다는 점입니다. GET에 바디를 넣어서 보내면 나타날 결과를 설명해보세요. HTTP 명세상 GET 요청도 바디를 가질 수는 있지만, 명세에서 바디의 사용 의미를 정의하지 않기 때문에 서버나 프록시·캐시 같은 중간 노드가 이를 무시하거나 거부할 수 있습니다.\n또한 GET은 조회 목적의 안전하고 멱등한 메서드이므로 바디로 데이터를 전달하는 것은 의미적으로 적절하지 않습니다.\n서버에 데이터를 전달해야 한다면 쿼리 스트링을 사용하거나 POST 등 다른 메서드를 사용하는 것이 권장됩니다. POST와 PUT의 차이점을 설명해보세요. POST는 자원을 새로 생성하는 메서드로, 같은 요청을 반복하면 매번 새로운 자원이 만들어질 수 있어 멱등하지 않습니다.\nPUT은 지정한 자원을 통째로 교체(없으면 생성)하는 메서드로, 같은 요청을 여러 번 보내도 최종 상태가 동일하게 유지되므로 멱등합니다.\n즉 POST는 \"새로 만든다\", PUT은 \"있어야 할 모습으로 맞춘다\"는 의미에서 차이가 있습니다. ">
+<title>[CS 스터디] 면접 대비 2</title>
+
+<link rel='canonical' href='http://localhost:1313/posts/cs-study-12/'>
+
+<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="[CS 스터디] 면접 대비 2">
+<meta property='og:description' content="1. 요약 TCP 연결형 서비스: 송신부와 수신부의 연결을 확인한 뒤 데이터를 주고받는 연결 지향형 프로토콜 가상 회선 패킷 교환 방식: 패킷이 전달되는 회선이 정해져 있어 순서대로 도착함 신뢰성 보장: 데이터의 손실이나 순서 오류 없이 전달됨을 보장하므로 신뢰성이 높음 핸드셰이킹: 연결 시 3-way 핸드셰이킹, 해제 시 4-way 핸드셰이킹을 사용 신뢰성 보장 방법: 흐름 제어: 수신부와 송신부 간의 데이터 처리 속도 차이를 조절 혼잡 제어: 송신부의 데이터 전달 속도와 네트워크 속도의 차이를 조절 오류 제어: 데이터의 오류를 검출하고 손실된 패킷을 재전송 UDP 비연결형 서비스: 송신부와 수신부의 연결을 보장하지 않는 비연결형 프로토콜 데이터그램 패킷 교환 방식: 패킷이 서로 다른 회선으로 전달될 수 있음 낮은 신뢰성: 흐름·혼잡 제어와 재전송이 없어 신뢰성은 낮지만 그만큼 오버헤드가 적어 빠름 오류 검출: 체크섬(checksum) 필드를 이용해 최소한의 오류 검출만 지원 HTTP 클라이언트-서버 구조의 통신 프로토콜: 인터넷에서 데이터를 전송하기 위해 사용됨 특징: 비연결성: 서버에서 응답을 받으면 연결을 끊음 무상태: 서버가 클라이언트의 이전 상태를 식별하거나 기억하지 않음 쿠키와 세션: 비연결성과 무상태의 단점을 보완하기 위한 수단 쿠키: 클라이언트 로컬에 저장되는 키-값 형태의 작은 데이터 파일 세션: 서버에 저장되는 연결 관련 정보 HTTPS HTTP + SSL/TLS: SSL/TLS를 이용해 HTTP의 보안을 강화한 웹 통신 프로토콜 SSL/TLS의 위치: 전송 계층과 응용 계층 사이에 위치하는 보안 통신 계층 TCP Keep Alive와 HTTP Keep Alive TCP Keep Alive: 연결된 세션을 유지하기 위한 방식\n일정 시간 동안 패킷 교환이 없으면 연결 유지 여부를 확인하는 패킷을 보냄 HTTP Keep Alive: 일정 시간 동안 TCP 연결을 유지해 여러 HTTP 요청·응답에 재사용하는 방식\n정해진 시간이 끝나면 연결이 해제됨 REST REST: URI로 자원을 명시하고 HTTP 메서드로 CRUD 연산을 수행하는 소프트웨어 아키텍처 장점: HTTP 프로토콜을 그대로 사용하므로 별도의 인프라 구축이 필요 없음 HTTP를 따르는 모든 플랫폼에서 사용 가능 단점: 사용 가능한 HTTP 메서드가 한정적이라 표현할 수 있는 동작이 제한적임 구성 요소: 자원(Resource): URI를 통해 클라이언트가 서버의 자원을 식별하고 조작을 요청함 행위(Verb): HTTP 메서드로 자원에 대한 연산을 표현 표현(Representation): JSON, XML 등의 형식으로 데이터를 주고받음 HTTP 메서드 POST: Create 연산, 새로운 자원을 생성할 때 사용 GET: Read 연산, 서버에서 자원을 조회할 때 사용 PUT: Update 연산, 자원을 갱신(또는 없으면 생성)할 때 사용 DELETE: Delete 연산, 자원을 삭제할 때 사용 2. 면접 대비 (Q&amp;A) TCP의 특징을 설명해보세요. TCP는 송신부와 수신부의 연결을 확인한 뒤 데이터를 주고받는 연결 지향형 프로토콜입니다.\n패킷이 전달되는 경로가 고정되는 가상 회선 패킷 교환 방식을 사용하며, 데이터의 손실이나 순서 오류 없이 전달됨을 보장하므로 신뢰성이 높습니다.\n연결 시에는 3-way 핸드셰이크, 해제 시에는 4-way 핸드셰이크를 통해 통신을 시작·종료합니다. TCP의 연결 및 해제 과정을 설명해보세요. 연결은 3-way 핸드셰이크로 이루어집니다. 클라이언트가 SYN을 보내면 서버가 SYN+ACK으로 응답하고, 클라이언트가 다시 ACK을 보내 연결이 확립됩니다.\n해제는 4-way 핸드셰이크로 이루어집니다. 종료를 요청하는 측에서 FIN을 보내고 상대가 ACK으로 응답한 뒤, 상대도 FIN을 보내면 마지막으로 ACK을 응답하여 연결이 종료됩니다. TCP에서 데이터의 신뢰성을 보장하기 위한 방법을 설명해보세요. 크게 세 가지 제어 방식을 사용합니다. 흐름 제어(Flow Control): 수신부의 처리 속도에 맞춰 송신부의 전송 속도를 조절합니다. 슬라이딩 윈도우 방식이 대표적입니다. 혼잡 제어(Congestion Control): 네트워크의 혼잡 상태에 따라 송신부의 전송량을 조절합니다. 오류 제어(Error Control): 체크섬으로 오류를 검출하고, ACK과 재전송 메커니즘으로 손실된 데이터를 복구합니다. UDP의 특징을 설명해보세요. UDP는 연결 과정 없이 데이터를 전송하는 비연결형 프로토콜입니다.\n패킷마다 서로 다른 경로로 전달될 수 있는 데이터그램 방식을 사용하며, 흐름·혼잡 제어나 재전송이 없어 신뢰성은 낮지만 그만큼 오버헤드가 적어 빠르고 효율적입니다.\n체크섬 필드를 통해 최소한의 오류 검출만 지원합니다. TCP와 UDP의 차이점을 설명해보세요. TCP는 연결 지향형으로 신뢰성을 보장하지만, 연결 설정과 제어로 인한 오버헤드가 크고 상대적으로 속도가 느립니다.\nUDP는 비연결형으로 신뢰성은 낮지만, 헤더가 작고 제어 절차가 없어 빠르고 가볍습니다.\n신뢰성이 중요한 파일 전송이나 웹 통신에는 TCP가, 실시간성이 중요한 영상·음성 스트리밍이나 게임 등에는 UDP가 주로 사용됩니다. UDP에서 오류 검출 방법을 설명해보세요. UDP 헤더의 체크섬(checksum) 필드를 이용해 오류를 검출합니다.\n송신 측에서 데이터의 비트들을 계산한 값을 체크섬에 담아 보내면, 수신 측이 동일한 방식으로 다시 계산해 값이 일치하는지 확인합니다. 값이 다르면 전송 중 데이터가 변경된 것으로 판단해 해당 패킷을 폐기합니다. HTTP에 대해 설명해보세요. HTTP는 인터넷에서 클라이언트와 서버가 데이터를 주고받기 위해 사용하는 응용 계층 프로토콜입니다.\n요청에 대한 응답을 받으면 연결을 끊는 비연결성과, 클라이언트의 이전 상태를 기억하지 않는 무상태성이라는 특징이 있습니다.\n이러한 단점은 쿠키와 세션을 통해 보완합니다. HTTP Keep Alive와 TCP Keep Alive를 설명해보세요. TCP Keep Alive는 이미 연결된 세션을 유지하기 위한 메커니즘으로, 일정 시간 동안 패킷 교환이 없으면 연결이 살아있는지 확인하는 패킷을 보냅니다.\nHTTP Keep Alive는 한 번 맺은 TCP 연결을 일정 시간 동안 유지해 여러 HTTP 요청·응답을 재사용할 수 있도록 하는 방식이며, 정해진 시간이 지나면 연결이 해제됩니다.\n같은 'Keep Alive'라는 이름을 쓰지만, TCP Keep Alive는 연결의 생존 여부 확인에 초점이 있고 HTTP Keep Alive는 연결의 재사용에 초점이 있습니다. 쿠키와 세션의 차이점을 설명해보세요. 쿠키는 클라이언트(브라우저) 측에 저장되는 키-값 형태의 작은 데이터 파일로, 매 요청에 자동으로 함께 전송됩니다.\n세션은 서버 측에 저장되는 연결 관련 정보로, 클라이언트는 세션 ID만 쿠키 등으로 보관해 자신을 식별합니다.\n쿠키는 클라이언트에 노출되어 상대적으로 보안이 약한 반면, 세션은 서버에 저장되어 보안성이 높지만 서버 자원을 차지합니다. HTTP와 HTTPS의 차이점을 설명해보세요. HTTPS는 HTTP에 SSL/TLS 보안 계층을 추가해 통신 내용을 암호화한 프로토콜입니다.\nHTTP가 평문으로 데이터를 주고받아 도청과 변조에 취약한 반면, HTTPS는 암호화를 통해 데이터의 기밀성과 무결성을 보장합니다.\n기본 포트도 HTTP는 80, HTTPS는 443으로 다릅니다. HTTPS에서 사용하는 암호화 방식을 설명해보세요. HTTPS는 대칭 키 암호화와 공개 키 암호화를 결합해 사용합니다.\n초기 핸드셰이크 단계에서는 공개 키 암호화 방식으로 대칭 키를 안전하게 교환하고, 이후 실제 데이터 통신에는 속도가 빠른 대칭 키 암호화를 사용합니다.\n이렇게 하면 공개 키 방식의 안전한 키 교환과 대칭 키 방식의 빠른 처리 속도라는 장점을 모두 활용할 수 있습니다. 사용자가 URL을 입력한 후 화면이 출력되기까지의 과정을 설명해보세요. 사용자가 URL을 입력하면 웹 브라우저는 입력된 도메인의 IP 주소를 DNS 서버에 질의합니다.\nDNS로부터 받은 IP 주소를 이용해 웹 서버와 TCP/IP 연결을 맺고 HTTP 요청을 전송하면, 서버는 요청을 처리하고 HTML·CSS·JS 등 리소스를 응답으로 돌려줍니다.\n브라우저는 받은 응답을 파싱·렌더링해 사용자 화면에 페이지를 출력합니다. REST의 장단점을 설명해보세요. 장점은 HTTP 프로토콜을 그대로 활용하므로 별도의 인프라가 필요 없고, HTTP를 따르는 모든 플랫폼에서 사용할 수 있으며, URI와 메서드만 봐도 요청의 의도를 파악하기 쉽다는 점입니다.\n단점은 자원에 대한 동작을 HTTP 메서드로만 표현해야 하므로 사용할 수 있는 연산이 한정적이고, 복잡한 동작이나 트랜잭션 단위 작업을 표현하기 어렵다는 점입니다. GET에 바디를 넣어서 보내면 나타날 결과를 설명해보세요. HTTP 명세상 GET 요청도 바디를 가질 수는 있지만, 명세에서 바디의 사용 의미를 정의하지 않기 때문에 서버나 프록시·캐시 같은 중간 노드가 이를 무시하거나 거부할 수 있습니다.\n또한 GET은 조회 목적의 안전하고 멱등한 메서드이므로 바디로 데이터를 전달하는 것은 의미적으로 적절하지 않습니다.\n서버에 데이터를 전달해야 한다면 쿼리 스트링을 사용하거나 POST 등 다른 메서드를 사용하는 것이 권장됩니다. POST와 PUT의 차이점을 설명해보세요. POST는 자원을 새로 생성하는 메서드로, 같은 요청을 반복하면 매번 새로운 자원이 만들어질 수 있어 멱등하지 않습니다.\nPUT은 지정한 자원을 통째로 교체(없으면 생성)하는 메서드로, 같은 요청을 여러 번 보내도 최종 상태가 동일하게 유지되므로 멱등합니다.\n즉 POST는 \"새로 만든다\", PUT은 \"있어야 할 모습으로 맞춘다\"는 의미에서 차이가 있습니다. ">
+<meta property='og:url' content='http://localhost:1313/posts/cs-study-12/'>
+<meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2026-06-12T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-06-12T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="[CS 스터디] 면접 대비 2">
+<meta name="twitter:description" content="1. 요약 TCP 연결형 서비스: 송신부와 수신부의 연결을 확인한 뒤 데이터를 주고받는 연결 지향형 프로토콜 가상 회선 패킷 교환 방식: 패킷이 전달되는 회선이 정해져 있어 순서대로 도착함 신뢰성 보장: 데이터의 손실이나 순서 오류 없이 전달됨을 보장하므로 신뢰성이 높음 핸드셰이킹: 연결 시 3-way 핸드셰이킹, 해제 시 4-way 핸드셰이킹을 사용 신뢰성 보장 방법: 흐름 제어: 수신부와 송신부 간의 데이터 처리 속도 차이를 조절 혼잡 제어: 송신부의 데이터 전달 속도와 네트워크 속도의 차이를 조절 오류 제어: 데이터의 오류를 검출하고 손실된 패킷을 재전송 UDP 비연결형 서비스: 송신부와 수신부의 연결을 보장하지 않는 비연결형 프로토콜 데이터그램 패킷 교환 방식: 패킷이 서로 다른 회선으로 전달될 수 있음 낮은 신뢰성: 흐름·혼잡 제어와 재전송이 없어 신뢰성은 낮지만 그만큼 오버헤드가 적어 빠름 오류 검출: 체크섬(checksum) 필드를 이용해 최소한의 오류 검출만 지원 HTTP 클라이언트-서버 구조의 통신 프로토콜: 인터넷에서 데이터를 전송하기 위해 사용됨 특징: 비연결성: 서버에서 응답을 받으면 연결을 끊음 무상태: 서버가 클라이언트의 이전 상태를 식별하거나 기억하지 않음 쿠키와 세션: 비연결성과 무상태의 단점을 보완하기 위한 수단 쿠키: 클라이언트 로컬에 저장되는 키-값 형태의 작은 데이터 파일 세션: 서버에 저장되는 연결 관련 정보 HTTPS HTTP + SSL/TLS: SSL/TLS를 이용해 HTTP의 보안을 강화한 웹 통신 프로토콜 SSL/TLS의 위치: 전송 계층과 응용 계층 사이에 위치하는 보안 통신 계층 TCP Keep Alive와 HTTP Keep Alive TCP Keep Alive: 연결된 세션을 유지하기 위한 방식\n일정 시간 동안 패킷 교환이 없으면 연결 유지 여부를 확인하는 패킷을 보냄 HTTP Keep Alive: 일정 시간 동안 TCP 연결을 유지해 여러 HTTP 요청·응답에 재사용하는 방식\n정해진 시간이 끝나면 연결이 해제됨 REST REST: URI로 자원을 명시하고 HTTP 메서드로 CRUD 연산을 수행하는 소프트웨어 아키텍처 장점: HTTP 프로토콜을 그대로 사용하므로 별도의 인프라 구축이 필요 없음 HTTP를 따르는 모든 플랫폼에서 사용 가능 단점: 사용 가능한 HTTP 메서드가 한정적이라 표현할 수 있는 동작이 제한적임 구성 요소: 자원(Resource): URI를 통해 클라이언트가 서버의 자원을 식별하고 조작을 요청함 행위(Verb): HTTP 메서드로 자원에 대한 연산을 표현 표현(Representation): JSON, XML 등의 형식으로 데이터를 주고받음 HTTP 메서드 POST: Create 연산, 새로운 자원을 생성할 때 사용 GET: Read 연산, 서버에서 자원을 조회할 때 사용 PUT: Update 연산, 자원을 갱신(또는 없으면 생성)할 때 사용 DELETE: Delete 연산, 자원을 삭제할 때 사용 2. 면접 대비 (Q&amp;A) TCP의 특징을 설명해보세요. TCP는 송신부와 수신부의 연결을 확인한 뒤 데이터를 주고받는 연결 지향형 프로토콜입니다.\n패킷이 전달되는 경로가 고정되는 가상 회선 패킷 교환 방식을 사용하며, 데이터의 손실이나 순서 오류 없이 전달됨을 보장하므로 신뢰성이 높습니다.\n연결 시에는 3-way 핸드셰이크, 해제 시에는 4-way 핸드셰이크를 통해 통신을 시작·종료합니다. TCP의 연결 및 해제 과정을 설명해보세요. 연결은 3-way 핸드셰이크로 이루어집니다. 클라이언트가 SYN을 보내면 서버가 SYN+ACK으로 응답하고, 클라이언트가 다시 ACK을 보내 연결이 확립됩니다.\n해제는 4-way 핸드셰이크로 이루어집니다. 종료를 요청하는 측에서 FIN을 보내고 상대가 ACK으로 응답한 뒤, 상대도 FIN을 보내면 마지막으로 ACK을 응답하여 연결이 종료됩니다. TCP에서 데이터의 신뢰성을 보장하기 위한 방법을 설명해보세요. 크게 세 가지 제어 방식을 사용합니다. 흐름 제어(Flow Control): 수신부의 처리 속도에 맞춰 송신부의 전송 속도를 조절합니다. 슬라이딩 윈도우 방식이 대표적입니다. 혼잡 제어(Congestion Control): 네트워크의 혼잡 상태에 따라 송신부의 전송량을 조절합니다. 오류 제어(Error Control): 체크섬으로 오류를 검출하고, ACK과 재전송 메커니즘으로 손실된 데이터를 복구합니다. UDP의 특징을 설명해보세요. UDP는 연결 과정 없이 데이터를 전송하는 비연결형 프로토콜입니다.\n패킷마다 서로 다른 경로로 전달될 수 있는 데이터그램 방식을 사용하며, 흐름·혼잡 제어나 재전송이 없어 신뢰성은 낮지만 그만큼 오버헤드가 적어 빠르고 효율적입니다.\n체크섬 필드를 통해 최소한의 오류 검출만 지원합니다. TCP와 UDP의 차이점을 설명해보세요. TCP는 연결 지향형으로 신뢰성을 보장하지만, 연결 설정과 제어로 인한 오버헤드가 크고 상대적으로 속도가 느립니다.\nUDP는 비연결형으로 신뢰성은 낮지만, 헤더가 작고 제어 절차가 없어 빠르고 가볍습니다.\n신뢰성이 중요한 파일 전송이나 웹 통신에는 TCP가, 실시간성이 중요한 영상·음성 스트리밍이나 게임 등에는 UDP가 주로 사용됩니다. UDP에서 오류 검출 방법을 설명해보세요. UDP 헤더의 체크섬(checksum) 필드를 이용해 오류를 검출합니다.\n송신 측에서 데이터의 비트들을 계산한 값을 체크섬에 담아 보내면, 수신 측이 동일한 방식으로 다시 계산해 값이 일치하는지 확인합니다. 값이 다르면 전송 중 데이터가 변경된 것으로 판단해 해당 패킷을 폐기합니다. HTTP에 대해 설명해보세요. HTTP는 인터넷에서 클라이언트와 서버가 데이터를 주고받기 위해 사용하는 응용 계층 프로토콜입니다.\n요청에 대한 응답을 받으면 연결을 끊는 비연결성과, 클라이언트의 이전 상태를 기억하지 않는 무상태성이라는 특징이 있습니다.\n이러한 단점은 쿠키와 세션을 통해 보완합니다. HTTP Keep Alive와 TCP Keep Alive를 설명해보세요. TCP Keep Alive는 이미 연결된 세션을 유지하기 위한 메커니즘으로, 일정 시간 동안 패킷 교환이 없으면 연결이 살아있는지 확인하는 패킷을 보냅니다.\nHTTP Keep Alive는 한 번 맺은 TCP 연결을 일정 시간 동안 유지해 여러 HTTP 요청·응답을 재사용할 수 있도록 하는 방식이며, 정해진 시간이 지나면 연결이 해제됩니다.\n같은 'Keep Alive'라는 이름을 쓰지만, TCP Keep Alive는 연결의 생존 여부 확인에 초점이 있고 HTTP Keep Alive는 연결의 재사용에 초점이 있습니다. 쿠키와 세션의 차이점을 설명해보세요. 쿠키는 클라이언트(브라우저) 측에 저장되는 키-값 형태의 작은 데이터 파일로, 매 요청에 자동으로 함께 전송됩니다.\n세션은 서버 측에 저장되는 연결 관련 정보로, 클라이언트는 세션 ID만 쿠키 등으로 보관해 자신을 식별합니다.\n쿠키는 클라이언트에 노출되어 상대적으로 보안이 약한 반면, 세션은 서버에 저장되어 보안성이 높지만 서버 자원을 차지합니다. HTTP와 HTTPS의 차이점을 설명해보세요. HTTPS는 HTTP에 SSL/TLS 보안 계층을 추가해 통신 내용을 암호화한 프로토콜입니다.\nHTTP가 평문으로 데이터를 주고받아 도청과 변조에 취약한 반면, HTTPS는 암호화를 통해 데이터의 기밀성과 무결성을 보장합니다.\n기본 포트도 HTTP는 80, HTTPS는 443으로 다릅니다. HTTPS에서 사용하는 암호화 방식을 설명해보세요. HTTPS는 대칭 키 암호화와 공개 키 암호화를 결합해 사용합니다.\n초기 핸드셰이크 단계에서는 공개 키 암호화 방식으로 대칭 키를 안전하게 교환하고, 이후 실제 데이터 통신에는 속도가 빠른 대칭 키 암호화를 사용합니다.\n이렇게 하면 공개 키 방식의 안전한 키 교환과 대칭 키 방식의 빠른 처리 속도라는 장점을 모두 활용할 수 있습니다. 사용자가 URL을 입력한 후 화면이 출력되기까지의 과정을 설명해보세요. 사용자가 URL을 입력하면 웹 브라우저는 입력된 도메인의 IP 주소를 DNS 서버에 질의합니다.\nDNS로부터 받은 IP 주소를 이용해 웹 서버와 TCP/IP 연결을 맺고 HTTP 요청을 전송하면, 서버는 요청을 처리하고 HTML·CSS·JS 등 리소스를 응답으로 돌려줍니다.\n브라우저는 받은 응답을 파싱·렌더링해 사용자 화면에 페이지를 출력합니다. REST의 장단점을 설명해보세요. 장점은 HTTP 프로토콜을 그대로 활용하므로 별도의 인프라가 필요 없고, HTTP를 따르는 모든 플랫폼에서 사용할 수 있으며, URI와 메서드만 봐도 요청의 의도를 파악하기 쉽다는 점입니다.\n단점은 자원에 대한 동작을 HTTP 메서드로만 표현해야 하므로 사용할 수 있는 연산이 한정적이고, 복잡한 동작이나 트랜잭션 단위 작업을 표현하기 어렵다는 점입니다. GET에 바디를 넣어서 보내면 나타날 결과를 설명해보세요. HTTP 명세상 GET 요청도 바디를 가질 수는 있지만, 명세에서 바디의 사용 의미를 정의하지 않기 때문에 서버나 프록시·캐시 같은 중간 노드가 이를 무시하거나 거부할 수 있습니다.\n또한 GET은 조회 목적의 안전하고 멱등한 메서드이므로 바디로 데이터를 전달하는 것은 의미적으로 적절하지 않습니다.\n서버에 데이터를 전달해야 한다면 쿼리 스트링을 사용하거나 POST 등 다른 메서드를 사용하는 것이 권장됩니다. POST와 PUT의 차이점을 설명해보세요. POST는 자원을 새로 생성하는 메서드로, 같은 요청을 반복하면 매번 새로운 자원이 만들어질 수 있어 멱등하지 않습니다.\nPUT은 지정한 자원을 통째로 교체(없으면 생성)하는 메서드로, 같은 요청을 여러 번 보내도 최종 상태가 동일하게 유지되므로 멱등합니다.\n즉 POST는 \"새로 만든다\", PUT은 \"있어야 할 모습으로 맞춘다\"는 의미에서 차이가 있습니다. "><link rel="alternate" type="application/json" href="http://localhost:1313/posts/cs-study-12/index.json">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/../assets/avatar_hu_c27af72c615ceedd.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Soyeon&#39;s Dev Log</a></h1>
+            <h2 class="site-description">백엔드 개발자 지망생의 기록</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-code" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="7 8 3 12 7 16" /><polyline points="17 8 21 12 17 16" /><line x1="14" y1="4" x2="10" y2="20" /></svg>
+                
+                <span>코딩테스트</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/cs/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><line x1="3" y1="6" x2="3" y2="19" /><line x1="12" y1="6" x2="12" y2="19" /><line x1="21" y1="6" x2="21" y2="19" /></svg>
+                
+                <span>CS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="4" y="5" width="16" height="16" rx="2" /><line x1="16" y1="3" x2="16" y2="7" /><line x1="8" y1="3" x2="8" y2="7" /><line x1="4" y1="11" x2="20" y2="11" /><rect x="8" y1="15" width="2" height="2" /></svg>
+                
+                <span>주간회고</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>검색</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>다크 모드</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/cs/" style="background-color: #e9c46a; color: #fff;">
+                CS
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/cs-study-12/">[CS 스터디] 면접 대비 2</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-06-12</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="1-요약">1. 요약
+</h3><h4 id="tcp">TCP
+</h4><ul>
+<li><strong>연결형 서비스</strong>: 송신부와 수신부의 연결을 확인한 뒤 데이터를 주고받는 연결 지향형 프로토콜</li>
+<li><strong>가상 회선 패킷 교환 방식</strong>: 패킷이 전달되는 회선이 정해져 있어 순서대로 도착함</li>
+<li><strong>신뢰성 보장</strong>: 데이터의 손실이나 순서 오류 없이 전달됨을 보장하므로 신뢰성이 높음</li>
+<li><strong>핸드셰이킹</strong>: 연결 시 3-way 핸드셰이킹, 해제 시 4-way 핸드셰이킹을 사용</li>
+<li><strong>신뢰성 보장 방법</strong>:
+<ul>
+<li><strong>흐름 제어</strong>: 수신부와 송신부 간의 데이터 처리 속도 차이를 조절</li>
+<li><strong>혼잡 제어</strong>: 송신부의 데이터 전달 속도와 네트워크 속도의 차이를 조절</li>
+<li><strong>오류 제어</strong>: 데이터의 오류를 검출하고 손실된 패킷을 재전송</li>
+</ul>
+</li>
+</ul>
+<h4 id="udp">UDP
+</h4><ul>
+<li><strong>비연결형 서비스</strong>: 송신부와 수신부의 연결을 보장하지 않는 비연결형 프로토콜</li>
+<li><strong>데이터그램 패킷 교환 방식</strong>: 패킷이 서로 다른 회선으로 전달될 수 있음</li>
+<li><strong>낮은 신뢰성</strong>: 흐름·혼잡 제어와 재전송이 없어 신뢰성은 낮지만 그만큼 오버헤드가 적어 빠름</li>
+<li><strong>오류 검출</strong>: 체크섬(checksum) 필드를 이용해 최소한의 오류 검출만 지원</li>
+</ul>
+<h4 id="http">HTTP
+</h4><ul>
+<li><strong>클라이언트-서버 구조의 통신 프로토콜</strong>: 인터넷에서 데이터를 전송하기 위해 사용됨</li>
+<li><strong>특징</strong>:
+<ul>
+<li><strong>비연결성</strong>: 서버에서 응답을 받으면 연결을 끊음</li>
+<li><strong>무상태</strong>: 서버가 클라이언트의 이전 상태를 식별하거나 기억하지 않음</li>
+</ul>
+</li>
+<li><strong>쿠키와 세션</strong>: 비연결성과 무상태의 단점을 보완하기 위한 수단
+<ul>
+<li><strong>쿠키</strong>: 클라이언트 로컬에 저장되는 키-값 형태의 작은 데이터 파일</li>
+<li><strong>세션</strong>: 서버에 저장되는 연결 관련 정보</li>
+</ul>
+</li>
+</ul>
+<h4 id="https">HTTPS
+</h4><ul>
+<li><strong>HTTP + SSL/TLS</strong>: SSL/TLS를 이용해 HTTP의 보안을 강화한 웹 통신 프로토콜</li>
+<li><strong>SSL/TLS의 위치</strong>: 전송 계층과 응용 계층 사이에 위치하는 보안 통신 계층</li>
+</ul>
+<h4 id="tcp-keep-alive와-http-keep-alive">TCP Keep Alive와 HTTP Keep Alive
+</h4><ul>
+<li><strong>TCP Keep Alive</strong>: 연결된 세션을 유지하기 위한 방식<br>
+일정 시간 동안 패킷 교환이 없으면 연결 유지 여부를 확인하는 패킷을 보냄</li>
+<li><strong>HTTP Keep Alive</strong>: 일정 시간 동안 TCP 연결을 유지해 여러 HTTP 요청·응답에 재사용하는 방식<br>
+정해진 시간이 끝나면 연결이 해제됨</li>
+</ul>
+<h4 id="rest">REST
+</h4><ul>
+<li><strong>REST</strong>: URI로 자원을 명시하고 HTTP 메서드로 CRUD 연산을 수행하는 소프트웨어 아키텍처</li>
+<li><strong>장점</strong>:
+<ul>
+<li>HTTP 프로토콜을 그대로 사용하므로 별도의 인프라 구축이 필요 없음</li>
+<li>HTTP를 따르는 모든 플랫폼에서 사용 가능</li>
+</ul>
+</li>
+<li><strong>단점</strong>: 사용 가능한 HTTP 메서드가 한정적이라 표현할 수 있는 동작이 제한적임</li>
+<li><strong>구성 요소</strong>:
+<ul>
+<li><strong>자원(Resource)</strong>: URI를 통해 클라이언트가 서버의 자원을 식별하고 조작을 요청함</li>
+<li><strong>행위(Verb)</strong>: HTTP 메서드로 자원에 대한 연산을 표현</li>
+<li><strong>표현(Representation)</strong>: JSON, XML 등의 형식으로 데이터를 주고받음</li>
+</ul>
+</li>
+</ul>
+<h4 id="http-메서드">HTTP 메서드
+</h4><ul>
+<li><strong>POST</strong>: Create 연산, 새로운 자원을 생성할 때 사용</li>
+<li><strong>GET</strong>: Read 연산, 서버에서 자원을 조회할 때 사용</li>
+<li><strong>PUT</strong>: Update 연산, 자원을 갱신(또는 없으면 생성)할 때 사용</li>
+<li><strong>DELETE</strong>: Delete 연산, 자원을 삭제할 때 사용</li>
+</ul>
+<hr>
+<h3 id="2-면접-대비-qa">2. 면접 대비 (Q&amp;A)
+</h3><details>
+<summary><b>TCP의 특징을 설명해보세요.</b></summary>
+TCP는 송신부와 수신부의 연결을 확인한 뒤 데이터를 주고받는 연결 지향형 프로토콜입니다.<br>
+패킷이 전달되는 경로가 고정되는 가상 회선 패킷 교환 방식을 사용하며, 데이터의 손실이나 순서 오류 없이 전달됨을 보장하므로 신뢰성이 높습니다.<br>
+연결 시에는 3-way 핸드셰이크, 해제 시에는 4-way 핸드셰이크를 통해 통신을 시작·종료합니다.
+</details>
+<details>
+<summary><b>TCP의 연결 및 해제 과정을 설명해보세요.</b></summary>
+연결은 3-way 핸드셰이크로 이루어집니다. 클라이언트가 SYN을 보내면 서버가 SYN+ACK으로 응답하고, 클라이언트가 다시 ACK을 보내 연결이 확립됩니다.<br>
+해제는 4-way 핸드셰이크로 이루어집니다. 종료를 요청하는 측에서 FIN을 보내고 상대가 ACK으로 응답한 뒤, 상대도 FIN을 보내면 마지막으로 ACK을 응답하여 연결이 종료됩니다.
+</details>
+<details>
+<summary><b>TCP에서 데이터의 신뢰성을 보장하기 위한 방법을 설명해보세요.</b></summary>
+크게 세 가지 제어 방식을 사용합니다.
+<ul>
+  <li><b>흐름 제어(Flow Control):</b> 수신부의 처리 속도에 맞춰 송신부의 전송 속도를 조절합니다. 슬라이딩 윈도우 방식이 대표적입니다.</li>
+  <li><b>혼잡 제어(Congestion Control):</b> 네트워크의 혼잡 상태에 따라 송신부의 전송량을 조절합니다.</li>
+  <li><b>오류 제어(Error Control):</b> 체크섬으로 오류를 검출하고, ACK과 재전송 메커니즘으로 손실된 데이터를 복구합니다.</li>
+</ul>
+</details>
+<details>
+<summary><b>UDP의 특징을 설명해보세요.</b></summary>
+UDP는 연결 과정 없이 데이터를 전송하는 비연결형 프로토콜입니다.<br>
+패킷마다 서로 다른 경로로 전달될 수 있는 데이터그램 방식을 사용하며, 흐름·혼잡 제어나 재전송이 없어 신뢰성은 낮지만 그만큼 오버헤드가 적어 빠르고 효율적입니다.<br>
+체크섬 필드를 통해 최소한의 오류 검출만 지원합니다.
+</details>
+<details>
+<summary><b>TCP와 UDP의 차이점을 설명해보세요.</b></summary>
+TCP는 연결 지향형으로 신뢰성을 보장하지만, 연결 설정과 제어로 인한 오버헤드가 크고 상대적으로 속도가 느립니다.<br>
+UDP는 비연결형으로 신뢰성은 낮지만, 헤더가 작고 제어 절차가 없어 빠르고 가볍습니다.<br>
+신뢰성이 중요한 파일 전송이나 웹 통신에는 TCP가, 실시간성이 중요한 영상·음성 스트리밍이나 게임 등에는 UDP가 주로 사용됩니다.
+</details>
+<details>
+<summary><b>UDP에서 오류 검출 방법을 설명해보세요.</b></summary>
+UDP 헤더의 체크섬(checksum) 필드를 이용해 오류를 검출합니다.<br>
+송신 측에서 데이터의 비트들을 계산한 값을 체크섬에 담아 보내면, 수신 측이 동일한 방식으로 다시 계산해 값이 일치하는지 확인합니다. 값이 다르면 전송 중 데이터가 변경된 것으로 판단해 해당 패킷을 폐기합니다.
+</details>
+<details>
+<summary><b>HTTP에 대해 설명해보세요.</b></summary>
+HTTP는 인터넷에서 클라이언트와 서버가 데이터를 주고받기 위해 사용하는 응용 계층 프로토콜입니다.<br>
+요청에 대한 응답을 받으면 연결을 끊는 비연결성과, 클라이언트의 이전 상태를 기억하지 않는 무상태성이라는 특징이 있습니다.<br>
+이러한 단점은 쿠키와 세션을 통해 보완합니다.
+</details>
+<details>
+<summary><b>HTTP Keep Alive와 TCP Keep Alive를 설명해보세요.</b></summary>
+TCP Keep Alive는 이미 연결된 세션을 유지하기 위한 메커니즘으로, 일정 시간 동안 패킷 교환이 없으면 연결이 살아있는지 확인하는 패킷을 보냅니다.<br>
+HTTP Keep Alive는 한 번 맺은 TCP 연결을 일정 시간 동안 유지해 여러 HTTP 요청·응답을 재사용할 수 있도록 하는 방식이며, 정해진 시간이 지나면 연결이 해제됩니다.<br>
+같은 'Keep Alive'라는 이름을 쓰지만, TCP Keep Alive는 연결의 생존 여부 확인에 초점이 있고 HTTP Keep Alive는 연결의 재사용에 초점이 있습니다.
+</details>
+<details>
+<summary><b>쿠키와 세션의 차이점을 설명해보세요.</b></summary>
+쿠키는 클라이언트(브라우저) 측에 저장되는 키-값 형태의 작은 데이터 파일로, 매 요청에 자동으로 함께 전송됩니다.<br>
+세션은 서버 측에 저장되는 연결 관련 정보로, 클라이언트는 세션 ID만 쿠키 등으로 보관해 자신을 식별합니다.<br>
+쿠키는 클라이언트에 노출되어 상대적으로 보안이 약한 반면, 세션은 서버에 저장되어 보안성이 높지만 서버 자원을 차지합니다.
+</details>
+<details>
+<summary><b>HTTP와 HTTPS의 차이점을 설명해보세요.</b></summary>
+HTTPS는 HTTP에 SSL/TLS 보안 계층을 추가해 통신 내용을 암호화한 프로토콜입니다.<br>
+HTTP가 평문으로 데이터를 주고받아 도청과 변조에 취약한 반면, HTTPS는 암호화를 통해 데이터의 기밀성과 무결성을 보장합니다.<br>
+기본 포트도 HTTP는 80, HTTPS는 443으로 다릅니다.
+</details>
+<details>
+<summary><b>HTTPS에서 사용하는 암호화 방식을 설명해보세요.</b></summary>
+HTTPS는 대칭 키 암호화와 공개 키 암호화를 결합해 사용합니다.<br>
+초기 핸드셰이크 단계에서는 공개 키 암호화 방식으로 대칭 키를 안전하게 교환하고, 이후 실제 데이터 통신에는 속도가 빠른 대칭 키 암호화를 사용합니다.<br>
+이렇게 하면 공개 키 방식의 안전한 키 교환과 대칭 키 방식의 빠른 처리 속도라는 장점을 모두 활용할 수 있습니다.
+</details>
+<details>
+<summary><b>사용자가 URL을 입력한 후 화면이 출력되기까지의 과정을 설명해보세요.</b></summary>
+사용자가 URL을 입력하면 웹 브라우저는 입력된 도메인의 IP 주소를 DNS 서버에 질의합니다.<br>
+DNS로부터 받은 IP 주소를 이용해 웹 서버와 TCP/IP 연결을 맺고 HTTP 요청을 전송하면, 서버는 요청을 처리하고 HTML·CSS·JS 등 리소스를 응답으로 돌려줍니다.<br>
+브라우저는 받은 응답을 파싱·렌더링해 사용자 화면에 페이지를 출력합니다.
+</details>
+<details>
+<summary><b>REST의 장단점을 설명해보세요.</b></summary>
+장점은 HTTP 프로토콜을 그대로 활용하므로 별도의 인프라가 필요 없고, HTTP를 따르는 모든 플랫폼에서 사용할 수 있으며, URI와 메서드만 봐도 요청의 의도를 파악하기 쉽다는 점입니다.<br>
+단점은 자원에 대한 동작을 HTTP 메서드로만 표현해야 하므로 사용할 수 있는 연산이 한정적이고, 복잡한 동작이나 트랜잭션 단위 작업을 표현하기 어렵다는 점입니다.
+</details>
+<details>
+<summary><b>GET에 바디를 넣어서 보내면 나타날 결과를 설명해보세요.</b></summary>
+HTTP 명세상 GET 요청도 바디를 가질 수는 있지만, 명세에서 바디의 사용 의미를 정의하지 않기 때문에 서버나 프록시·캐시 같은 중간 노드가 이를 무시하거나 거부할 수 있습니다.<br>
+또한 GET은 조회 목적의 안전하고 멱등한 메서드이므로 바디로 데이터를 전달하는 것은 의미적으로 적절하지 않습니다.<br>
+서버에 데이터를 전달해야 한다면 쿼리 스트링을 사용하거나 POST 등 다른 메서드를 사용하는 것이 권장됩니다.
+</details>
+<details>
+<summary><b>POST와 PUT의 차이점을 설명해보세요.</b></summary>
+POST는 자원을 새로 생성하는 메서드로, 같은 요청을 반복하면 매번 새로운 자원이 만들어질 수 있어 멱등하지 않습니다.<br>
+PUT은 지정한 자원을 통째로 교체(없으면 생성)하는 메서드로, 같은 요청을 여러 번 보내도 최종 상태가 동일하게 유지되므로 멱등합니다.<br>
+즉 POST는 "새로 만든다", PUT은 "있어야 할 모습으로 맞춘다"는 의미에서 차이가 있습니다.
+</details>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Soyeon&#39;s Dev Log
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.748d0acf3bd5d18477b5028b83b70ecfa20eb15aefdff97697a330a2202721bf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

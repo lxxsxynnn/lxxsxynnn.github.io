@@ -6,7 +6,182 @@
         <description>Recent content on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Wed, 10 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 12 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[CS 스터디] 면접 대비 2</title>
+        <link>http://localhost:1313/posts/cs-study-12/</link>
+        <pubDate>Fri, 12 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/cs-study-12/</guid>
+        <description>&lt;h3 id=&#34;1-요약&#34;&gt;1. 요약
+&lt;/h3&gt;&lt;h4 id=&#34;tcp&#34;&gt;TCP
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;연결형 서비스&lt;/strong&gt;: 송신부와 수신부의 연결을 확인한 뒤 데이터를 주고받는 연결 지향형 프로토콜&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;가상 회선 패킷 교환 방식&lt;/strong&gt;: 패킷이 전달되는 회선이 정해져 있어 순서대로 도착함&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;신뢰성 보장&lt;/strong&gt;: 데이터의 손실이나 순서 오류 없이 전달됨을 보장하므로 신뢰성이 높음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;핸드셰이킹&lt;/strong&gt;: 연결 시 3-way 핸드셰이킹, 해제 시 4-way 핸드셰이킹을 사용&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;신뢰성 보장 방법&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;흐름 제어&lt;/strong&gt;: 수신부와 송신부 간의 데이터 처리 속도 차이를 조절&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;혼잡 제어&lt;/strong&gt;: 송신부의 데이터 전달 속도와 네트워크 속도의 차이를 조절&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;오류 제어&lt;/strong&gt;: 데이터의 오류를 검출하고 손실된 패킷을 재전송&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;udp&#34;&gt;UDP
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;비연결형 서비스&lt;/strong&gt;: 송신부와 수신부의 연결을 보장하지 않는 비연결형 프로토콜&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;데이터그램 패킷 교환 방식&lt;/strong&gt;: 패킷이 서로 다른 회선으로 전달될 수 있음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;낮은 신뢰성&lt;/strong&gt;: 흐름·혼잡 제어와 재전송이 없어 신뢰성은 낮지만 그만큼 오버헤드가 적어 빠름&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;오류 검출&lt;/strong&gt;: 체크섬(checksum) 필드를 이용해 최소한의 오류 검출만 지원&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;http&#34;&gt;HTTP
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;클라이언트-서버 구조의 통신 프로토콜&lt;/strong&gt;: 인터넷에서 데이터를 전송하기 위해 사용됨&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;특징&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;비연결성&lt;/strong&gt;: 서버에서 응답을 받으면 연결을 끊음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;무상태&lt;/strong&gt;: 서버가 클라이언트의 이전 상태를 식별하거나 기억하지 않음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;쿠키와 세션&lt;/strong&gt;: 비연결성과 무상태의 단점을 보완하기 위한 수단
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;쿠키&lt;/strong&gt;: 클라이언트 로컬에 저장되는 키-값 형태의 작은 데이터 파일&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;세션&lt;/strong&gt;: 서버에 저장되는 연결 관련 정보&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;https&#34;&gt;HTTPS
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;HTTP + SSL/TLS&lt;/strong&gt;: SSL/TLS를 이용해 HTTP의 보안을 강화한 웹 통신 프로토콜&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SSL/TLS의 위치&lt;/strong&gt;: 전송 계층과 응용 계층 사이에 위치하는 보안 통신 계층&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;tcp-keep-alive와-http-keep-alive&#34;&gt;TCP Keep Alive와 HTTP Keep Alive
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;TCP Keep Alive&lt;/strong&gt;: 연결된 세션을 유지하기 위한 방식&lt;br&gt;
+일정 시간 동안 패킷 교환이 없으면 연결 유지 여부를 확인하는 패킷을 보냄&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HTTP Keep Alive&lt;/strong&gt;: 일정 시간 동안 TCP 연결을 유지해 여러 HTTP 요청·응답에 재사용하는 방식&lt;br&gt;
+정해진 시간이 끝나면 연결이 해제됨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;rest&#34;&gt;REST
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;REST&lt;/strong&gt;: URI로 자원을 명시하고 HTTP 메서드로 CRUD 연산을 수행하는 소프트웨어 아키텍처&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;장점&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;HTTP 프로토콜을 그대로 사용하므로 별도의 인프라 구축이 필요 없음&lt;/li&gt;
+&lt;li&gt;HTTP를 따르는 모든 플랫폼에서 사용 가능&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;단점&lt;/strong&gt;: 사용 가능한 HTTP 메서드가 한정적이라 표현할 수 있는 동작이 제한적임&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;구성 요소&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;자원(Resource)&lt;/strong&gt;: URI를 통해 클라이언트가 서버의 자원을 식별하고 조작을 요청함&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;행위(Verb)&lt;/strong&gt;: HTTP 메서드로 자원에 대한 연산을 표현&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;표현(Representation)&lt;/strong&gt;: JSON, XML 등의 형식으로 데이터를 주고받음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;http-메서드&#34;&gt;HTTP 메서드
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;POST&lt;/strong&gt;: Create 연산, 새로운 자원을 생성할 때 사용&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GET&lt;/strong&gt;: Read 연산, 서버에서 자원을 조회할 때 사용&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PUT&lt;/strong&gt;: Update 연산, 자원을 갱신(또는 없으면 생성)할 때 사용&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DELETE&lt;/strong&gt;: Delete 연산, 자원을 삭제할 때 사용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;2-면접-대비-qa&#34;&gt;2. 면접 대비 (Q&amp;amp;A)
+&lt;/h3&gt;&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;TCP의 특징을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+TCP는 송신부와 수신부의 연결을 확인한 뒤 데이터를 주고받는 연결 지향형 프로토콜입니다.&lt;br&gt;
+패킷이 전달되는 경로가 고정되는 가상 회선 패킷 교환 방식을 사용하며, 데이터의 손실이나 순서 오류 없이 전달됨을 보장하므로 신뢰성이 높습니다.&lt;br&gt;
+연결 시에는 3-way 핸드셰이크, 해제 시에는 4-way 핸드셰이크를 통해 통신을 시작·종료합니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;TCP의 연결 및 해제 과정을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+연결은 3-way 핸드셰이크로 이루어집니다. 클라이언트가 SYN을 보내면 서버가 SYN+ACK으로 응답하고, 클라이언트가 다시 ACK을 보내 연결이 확립됩니다.&lt;br&gt;
+해제는 4-way 핸드셰이크로 이루어집니다. 종료를 요청하는 측에서 FIN을 보내고 상대가 ACK으로 응답한 뒤, 상대도 FIN을 보내면 마지막으로 ACK을 응답하여 연결이 종료됩니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;TCP에서 데이터의 신뢰성을 보장하기 위한 방법을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+크게 세 가지 제어 방식을 사용합니다.
+&lt;ul&gt;
+  &lt;li&gt;&lt;b&gt;흐름 제어(Flow Control):&lt;/b&gt; 수신부의 처리 속도에 맞춰 송신부의 전송 속도를 조절합니다. 슬라이딩 윈도우 방식이 대표적입니다.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;혼잡 제어(Congestion Control):&lt;/b&gt; 네트워크의 혼잡 상태에 따라 송신부의 전송량을 조절합니다.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;오류 제어(Error Control):&lt;/b&gt; 체크섬으로 오류를 검출하고, ACK과 재전송 메커니즘으로 손실된 데이터를 복구합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;UDP의 특징을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+UDP는 연결 과정 없이 데이터를 전송하는 비연결형 프로토콜입니다.&lt;br&gt;
+패킷마다 서로 다른 경로로 전달될 수 있는 데이터그램 방식을 사용하며, 흐름·혼잡 제어나 재전송이 없어 신뢰성은 낮지만 그만큼 오버헤드가 적어 빠르고 효율적입니다.&lt;br&gt;
+체크섬 필드를 통해 최소한의 오류 검출만 지원합니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;TCP와 UDP의 차이점을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+TCP는 연결 지향형으로 신뢰성을 보장하지만, 연결 설정과 제어로 인한 오버헤드가 크고 상대적으로 속도가 느립니다.&lt;br&gt;
+UDP는 비연결형으로 신뢰성은 낮지만, 헤더가 작고 제어 절차가 없어 빠르고 가볍습니다.&lt;br&gt;
+신뢰성이 중요한 파일 전송이나 웹 통신에는 TCP가, 실시간성이 중요한 영상·음성 스트리밍이나 게임 등에는 UDP가 주로 사용됩니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;UDP에서 오류 검출 방법을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+UDP 헤더의 체크섬(checksum) 필드를 이용해 오류를 검출합니다.&lt;br&gt;
+송신 측에서 데이터의 비트들을 계산한 값을 체크섬에 담아 보내면, 수신 측이 동일한 방식으로 다시 계산해 값이 일치하는지 확인합니다. 값이 다르면 전송 중 데이터가 변경된 것으로 판단해 해당 패킷을 폐기합니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;HTTP에 대해 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+HTTP는 인터넷에서 클라이언트와 서버가 데이터를 주고받기 위해 사용하는 응용 계층 프로토콜입니다.&lt;br&gt;
+요청에 대한 응답을 받으면 연결을 끊는 비연결성과, 클라이언트의 이전 상태를 기억하지 않는 무상태성이라는 특징이 있습니다.&lt;br&gt;
+이러한 단점은 쿠키와 세션을 통해 보완합니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;HTTP Keep Alive와 TCP Keep Alive를 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+TCP Keep Alive는 이미 연결된 세션을 유지하기 위한 메커니즘으로, 일정 시간 동안 패킷 교환이 없으면 연결이 살아있는지 확인하는 패킷을 보냅니다.&lt;br&gt;
+HTTP Keep Alive는 한 번 맺은 TCP 연결을 일정 시간 동안 유지해 여러 HTTP 요청·응답을 재사용할 수 있도록 하는 방식이며, 정해진 시간이 지나면 연결이 해제됩니다.&lt;br&gt;
+같은 &#39;Keep Alive&#39;라는 이름을 쓰지만, TCP Keep Alive는 연결의 생존 여부 확인에 초점이 있고 HTTP Keep Alive는 연결의 재사용에 초점이 있습니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;쿠키와 세션의 차이점을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+쿠키는 클라이언트(브라우저) 측에 저장되는 키-값 형태의 작은 데이터 파일로, 매 요청에 자동으로 함께 전송됩니다.&lt;br&gt;
+세션은 서버 측에 저장되는 연결 관련 정보로, 클라이언트는 세션 ID만 쿠키 등으로 보관해 자신을 식별합니다.&lt;br&gt;
+쿠키는 클라이언트에 노출되어 상대적으로 보안이 약한 반면, 세션은 서버에 저장되어 보안성이 높지만 서버 자원을 차지합니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;HTTP와 HTTPS의 차이점을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+HTTPS는 HTTP에 SSL/TLS 보안 계층을 추가해 통신 내용을 암호화한 프로토콜입니다.&lt;br&gt;
+HTTP가 평문으로 데이터를 주고받아 도청과 변조에 취약한 반면, HTTPS는 암호화를 통해 데이터의 기밀성과 무결성을 보장합니다.&lt;br&gt;
+기본 포트도 HTTP는 80, HTTPS는 443으로 다릅니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;HTTPS에서 사용하는 암호화 방식을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+HTTPS는 대칭 키 암호화와 공개 키 암호화를 결합해 사용합니다.&lt;br&gt;
+초기 핸드셰이크 단계에서는 공개 키 암호화 방식으로 대칭 키를 안전하게 교환하고, 이후 실제 데이터 통신에는 속도가 빠른 대칭 키 암호화를 사용합니다.&lt;br&gt;
+이렇게 하면 공개 키 방식의 안전한 키 교환과 대칭 키 방식의 빠른 처리 속도라는 장점을 모두 활용할 수 있습니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;사용자가 URL을 입력한 후 화면이 출력되기까지의 과정을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+사용자가 URL을 입력하면 웹 브라우저는 입력된 도메인의 IP 주소를 DNS 서버에 질의합니다.&lt;br&gt;
+DNS로부터 받은 IP 주소를 이용해 웹 서버와 TCP/IP 연결을 맺고 HTTP 요청을 전송하면, 서버는 요청을 처리하고 HTML·CSS·JS 등 리소스를 응답으로 돌려줍니다.&lt;br&gt;
+브라우저는 받은 응답을 파싱·렌더링해 사용자 화면에 페이지를 출력합니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;REST의 장단점을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+장점은 HTTP 프로토콜을 그대로 활용하므로 별도의 인프라가 필요 없고, HTTP를 따르는 모든 플랫폼에서 사용할 수 있으며, URI와 메서드만 봐도 요청의 의도를 파악하기 쉽다는 점입니다.&lt;br&gt;
+단점은 자원에 대한 동작을 HTTP 메서드로만 표현해야 하므로 사용할 수 있는 연산이 한정적이고, 복잡한 동작이나 트랜잭션 단위 작업을 표현하기 어렵다는 점입니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;GET에 바디를 넣어서 보내면 나타날 결과를 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+HTTP 명세상 GET 요청도 바디를 가질 수는 있지만, 명세에서 바디의 사용 의미를 정의하지 않기 때문에 서버나 프록시·캐시 같은 중간 노드가 이를 무시하거나 거부할 수 있습니다.&lt;br&gt;
+또한 GET은 조회 목적의 안전하고 멱등한 메서드이므로 바디로 데이터를 전달하는 것은 의미적으로 적절하지 않습니다.&lt;br&gt;
+서버에 데이터를 전달해야 한다면 쿼리 스트링을 사용하거나 POST 등 다른 메서드를 사용하는 것이 권장됩니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;POST와 PUT의 차이점을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+POST는 자원을 새로 생성하는 메서드로, 같은 요청을 반복하면 매번 새로운 자원이 만들어질 수 있어 멱등하지 않습니다.&lt;br&gt;
+PUT은 지정한 자원을 통째로 교체(없으면 생성)하는 메서드로, 같은 요청을 여러 번 보내도 최종 상태가 동일하게 유지되므로 멱등합니다.&lt;br&gt;
+즉 POST는 &#34;새로 만든다&#34;, PUT은 &#34;있어야 할 모습으로 맞춘다&#34;는 의미에서 차이가 있습니다.
+&lt;/details&gt;
+</description>
+        </item>
+        <item>
         <title>[CS 스터디] REST</title>
         <link>http://localhost:1313/posts/cs-study-11/</link>
         <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
