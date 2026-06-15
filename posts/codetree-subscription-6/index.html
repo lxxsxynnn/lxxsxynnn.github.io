@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="코드트리 청약통장 6회차: 가장 자주 마주치는 DFS/백트래킹 알고리즘을 개념부터 구현 패턴 정리">
+<title>[코드트리] DFS / 백트래킹 알고리즘 쉽게 이해하기</title>
+
+<link rel='canonical' href='http://localhost:1313/posts/codetree-subscription-6/'>
+
+<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="[코드트리] DFS / 백트래킹 알고리즘 쉽게 이해하기">
+<meta property='og:description' content="코드트리 청약통장 6회차: 가장 자주 마주치는 DFS/백트래킹 알고리즘을 개념부터 구현 패턴 정리">
+<meta property='og:url' content='http://localhost:1313/posts/codetree-subscription-6/'>
+<meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='코드트리' /><meta property='article:tag' content='코딩테스트' /><meta property='article:tag' content='코테공부' /><meta property='article:tag' content='DFS' /><meta property='article:tag' content='백트래킹' /><meta property='article:tag' content='개발자취업' /><meta property='article:published_time' content='2026-06-15T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-06-15T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="[코드트리] DFS / 백트래킹 알고리즘 쉽게 이해하기">
+<meta name="twitter:description" content="코드트리 청약통장 6회차: 가장 자주 마주치는 DFS/백트래킹 알고리즘을 개념부터 구현 패턴 정리"><link rel="alternate" type="application/json" href="http://localhost:1313/posts/codetree-subscription-6/index.json">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/../assets/avatar_hu_c27af72c615ceedd.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Soyeon&#39;s Dev Log</a></h1>
+            <h2 class="site-description">백엔드 개발자 지망생의 기록</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-code" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="7 8 3 12 7 16" /><polyline points="17 8 21 12 17 16" /><line x1="14" y1="4" x2="10" y2="20" /></svg>
+                
+                <span>코딩테스트</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/cs/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><line x1="3" y1="6" x2="3" y2="19" /><line x1="12" y1="6" x2="12" y2="19" /><line x1="21" y1="6" x2="21" y2="19" /></svg>
+                
+                <span>CS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="4" y="5" width="16" height="16" rx="2" /><line x1="16" y1="3" x2="16" y2="7" /><line x1="8" y1="3" x2="8" y2="7" /><line x1="4" y1="11" x2="20" y2="11" /><rect x="8" y1="15" width="2" height="2" /></svg>
+                
+                <span>주간회고</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>검색</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>다크 모드</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/" style="background-color: #2a9d8f; color: #fff;">
+                코딩테스트
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/codetree-subscription-6/">[코드트리] DFS / 백트래킹 알고리즘 쉽게 이해하기</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            코드트리 청약통장 6회차: 가장 자주 마주치는 DFS/백트래킹 알고리즘을 개념부터 구현 패턴 정리
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-06-15</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>코딩테스트 공부를 하다 보면 &ldquo;이건 DFS다&rdquo;, &ldquo;백트래킹이다&rdquo; 하는 말을 정말 자주 듣습니다.</p>
+<p>이번 회차에서는 <strong>DFS / 백트래킹</strong>을 제 방식대로 정리해보려고 합니다.<br>
+&ldquo;그래서 둘이 뭐가 다른데?&ldquo;부터 시작해서, 구현 템플릿과 실수하기 쉬운 함정까지 한번에 짚고 넘어갈게요.</p>
+<blockquote>
+<p><strong>👉 코드트리 바로가기</strong><br>
+<a class="link" href="https://www.codetree.ai"  target="_blank" rel="noopener"
+    >코드트리(Codetree)</a></p>
+</blockquote>
+<hr>
+<h2 id="1-dfs란-무엇인가">1. DFS란 무엇인가
+</h2><p>DFS(Depth-First Search, 깊이 우선 탐색)는 이름 그대로 <strong>한 길을 끝까지 파고든 뒤, 막다른 길을 만나면 다시 돌아와서 다른 길을 시도</strong>하는 탐색 방식입니다.</p>
+<p>말로 설명하면 어려운데, 미로 게임을 떠올리면 쉽습니다.</p>
+<blockquote>
+<p>&ldquo;갈 수 있는 길이 보이면 일단 들어간다.<br>
+막다른 길이 나오면 한 칸 뒤로 돌아온다.<br>
+모든 방향을 다 시도해봤다면 또 한 칸 뒤로 돌아온다.&rdquo;</p>
+</blockquote>
+<p>이 동작을 코드로 옮긴 게 DFS입니다. 그래프, 트리, 2차원 격자 — &ldquo;노드와 그 옆 노드들&quot;로 표현할 수 있는 모든 구조에 적용할 수 있습니다.</p>
+<h3 id="dfs의-두-가지-구현-방식">DFS의 두 가지 구현 방식
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>구현 방식</th>
+          <th>특징</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>재귀 호출</td>
+          <td>코드가 짧고 직관적. 호출 스택을 그대로 활용</td>
+      </tr>
+      <tr>
+          <td>명시적 스택</td>
+          <td>재귀 깊이가 너무 깊어 StackOverflow가 우려될 때 사용</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>대부분의 코딩테스트 문제에서는 <strong>재귀 방식</strong>으로 충분합니다.</p>
+<hr>
+<h2 id="2-백트래킹은-dfs와-뭐가-다를까">2. 백트래킹은 DFS와 뭐가 다를까
+</h2><p>처음 공부할 때 제일 헷갈렸던 부분입니다. 결론부터 말하면, **백트래킹은 DFS의 &ldquo;전략적인 버전&rdquo;**입니다.</p>
+<ul>
+<li><strong>DFS</strong>: 모든 경로를 다 탐색한다.</li>
+<li><strong>백트래킹</strong>: 탐색하되, &ldquo;답이 될 수 없는 가지&quot;는 <strong>미리 잘라낸다 (가지치기, Pruning)</strong>.</li>
+</ul>
+<p>예를 들어 N-Queens 문제에서 첫 번째 행에 퀸을 두고, 두 번째 행에 두려고 하는데 이미 같은 열에 있는 경우를 생각해봅시다. <br>
+DFS는 그래도 일단 끝까지 들어가 봤다가 &ldquo;아 안 되네&rdquo; 하고 돌아오겠죠. 백트래킹은 <strong>두 번째 행에서 이미 불가능을 알았기 때문에, 그 가지로 아예 안 들어갑니다.</strong></p>
+<p>즉 백트래킹의 핵심은 두 가지입니다.</p>
+<ol>
+<li><strong>유망성 판단(Promising Check)</strong>: 이 길로 가면 답이 나올 수 있는가?</li>
+<li><strong>상태 복구(Backtrack)</strong>: 다음 길을 시도하기 위해 왔던 흔적을 지운다.</li>
+</ol>
+<p>이 두 가지가 빠지면 백트래킹이 아니라 그냥 완전 탐색 DFS입니다.</p>
+<hr>
+<h2 id="3-구현-패턴">3. 구현 패턴
+</h2><p>DFS/백트래킹 문제를 풀 때 항상 다음 세 가지를 먼저 그립니다.</p>
+<ol>
+<li><strong>종료 조건</strong>: 언제 재귀를 멈출 것인가?</li>
+<li><strong>다음 후보</strong>: 현재 상태에서 갈 수 있는 곳은 어디인가?</li>
+<li><strong>상태 복구</strong>: 다음 가지를 시도하기 전에 무엇을 되돌려야 하는가?</li>
+</ol>
+<p>이걸 코드로 옮기면 거의 항상 이런 모양이 됩니다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dfs</span>(<span style="color:#66d9ef">int</span> node, <span style="color:#75715e">/* 현재까지의 상태 */</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 1. 종료 조건</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (목표_달성(node)) {
+</span></span><span style="display:flex;"><span>        정답_처리();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 2. 다음 후보 탐색</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> next : 다음_후보(node)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (visited<span style="color:#f92672">[</span>next<span style="color:#f92672">]</span>) <span style="color:#66d9ef">continue</span>;         <span style="color:#75715e">// 이미 방문한 곳</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>유망한가(next)) <span style="color:#66d9ef">continue</span>;        <span style="color:#75715e">// 백트래킹: 가지치기</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        visited<span style="color:#f92672">[</span>next<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;                <span style="color:#75715e">// 상태 변경</span>
+</span></span><span style="display:flex;"><span>        dfs(next, <span style="color:#75715e">/* 갱신된 상태 */</span>);
+</span></span><span style="display:flex;"><span>        visited<span style="color:#f92672">[</span>next<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;               <span style="color:#75715e">// 상태 복구 (백트래킹의 핵심!)</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>격자 문제라면 <code>다음_후보</code>가 상하좌우 4방향이 되고, 순열 생성이라면 &ldquo;아직 안 쓴 숫자들&quot;이 됩니다.<br>
+<strong>틀만 같고 안에 채워 넣는 게 달라질 뿐</strong>이라는 게 DFS/백트래킹의 매력입니다.</p>
+<h3 id="격자-문제의-단골-템플릿">격자 문제의 단골 템플릿
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> dx <span style="color:#f92672">=</span> {<span style="color:#f92672">-</span>1, 1, 0, 0};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> dy <span style="color:#f92672">=</span> {0, 0, <span style="color:#f92672">-</span>1, 1};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dfs</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
+</span></span><span style="display:flex;"><span>    visited<span style="color:#f92672">[</span>x<span style="color:#f92672">][</span>y<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> dir <span style="color:#f92672">=</span> 0; dir <span style="color:#f92672">&lt;</span> 4; dir<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> nx <span style="color:#f92672">=</span> x <span style="color:#f92672">+</span> dx<span style="color:#f92672">[</span>dir<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ny <span style="color:#f92672">=</span> y <span style="color:#f92672">+</span> dy<span style="color:#f92672">[</span>dir<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (nx <span style="color:#f92672">&lt;</span> 0 <span style="color:#f92672">||</span> ny <span style="color:#f92672">&lt;</span> 0 <span style="color:#f92672">||</span> nx <span style="color:#f92672">&gt;=</span> N <span style="color:#f92672">||</span> ny <span style="color:#f92672">&gt;=</span> M) <span style="color:#66d9ef">continue</span>; <span style="color:#75715e">// 격자 밖</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (visited<span style="color:#f92672">[</span>nx<span style="color:#f92672">][</span>ny<span style="color:#f92672">]</span>) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (board<span style="color:#f92672">[</span>nx<span style="color:#f92672">][</span>ny<span style="color:#f92672">]</span> <span style="color:#f92672">==</span> 0) <span style="color:#66d9ef">continue</span>;                     <span style="color:#75715e">// 갈 수 없는 칸</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        dfs(nx, ny);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><hr>
+<h2 id="4-코드트리-문제-풀이로-익혀보기">4. 코드트리 문제 풀이로 익혀보기
+</h2><p>직접 풀어봐야 이해가 더 잘 갈 것 같아서 코드트리 그래프 탐색 트레일의 입문 문제 **&ldquo;DFS 행렬&rdquo;**을 풀면서 더 자세히 알아보겠습니다.</p>
+<blockquote>
+<p><strong>👉 문제 보러 가기</strong><br>
+<a class="link" href="https://www.codetree.ai/ko/trails/complete/curated-cards/intro-graph-traversal/introduction"  target="_blank" rel="noopener"
+    >코드트리 - 그래프 탐색 입문 트레일</a></p>
+</blockquote>
+<h3 id="문제-요약">문제 요약
+</h3><p>5개의 도시가 있고, 도시 간 연결 관계가 5×5 인접 행렬로 주어집니다. (<code>a[i][j] = 1</code>이면 i → j 간선 존재)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>     1   2   3   4   5
+</span></span><span style="display:flex;"><span>  1  0   0   1   0   1
+</span></span><span style="display:flex;"><span>  2  1   0   0   1   0
+</span></span><span style="display:flex;"><span>  3  1   0   0   0   0
+</span></span><span style="display:flex;"><span>  4  0   1   0   0   1
+</span></span><span style="display:flex;"><span>  5  0   0   0   1   0
+</span></span></code></pre></div><p>1번 도시에서 출발해 DFS를 수행하되, <strong>갈 수 있는 도시가 여러 개일 때는 번호가 작은 도시부터</strong> 탐색합니다. 이때의 방문 순서를 구하면 됩니다.</p>
+<h3 id="접근-방법">접근 방법
+</h3><ol>
+<li><strong>인접 행렬 + visited 배열</strong>: 정점 수가 적으니 인접 행렬을 그대로 사용</li>
+<li><strong>&ldquo;작은 번호부터&rdquo; 조건</strong>: 인접 행렬의 <strong>열 번호를 1부터 N까지 오름차순으로 순회</strong>하면 자동으로 만족됩니다. 별도의 정렬이 필요 없습니다.</li>
+</ol>
+<h3 id="핵심-로직">핵심 로직
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> N <span style="color:#f92672">=</span> 5;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[][]</span> graph <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>N <span style="color:#f92672">+</span> 1<span style="color:#f92672">][</span>N <span style="color:#f92672">+</span> 1<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[]</span> visited <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[</span>N <span style="color:#f92672">+</span> 1<span style="color:#f92672">]</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> List<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> order <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dfs</span>(<span style="color:#66d9ef">int</span> node) {
+</span></span><span style="display:flex;"><span>    visited<span style="color:#f92672">[</span>node<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>    order.<span style="color:#a6e22e">add</span>(node);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 작은 번호부터 보기 위해 1부터 순회</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> next <span style="color:#f92672">=</span> 1; next <span style="color:#f92672">&lt;=</span> N; next<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (graph<span style="color:#f92672">[</span>node<span style="color:#f92672">][</span>next<span style="color:#f92672">]</span> <span style="color:#f92672">==</span> 1 <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>visited<span style="color:#f92672">[</span>next<span style="color:#f92672">]</span>) {
+</span></span><span style="display:flex;"><span>            dfs(next);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 입력 파싱 ...</span>
+</span></span><span style="display:flex;"><span>    dfs(1);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// order: [1, 3, 5, 4, 2]</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="손으로-따라가-보기">손으로 따라가 보기
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>단계</th>
+          <th>현재 노드</th>
+          <th>visited</th>
+          <th>갈 수 있는 후보</th>
+          <th>선택</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>①</td>
+          <td>1</td>
+          <td>{1}</td>
+          <td>3, 5</td>
+          <td>3</td>
+      </tr>
+      <tr>
+          <td>②</td>
+          <td>3</td>
+          <td>{1, 3}</td>
+          <td>1(방문)</td>
+          <td>← 백트랙</td>
+      </tr>
+      <tr>
+          <td>③</td>
+          <td>1</td>
+          <td>{1, 3}</td>
+          <td>5</td>
+          <td>5</td>
+      </tr>
+      <tr>
+          <td>④</td>
+          <td>5</td>
+          <td>{1, 3, 5}</td>
+          <td>4</td>
+          <td>4</td>
+      </tr>
+      <tr>
+          <td>⑤</td>
+          <td>4</td>
+          <td>{1, 3, 5, 4}</td>
+          <td>2, 5(방문)</td>
+          <td>2</td>
+      </tr>
+      <tr>
+          <td>⑥</td>
+          <td>2</td>
+          <td>{1, 3, 5, 4, 2}</td>
+          <td>1(방문), 4(방문)</td>
+          <td>← 종료</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>방문 순서: <code>1 → 3 → 5 → 4 → 2</code></strong></p>
+<p>표로 정리하니 &ldquo;왜 5보다 3을 먼저 갔는지&rdquo;, &ldquo;왜 2가 가장 마지막인지&quot;가 한눈에 보입니다. 트레이싱을 손으로 한번 해보는 게 사실 가장 빠른 학습법이에요.</p>
+<h3 id="시간-복잡도">시간 복잡도
+</h3><ul>
+<li>인접 행렬을 모든 정점에서 한 번씩 훑으므로 <strong>O(V²)</strong>.</li>
+<li>정점이 적은 (V ≤ 1,000 정도) 문제에서는 인접 행렬이 오히려 구현이 깔끔합니다. 정점이 많아지면 인접 리스트로 바꿔 O(V + E)로 줄이는 게 정석입니다.</li>
+</ul>
+<h3 id="한-단계-더--격자에서의-dfs">한 단계 더 — 격자에서의 DFS
+</h3><p>같은 DFS 골격을 격자 문제에 적용하면 또 다른 결의 문제를 풀 수 있습니다.<br>
+예를 들어 코드트리의 <strong>뿌요뿌요 유형 문제</strong>처럼 같은 색이 4개 이상 인접해 있는지 찾는 문제도 결국 &ldquo;특정 칸에서 출발해 같은 색으로 이어진 칸을 모두 세는 DFS&quot;입니다.</p>
+<blockquote>
+<p><strong>👉 격자형 DFS 연습</strong><br>
+<a class="link" href="https://www.codetree.ai/ko/trails/complete/curated-cards/test-puyo-puyo/description"  target="_blank" rel="noopener"
+    >코드트리 - 뿌요뿌요 유형</a></p>
+</blockquote>
+<p>위에서 정리한 dx/dy 4방향 템플릿이 그대로 쓰입니다. 틀은 같고, 종료 조건과 상태만 문제에 맞게 갈아끼우면 됩니다.</p>
+<hr>
+<h2 id="5-자주-하는-실수와-함정">5. 자주 하는 실수와 함정
+</h2><p>제가 직접 겪었거나, 코드트리 문제를 풀면서 가장 많이 본 실수들을 모아봤습니다.</p>
+<h3 id="-상태-복구를-빼먹는다">① 상태 복구를 빼먹는다
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>visited<span style="color:#f92672">[</span>next<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>dfs(next);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// visited[next] = false;  ← 이걸 까먹는 순간 답이 한 갈래로만 나옴</span>
+</span></span></code></pre></div><p>특히 &ldquo;모든 경우의 수&quot;를 구하는 문제에서 이게 빠지면 첫 번째로 도달한 답만 나오고 나머지 가지를 못 타게 됩니다.</p>
+<h3 id="-종료-조건-위치를-잘못-잡는다">② 종료 조건 위치를 잘못 잡는다
+</h3><p>종료 조건을 <strong>재귀 호출 후</strong>에 두면 이미 한 단계 더 들어간 상태에서 검사하게 됩니다.<br>
+항상 <strong>함수 진입 직후 맨 처음에</strong> 두는 것을 습관화하는 게 좋을 것 같습니다.</p>
+<h3 id="-격자-문제에서-인덱스-범위-검사를-빠뜨린다">③ 격자 문제에서 인덱스 범위 검사를 빠뜨린다
+</h3><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (nx <span style="color:#f92672">&lt;</span> 0 <span style="color:#f92672">||</span> ny <span style="color:#f92672">&lt;</span> 0 <span style="color:#f92672">||</span> nx <span style="color:#f92672">&gt;=</span> N <span style="color:#f92672">||</span> ny <span style="color:#f92672">&gt;=</span> M) <span style="color:#66d9ef">continue</span>;
+</span></span></code></pre></div><p>이 한 줄 없으면 <code>ArrayIndexOutOfBoundsException</code>이 발생하거나, 더 골치 아프게는 &ldquo;잘못된 위치&quot;를 방문 처리해서 결과가 미묘하게 어긋납니다.</p>
+<h3 id="-가지치기를-너무-일찍-한다">④ 가지치기를 너무 일찍 한다
+</h3><p>백트래킹이 좋다고 무리하게 가지치기 조건을 넣다 보면, <strong>답이 될 수 있는 경로까지 잘라버리는</strong> 경우가 있습니다.<br>
+가지치기 조건을 짤 때는 &ldquo;이 조건이 참이면 <em>절대로</em> 답이 안 나오는가?&ldquo;를 한 번 더 확인하세요.</p>
+<h3 id="-재귀-깊이가-너무-깊다">⑤ 재귀 깊이가 너무 깊다
+</h3><p>Java의 기본 스택 크기는 보통 512KB ~ 1MB 정도입니다. 재귀 호출이 수만 번 일어나는 문제라면 명시적 스택으로 바꾸거나, <code>-Xss</code> 옵션으로 스택을 키우는 걸 고려해야 합니다.</p>
+<hr>
+<h2 id="6-기타--풀이를-빠르게-만드는-사고-순서">6. 기타 — 풀이를 빠르게 만드는 사고 순서
+</h2><p>문제를 받았을 때 저는 이 순서로 생각합니다.</p>
+<ol>
+<li><strong>&ldquo;그래프/트리/격자 형태인가?&rdquo;</strong> → DFS 후보</li>
+<li><strong>&ldquo;모든 경우의 수를 다 봐야 하는가?&rdquo;</strong> → 백트래킹</li>
+<li><strong>&ldquo;중간에 잘라낼 수 있는 명백한 조건이 있는가?&rdquo;</strong> → 있으면 가지치기 설계</li>
+<li><strong>&ldquo;상태가 무엇인가?&rdquo;</strong> → 재귀 인자로 들고 다닐 변수 결정</li>
+<li><strong>&ldquo;상태를 어떻게 복구하는가?&rdquo;</strong> → 백트래킹 라인 설계</li>
+</ol>
+<p>이 다섯 가지 질문에 답이 나오면, 사실상 코드의 골격은 다 잡힌 셈입니다.</p>
+<blockquote>
+<p>💡 <strong>TIP</strong>: 상태 복구가 너무 복잡해지면 그 문제는 DFS보다 <strong>BFS</strong>가 더 적합할 수도 있습니다.<br>
+&ldquo;왔던 길을 되돌릴 수 있는가?&ldquo;가 DFS와 BFS를 가르는 중요한 기준입니다.</p>
+</blockquote>
+<hr>
+<h2 id="마치며">마치며
+</h2><p>처음에는 &ldquo;DFS랑 백트래킹은 그냥 같은 거 아닌가?&ldquo;라고 생각했는데, 코드트리에서 다양한 유형을 풀어보면서 둘의 결정적인 차이가 <strong>가지치기와 상태 복구</strong>라는 걸 체감했습니다.<br>
+특히 격자형 시뮬레이션이나 부분집합/순열 문제에서 이 두 가지가 빠지면 시간 초과로 직행하거나, 답이 한 개밖에 안 나오는 황당한 일이 벌어지더라고요.</p>
+<p>이번 정리를 통해 제 머릿속에서도 한번 더 구조가 정돈된 느낌입니다.<br>
+앞으로 비슷한 유형을 만났을 때, 이 글에 적어둔 &ldquo;종료 조건 → 다음 후보 → 상태 복구&rdquo; 세 줄짜리 체크리스트를 떠올리면서 풀어볼 생각입니다.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%EC%BD%94%EB%93%9C%ED%8A%B8%EB%A6%AC/">코드트리</a>
+        
+            <a href="/tags/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/">코딩테스트</a>
+        
+            <a href="/tags/%EC%BD%94%ED%85%8C%EA%B3%B5%EB%B6%80/">코테공부</a>
+        
+            <a href="/tags/dfs/">DFS</a>
+        
+            <a href="/tags/%EB%B0%B1%ED%8A%B8%EB%9E%98%ED%82%B9/">백트래킹</a>
+        
+            <a href="/tags/%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%B7%A8%EC%97%85/">개발자취업</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">관련 글</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/codetree-subscription-5/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[코드트리] 갭체크로 한 달 만에 약점 유형 극복한 후기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/codetree-subscription-4/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[코드트리] 북마크 기능으로 나만의 복습 루틴 &amp; 오답노트 만들기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/codetree-subscription-3/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[코드트리] 깃허브 연동과 알림톡으로 완성하는 코드트리 학습 루틴</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/codetree-subscription-2/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[코드트리] 시뮬레이션 알고리즘 약점 극복 공부 후기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/codetree-subscription-1/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[코드트리] 코딩테스트 준비, &#39;갭체크&#39;로 나의 약점 완벽 분석하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Soyeon&#39;s Dev Log
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.748d0acf3bd5d18477b5028b83b70ecfa20eb15aefdff97697a330a2202721bf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
