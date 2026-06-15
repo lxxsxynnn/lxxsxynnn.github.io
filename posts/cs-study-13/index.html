@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 1. 데이터베이스란 여러 사용자나 응용 프로그램이 함께 활용할 수 있도록 체계적으로 저장·관리되는 데이터의 집합\n단순히 파일 시스템에 데이터를 쌓아두는 것과 달리, 일관성·동시성·검색 효율을 보장하기 위해 별도의 관리 체계(DBMS) 위에서 운영됨\n특징 실시간 접근: 요청이 들어오면 즉시 데이터를 조회·변경해 응답할 수 있음\n배치 처리만 가능한 옛 파일 시스템과 구분되는 가장 큰 차이점 동시 공유: 여러 사용자가 같은 데이터에 동시에 접근해도 충돌 없이 동작함\n이를 보장하기 위해 트랜잭션과 락(lock) 같은 메커니즘이 필요해짐 지속적 변화: 데이터가 한 번 저장된 후에도 갱신·삽입·삭제를 통해 계속 변화함\n현재 시점의 상태가 곧 데이터베이스의 값이며, 정적인 자료와는 본질적으로 다름 내용 기반 참조: 데이터의 저장 위치(주소)가 아니라 값 그 자체로 데이터를 찾음\n&ldquo;회원번호가 1023인 사용자&quot;처럼 의미를 기준으로 접근하므로 응용 코드가 저장 구조에 종속되지 않음 구성 요소 데이터를 모델링할 때 다음 세 가지 단위로 세상을 표현함\n">
+<title>[CS 스터디] 데이터베이스의 종류</title>
+
+<link rel='canonical' href='http://localhost:1313/posts/cs-study-13/'>
+
+<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="[CS 스터디] 데이터베이스의 종류">
+<meta property='og:description' content=" 1. 데이터베이스란 여러 사용자나 응용 프로그램이 함께 활용할 수 있도록 체계적으로 저장·관리되는 데이터의 집합\n단순히 파일 시스템에 데이터를 쌓아두는 것과 달리, 일관성·동시성·검색 효율을 보장하기 위해 별도의 관리 체계(DBMS) 위에서 운영됨\n특징 실시간 접근: 요청이 들어오면 즉시 데이터를 조회·변경해 응답할 수 있음\n배치 처리만 가능한 옛 파일 시스템과 구분되는 가장 큰 차이점 동시 공유: 여러 사용자가 같은 데이터에 동시에 접근해도 충돌 없이 동작함\n이를 보장하기 위해 트랜잭션과 락(lock) 같은 메커니즘이 필요해짐 지속적 변화: 데이터가 한 번 저장된 후에도 갱신·삽입·삭제를 통해 계속 변화함\n현재 시점의 상태가 곧 데이터베이스의 값이며, 정적인 자료와는 본질적으로 다름 내용 기반 참조: 데이터의 저장 위치(주소)가 아니라 값 그 자체로 데이터를 찾음\n&ldquo;회원번호가 1023인 사용자&quot;처럼 의미를 기준으로 접근하므로 응용 코드가 저장 구조에 종속되지 않음 구성 요소 데이터를 모델링할 때 다음 세 가지 단위로 세상을 표현함\n">
+<meta property='og:url' content='http://localhost:1313/posts/cs-study-13/'>
+<meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2026-06-15T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-06-15T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="[CS 스터디] 데이터베이스의 종류">
+<meta name="twitter:description" content=" 1. 데이터베이스란 여러 사용자나 응용 프로그램이 함께 활용할 수 있도록 체계적으로 저장·관리되는 데이터의 집합\n단순히 파일 시스템에 데이터를 쌓아두는 것과 달리, 일관성·동시성·검색 효율을 보장하기 위해 별도의 관리 체계(DBMS) 위에서 운영됨\n특징 실시간 접근: 요청이 들어오면 즉시 데이터를 조회·변경해 응답할 수 있음\n배치 처리만 가능한 옛 파일 시스템과 구분되는 가장 큰 차이점 동시 공유: 여러 사용자가 같은 데이터에 동시에 접근해도 충돌 없이 동작함\n이를 보장하기 위해 트랜잭션과 락(lock) 같은 메커니즘이 필요해짐 지속적 변화: 데이터가 한 번 저장된 후에도 갱신·삽입·삭제를 통해 계속 변화함\n현재 시점의 상태가 곧 데이터베이스의 값이며, 정적인 자료와는 본질적으로 다름 내용 기반 참조: 데이터의 저장 위치(주소)가 아니라 값 그 자체로 데이터를 찾음\n&ldquo;회원번호가 1023인 사용자&quot;처럼 의미를 기준으로 접근하므로 응용 코드가 저장 구조에 종속되지 않음 구성 요소 데이터를 모델링할 때 다음 세 가지 단위로 세상을 표현함\n"><link rel="alternate" type="application/json" href="http://localhost:1313/posts/cs-study-13/index.json">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/../assets/avatar_hu_c27af72c615ceedd.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Soyeon&#39;s Dev Log</a></h1>
+            <h2 class="site-description">백엔드 개발자 지망생의 기록</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-code" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="7 8 3 12 7 16" /><polyline points="17 8 21 12 17 16" /><line x1="14" y1="4" x2="10" y2="20" /></svg>
+                
+                <span>코딩테스트</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/cs/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><line x1="3" y1="6" x2="3" y2="19" /><line x1="12" y1="6" x2="12" y2="19" /><line x1="21" y1="6" x2="21" y2="19" /></svg>
+                
+                <span>CS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="4" y="5" width="16" height="16" rx="2" /><line x1="16" y1="3" x2="16" y2="7" /><line x1="8" y1="3" x2="8" y2="7" /><line x1="4" y1="11" x2="20" y2="11" /><rect x="8" y1="15" width="2" height="2" /></svg>
+                
+                <span>주간회고</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>검색</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>다크 모드</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/cs/" style="background-color: #e9c46a; color: #fff;">
+                CS
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/cs-study-13/">[CS 스터디] 데이터베이스의 종류</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-06-15</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <div style="margin: 0 40px;">
+<h3 id="1-데이터베이스란">1. 데이터베이스란
+</h3><p>여러 사용자나 응용 프로그램이 함께 활용할 수 있도록 <strong>체계적으로 저장·관리되는 데이터의 집합</strong><br>
+단순히 파일 시스템에 데이터를 쌓아두는 것과 달리, 일관성·동시성·검색 효율을 보장하기 위해 별도의 관리 체계(DBMS) 위에서 운영됨</p>
+<h4 id="특징">특징
+</h4><ul>
+<li><strong>실시간 접근</strong>: 요청이 들어오면 즉시 데이터를 조회·변경해 응답할 수 있음<br>
+배치 처리만 가능한 옛 파일 시스템과 구분되는 가장 큰 차이점</li>
+<li><strong>동시 공유</strong>: 여러 사용자가 같은 데이터에 동시에 접근해도 충돌 없이 동작함<br>
+이를 보장하기 위해 트랜잭션과 락(lock) 같은 메커니즘이 필요해짐</li>
+<li><strong>지속적 변화</strong>: 데이터가 한 번 저장된 후에도 갱신·삽입·삭제를 통해 계속 변화함<br>
+현재 시점의 상태가 곧 데이터베이스의 값이며, 정적인 자료와는 본질적으로 다름</li>
+<li><strong>내용 기반 참조</strong>: 데이터의 저장 위치(주소)가 아니라 <strong>값 그 자체</strong>로 데이터를 찾음<br>
+&ldquo;회원번호가 1023인 사용자&quot;처럼 의미를 기준으로 접근하므로 응용 코드가 저장 구조에 종속되지 않음</li>
+</ul>
+<h4 id="구성-요소">구성 요소
+</h4><p>데이터를 모델링할 때 다음 세 가지 단위로 세상을 표현함</p>
+<ul>
+<li><strong>개체(Entity)</strong>: 데이터로 나타내고자 하는 실체. 예: 회원, 상품, 주문<br>
+하나의 개체는 여러 속성을 묶어서 정의함</li>
+<li><strong>속성(Attribute)</strong>: 개체가 가진 특성. 예: 회원의 이름, 이메일, 가입일<br>
+데이터베이스를 구성하는 가장 작은 논리적 단위로, 각 속성은 자신의 데이터 타입을 가짐</li>
+<li><strong>관계(Relationship)</strong>: 개체와 개체가 서로 어떻게 연결되는지를 나타냄<br>
+&ldquo;회원이 상품을 <strong>주문한다</strong>&ldquo;처럼 보통 동사로 표현되며, 1:1·1:N·N:M의 형태로 구분됨</li>
+</ul>
+<h4 id="스키마">스키마
+</h4><p>데이터베이스의 <strong>구조, 표현 방식, 제약 조건</strong>을 정의해 둔 명세<br>
+같은 데이터라도 어떤 관점에서 보느냐에 따라 다르게 표현되므로, ANSI/SPARC 모델에서는 세 단계로 분리함</p>
+<ul>
+<li><strong>외부 스키마(External Schema)</strong>: 사용자나 응용 프로그램이 보는 부분적인 데이터베이스의 모습<br>
+필요한 일부만 노출하는 &ldquo;뷰(View)&ldquo;에 해당하며, 사용자마다 다를 수 있음</li>
+<li><strong>개념 스키마(Conceptual Schema)</strong>: 데이터베이스 전체의 논리적 구조<br>
+모든 사용자의 요구를 통합한 단 하나의 관점이며, 보통 &ldquo;스키마&quot;라고 하면 이것을 가리킴</li>
+<li><strong>내부 스키마(Internal Schema)</strong>: 데이터가 디스크 등 물리적 저장 장치에 실제로 어떻게 저장되는지를 정의<br>
+인덱스 구조, 레코드 배치 방식 등이 여기에 포함됨</li>
+</ul>
+<p>세 단계를 분리하면, 저장 방식이 바뀌어도(내부 스키마 변경) 사용자가 보는 화면(외부 스키마)은 그대로 유지할 수 있음 → <strong>데이터 독립성</strong>이 확보됨</p>
+<h3 id="2-관계형-데이터베이스">2. 관계형 데이터베이스
+</h3><p>데이터를 <strong>2차원 테이블</strong> 형태로 저장하고, 테이블 간의 관계를 통해 데이터 사이의 종속성을 표현하는 데이터베이스<br>
+스키마를 미리 정의해두기 때문에 데이터 구조가 명확하고, 무결성 제약 조건을 강제할 수 있음<br>
+스키마는 개체-관계 다이어그램(ERD)이나 DDL 같은 문자열로 표현됨</p>
+<h4 id="릴레이션과-테이블">릴레이션과 테이블
+</h4><ul>
+<li><strong>릴레이션(Relation)</strong>: 관계형 모델에서 데이터를 표현하는 <strong>수학적·개념적 단위</strong><br>
+집합론에 뿌리를 둔 추상 개념이며, 중복 없는 튜플의 집합으로 정의됨</li>
+<li><strong>테이블(Table)</strong>: 릴레이션을 실제 DBMS에서 구현한 물리적 형태<br>
+키와 값으로 이루어진 2차원 격자이며, 행과 열로 구성됨
+<ul>
+<li><strong>행(Row)</strong>: 하나의 데이터 묶음. 한 개체의 인스턴스 하나에 해당하며, 튜플(Tuple) 또는 레코드(Record)라고도 함</li>
+<li><strong>열(Column)</strong>: 이름과 타입을 가진 데이터의 속성. 필드(Field) 또는 어트리뷰트(Attribute)라고도 함</li>
+</ul>
+</li>
+</ul>
+<p>테이블 간 관계는 **외래 키(Foreign Key)**로 연결하며, 이로써 데이터의 종속성과 연관성을 명시적으로 표현할 수 있음<br>
+SQL이라는 표준화된 질의 언어로 데이터를 조작할 수 있다는 점도 관계형 DB의 큰 강점</p>
+<h3 id="3-nosql-데이터베이스">3. NoSQL 데이터베이스
+</h3><p>관계형 모델의 정형화된 테이블 구조에 얽매이지 않는, 보다 유연한 형태의 <strong>비관계형 데이터베이스</strong><br>
+웹·모바일 환경에서 비정형 데이터(로그, 소셜 데이터 등)가 폭증하면서, 스키마 변경 없이 빠르게 적재·조회할 필요성에서 등장함</p>
+<h4 id="특징-1">특징
+</h4><ul>
+<li><strong>대용량 조회에 유리</strong>: 정규화로 인한 조인 비용이 없거나 적어, 단순 조회가 매우 빠름</li>
+<li><strong>수평적 확장(Scale-out)</strong>: 서버 한 대의 성능을 키우는 대신, 서버를 여러 대로 늘리는 방식으로 확장 가능<br>
+관계형 DB는 조인과 트랜잭션 보장 때문에 수평 확장이 어려운 반면, NoSQL은 데이터가 독립적이라 분산이 쉬움</li>
+<li><strong>스키마 유연성</strong>: 데이터마다 필드 구성이 달라도 저장 가능. 요구사항이 자주 바뀌는 초기 서비스에 적합함</li>
+<li>단, 트랜잭션과 강한 일관성 보장은 관계형 DB보다 약한 경우가 많음</li>
+</ul>
+<h4 id="종류">종류
+</h4><ul>
+<li><strong>도큐먼트(Document)</strong>: JSON/BSON 같은 문서 단위로 데이터를 저장<br>
+중첩 구조를 자연스럽게 표현할 수 있음 (예: MongoDB)</li>
+<li><strong>키-값(Key-Value)</strong>: 가장 단순한 형태. 키 하나로 값을 즉시 꺼냄<br>
+캐시나 세션 저장소로 자주 쓰임 (예: Redis)</li>
+<li><strong>와이드 컬럼(Wide Column)</strong>: 행마다 서로 다른 컬럼을 가질 수 있는 컬럼 기반 저장<br>
+대규모 분석·로그 데이터에 강점 (예: Cassandra, HBase)</li>
+<li><strong>그래프(Graph)</strong>: 노드와 간선으로 개체 간 관계 자체를 직접 표현<br>
+소셜 네트워크나 추천 시스템처럼 관계 탐색이 중요한 경우에 적합 (예: Neo4j)</li>
+</ul>
+<h4 id="cf-그-외의-데이터-모델">cf) 그 외의 데이터 모델
+</h4><p>관계형·NoSQL 이전에 쓰이던 고전적인 모델들</p>
+<ul>
+<li><strong>계층형 데이터베이스</strong>: 부모-자식 관계의 트리 구조로 데이터를 표현<br>
+개체 간 1:N 관계만 표현 가능해 일대다 관계라고도 함<br>
+접근 경로가 정해져 있어 빠르지만, 구조 변경이 어려움</li>
+<li><strong>네트워크형 데이터베이스</strong>: 계층형을 확장해 N:M 관계까지 표현할 수 있는 그래프 구조<br>
+유연성은 늘었지만 구조가 복잡해 유지보수가 어렵다는 한계로 점차 관계형 모델에 자리를 내줌</li>
+</ul>
+</div>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Soyeon&#39;s Dev Log
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.748d0acf3bd5d18477b5028b83b70ecfa20eb15aefdff97697a330a2202721bf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

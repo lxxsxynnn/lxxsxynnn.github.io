@@ -7,6 +7,101 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
         <lastBuildDate>Mon, 15 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[CS 스터디] 데이터베이스의 종류</title>
+        <link>http://localhost:1313/posts/cs-study-13/</link>
+        <pubDate>Mon, 15 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/cs-study-13/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h3 id=&#34;1-데이터베이스란&#34;&gt;1. 데이터베이스란
+&lt;/h3&gt;&lt;p&gt;여러 사용자나 응용 프로그램이 함께 활용할 수 있도록 &lt;strong&gt;체계적으로 저장·관리되는 데이터의 집합&lt;/strong&gt;&lt;br&gt;
+단순히 파일 시스템에 데이터를 쌓아두는 것과 달리, 일관성·동시성·검색 효율을 보장하기 위해 별도의 관리 체계(DBMS) 위에서 운영됨&lt;/p&gt;
+&lt;h4 id=&#34;특징&#34;&gt;특징
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;실시간 접근&lt;/strong&gt;: 요청이 들어오면 즉시 데이터를 조회·변경해 응답할 수 있음&lt;br&gt;
+배치 처리만 가능한 옛 파일 시스템과 구분되는 가장 큰 차이점&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;동시 공유&lt;/strong&gt;: 여러 사용자가 같은 데이터에 동시에 접근해도 충돌 없이 동작함&lt;br&gt;
+이를 보장하기 위해 트랜잭션과 락(lock) 같은 메커니즘이 필요해짐&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;지속적 변화&lt;/strong&gt;: 데이터가 한 번 저장된 후에도 갱신·삽입·삭제를 통해 계속 변화함&lt;br&gt;
+현재 시점의 상태가 곧 데이터베이스의 값이며, 정적인 자료와는 본질적으로 다름&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;내용 기반 참조&lt;/strong&gt;: 데이터의 저장 위치(주소)가 아니라 &lt;strong&gt;값 그 자체&lt;/strong&gt;로 데이터를 찾음&lt;br&gt;
+&amp;ldquo;회원번호가 1023인 사용자&amp;quot;처럼 의미를 기준으로 접근하므로 응용 코드가 저장 구조에 종속되지 않음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;구성-요소&#34;&gt;구성 요소
+&lt;/h4&gt;&lt;p&gt;데이터를 모델링할 때 다음 세 가지 단위로 세상을 표현함&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;개체(Entity)&lt;/strong&gt;: 데이터로 나타내고자 하는 실체. 예: 회원, 상품, 주문&lt;br&gt;
+하나의 개체는 여러 속성을 묶어서 정의함&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;속성(Attribute)&lt;/strong&gt;: 개체가 가진 특성. 예: 회원의 이름, 이메일, 가입일&lt;br&gt;
+데이터베이스를 구성하는 가장 작은 논리적 단위로, 각 속성은 자신의 데이터 타입을 가짐&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;관계(Relationship)&lt;/strong&gt;: 개체와 개체가 서로 어떻게 연결되는지를 나타냄&lt;br&gt;
+&amp;ldquo;회원이 상품을 &lt;strong&gt;주문한다&lt;/strong&gt;&amp;ldquo;처럼 보통 동사로 표현되며, 1:1·1:N·N:M의 형태로 구분됨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;스키마&#34;&gt;스키마
+&lt;/h4&gt;&lt;p&gt;데이터베이스의 &lt;strong&gt;구조, 표현 방식, 제약 조건&lt;/strong&gt;을 정의해 둔 명세&lt;br&gt;
+같은 데이터라도 어떤 관점에서 보느냐에 따라 다르게 표현되므로, ANSI/SPARC 모델에서는 세 단계로 분리함&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;외부 스키마(External Schema)&lt;/strong&gt;: 사용자나 응용 프로그램이 보는 부분적인 데이터베이스의 모습&lt;br&gt;
+필요한 일부만 노출하는 &amp;ldquo;뷰(View)&amp;ldquo;에 해당하며, 사용자마다 다를 수 있음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;개념 스키마(Conceptual Schema)&lt;/strong&gt;: 데이터베이스 전체의 논리적 구조&lt;br&gt;
+모든 사용자의 요구를 통합한 단 하나의 관점이며, 보통 &amp;ldquo;스키마&amp;quot;라고 하면 이것을 가리킴&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;내부 스키마(Internal Schema)&lt;/strong&gt;: 데이터가 디스크 등 물리적 저장 장치에 실제로 어떻게 저장되는지를 정의&lt;br&gt;
+인덱스 구조, 레코드 배치 방식 등이 여기에 포함됨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;세 단계를 분리하면, 저장 방식이 바뀌어도(내부 스키마 변경) 사용자가 보는 화면(외부 스키마)은 그대로 유지할 수 있음 → &lt;strong&gt;데이터 독립성&lt;/strong&gt;이 확보됨&lt;/p&gt;
+&lt;h3 id=&#34;2-관계형-데이터베이스&#34;&gt;2. 관계형 데이터베이스
+&lt;/h3&gt;&lt;p&gt;데이터를 &lt;strong&gt;2차원 테이블&lt;/strong&gt; 형태로 저장하고, 테이블 간의 관계를 통해 데이터 사이의 종속성을 표현하는 데이터베이스&lt;br&gt;
+스키마를 미리 정의해두기 때문에 데이터 구조가 명확하고, 무결성 제약 조건을 강제할 수 있음&lt;br&gt;
+스키마는 개체-관계 다이어그램(ERD)이나 DDL 같은 문자열로 표현됨&lt;/p&gt;
+&lt;h4 id=&#34;릴레이션과-테이블&#34;&gt;릴레이션과 테이블
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;릴레이션(Relation)&lt;/strong&gt;: 관계형 모델에서 데이터를 표현하는 &lt;strong&gt;수학적·개념적 단위&lt;/strong&gt;&lt;br&gt;
+집합론에 뿌리를 둔 추상 개념이며, 중복 없는 튜플의 집합으로 정의됨&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;테이블(Table)&lt;/strong&gt;: 릴레이션을 실제 DBMS에서 구현한 물리적 형태&lt;br&gt;
+키와 값으로 이루어진 2차원 격자이며, 행과 열로 구성됨
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;행(Row)&lt;/strong&gt;: 하나의 데이터 묶음. 한 개체의 인스턴스 하나에 해당하며, 튜플(Tuple) 또는 레코드(Record)라고도 함&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;열(Column)&lt;/strong&gt;: 이름과 타입을 가진 데이터의 속성. 필드(Field) 또는 어트리뷰트(Attribute)라고도 함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;테이블 간 관계는 **외래 키(Foreign Key)**로 연결하며, 이로써 데이터의 종속성과 연관성을 명시적으로 표현할 수 있음&lt;br&gt;
+SQL이라는 표준화된 질의 언어로 데이터를 조작할 수 있다는 점도 관계형 DB의 큰 강점&lt;/p&gt;
+&lt;h3 id=&#34;3-nosql-데이터베이스&#34;&gt;3. NoSQL 데이터베이스
+&lt;/h3&gt;&lt;p&gt;관계형 모델의 정형화된 테이블 구조에 얽매이지 않는, 보다 유연한 형태의 &lt;strong&gt;비관계형 데이터베이스&lt;/strong&gt;&lt;br&gt;
+웹·모바일 환경에서 비정형 데이터(로그, 소셜 데이터 등)가 폭증하면서, 스키마 변경 없이 빠르게 적재·조회할 필요성에서 등장함&lt;/p&gt;
+&lt;h4 id=&#34;특징-1&#34;&gt;특징
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;대용량 조회에 유리&lt;/strong&gt;: 정규화로 인한 조인 비용이 없거나 적어, 단순 조회가 매우 빠름&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;수평적 확장(Scale-out)&lt;/strong&gt;: 서버 한 대의 성능을 키우는 대신, 서버를 여러 대로 늘리는 방식으로 확장 가능&lt;br&gt;
+관계형 DB는 조인과 트랜잭션 보장 때문에 수평 확장이 어려운 반면, NoSQL은 데이터가 독립적이라 분산이 쉬움&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;스키마 유연성&lt;/strong&gt;: 데이터마다 필드 구성이 달라도 저장 가능. 요구사항이 자주 바뀌는 초기 서비스에 적합함&lt;/li&gt;
+&lt;li&gt;단, 트랜잭션과 강한 일관성 보장은 관계형 DB보다 약한 경우가 많음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;종류&#34;&gt;종류
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;도큐먼트(Document)&lt;/strong&gt;: JSON/BSON 같은 문서 단위로 데이터를 저장&lt;br&gt;
+중첩 구조를 자연스럽게 표현할 수 있음 (예: MongoDB)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;키-값(Key-Value)&lt;/strong&gt;: 가장 단순한 형태. 키 하나로 값을 즉시 꺼냄&lt;br&gt;
+캐시나 세션 저장소로 자주 쓰임 (예: Redis)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;와이드 컬럼(Wide Column)&lt;/strong&gt;: 행마다 서로 다른 컬럼을 가질 수 있는 컬럼 기반 저장&lt;br&gt;
+대규모 분석·로그 데이터에 강점 (예: Cassandra, HBase)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;그래프(Graph)&lt;/strong&gt;: 노드와 간선으로 개체 간 관계 자체를 직접 표현&lt;br&gt;
+소셜 네트워크나 추천 시스템처럼 관계 탐색이 중요한 경우에 적합 (예: Neo4j)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;cf-그-외의-데이터-모델&#34;&gt;cf) 그 외의 데이터 모델
+&lt;/h4&gt;&lt;p&gt;관계형·NoSQL 이전에 쓰이던 고전적인 모델들&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;계층형 데이터베이스&lt;/strong&gt;: 부모-자식 관계의 트리 구조로 데이터를 표현&lt;br&gt;
+개체 간 1:N 관계만 표현 가능해 일대다 관계라고도 함&lt;br&gt;
+접근 경로가 정해져 있어 빠르지만, 구조 변경이 어려움&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;네트워크형 데이터베이스&lt;/strong&gt;: 계층형을 확장해 N:M 관계까지 표현할 수 있는 그래프 구조&lt;br&gt;
+유연성은 늘었지만 구조가 복잡해 유지보수가 어렵다는 한계로 점차 관계형 모델에 자리를 내줌&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</description>
+        </item>
+        <item>
         <title>[코드트리] DFS / 백트래킹 알고리즘 쉽게 이해하기</title>
         <link>http://localhost:1313/posts/codetree-subscription-6/</link>
         <pubDate>Mon, 15 Jun 2026 00:00:00 +0000</pubDate>
