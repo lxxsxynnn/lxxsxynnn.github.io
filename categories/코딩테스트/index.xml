@@ -6,7 +6,271 @@
         <description>Recent content in 코딩테스트 on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Mon, 08 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 15 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[코드트리] DFS / 백트래킹 알고리즘 쉽게 이해하기</title>
+        <link>http://localhost:1313/posts/codetree-subscription-6/</link>
+        <pubDate>Mon, 15 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/codetree-subscription-6/</guid>
+        <description>&lt;p&gt;코딩테스트 공부를 하다 보면 &amp;ldquo;이건 DFS다&amp;rdquo;, &amp;ldquo;백트래킹이다&amp;rdquo; 하는 말을 정말 자주 듣습니다.&lt;/p&gt;
+&lt;p&gt;이번 회차에서는 &lt;strong&gt;DFS / 백트래킹&lt;/strong&gt;을 제 방식대로 정리해보려고 합니다.&lt;br&gt;
+&amp;ldquo;그래서 둘이 뭐가 다른데?&amp;ldquo;부터 시작해서, 구현 템플릿과 실수하기 쉬운 함정까지 한번에 짚고 넘어갈게요.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;👉 코드트리 바로가기&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.codetree.ai&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;코드트리(Codetree)&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-dfs란-무엇인가&#34;&gt;1. DFS란 무엇인가
+&lt;/h2&gt;&lt;p&gt;DFS(Depth-First Search, 깊이 우선 탐색)는 이름 그대로 &lt;strong&gt;한 길을 끝까지 파고든 뒤, 막다른 길을 만나면 다시 돌아와서 다른 길을 시도&lt;/strong&gt;하는 탐색 방식입니다.&lt;/p&gt;
+&lt;p&gt;말로 설명하면 어려운데, 미로 게임을 떠올리면 쉽습니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;갈 수 있는 길이 보이면 일단 들어간다.&lt;br&gt;
+막다른 길이 나오면 한 칸 뒤로 돌아온다.&lt;br&gt;
+모든 방향을 다 시도해봤다면 또 한 칸 뒤로 돌아온다.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;이 동작을 코드로 옮긴 게 DFS입니다. 그래프, 트리, 2차원 격자 — &amp;ldquo;노드와 그 옆 노드들&amp;quot;로 표현할 수 있는 모든 구조에 적용할 수 있습니다.&lt;/p&gt;
+&lt;h3 id=&#34;dfs의-두-가지-구현-방식&#34;&gt;DFS의 두 가지 구현 방식
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;구현 방식&lt;/th&gt;
+          &lt;th&gt;특징&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;재귀 호출&lt;/td&gt;
+          &lt;td&gt;코드가 짧고 직관적. 호출 스택을 그대로 활용&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;명시적 스택&lt;/td&gt;
+          &lt;td&gt;재귀 깊이가 너무 깊어 StackOverflow가 우려될 때 사용&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;대부분의 코딩테스트 문제에서는 &lt;strong&gt;재귀 방식&lt;/strong&gt;으로 충분합니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-백트래킹은-dfs와-뭐가-다를까&#34;&gt;2. 백트래킹은 DFS와 뭐가 다를까
+&lt;/h2&gt;&lt;p&gt;처음 공부할 때 제일 헷갈렸던 부분입니다. 결론부터 말하면, **백트래킹은 DFS의 &amp;ldquo;전략적인 버전&amp;rdquo;**입니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;DFS&lt;/strong&gt;: 모든 경로를 다 탐색한다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;백트래킹&lt;/strong&gt;: 탐색하되, &amp;ldquo;답이 될 수 없는 가지&amp;quot;는 &lt;strong&gt;미리 잘라낸다 (가지치기, Pruning)&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;예를 들어 N-Queens 문제에서 첫 번째 행에 퀸을 두고, 두 번째 행에 두려고 하는데 이미 같은 열에 있는 경우를 생각해봅시다. &lt;br&gt;
+DFS는 그래도 일단 끝까지 들어가 봤다가 &amp;ldquo;아 안 되네&amp;rdquo; 하고 돌아오겠죠. 백트래킹은 &lt;strong&gt;두 번째 행에서 이미 불가능을 알았기 때문에, 그 가지로 아예 안 들어갑니다.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;즉 백트래킹의 핵심은 두 가지입니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;유망성 판단(Promising Check)&lt;/strong&gt;: 이 길로 가면 답이 나올 수 있는가?&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;상태 복구(Backtrack)&lt;/strong&gt;: 다음 길을 시도하기 위해 왔던 흔적을 지운다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;이 두 가지가 빠지면 백트래킹이 아니라 그냥 완전 탐색 DFS입니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3-구현-패턴&#34;&gt;3. 구현 패턴
+&lt;/h2&gt;&lt;p&gt;DFS/백트래킹 문제를 풀 때 항상 다음 세 가지를 먼저 그립니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;종료 조건&lt;/strong&gt;: 언제 재귀를 멈출 것인가?&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;다음 후보&lt;/strong&gt;: 현재 상태에서 갈 수 있는 곳은 어디인가?&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;상태 복구&lt;/strong&gt;: 다음 가지를 시도하기 전에 무엇을 되돌려야 하는가?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;이걸 코드로 옮기면 거의 항상 이런 모양이 됩니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;dfs&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; node, &lt;span style=&#34;color:#75715e&#34;&gt;/* 현재까지의 상태 */&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// 1. 종료 조건&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (목표_달성(node)) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        정답_처리();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// 2. 다음 후보 탐색&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; next : 다음_후보(node)) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (visited&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;next&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;;         &lt;span style=&#34;color:#75715e&#34;&gt;// 이미 방문한 곳&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;유망한가(next)) &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;;        &lt;span style=&#34;color:#75715e&#34;&gt;// 백트래킹: 가지치기&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        visited&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;next&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;;                &lt;span style=&#34;color:#75715e&#34;&gt;// 상태 변경&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        dfs(next, &lt;span style=&#34;color:#75715e&#34;&gt;/* 갱신된 상태 */&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        visited&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;next&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;;               &lt;span style=&#34;color:#75715e&#34;&gt;// 상태 복구 (백트래킹의 핵심!)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;격자 문제라면 &lt;code&gt;다음_후보&lt;/code&gt;가 상하좌우 4방향이 되고, 순열 생성이라면 &amp;ldquo;아직 안 쓴 숫자들&amp;quot;이 됩니다.&lt;br&gt;
+&lt;strong&gt;틀만 같고 안에 채워 넣는 게 달라질 뿐&lt;/strong&gt;이라는 게 DFS/백트래킹의 매력입니다.&lt;/p&gt;
+&lt;h3 id=&#34;격자-문제의-단골-템플릿&#34;&gt;격자 문제의 단골 템플릿
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; dx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1, 1, 0, 0};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; dy &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {0, 0, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1, 1};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;dfs&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; x, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; y) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    visited&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;x&lt;span style=&#34;color:#f92672&#34;&gt;][&lt;/span&gt;y&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; dir &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 0; dir &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; 4; dir&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; nx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; dx&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;dir&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; ny &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; y &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; dy&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;dir&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (nx &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; 0 &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; ny &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; 0 &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; nx &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; N &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; ny &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; M) &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;; &lt;span style=&#34;color:#75715e&#34;&gt;// 격자 밖&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (visited&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;nx&lt;span style=&#34;color:#f92672&#34;&gt;][&lt;/span&gt;ny&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (board&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;nx&lt;span style=&#34;color:#f92672&#34;&gt;][&lt;/span&gt;ny&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; 0) &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;;                     &lt;span style=&#34;color:#75715e&#34;&gt;// 갈 수 없는 칸&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        dfs(nx, ny);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;4-코드트리-문제-풀이로-익혀보기&#34;&gt;4. 코드트리 문제 풀이로 익혀보기
+&lt;/h2&gt;&lt;p&gt;직접 풀어봐야 이해가 더 잘 갈 것 같아서 코드트리 그래프 탐색 트레일의 입문 문제 **&amp;ldquo;DFS 행렬&amp;rdquo;**을 풀면서 더 자세히 알아보겠습니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;👉 문제 보러 가기&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.codetree.ai/ko/trails/complete/curated-cards/intro-graph-traversal/introduction&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;코드트리 - 그래프 탐색 입문 트레일&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;문제-요약&#34;&gt;문제 요약
+&lt;/h3&gt;&lt;p&gt;5개의 도시가 있고, 도시 간 연결 관계가 5×5 인접 행렬로 주어집니다. (&lt;code&gt;a[i][j] = 1&lt;/code&gt;이면 i → j 간선 존재)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     1   2   3   4   5
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  1  0   0   1   0   1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  2  1   0   0   1   0
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  3  1   0   0   0   0
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  4  0   1   0   0   1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  5  0   0   0   1   0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;1번 도시에서 출발해 DFS를 수행하되, &lt;strong&gt;갈 수 있는 도시가 여러 개일 때는 번호가 작은 도시부터&lt;/strong&gt; 탐색합니다. 이때의 방문 순서를 구하면 됩니다.&lt;/p&gt;
+&lt;h3 id=&#34;접근-방법&#34;&gt;접근 방법
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;인접 행렬 + visited 배열&lt;/strong&gt;: 정점 수가 적으니 인접 행렬을 그대로 사용&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ldquo;작은 번호부터&amp;rdquo; 조건&lt;/strong&gt;: 인접 행렬의 &lt;strong&gt;열 번호를 1부터 N까지 오름차순으로 순회&lt;/strong&gt;하면 자동으로 만족됩니다. 별도의 정렬이 필요 없습니다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;핵심-로직&#34;&gt;핵심 로직
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; N &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 5;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[][]&lt;/span&gt; graph &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;N &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1&lt;span style=&#34;color:#f92672&#34;&gt;][&lt;/span&gt;N &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;boolean&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; visited &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;boolean&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;N &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; List&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Integer&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; order &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; ArrayList&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&amp;gt;&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;dfs&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; node) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    visited&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;node&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    order.&lt;span style=&#34;color:#a6e22e&#34;&gt;add&lt;/span&gt;(node);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// 작은 번호부터 보기 위해 1부터 순회&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; next &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 1; next &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; N; next&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (graph&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;node&lt;span style=&#34;color:#f92672&#34;&gt;][&lt;/span&gt;next&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; 1 &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;visited&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;next&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            dfs(next);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;(String&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; args) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// 입력 파싱 ...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    dfs(1);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// order: [1, 3, 5, 4, 2]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;손으로-따라가-보기&#34;&gt;손으로 따라가 보기
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;단계&lt;/th&gt;
+          &lt;th&gt;현재 노드&lt;/th&gt;
+          &lt;th&gt;visited&lt;/th&gt;
+          &lt;th&gt;갈 수 있는 후보&lt;/th&gt;
+          &lt;th&gt;선택&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;①&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;{1}&lt;/td&gt;
+          &lt;td&gt;3, 5&lt;/td&gt;
+          &lt;td&gt;3&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;②&lt;/td&gt;
+          &lt;td&gt;3&lt;/td&gt;
+          &lt;td&gt;{1, 3}&lt;/td&gt;
+          &lt;td&gt;1(방문)&lt;/td&gt;
+          &lt;td&gt;← 백트랙&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;③&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;{1, 3}&lt;/td&gt;
+          &lt;td&gt;5&lt;/td&gt;
+          &lt;td&gt;5&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;④&lt;/td&gt;
+          &lt;td&gt;5&lt;/td&gt;
+          &lt;td&gt;{1, 3, 5}&lt;/td&gt;
+          &lt;td&gt;4&lt;/td&gt;
+          &lt;td&gt;4&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;⑤&lt;/td&gt;
+          &lt;td&gt;4&lt;/td&gt;
+          &lt;td&gt;{1, 3, 5, 4}&lt;/td&gt;
+          &lt;td&gt;2, 5(방문)&lt;/td&gt;
+          &lt;td&gt;2&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;⑥&lt;/td&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;{1, 3, 5, 4, 2}&lt;/td&gt;
+          &lt;td&gt;1(방문), 4(방문)&lt;/td&gt;
+          &lt;td&gt;← 종료&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;방문 순서: &lt;code&gt;1 → 3 → 5 → 4 → 2&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;표로 정리하니 &amp;ldquo;왜 5보다 3을 먼저 갔는지&amp;rdquo;, &amp;ldquo;왜 2가 가장 마지막인지&amp;quot;가 한눈에 보입니다. 트레이싱을 손으로 한번 해보는 게 사실 가장 빠른 학습법이에요.&lt;/p&gt;
+&lt;h3 id=&#34;시간-복잡도&#34;&gt;시간 복잡도
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;인접 행렬을 모든 정점에서 한 번씩 훑으므로 &lt;strong&gt;O(V²)&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;정점이 적은 (V ≤ 1,000 정도) 문제에서는 인접 행렬이 오히려 구현이 깔끔합니다. 정점이 많아지면 인접 리스트로 바꿔 O(V + E)로 줄이는 게 정석입니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;한-단계-더--격자에서의-dfs&#34;&gt;한 단계 더 — 격자에서의 DFS
+&lt;/h3&gt;&lt;p&gt;같은 DFS 골격을 격자 문제에 적용하면 또 다른 결의 문제를 풀 수 있습니다.&lt;br&gt;
+예를 들어 코드트리의 &lt;strong&gt;뿌요뿌요 유형 문제&lt;/strong&gt;처럼 같은 색이 4개 이상 인접해 있는지 찾는 문제도 결국 &amp;ldquo;특정 칸에서 출발해 같은 색으로 이어진 칸을 모두 세는 DFS&amp;quot;입니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;👉 격자형 DFS 연습&lt;/strong&gt;&lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.codetree.ai/ko/trails/complete/curated-cards/test-puyo-puyo/description&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;코드트리 - 뿌요뿌요 유형&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;위에서 정리한 dx/dy 4방향 템플릿이 그대로 쓰입니다. 틀은 같고, 종료 조건과 상태만 문제에 맞게 갈아끼우면 됩니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;5-자주-하는-실수와-함정&#34;&gt;5. 자주 하는 실수와 함정
+&lt;/h2&gt;&lt;p&gt;제가 직접 겪었거나, 코드트리 문제를 풀면서 가장 많이 본 실수들을 모아봤습니다.&lt;/p&gt;
+&lt;h3 id=&#34;-상태-복구를-빼먹는다&#34;&gt;① 상태 복구를 빼먹는다
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;visited&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;next&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;dfs(next);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// visited[next] = false;  ← 이걸 까먹는 순간 답이 한 갈래로만 나옴&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;특히 &amp;ldquo;모든 경우의 수&amp;quot;를 구하는 문제에서 이게 빠지면 첫 번째로 도달한 답만 나오고 나머지 가지를 못 타게 됩니다.&lt;/p&gt;
+&lt;h3 id=&#34;-종료-조건-위치를-잘못-잡는다&#34;&gt;② 종료 조건 위치를 잘못 잡는다
+&lt;/h3&gt;&lt;p&gt;종료 조건을 &lt;strong&gt;재귀 호출 후&lt;/strong&gt;에 두면 이미 한 단계 더 들어간 상태에서 검사하게 됩니다.&lt;br&gt;
+항상 &lt;strong&gt;함수 진입 직후 맨 처음에&lt;/strong&gt; 두는 것을 습관화하는 게 좋을 것 같습니다.&lt;/p&gt;
+&lt;h3 id=&#34;-격자-문제에서-인덱스-범위-검사를-빠뜨린다&#34;&gt;③ 격자 문제에서 인덱스 범위 검사를 빠뜨린다
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (nx &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; 0 &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; ny &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; 0 &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; nx &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; N &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; ny &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; M) &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이 한 줄 없으면 &lt;code&gt;ArrayIndexOutOfBoundsException&lt;/code&gt;이 발생하거나, 더 골치 아프게는 &amp;ldquo;잘못된 위치&amp;quot;를 방문 처리해서 결과가 미묘하게 어긋납니다.&lt;/p&gt;
+&lt;h3 id=&#34;-가지치기를-너무-일찍-한다&#34;&gt;④ 가지치기를 너무 일찍 한다
+&lt;/h3&gt;&lt;p&gt;백트래킹이 좋다고 무리하게 가지치기 조건을 넣다 보면, &lt;strong&gt;답이 될 수 있는 경로까지 잘라버리는&lt;/strong&gt; 경우가 있습니다.&lt;br&gt;
+가지치기 조건을 짤 때는 &amp;ldquo;이 조건이 참이면 &lt;em&gt;절대로&lt;/em&gt; 답이 안 나오는가?&amp;ldquo;를 한 번 더 확인하세요.&lt;/p&gt;
+&lt;h3 id=&#34;-재귀-깊이가-너무-깊다&#34;&gt;⑤ 재귀 깊이가 너무 깊다
+&lt;/h3&gt;&lt;p&gt;Java의 기본 스택 크기는 보통 512KB ~ 1MB 정도입니다. 재귀 호출이 수만 번 일어나는 문제라면 명시적 스택으로 바꾸거나, &lt;code&gt;-Xss&lt;/code&gt; 옵션으로 스택을 키우는 걸 고려해야 합니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;6-기타--풀이를-빠르게-만드는-사고-순서&#34;&gt;6. 기타 — 풀이를 빠르게 만드는 사고 순서
+&lt;/h2&gt;&lt;p&gt;문제를 받았을 때 저는 이 순서로 생각합니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ldquo;그래프/트리/격자 형태인가?&amp;rdquo;&lt;/strong&gt; → DFS 후보&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ldquo;모든 경우의 수를 다 봐야 하는가?&amp;rdquo;&lt;/strong&gt; → 백트래킹&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ldquo;중간에 잘라낼 수 있는 명백한 조건이 있는가?&amp;rdquo;&lt;/strong&gt; → 있으면 가지치기 설계&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ldquo;상태가 무엇인가?&amp;rdquo;&lt;/strong&gt; → 재귀 인자로 들고 다닐 변수 결정&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ldquo;상태를 어떻게 복구하는가?&amp;rdquo;&lt;/strong&gt; → 백트래킹 라인 설계&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;이 다섯 가지 질문에 답이 나오면, 사실상 코드의 골격은 다 잡힌 셈입니다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;💡 &lt;strong&gt;TIP&lt;/strong&gt;: 상태 복구가 너무 복잡해지면 그 문제는 DFS보다 &lt;strong&gt;BFS&lt;/strong&gt;가 더 적합할 수도 있습니다.&lt;br&gt;
+&amp;ldquo;왔던 길을 되돌릴 수 있는가?&amp;ldquo;가 DFS와 BFS를 가르는 중요한 기준입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;마치며&#34;&gt;마치며
+&lt;/h2&gt;&lt;p&gt;처음에는 &amp;ldquo;DFS랑 백트래킹은 그냥 같은 거 아닌가?&amp;ldquo;라고 생각했는데, 코드트리에서 다양한 유형을 풀어보면서 둘의 결정적인 차이가 &lt;strong&gt;가지치기와 상태 복구&lt;/strong&gt;라는 걸 체감했습니다.&lt;br&gt;
+특히 격자형 시뮬레이션이나 부분집합/순열 문제에서 이 두 가지가 빠지면 시간 초과로 직행하거나, 답이 한 개밖에 안 나오는 황당한 일이 벌어지더라고요.&lt;/p&gt;
+&lt;p&gt;이번 정리를 통해 제 머릿속에서도 한번 더 구조가 정돈된 느낌입니다.&lt;br&gt;
+앞으로 비슷한 유형을 만났을 때, 이 글에 적어둔 &amp;ldquo;종료 조건 → 다음 후보 → 상태 복구&amp;rdquo; 세 줄짜리 체크리스트를 떠올리면서 풀어볼 생각입니다.&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>[코드트리] 갭체크로 한 달 만에 약점 유형 극복한 후기</title>
         <link>http://localhost:1313/posts/codetree-subscription-5/</link>
         <pubDate>Mon, 08 Jun 2026 00:00:00 +0000</pubDate>

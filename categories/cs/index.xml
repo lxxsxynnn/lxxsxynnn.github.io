@@ -6,7 +6,389 @@
         <description>Recent content in CS on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Wed, 10 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/cs/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 16 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/cs/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[CS 스터디] 관계형 데이터베이스</title>
+        <link>http://localhost:1313/posts/cs-study-14/</link>
+        <pubDate>Tue, 16 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/cs-study-14/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h3 id=&#34;1-키&#34;&gt;1. 키
+&lt;/h3&gt;&lt;p&gt;테이블의 수많은 튜플 중에서 &lt;strong&gt;특정 튜플을 식별하기 위한 속성&lt;/strong&gt;(또는 속성의 집합)&lt;br&gt;
+키는 다음 두 가지 특성을 기준으로 분류함&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;유일성(Uniqueness)&lt;/strong&gt;: 키 값 하나로 튜플 한 행을 유일하게 식별할 수 있는 성질&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;최소성(Minimality)&lt;/strong&gt;: 식별에 꼭 필요한 속성만으로 키를 구성하는 성질&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;키의-종류&#34;&gt;키의 종류
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;슈퍼 키(Super Key)&lt;/strong&gt;: 유일성은 만족하지만 최소성은 만족하지 않을 수 있는 키&lt;br&gt;
+예: &lt;code&gt;(회원ID, 이름)&lt;/code&gt; — 회원ID만으로도 식별 가능하지만 이름까지 묶어도 슈퍼 키&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;후보 키(Candidate Key)&lt;/strong&gt;: 유일성과 최소성을 모두 만족하는 키&lt;br&gt;
+하나의 테이블에 여러 개 존재할 수 있음 (예: &lt;code&gt;회원ID&lt;/code&gt;, &lt;code&gt;이메일&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;기본 키(Primary Key)&lt;/strong&gt;: 여러 후보 키 중 대표로 선택된 키&lt;br&gt;
+NULL 값을 가질 수 없고, 중복도 허용되지 않음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;대체 키(Alternate Key)&lt;/strong&gt;: 후보 키 중 기본 키로 선택되지 않은 나머지 키&lt;br&gt;
+여전히 유일성을 보장하므로 보조적인 식별자로 활용할 수 있음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;외래 키(Foreign Key)&lt;/strong&gt;: 다른 테이블의 기본 키를 참조해 두 테이블을 연결하는 키&lt;br&gt;
+관계형 모델에서 테이블 간 관계를 표현하는 핵심 수단&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-무결성&#34;&gt;2. 무결성
+&lt;/h3&gt;&lt;p&gt;데이터베이스에 저장된 값이 &lt;strong&gt;실제 사실과 일치하고(정확성), 항상 일정하게 유지되도록(일관성)&lt;/strong&gt; 보장하는 성질&lt;br&gt;
+잘못된 입력이 들어와도 데이터의 신뢰성이 깨지지 않도록 DBMS가 강제하는 제약 조건&lt;/p&gt;
+&lt;h4 id=&#34;종류&#34;&gt;종류
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;개체 무결성(Entity Integrity)&lt;/strong&gt;: 모든 테이블은 기본 키를 가져야 하며, 그 값은 NULL이거나 중복될 수 없음&lt;br&gt;
+→ 각 행이 유일하게 식별 가능해야 한다는 원칙&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;도메인 무결성(Domain Integrity)&lt;/strong&gt;: 속성 값은 그 속성에 허용된 &lt;strong&gt;도메인(값의 집합)&lt;/strong&gt; 안에 있어야 함&lt;br&gt;
+예: &lt;code&gt;나이&lt;/code&gt; 컬럼은 정수, &lt;code&gt;성별&lt;/code&gt; 컬럼은 &amp;lsquo;M&amp;rsquo;/&amp;lsquo;F&amp;rsquo; 중 하나만 허용&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;참조 무결성(Referential Integrity)&lt;/strong&gt;: 외래 키의 값은 &lt;strong&gt;참조 대상 테이블의 기본 키 값과 일치&lt;/strong&gt;하거나 NULL이어야 함&lt;br&gt;
+→ 존재하지 않는 행을 참조하는 &amp;ldquo;고아 데이터&amp;quot;가 생기지 않도록 막아 줌&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-인덱스&#34;&gt;3. 인덱스
+&lt;/h3&gt;&lt;p&gt;테이블의 데이터를 빠르게 찾기 위해, &lt;strong&gt;속성 값과 해당 튜플의 위치(주소)를 별도로 정리해둔 자료구조&lt;/strong&gt;&lt;br&gt;
+책 뒤에 있는 색인(index)처럼, 전체를 훑지 않고도 원하는 데이터로 바로 점프할 수 있도록 도와줌&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [ 원본 테이블 ]                     [ 이름 컬럼 인덱스 ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ┌─────┬──────┬──────┐               ┌──────┬─────────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   │ id  │ name │ age  │               │ name │ row_ptr │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ├─────┼──────┼──────┤               ├──────┼─────────┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   │ 101 │ 영희  │  29  │               │ 미나  │  → 103  │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   │ 102 │ 철수  │  31  │               │ 영희  │  → 101  │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   │ 103 │ 미나  │  27  │               │ 지훈  │  → 104  │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   │ 104 │ 지훈  │  35  │               │ 철수  │  → 102  │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   └─────┴──────┴──────┘               └──────┴─────────┘
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                       (정렬된 상태로 보관)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;장점&#34;&gt;장점
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;인덱스가 정렬된 상태로 유지되므로 &lt;strong&gt;검색 속도가 크게 빨라짐&lt;/strong&gt;&lt;br&gt;
+특히 데이터가 많을수록 풀 스캔과의 격차가 벌어짐&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;단점&#34;&gt;단점
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;인덱스를 저장하기 위한 &lt;strong&gt;추가 공간&lt;/strong&gt;이 필요함&lt;/li&gt;
+&lt;li&gt;데이터의 삽입·수정·삭제 시 인덱스도 함께 갱신해야 하므로 &lt;strong&gt;쓰기 성능이 저하됨&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;삭제 연산이 일어나도 인덱스 항목은 즉시 물리적으로 제거되지 않고, 일단 &amp;ldquo;사용하지 않음&amp;quot;으로 표시된 채 남아 있다가 나중에 일괄적으로 정리되는 경우가 많음 (lazy deletion)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [ &amp;#39;미나&amp;#39; 삭제 직후 — 인덱스에는 흔적이 남아 있음 ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   원본 테이블                            이름 인덱스
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ┌─────┬──────┬──────┐                 ┌──────┬───────────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   │ 101 │ 영희  │  29  │                 │ 미나  │✗ (삭제 표시)│
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   │ 102 │ 철수  │  31  │                 │ 영희  │   → 101   │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   │ 104 │ 지훈  │  35  │                 │ 지훈  │   → 104   │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   └─────┴──────┴──────┘                 │ 철수  │   → 102   │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                         └──────┴───────────┘
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;인덱스는 대표적으로 &lt;strong&gt;해시 테이블&lt;/strong&gt;과 &lt;strong&gt;B-트리 / B+ 트리&lt;/strong&gt; 두 가지 방식으로 구현됨&lt;/p&gt;
+&lt;h4 id=&#34;해시-테이블-인덱스&#34;&gt;해시 테이블 인덱스
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;속성 값을 해시 함수에 통과시켜 나온 해시 값으로 인덱싱하는 방식&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;정확히 일치하는 값으로 검색할 때만&lt;/strong&gt; 사용 가능 (예: &lt;code&gt;WHERE name = &#39;영희&#39;&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;부등호(&lt;code&gt;&amp;gt;&lt;/code&gt;, &lt;code&gt;&amp;lt;&lt;/code&gt;) 비교나 부분 일치(&lt;code&gt;LIKE&lt;/code&gt;) 같은 &lt;strong&gt;범위 검색에는 활용할 수 없음&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;속도는 매우 빠르지만 활용 범위가 좁아 일반적인 RDBMS의 기본 인덱스로는 잘 쓰이지 않음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;b-트리--b-트리-인덱스&#34;&gt;B-트리 / B+ 트리 인덱스
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;인덱스를 정렬된 트리 형태로 관리하는 방식&lt;/li&gt;
+&lt;li&gt;삽입·삭제 시에도 균형이 유지되므로 &lt;strong&gt;삽입·갱신·삭제 비용이 안정적&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;범위 검색이 가능&lt;/strong&gt;해 &lt;code&gt;BETWEEN&lt;/code&gt;, 부등호 비교, 부분 일치 등에 활용할 수 있음&lt;br&gt;
+특히 B+ 트리는 리프 노드들이 연결 리스트로 이어져 있어 범위 스캔에 매우 유리함&lt;/li&gt;
+&lt;li&gt;위와 같은 이유로 대부분의 관계형 DBMS는 &lt;strong&gt;B+ 트리를 기본 인덱스 구조로 사용&lt;/strong&gt;함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4-orm-object-relational-mapping&#34;&gt;4. ORM (Object-Relational Mapping)
+&lt;/h3&gt;&lt;p&gt;객체 지향 언어의 &lt;strong&gt;객체&lt;/strong&gt;와 관계형 데이터베이스의 &lt;strong&gt;테이블&lt;/strong&gt;을 자동으로 매핑해주는 도구&lt;br&gt;
+SQL을 직접 작성하지 않아도 객체를 다루듯 데이터베이스에 접근할 수 있어, 객체 지향 코드와 DB 사이의 패러다임 차이를 줄여 줌&lt;/p&gt;
+&lt;h4 id=&#34;장점-1&#34;&gt;장점
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;SQL 대신 &lt;strong&gt;객체 지향적인 코드&lt;/strong&gt;로 데이터 조작을 표현할 수 있어 가독성이 좋아짐&lt;/li&gt;
+&lt;li&gt;DBMS 종류가 바뀌어도 ORM이 SQL 차이를 흡수해주므로 &lt;strong&gt;이식성&lt;/strong&gt;이 높아짐&lt;/li&gt;
+&lt;li&gt;반복적인 CRUD 코드를 자동화해 &lt;strong&gt;개발 생산성&lt;/strong&gt;이 향상됨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;단점-1&#34;&gt;단점
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;추상화 계층이 한 단계 더 끼는 만큼 &lt;strong&gt;성능 튜닝이 어렵고&lt;/strong&gt;, 복잡한 쿼리는 직접 SQL을 작성하는 편이 나을 수 있음&lt;/li&gt;
+&lt;li&gt;연관 객체를 반복 조회할 때 발생하는 &lt;strong&gt;N+1 문제&lt;/strong&gt; 등, ORM 특유의 함정을 이해하고 있어야 함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;대표-예시&#34;&gt;대표 예시
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Java&lt;/strong&gt;: Hibernate, JPA&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Python&lt;/strong&gt;: Django ORM, SQLAlchemy&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ruby&lt;/strong&gt;: ActiveRecord&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Node.js&lt;/strong&gt;: Sequelize, Prisma&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</description>
+        </item>
+        <item>
+        <title>[CS 스터디] 데이터베이스의 종류</title>
+        <link>http://localhost:1313/posts/cs-study-13/</link>
+        <pubDate>Mon, 15 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/cs-study-13/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h3 id=&#34;1-데이터베이스란&#34;&gt;1. 데이터베이스란
+&lt;/h3&gt;&lt;p&gt;여러 사용자나 응용 프로그램이 함께 활용할 수 있도록 &lt;strong&gt;체계적으로 저장·관리되는 데이터의 집합&lt;/strong&gt;&lt;br&gt;
+단순히 파일 시스템에 데이터를 쌓아두는 것과 달리, 일관성·동시성·검색 효율을 보장하기 위해 별도의 관리 체계(DBMS) 위에서 운영됨&lt;/p&gt;
+&lt;h4 id=&#34;특징&#34;&gt;특징
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;실시간 접근&lt;/strong&gt;: 요청이 들어오면 즉시 데이터를 조회·변경해 응답할 수 있음&lt;br&gt;
+배치 처리만 가능한 옛 파일 시스템과 구분되는 가장 큰 차이점&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;동시 공유&lt;/strong&gt;: 여러 사용자가 같은 데이터에 동시에 접근해도 충돌 없이 동작함&lt;br&gt;
+이를 보장하기 위해 트랜잭션과 락(lock) 같은 메커니즘이 필요해짐&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;지속적 변화&lt;/strong&gt;: 데이터가 한 번 저장된 후에도 갱신·삽입·삭제를 통해 계속 변화함&lt;br&gt;
+현재 시점의 상태가 곧 데이터베이스의 값이며, 정적인 자료와는 본질적으로 다름&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;내용 기반 참조&lt;/strong&gt;: 데이터의 저장 위치(주소)가 아니라 &lt;strong&gt;값 그 자체&lt;/strong&gt;로 데이터를 찾음&lt;br&gt;
+&amp;ldquo;회원번호가 1023인 사용자&amp;quot;처럼 의미를 기준으로 접근하므로 응용 코드가 저장 구조에 종속되지 않음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;구성-요소&#34;&gt;구성 요소
+&lt;/h4&gt;&lt;p&gt;데이터를 모델링할 때 다음 세 가지 단위로 세상을 표현함&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;개체(Entity)&lt;/strong&gt;: 데이터로 나타내고자 하는 실체. 예: 회원, 상품, 주문&lt;br&gt;
+하나의 개체는 여러 속성을 묶어서 정의함&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;속성(Attribute)&lt;/strong&gt;: 개체가 가진 특성. 예: 회원의 이름, 이메일, 가입일&lt;br&gt;
+데이터베이스를 구성하는 가장 작은 논리적 단위로, 각 속성은 자신의 데이터 타입을 가짐&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;관계(Relationship)&lt;/strong&gt;: 개체와 개체가 서로 어떻게 연결되는지를 나타냄&lt;br&gt;
+&amp;ldquo;회원이 상품을 &lt;strong&gt;주문한다&lt;/strong&gt;&amp;ldquo;처럼 보통 동사로 표현되며, 1:1·1:N·N:M의 형태로 구분됨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;스키마&#34;&gt;스키마
+&lt;/h4&gt;&lt;p&gt;데이터베이스의 &lt;strong&gt;구조, 표현 방식, 제약 조건&lt;/strong&gt;을 정의해 둔 명세&lt;br&gt;
+같은 데이터라도 어떤 관점에서 보느냐에 따라 다르게 표현되므로, ANSI/SPARC 모델에서는 세 단계로 분리함&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;외부 스키마(External Schema)&lt;/strong&gt;: 사용자나 응용 프로그램이 보는 부분적인 데이터베이스의 모습&lt;br&gt;
+필요한 일부만 노출하는 &amp;ldquo;뷰(View)&amp;ldquo;에 해당하며, 사용자마다 다를 수 있음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;개념 스키마(Conceptual Schema)&lt;/strong&gt;: 데이터베이스 전체의 논리적 구조&lt;br&gt;
+모든 사용자의 요구를 통합한 단 하나의 관점이며, 보통 &amp;ldquo;스키마&amp;quot;라고 하면 이것을 가리킴&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;내부 스키마(Internal Schema)&lt;/strong&gt;: 데이터가 디스크 등 물리적 저장 장치에 실제로 어떻게 저장되는지를 정의&lt;br&gt;
+인덱스 구조, 레코드 배치 방식 등이 여기에 포함됨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;세 단계를 분리하면, 저장 방식이 바뀌어도(내부 스키마 변경) 사용자가 보는 화면(외부 스키마)은 그대로 유지할 수 있음 → &lt;strong&gt;데이터 독립성&lt;/strong&gt;이 확보됨&lt;/p&gt;
+&lt;h3 id=&#34;2-관계형-데이터베이스&#34;&gt;2. 관계형 데이터베이스
+&lt;/h3&gt;&lt;p&gt;데이터를 &lt;strong&gt;2차원 테이블&lt;/strong&gt; 형태로 저장하고, 테이블 간의 관계를 통해 데이터 사이의 종속성을 표현하는 데이터베이스&lt;br&gt;
+스키마를 미리 정의해두기 때문에 데이터 구조가 명확하고, 무결성 제약 조건을 강제할 수 있음&lt;br&gt;
+스키마는 개체-관계 다이어그램(ERD)이나 DDL 같은 문자열로 표현됨&lt;/p&gt;
+&lt;h4 id=&#34;릴레이션과-테이블&#34;&gt;릴레이션과 테이블
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;릴레이션(Relation)&lt;/strong&gt;: 관계형 모델에서 데이터를 표현하는 &lt;strong&gt;수학적·개념적 단위&lt;/strong&gt;&lt;br&gt;
+집합론에 뿌리를 둔 추상 개념이며, 중복 없는 튜플의 집합으로 정의됨&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;테이블(Table)&lt;/strong&gt;: 릴레이션을 실제 DBMS에서 구현한 물리적 형태&lt;br&gt;
+키와 값으로 이루어진 2차원 격자이며, 행과 열로 구성됨
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;행(Row)&lt;/strong&gt;: 하나의 데이터 묶음. 한 개체의 인스턴스 하나에 해당하며, 튜플(Tuple) 또는 레코드(Record)라고도 함&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;열(Column)&lt;/strong&gt;: 이름과 타입을 가진 데이터의 속성. 필드(Field) 또는 어트리뷰트(Attribute)라고도 함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;테이블 간 관계는 &lt;strong&gt;외래 키(Foreign Key)&lt;/strong&gt; 로 연결하며, 이로써 데이터의 종속성과 연관성을 명시적으로 표현할 수 있음&lt;br&gt;
+SQL이라는 표준화된 질의 언어로 데이터를 조작할 수 있다는 점도 관계형 DB의 큰 강점&lt;/p&gt;
+&lt;h3 id=&#34;3-nosql-데이터베이스&#34;&gt;3. NoSQL 데이터베이스
+&lt;/h3&gt;&lt;p&gt;관계형 모델의 정형화된 테이블 구조에 얽매이지 않는, 보다 유연한 형태의 &lt;strong&gt;비관계형 데이터베이스&lt;/strong&gt;&lt;br&gt;
+웹·모바일 환경에서 비정형 데이터(로그, 소셜 데이터 등)가 폭증하면서, 스키마 변경 없이 빠르게 적재·조회할 필요성에서 등장함&lt;/p&gt;
+&lt;h4 id=&#34;특징-1&#34;&gt;특징
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;대용량 조회에 유리&lt;/strong&gt;: 정규화로 인한 조인 비용이 없거나 적어, 단순 조회가 매우 빠름&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;수평적 확장(Scale-out)&lt;/strong&gt;: 서버 한 대의 성능을 키우는 대신, 서버를 여러 대로 늘리는 방식으로 확장 가능&lt;br&gt;
+관계형 DB는 조인과 트랜잭션 보장 때문에 수평 확장이 어려운 반면, NoSQL은 데이터가 독립적이라 분산이 쉬움&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;스키마 유연성&lt;/strong&gt;: 데이터마다 필드 구성이 달라도 저장 가능. 요구사항이 자주 바뀌는 초기 서비스에 적합함&lt;/li&gt;
+&lt;li&gt;단, 트랜잭션과 강한 일관성 보장은 관계형 DB보다 약한 경우가 많음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;종류&#34;&gt;종류
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;도큐먼트(Document)&lt;/strong&gt;: JSON/BSON 같은 문서 단위로 데이터를 저장&lt;br&gt;
+중첩 구조를 자연스럽게 표현할 수 있음 (예: MongoDB)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;키-값(Key-Value)&lt;/strong&gt;: 가장 단순한 형태. 키 하나로 값을 즉시 꺼냄&lt;br&gt;
+캐시나 세션 저장소로 자주 쓰임 (예: Redis)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;와이드 컬럼(Wide Column)&lt;/strong&gt;: 행마다 서로 다른 컬럼을 가질 수 있는 컬럼 기반 저장&lt;br&gt;
+대규모 분석·로그 데이터에 강점 (예: Cassandra, HBase)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;그래프(Graph)&lt;/strong&gt;: 노드와 간선으로 개체 간 관계 자체를 직접 표현&lt;br&gt;
+소셜 네트워크나 추천 시스템처럼 관계 탐색이 중요한 경우에 적합 (예: Neo4j)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;cf-그-외의-데이터-모델&#34;&gt;cf) 그 외의 데이터 모델
+&lt;/h4&gt;&lt;p&gt;관계형·NoSQL 이전에 쓰이던 고전적인 모델들&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;계층형 데이터베이스&lt;/strong&gt;: 부모-자식 관계의 트리 구조로 데이터를 표현&lt;br&gt;
+개체 간 1:N 관계만 표현 가능해 일대다 관계라고도 함&lt;br&gt;
+접근 경로가 정해져 있어 빠르지만, 구조 변경이 어려움&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;네트워크형 데이터베이스&lt;/strong&gt;: 계층형을 확장해 N:M 관계까지 표현할 수 있는 그래프 구조&lt;br&gt;
+유연성은 늘었지만 구조가 복잡해 유지보수가 어렵다는 한계로 점차 관계형 모델에 자리를 내줌&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</description>
+        </item>
+        <item>
+        <title>[CS 스터디] 면접 대비 2</title>
+        <link>http://localhost:1313/posts/cs-study-12/</link>
+        <pubDate>Fri, 12 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/cs-study-12/</guid>
+        <description>&lt;h3 id=&#34;1-요약&#34;&gt;1. 요약
+&lt;/h3&gt;&lt;h4 id=&#34;tcp&#34;&gt;TCP
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;연결형 서비스&lt;/strong&gt;: 송신부와 수신부의 연결을 확인한 뒤 데이터를 주고받는 연결 지향형 프로토콜&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;가상 회선 패킷 교환 방식&lt;/strong&gt;: 패킷이 전달되는 회선이 정해져 있어 순서대로 도착함&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;신뢰성 보장&lt;/strong&gt;: 데이터의 손실이나 순서 오류 없이 전달됨을 보장하므로 신뢰성이 높음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;핸드셰이킹&lt;/strong&gt;: 연결 시 3-way 핸드셰이킹, 해제 시 4-way 핸드셰이킹을 사용&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;신뢰성 보장 방법&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;흐름 제어&lt;/strong&gt;: 수신부와 송신부 간의 데이터 처리 속도 차이를 조절&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;혼잡 제어&lt;/strong&gt;: 송신부의 데이터 전달 속도와 네트워크 속도의 차이를 조절&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;오류 제어&lt;/strong&gt;: 데이터의 오류를 검출하고 손실된 패킷을 재전송&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;udp&#34;&gt;UDP
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;비연결형 서비스&lt;/strong&gt;: 송신부와 수신부의 연결을 보장하지 않는 비연결형 프로토콜&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;데이터그램 패킷 교환 방식&lt;/strong&gt;: 패킷이 서로 다른 회선으로 전달될 수 있음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;낮은 신뢰성&lt;/strong&gt;: 흐름·혼잡 제어와 재전송이 없어 신뢰성은 낮지만 그만큼 오버헤드가 적어 빠름&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;오류 검출&lt;/strong&gt;: 체크섬(checksum) 필드를 이용해 최소한의 오류 검출만 지원&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;http&#34;&gt;HTTP
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;클라이언트-서버 구조의 통신 프로토콜&lt;/strong&gt;: 인터넷에서 데이터를 전송하기 위해 사용됨&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;특징&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;비연결성&lt;/strong&gt;: 서버에서 응답을 받으면 연결을 끊음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;무상태&lt;/strong&gt;: 서버가 클라이언트의 이전 상태를 식별하거나 기억하지 않음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;쿠키와 세션&lt;/strong&gt;: 비연결성과 무상태의 단점을 보완하기 위한 수단
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;쿠키&lt;/strong&gt;: 클라이언트 로컬에 저장되는 키-값 형태의 작은 데이터 파일&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;세션&lt;/strong&gt;: 서버에 저장되는 연결 관련 정보&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;https&#34;&gt;HTTPS
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;HTTP + SSL/TLS&lt;/strong&gt;: SSL/TLS를 이용해 HTTP의 보안을 강화한 웹 통신 프로토콜&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SSL/TLS의 위치&lt;/strong&gt;: 전송 계층과 응용 계층 사이에 위치하는 보안 통신 계층&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;tcp-keep-alive와-http-keep-alive&#34;&gt;TCP Keep Alive와 HTTP Keep Alive
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;TCP Keep Alive&lt;/strong&gt;: 연결된 세션을 유지하기 위한 방식&lt;br&gt;
+일정 시간 동안 패킷 교환이 없으면 연결 유지 여부를 확인하는 패킷을 보냄&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HTTP Keep Alive&lt;/strong&gt;: 일정 시간 동안 TCP 연결을 유지해 여러 HTTP 요청·응답에 재사용하는 방식&lt;br&gt;
+정해진 시간이 끝나면 연결이 해제됨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;rest&#34;&gt;REST
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;REST&lt;/strong&gt;: URI로 자원을 명시하고 HTTP 메서드로 CRUD 연산을 수행하는 소프트웨어 아키텍처&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;장점&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;HTTP 프로토콜을 그대로 사용하므로 별도의 인프라 구축이 필요 없음&lt;/li&gt;
+&lt;li&gt;HTTP를 따르는 모든 플랫폼에서 사용 가능&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;단점&lt;/strong&gt;: 사용 가능한 HTTP 메서드가 한정적이라 표현할 수 있는 동작이 제한적임&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;구성 요소&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;자원(Resource)&lt;/strong&gt;: URI를 통해 클라이언트가 서버의 자원을 식별하고 조작을 요청함&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;행위(Verb)&lt;/strong&gt;: HTTP 메서드로 자원에 대한 연산을 표현&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;표현(Representation)&lt;/strong&gt;: JSON, XML 등의 형식으로 데이터를 주고받음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;http-메서드&#34;&gt;HTTP 메서드
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;POST&lt;/strong&gt;: Create 연산, 새로운 자원을 생성할 때 사용&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GET&lt;/strong&gt;: Read 연산, 서버에서 자원을 조회할 때 사용&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PUT&lt;/strong&gt;: Update 연산, 자원을 갱신(또는 없으면 생성)할 때 사용&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DELETE&lt;/strong&gt;: Delete 연산, 자원을 삭제할 때 사용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;2-면접-대비-qa&#34;&gt;2. 면접 대비 (Q&amp;amp;A)
+&lt;/h3&gt;&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;TCP의 특징을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+TCP는 송신부와 수신부의 연결을 확인한 뒤 데이터를 주고받는 연결 지향형 프로토콜입니다.&lt;br&gt;
+패킷이 전달되는 경로가 고정되는 가상 회선 패킷 교환 방식을 사용하며, 데이터의 손실이나 순서 오류 없이 전달됨을 보장하므로 신뢰성이 높습니다.&lt;br&gt;
+연결 시에는 3-way 핸드셰이크, 해제 시에는 4-way 핸드셰이크를 통해 통신을 시작·종료합니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;TCP의 연결 및 해제 과정을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+연결은 3-way 핸드셰이크로 이루어집니다. 클라이언트가 SYN을 보내면 서버가 SYN+ACK으로 응답하고, 클라이언트가 다시 ACK을 보내 연결이 확립됩니다.&lt;br&gt;
+해제는 4-way 핸드셰이크로 이루어집니다. 종료를 요청하는 측에서 FIN을 보내고 상대가 ACK으로 응답한 뒤, 상대도 FIN을 보내면 마지막으로 ACK을 응답하여 연결이 종료됩니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;TCP에서 데이터의 신뢰성을 보장하기 위한 방법을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+크게 세 가지 제어 방식을 사용합니다.
+&lt;ul&gt;
+  &lt;li&gt;&lt;b&gt;흐름 제어(Flow Control):&lt;/b&gt; 수신부의 처리 속도에 맞춰 송신부의 전송 속도를 조절합니다. 슬라이딩 윈도우 방식이 대표적입니다.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;혼잡 제어(Congestion Control):&lt;/b&gt; 네트워크의 혼잡 상태에 따라 송신부의 전송량을 조절합니다.&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;오류 제어(Error Control):&lt;/b&gt; 체크섬으로 오류를 검출하고, ACK과 재전송 메커니즘으로 손실된 데이터를 복구합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;UDP의 특징을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+UDP는 연결 과정 없이 데이터를 전송하는 비연결형 프로토콜입니다.&lt;br&gt;
+패킷마다 서로 다른 경로로 전달될 수 있는 데이터그램 방식을 사용하며, 흐름·혼잡 제어나 재전송이 없어 신뢰성은 낮지만 그만큼 오버헤드가 적어 빠르고 효율적입니다.&lt;br&gt;
+체크섬 필드를 통해 최소한의 오류 검출만 지원합니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;TCP와 UDP의 차이점을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+TCP는 연결 지향형으로 신뢰성을 보장하지만, 연결 설정과 제어로 인한 오버헤드가 크고 상대적으로 속도가 느립니다.&lt;br&gt;
+UDP는 비연결형으로 신뢰성은 낮지만, 헤더가 작고 제어 절차가 없어 빠르고 가볍습니다.&lt;br&gt;
+신뢰성이 중요한 파일 전송이나 웹 통신에는 TCP가, 실시간성이 중요한 영상·음성 스트리밍이나 게임 등에는 UDP가 주로 사용됩니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;UDP에서 오류 검출 방법을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+UDP 헤더의 체크섬(checksum) 필드를 이용해 오류를 검출합니다.&lt;br&gt;
+송신 측에서 데이터의 비트들을 계산한 값을 체크섬에 담아 보내면, 수신 측이 동일한 방식으로 다시 계산해 값이 일치하는지 확인합니다. 값이 다르면 전송 중 데이터가 변경된 것으로 판단해 해당 패킷을 폐기합니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;HTTP에 대해 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+HTTP는 인터넷에서 클라이언트와 서버가 데이터를 주고받기 위해 사용하는 응용 계층 프로토콜입니다.&lt;br&gt;
+요청에 대한 응답을 받으면 연결을 끊는 비연결성과, 클라이언트의 이전 상태를 기억하지 않는 무상태성이라는 특징이 있습니다.&lt;br&gt;
+이러한 단점은 쿠키와 세션을 통해 보완합니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;HTTP Keep Alive와 TCP Keep Alive를 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+TCP Keep Alive는 이미 연결된 세션을 유지하기 위한 메커니즘으로, 일정 시간 동안 패킷 교환이 없으면 연결이 살아있는지 확인하는 패킷을 보냅니다.&lt;br&gt;
+HTTP Keep Alive는 한 번 맺은 TCP 연결을 일정 시간 동안 유지해 여러 HTTP 요청·응답을 재사용할 수 있도록 하는 방식이며, 정해진 시간이 지나면 연결이 해제됩니다.&lt;br&gt;
+같은 &#39;Keep Alive&#39;라는 이름을 쓰지만, TCP Keep Alive는 연결의 생존 여부 확인에 초점이 있고 HTTP Keep Alive는 연결의 재사용에 초점이 있습니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;쿠키와 세션의 차이점을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+쿠키는 클라이언트(브라우저) 측에 저장되는 키-값 형태의 작은 데이터 파일로, 매 요청에 자동으로 함께 전송됩니다.&lt;br&gt;
+세션은 서버 측에 저장되는 연결 관련 정보로, 클라이언트는 세션 ID만 쿠키 등으로 보관해 자신을 식별합니다.&lt;br&gt;
+쿠키는 클라이언트에 노출되어 상대적으로 보안이 약한 반면, 세션은 서버에 저장되어 보안성이 높지만 서버 자원을 차지합니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;HTTP와 HTTPS의 차이점을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+HTTPS는 HTTP에 SSL/TLS 보안 계층을 추가해 통신 내용을 암호화한 프로토콜입니다.&lt;br&gt;
+HTTP가 평문으로 데이터를 주고받아 도청과 변조에 취약한 반면, HTTPS는 암호화를 통해 데이터의 기밀성과 무결성을 보장합니다.&lt;br&gt;
+기본 포트도 HTTP는 80, HTTPS는 443으로 다릅니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;HTTPS에서 사용하는 암호화 방식을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+HTTPS는 대칭 키 암호화와 공개 키 암호화를 결합해 사용합니다.&lt;br&gt;
+초기 핸드셰이크 단계에서는 공개 키 암호화 방식으로 대칭 키를 안전하게 교환하고, 이후 실제 데이터 통신에는 속도가 빠른 대칭 키 암호화를 사용합니다.&lt;br&gt;
+이렇게 하면 공개 키 방식의 안전한 키 교환과 대칭 키 방식의 빠른 처리 속도라는 장점을 모두 활용할 수 있습니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;사용자가 URL을 입력한 후 화면이 출력되기까지의 과정을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+사용자가 URL을 입력하면 웹 브라우저는 입력된 도메인의 IP 주소를 DNS 서버에 질의합니다.&lt;br&gt;
+DNS로부터 받은 IP 주소를 이용해 웹 서버와 TCP/IP 연결을 맺고 HTTP 요청을 전송하면, 서버는 요청을 처리하고 HTML·CSS·JS 등 리소스를 응답으로 돌려줍니다.&lt;br&gt;
+브라우저는 받은 응답을 파싱·렌더링해 사용자 화면에 페이지를 출력합니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;REST의 장단점을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+장점은 HTTP 프로토콜을 그대로 활용하므로 별도의 인프라가 필요 없고, HTTP를 따르는 모든 플랫폼에서 사용할 수 있으며, URI와 메서드만 봐도 요청의 의도를 파악하기 쉽다는 점입니다.&lt;br&gt;
+단점은 자원에 대한 동작을 HTTP 메서드로만 표현해야 하므로 사용할 수 있는 연산이 한정적이고, 복잡한 동작이나 트랜잭션 단위 작업을 표현하기 어렵다는 점입니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;GET에 바디를 넣어서 보내면 나타날 결과를 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+HTTP 명세상 GET 요청도 바디를 가질 수는 있지만, 명세에서 바디의 사용 의미를 정의하지 않기 때문에 서버나 프록시·캐시 같은 중간 노드가 이를 무시하거나 거부할 수 있습니다.&lt;br&gt;
+또한 GET은 조회 목적의 안전하고 멱등한 메서드이므로 바디로 데이터를 전달하는 것은 의미적으로 적절하지 않습니다.&lt;br&gt;
+서버에 데이터를 전달해야 한다면 쿼리 스트링을 사용하거나 POST 등 다른 메서드를 사용하는 것이 권장됩니다.
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;POST와 PUT의 차이점을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+POST는 자원을 새로 생성하는 메서드로, 같은 요청을 반복하면 매번 새로운 자원이 만들어질 수 있어 멱등하지 않습니다.&lt;br&gt;
+PUT은 지정한 자원을 통째로 교체(없으면 생성)하는 메서드로, 같은 요청을 여러 번 보내도 최종 상태가 동일하게 유지되므로 멱등합니다.&lt;br&gt;
+즉 POST는 &#34;새로 만든다&#34;, PUT은 &#34;있어야 할 모습으로 맞춘다&#34;는 의미에서 차이가 있습니다.
+&lt;/details&gt;
+</description>
+        </item>
+        <item>
         <title>[CS 스터디] REST</title>
         <link>http://localhost:1313/posts/cs-study-11/</link>
         <pubDate>Wed, 10 Jun 2026 00:00:00 +0000</pubDate>
