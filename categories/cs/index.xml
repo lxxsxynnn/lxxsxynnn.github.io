@@ -6,7 +6,197 @@
         <description>Recent content in CS on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Tue, 16 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/cs/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 17 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/cs/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[CS 스터디] 트랜잭션</title>
+        <link>http://localhost:1313/posts/cs-study-15/</link>
+        <pubDate>Wed, 17 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/cs-study-15/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h3 id=&#34;1-트랜잭션&#34;&gt;1. 트랜잭션
+&lt;/h3&gt;&lt;p&gt;데이터베이스의 상태를 변화시키기 위해 수행하는 &lt;strong&gt;하나의 논리적 작업 단위&lt;/strong&gt;(또는 일련의 연산)&lt;br&gt;
+중간에 일부만 반영되면 데이터가 깨질 수 있으므로, &lt;strong&gt;전부 반영되거나 전혀 반영되지 않는&lt;/strong&gt; 단위로 묶어 처리함&lt;/p&gt;
+&lt;h4 id=&#34;특징-acid&#34;&gt;특징 (ACID)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;원자성(Atomicity)&lt;/strong&gt;: 트랜잭션의 연산이 모두 성공적으로 반영되거나, 아예 하나도 반영되지 않아야 함&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;일관성(Consistency)&lt;/strong&gt;: 트랜잭션이 끝난 뒤에도 데이터베이스는 정해진 무결성 제약을 만족해야 함&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;독립성/고립성(Isolation)&lt;/strong&gt;: 수행 중인 트랜잭션의 중간 결과에 다른 트랜잭션이 끼어들 수 없어야 함&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;영속성(Durability)&lt;/strong&gt;: 완료된 트랜잭션의 결과는 시스템 장애가 일어나도 사라지지 않고 영구적으로 반영됨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;tcl-명령어&#34;&gt;TCL 명령어
+&lt;/h4&gt;&lt;p&gt;원자성을 보장하려면 트랜잭션의 시작·종료·되돌리기를 명시적으로 제어해야 함&lt;br&gt;
+이를 위해 사용하는 SQL 명령을 &lt;strong&gt;TCL(Transaction Control Language)&lt;/strong&gt; 이라고 부름&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;COMMIT&lt;/strong&gt;: 트랜잭션이 정상적으로 종료되었음을 알리고, 변경 사항을 데이터베이스에 영구 반영&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ROLLBACK&lt;/strong&gt;: 트랜잭션이 비정상적으로 종료되어, 그동안의 변경 사항을 취소하고 이전 상태로 되돌림&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SAVEPOINT&lt;/strong&gt;: 트랜잭션 중간에 특정 지점을 표시해두는 명령&lt;br&gt;
+ROLLBACK과 함께 쓰면 트랜잭션 전체가 아니라 표시한 지점까지만 되돌릴 수 있음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;트랜잭션의-상태&#34;&gt;트랜잭션의 상태
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                     ┌──────────────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                     │   활성화      │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                     │  (Active)    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                     └──────┬───────┘
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                            │ 마지막 연산 수행
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                            ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                  ┌──────────────────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ┌────────│   부분 완료       │────────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │        │(Partially Done)  │        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │        └──────────────────┘        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │ 오류                                │ COMMIT
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ▼                                    ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ┌──────────┐                       ┌──────────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   │  실패     │                      │  완료     │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   │ (Failed) │                       │(Committed)│
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   └────┬─────┘                       └──────────┘
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │ ROLLBACK
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ┌──────────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   │  철회     │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   │(Aborted) │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   └──────────┘
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;활성화(Active)&lt;/strong&gt;: 트랜잭션이 시작되어 연산을 처리 중인 상태&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;부분 완료(Partially Committed)&lt;/strong&gt;: 마지막 연산까지 끝났지만 아직 결과가 DB에 반영되지 않은 상태&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;완료(Committed)&lt;/strong&gt;: 결과가 DB에 정상적으로 반영된 상태&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;실패(Failed)&lt;/strong&gt;: 처리 도중 오류가 발생해 트랜잭션이 중단된 상태&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;철회(Aborted)&lt;/strong&gt;: 실패 후 ROLLBACK을 수행해 데이터베이스가 이전 상태로 되돌아간 상태&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;cf-트랜잭션-격리-수준-isolation-level&#34;&gt;cf) 트랜잭션 격리 수준 (Isolation Level)
+&lt;/h4&gt;&lt;p&gt;여러 트랜잭션이 동시에 실행될 때, 서로의 작업을 &lt;strong&gt;얼마나 격리할 것인지&lt;/strong&gt; 정하는 수준&lt;br&gt;
+격리 수준이 낮을수록 동시성은 높아지지만 데이터 일관성 문제가 발생할 수 있음&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Read Uncommitted&lt;/strong&gt;: 다른 트랜잭션이 COMMIT하지 않은 변경 사항까지도 조회 가능&lt;br&gt;
+동시성은 가장 높지만 &lt;strong&gt;Dirty Read&lt;/strong&gt;가 발생할 수 있음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Read Committed&lt;/strong&gt;: COMMIT된 데이터만 다른 트랜잭션이 조회할 수 있음&lt;br&gt;
+Dirty Read는 막지만, 같은 데이터를 두 번 읽었을 때 값이 달라지는 &lt;strong&gt;Non-Repeatable Read&lt;/strong&gt; 발생 가능&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Repeatable Read&lt;/strong&gt;: 트랜잭션이 한 번 읽은 데이터는 다른 트랜잭션이 갱신·삭제할 수 없음&lt;br&gt;
+단, 새로운 행이 추가되는 것은 막지 못해 &lt;strong&gt;Phantom Read&lt;/strong&gt;가 발생할 수 있음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Serializable&lt;/strong&gt;: 트랜잭션이 읽은 데이터에 대해 다른 트랜잭션이 갱신·삭제·삽입을 모두 할 수 없음&lt;br&gt;
+가장 안전하지만 동시성이 가장 낮아 성능이 떨어짐&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;동시성과 고립성은 &lt;strong&gt;상충 관계&lt;/strong&gt;에 있음&lt;br&gt;
+동시성이 높으면 처리량은 올라가지만 데이터 일관성 문제가 발생할 위험이 커지고,&lt;br&gt;
+고립성을 높이면 일관성은 보장되지만 다른 트랜잭션이 대기해야 하므로 효율이 떨어짐&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;2-락lock&#34;&gt;2. 락(Lock)
+&lt;/h3&gt;&lt;p&gt;트랜잭션이 처리되는 &lt;strong&gt;순서를 보장&lt;/strong&gt;하고, 같은 데이터에 동시에 접근하지 못하도록 막는 메커니즘&lt;br&gt;
+운영체제의 상호 배제(Mutual Exclusion) 기법과 유사한 원리&lt;/p&gt;
+&lt;h4 id=&#34;락의-종류&#34;&gt;락의 종류
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;공유 락(Shared Lock, 읽기 락)&lt;/strong&gt;: 데이터를 &lt;strong&gt;읽기 위한&lt;/strong&gt; 락&lt;br&gt;
+읽기는 일관성에 영향을 주지 않으므로, 동일 데이터에 여러 공유 락이 동시에 걸릴 수 있음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;배타 락(Exclusive Lock, 쓰기 락)&lt;/strong&gt;: 데이터를 &lt;strong&gt;수정하기 위한&lt;/strong&gt; 락&lt;br&gt;
+데이터에 하나의 배타 락이 걸려 있는 동안에는 다른 어떤 락(공유든 배타든)도 걸 수 없음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;트랜잭션의-교착-상태deadlock&#34;&gt;트랜잭션의 교착 상태(Deadlock)
+&lt;/h4&gt;&lt;p&gt;여러 트랜잭션이 서로가 가진 락을 기다리며 무한 대기에 빠진 상태&lt;br&gt;
+한 트랜잭션이 어떤 데이터의 락을 보유한 상태에서 또 다른 데이터의 락을 요청하고, 그 데이터의 락은 또 다른 트랜잭션이 보유하고 있는 상황이 맞물려 발생함&lt;/p&gt;
+&lt;h4 id=&#34;해결-방법&#34;&gt;해결 방법
+&lt;/h4&gt;&lt;p&gt;&lt;strong&gt;1. 예방 기법&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;트랜잭션을 시작하기 전에 &lt;strong&gt;필요한 모든 데이터의 락을 한 번에 미리 획득&lt;/strong&gt;하는 방식&lt;br&gt;
+하나라도 못 얻으면 트랜잭션을 시작하지 않으므로 교착 상태가 원천적으로 발생하지 않음&lt;br&gt;
+단, 락을 오래 보유하게 되어 동시성이 떨어짐&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. 회피 기법&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;트랜잭션이 들어온 순서(타임스탬프)에 따라 교착 상태를 피하는 방식&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;wait-die&lt;/strong&gt;: 락을 요청하려는 트랜잭션이 락 보유 트랜잭션보다 &lt;strong&gt;오래되었다면&lt;/strong&gt; 락을 얻을 때까지 대기&lt;br&gt;
+더 &lt;strong&gt;최신&lt;/strong&gt;이라면 락 획득을 포기하고 자신을 종료 (die)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;wound-wait&lt;/strong&gt;: 락을 요청하려는 트랜잭션이 락 보유 트랜잭션보다 &lt;strong&gt;오래되었다면&lt;/strong&gt; 보유자를 강제로 종료시키고 락을 빼앗음 (wound)&lt;br&gt;
+더 &lt;strong&gt;최신&lt;/strong&gt;이라면 락이 풀릴 때까지 대기&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;두 방식 모두 &amp;ldquo;오래된 트랜잭션에게 우선권을 준다&amp;quot;는 원칙은 같지만, &lt;strong&gt;양보의 방향&lt;/strong&gt;이 반대임&lt;/p&gt;
+&lt;h3 id=&#34;3-이상anomaly&#34;&gt;3. 이상(Anomaly)
+&lt;/h3&gt;&lt;p&gt;테이블이 잘 정규화되지 않아 속성 간 종속이나 데이터 중복이 있을 때 발생하는 문제&lt;br&gt;
+같은 정보가 여러 곳에 흩어져 있을 때 데이터의 정확성을 해치게 됨&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;삽입 이상(Insertion Anomaly)&lt;/strong&gt;: 새 데이터를 넣고 싶을 때 의도치 않게 다른 데이터까지 함께 넣어야 하는 문제&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;갱신 이상(Update Anomaly)&lt;/strong&gt;: 데이터를 수정할 때 중복된 모든 위치를 동시에 갱신하지 못해 데이터 모순이 발생하는 문제&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;삭제 이상(Deletion Anomaly)&lt;/strong&gt;: 일부 데이터를 삭제하려 했을 때 의도치 않은 다른 정보까지 함께 사라지는 문제&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4-정규화&#34;&gt;4. 정규화
+&lt;/h3&gt;&lt;p&gt;이상 현상을 해결하기 위해 테이블을 &lt;strong&gt;더 작은 테이블로 분해&lt;/strong&gt;하는 과정&lt;br&gt;
+분해 단계에 따라 단계별 &amp;ldquo;정규형&amp;quot;이 정의되며, 보통 제3정규형(또는 BCNF)까지 진행하는 것이 일반적임&lt;br&gt;
+정규화 단계가 높아질수록 데이터 중복은 줄지만 조인 비용이 늘기 때문에, 상황에 맞게 적정 수준을 선택해야 함&lt;/p&gt;
+&lt;h4 id=&#34;정규화-단계&#34;&gt;정규화 단계
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   비정규형
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      │  ① 모든 속성을 원자 값으로 분해
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   제1정규형 (1NF)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      │  ② 부분 함수 종속 제거
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   제2정규형 (2NF)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      │  ③ 이행적 함수 종속 제거
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   제3정규형 (3NF)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      │  ④ 모든 결정자가 후보 키가 되도록 분해
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   보이스-코드 정규형 (BCNF)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      │  ⑤ 다치 종속 제거
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   제4정규형 (4NF)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      │  ⑥ 조인 종속 제거
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   제5정규형 (5NF)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;제1정규형-1nf&#34;&gt;제1정규형 (1NF)
+&lt;/h4&gt;&lt;p&gt;테이블의 모든 속성 값이 더 이상 분해될 수 없는 &lt;strong&gt;원자 값(atomic value)&lt;/strong&gt; 으로 구성되어야 함&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[ 위반 — 한 셀에 여러 값 ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| 회원ID | 취미              |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| ------ | ----------------- |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| 1      | 독서, 영화, 등산  |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[ 1NF ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| 회원ID | 취미   |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| ------ | ------ |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| 1      | 독서   |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| 1      | 영화   |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| 1      | 등산   |
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;제2정규형-2nf&#34;&gt;제2정규형 (2NF)
+&lt;/h4&gt;&lt;p&gt;1NF를 만족하면서, &lt;strong&gt;부분 함수 종속을 제거&lt;/strong&gt;해 모든 일반 속성이 기본 키 전체에 종속되어야 함&lt;br&gt;
+즉, 기본 키의 &lt;strong&gt;진부분집합&lt;/strong&gt;이 일반 속성을 결정해서는 안 됨&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[ 위반 — (학생ID, 과목ID)가 키인데 과목명은 과목ID에만 종속 ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| 학생ID | 과목ID | 과목명 | 점수 |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| ------ | ------ | ------ | ---- |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| 1      | A01    | 자료구조 | 95 |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| 2      | A01    | 자료구조 | 88 |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[ 2NF — 테이블 분해 ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[수강]: 학생ID, 과목ID, 점수
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[과목]: 과목ID, 과목명
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;cf) 진부분집합&lt;/strong&gt;: 집합 A가 집합 B의 부분집합이면서 B와 같지 않은 경우&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;제3정규형-3nf&#34;&gt;제3정규형 (3NF)
+&lt;/h4&gt;&lt;p&gt;2NF를 만족하면서, &lt;strong&gt;이행적 함수 종속을 제거&lt;/strong&gt;해야 함&lt;br&gt;
+즉, &amp;ldquo;A → B, B → C이면 A → C&amp;quot;처럼 키가 아닌 속성이 다른 일반 속성을 결정하는 관계가 없어야 함&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[ 위반 — 회원ID → 등급ID → 등급명 (이행적 종속) ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;| 회원ID | 등급ID | 등급명 |
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[ 3NF ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[회원]: 회원ID, 등급ID
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[등급]: 등급ID, 등급명
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;보이스-코드-정규형-bcnf&#34;&gt;보이스-코드 정규형 (BCNF)
+&lt;/h4&gt;&lt;p&gt;&amp;ldquo;강한 제3정규형&amp;quot;이라고도 함&lt;br&gt;
+3NF를 만족하면서, &lt;strong&gt;모든 결정자가 후보 키&lt;/strong&gt;가 되도록 테이블을 분해해야 함&lt;br&gt;
+3NF만으로는 잡히지 않는 일부 이상 현상까지 제거할 수 있음&lt;/p&gt;
+&lt;h4 id=&#34;제4정규형-4nf&#34;&gt;제4정규형 (4NF)
+&lt;/h4&gt;&lt;p&gt;BCNF를 만족하면서, &lt;strong&gt;다치 종속(multi-valued dependency)&lt;/strong&gt; 을 제거해야 함&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;cf) 다치 종속&lt;/strong&gt;: 한 속성이 다른 여러 속성의 &lt;em&gt;값의 집합&lt;/em&gt;을 결정하는 관계&lt;br&gt;
+예: 한 학생이 여러 과목을 듣고 여러 동아리에 속할 때, 과목과 동아리가 서로 독립이라면 한 테이블로 묶지 말아야 함&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;제5정규형-5nf&#34;&gt;제5정규형 (5NF)
+&lt;/h4&gt;&lt;p&gt;4NF를 만족하면서, &lt;strong&gt;조인 종속&lt;/strong&gt;이 없어야 함&lt;br&gt;
+테이블을 더 작게 분해한 뒤 다시 조인했을 때 원래 테이블이 손실 없이 복원되도록 분해해야 함&lt;/p&gt;
+&lt;h4 id=&#34;역정규화-denormalization&#34;&gt;역정규화 (Denormalization)
+&lt;/h4&gt;&lt;p&gt;정규화된 테이블을 의도적으로 낮은 정규화 단계로 되돌리는 작업&lt;br&gt;
+조인 비용을 줄여 &lt;strong&gt;읽기 성능을 끌어올리고 싶을 때&lt;/strong&gt; 사용함&lt;br&gt;
+대신 데이터 중복으로 인한 이상 현상의 위험을 다시 떠안게 되므로, 트레이드오프를 신중히 따져야 함&lt;/p&gt;
+&lt;/div&gt;
+</description>
+        </item>
+        <item>
         <title>[CS 스터디] 관계형 데이터베이스</title>
         <link>http://localhost:1313/posts/cs-study-14/</link>
         <pubDate>Tue, 16 Jun 2026 00:00:00 +0000</pubDate>

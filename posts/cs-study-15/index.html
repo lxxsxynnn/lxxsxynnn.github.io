@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 1. 트랜잭션 데이터베이스의 상태를 변화시키기 위해 수행하는 하나의 논리적 작업 단위(또는 일련의 연산)\n중간에 일부만 반영되면 데이터가 깨질 수 있으므로, 전부 반영되거나 전혀 반영되지 않는 단위로 묶어 처리함\n특징 (ACID) 원자성(Atomicity): 트랜잭션의 연산이 모두 성공적으로 반영되거나, 아예 하나도 반영되지 않아야 함 일관성(Consistency): 트랜잭션이 끝난 뒤에도 데이터베이스는 정해진 무결성 제약을 만족해야 함 독립성/고립성(Isolation): 수행 중인 트랜잭션의 중간 결과에 다른 트랜잭션이 끼어들 수 없어야 함 영속성(Durability): 완료된 트랜잭션의 결과는 시스템 장애가 일어나도 사라지지 않고 영구적으로 반영됨 TCL 명령어 원자성을 보장하려면 트랜잭션의 시작·종료·되돌리기를 명시적으로 제어해야 함\n이를 위해 사용하는 SQL 명령을 TCL(Transaction Control Language) 이라고 부름\n">
+<title>[CS 스터디] 트랜잭션</title>
+
+<link rel='canonical' href='http://localhost:1313/posts/cs-study-15/'>
+
+<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="[CS 스터디] 트랜잭션">
+<meta property='og:description' content=" 1. 트랜잭션 데이터베이스의 상태를 변화시키기 위해 수행하는 하나의 논리적 작업 단위(또는 일련의 연산)\n중간에 일부만 반영되면 데이터가 깨질 수 있으므로, 전부 반영되거나 전혀 반영되지 않는 단위로 묶어 처리함\n특징 (ACID) 원자성(Atomicity): 트랜잭션의 연산이 모두 성공적으로 반영되거나, 아예 하나도 반영되지 않아야 함 일관성(Consistency): 트랜잭션이 끝난 뒤에도 데이터베이스는 정해진 무결성 제약을 만족해야 함 독립성/고립성(Isolation): 수행 중인 트랜잭션의 중간 결과에 다른 트랜잭션이 끼어들 수 없어야 함 영속성(Durability): 완료된 트랜잭션의 결과는 시스템 장애가 일어나도 사라지지 않고 영구적으로 반영됨 TCL 명령어 원자성을 보장하려면 트랜잭션의 시작·종료·되돌리기를 명시적으로 제어해야 함\n이를 위해 사용하는 SQL 명령을 TCL(Transaction Control Language) 이라고 부름\n">
+<meta property='og:url' content='http://localhost:1313/posts/cs-study-15/'>
+<meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2026-06-17T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-06-17T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="[CS 스터디] 트랜잭션">
+<meta name="twitter:description" content=" 1. 트랜잭션 데이터베이스의 상태를 변화시키기 위해 수행하는 하나의 논리적 작업 단위(또는 일련의 연산)\n중간에 일부만 반영되면 데이터가 깨질 수 있으므로, 전부 반영되거나 전혀 반영되지 않는 단위로 묶어 처리함\n특징 (ACID) 원자성(Atomicity): 트랜잭션의 연산이 모두 성공적으로 반영되거나, 아예 하나도 반영되지 않아야 함 일관성(Consistency): 트랜잭션이 끝난 뒤에도 데이터베이스는 정해진 무결성 제약을 만족해야 함 독립성/고립성(Isolation): 수행 중인 트랜잭션의 중간 결과에 다른 트랜잭션이 끼어들 수 없어야 함 영속성(Durability): 완료된 트랜잭션의 결과는 시스템 장애가 일어나도 사라지지 않고 영구적으로 반영됨 TCL 명령어 원자성을 보장하려면 트랜잭션의 시작·종료·되돌리기를 명시적으로 제어해야 함\n이를 위해 사용하는 SQL 명령을 TCL(Transaction Control Language) 이라고 부름\n"><link rel="alternate" type="application/json" href="http://localhost:1313/posts/cs-study-15/index.json">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/../assets/avatar_hu_c27af72c615ceedd.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Soyeon&#39;s Dev Log</a></h1>
+            <h2 class="site-description">백엔드 개발자 지망생의 기록</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-code" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="7 8 3 12 7 16" /><polyline points="17 8 21 12 17 16" /><line x1="14" y1="4" x2="10" y2="20" /></svg>
+                
+                <span>코딩테스트</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/cs/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><line x1="3" y1="6" x2="3" y2="19" /><line x1="12" y1="6" x2="12" y2="19" /><line x1="21" y1="6" x2="21" y2="19" /></svg>
+                
+                <span>CS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="4" y="5" width="16" height="16" rx="2" /><line x1="16" y1="3" x2="16" y2="7" /><line x1="8" y1="3" x2="8" y2="7" /><line x1="4" y1="11" x2="20" y2="11" /><rect x="8" y1="15" width="2" height="2" /></svg>
+                
+                <span>주간회고</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>검색</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>다크 모드</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/cs/" style="background-color: #e9c46a; color: #fff;">
+                CS
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/cs-study-15/">[CS 스터디] 트랜잭션</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-06-17</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <div style="margin: 0 40px;">
+<h3 id="1-트랜잭션">1. 트랜잭션
+</h3><p>데이터베이스의 상태를 변화시키기 위해 수행하는 <strong>하나의 논리적 작업 단위</strong>(또는 일련의 연산)<br>
+중간에 일부만 반영되면 데이터가 깨질 수 있으므로, <strong>전부 반영되거나 전혀 반영되지 않는</strong> 단위로 묶어 처리함</p>
+<h4 id="특징-acid">특징 (ACID)
+</h4><ul>
+<li><strong>원자성(Atomicity)</strong>: 트랜잭션의 연산이 모두 성공적으로 반영되거나, 아예 하나도 반영되지 않아야 함</li>
+<li><strong>일관성(Consistency)</strong>: 트랜잭션이 끝난 뒤에도 데이터베이스는 정해진 무결성 제약을 만족해야 함</li>
+<li><strong>독립성/고립성(Isolation)</strong>: 수행 중인 트랜잭션의 중간 결과에 다른 트랜잭션이 끼어들 수 없어야 함</li>
+<li><strong>영속성(Durability)</strong>: 완료된 트랜잭션의 결과는 시스템 장애가 일어나도 사라지지 않고 영구적으로 반영됨</li>
+</ul>
+<h4 id="tcl-명령어">TCL 명령어
+</h4><p>원자성을 보장하려면 트랜잭션의 시작·종료·되돌리기를 명시적으로 제어해야 함<br>
+이를 위해 사용하는 SQL 명령을 <strong>TCL(Transaction Control Language)</strong> 이라고 부름</p>
+<ul>
+<li><strong>COMMIT</strong>: 트랜잭션이 정상적으로 종료되었음을 알리고, 변경 사항을 데이터베이스에 영구 반영</li>
+<li><strong>ROLLBACK</strong>: 트랜잭션이 비정상적으로 종료되어, 그동안의 변경 사항을 취소하고 이전 상태로 되돌림</li>
+<li><strong>SAVEPOINT</strong>: 트랜잭션 중간에 특정 지점을 표시해두는 명령<br>
+ROLLBACK과 함께 쓰면 트랜잭션 전체가 아니라 표시한 지점까지만 되돌릴 수 있음</li>
+</ul>
+<h4 id="트랜잭션의-상태">트랜잭션의 상태
+</h4><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>                     ┌──────────────┐
+</span></span><span style="display:flex;"><span>                     │   활성화      │
+</span></span><span style="display:flex;"><span>                     │  (Active)    │
+</span></span><span style="display:flex;"><span>                     └──────┬───────┘
+</span></span><span style="display:flex;"><span>                            │ 마지막 연산 수행
+</span></span><span style="display:flex;"><span>                            ▼
+</span></span><span style="display:flex;"><span>                  ┌──────────────────┐
+</span></span><span style="display:flex;"><span>        ┌────────│   부분 완료       │────────┐
+</span></span><span style="display:flex;"><span>        │        │(Partially Done)  │        │
+</span></span><span style="display:flex;"><span>        │        └──────────────────┘        │
+</span></span><span style="display:flex;"><span>        │ 오류                                │ COMMIT
+</span></span><span style="display:flex;"><span>        ▼                                    ▼
+</span></span><span style="display:flex;"><span>   ┌──────────┐                       ┌──────────┐
+</span></span><span style="display:flex;"><span>   │  실패     │                      │  완료     │
+</span></span><span style="display:flex;"><span>   │ (Failed) │                       │(Committed)│
+</span></span><span style="display:flex;"><span>   └────┬─────┘                       └──────────┘
+</span></span><span style="display:flex;"><span>        │ ROLLBACK
+</span></span><span style="display:flex;"><span>        ▼
+</span></span><span style="display:flex;"><span>   ┌──────────┐
+</span></span><span style="display:flex;"><span>   │  철회     │
+</span></span><span style="display:flex;"><span>   │(Aborted) │
+</span></span><span style="display:flex;"><span>   └──────────┘
+</span></span></code></pre></div><ul>
+<li><strong>활성화(Active)</strong>: 트랜잭션이 시작되어 연산을 처리 중인 상태</li>
+<li><strong>부분 완료(Partially Committed)</strong>: 마지막 연산까지 끝났지만 아직 결과가 DB에 반영되지 않은 상태</li>
+<li><strong>완료(Committed)</strong>: 결과가 DB에 정상적으로 반영된 상태</li>
+<li><strong>실패(Failed)</strong>: 처리 도중 오류가 발생해 트랜잭션이 중단된 상태</li>
+<li><strong>철회(Aborted)</strong>: 실패 후 ROLLBACK을 수행해 데이터베이스가 이전 상태로 되돌아간 상태</li>
+</ul>
+<h4 id="cf-트랜잭션-격리-수준-isolation-level">cf) 트랜잭션 격리 수준 (Isolation Level)
+</h4><p>여러 트랜잭션이 동시에 실행될 때, 서로의 작업을 <strong>얼마나 격리할 것인지</strong> 정하는 수준<br>
+격리 수준이 낮을수록 동시성은 높아지지만 데이터 일관성 문제가 발생할 수 있음</p>
+<ul>
+<li><strong>Read Uncommitted</strong>: 다른 트랜잭션이 COMMIT하지 않은 변경 사항까지도 조회 가능<br>
+동시성은 가장 높지만 <strong>Dirty Read</strong>가 발생할 수 있음</li>
+<li><strong>Read Committed</strong>: COMMIT된 데이터만 다른 트랜잭션이 조회할 수 있음<br>
+Dirty Read는 막지만, 같은 데이터를 두 번 읽었을 때 값이 달라지는 <strong>Non-Repeatable Read</strong> 발생 가능</li>
+<li><strong>Repeatable Read</strong>: 트랜잭션이 한 번 읽은 데이터는 다른 트랜잭션이 갱신·삭제할 수 없음<br>
+단, 새로운 행이 추가되는 것은 막지 못해 <strong>Phantom Read</strong>가 발생할 수 있음</li>
+<li><strong>Serializable</strong>: 트랜잭션이 읽은 데이터에 대해 다른 트랜잭션이 갱신·삭제·삽입을 모두 할 수 없음<br>
+가장 안전하지만 동시성이 가장 낮아 성능이 떨어짐</li>
+</ul>
+<blockquote>
+<p>동시성과 고립성은 <strong>상충 관계</strong>에 있음<br>
+동시성이 높으면 처리량은 올라가지만 데이터 일관성 문제가 발생할 위험이 커지고,<br>
+고립성을 높이면 일관성은 보장되지만 다른 트랜잭션이 대기해야 하므로 효율이 떨어짐</p>
+</blockquote>
+<h3 id="2-락lock">2. 락(Lock)
+</h3><p>트랜잭션이 처리되는 <strong>순서를 보장</strong>하고, 같은 데이터에 동시에 접근하지 못하도록 막는 메커니즘<br>
+운영체제의 상호 배제(Mutual Exclusion) 기법과 유사한 원리</p>
+<h4 id="락의-종류">락의 종류
+</h4><ul>
+<li><strong>공유 락(Shared Lock, 읽기 락)</strong>: 데이터를 <strong>읽기 위한</strong> 락<br>
+읽기는 일관성에 영향을 주지 않으므로, 동일 데이터에 여러 공유 락이 동시에 걸릴 수 있음</li>
+<li><strong>배타 락(Exclusive Lock, 쓰기 락)</strong>: 데이터를 <strong>수정하기 위한</strong> 락<br>
+데이터에 하나의 배타 락이 걸려 있는 동안에는 다른 어떤 락(공유든 배타든)도 걸 수 없음</li>
+</ul>
+<h4 id="트랜잭션의-교착-상태deadlock">트랜잭션의 교착 상태(Deadlock)
+</h4><p>여러 트랜잭션이 서로가 가진 락을 기다리며 무한 대기에 빠진 상태<br>
+한 트랜잭션이 어떤 데이터의 락을 보유한 상태에서 또 다른 데이터의 락을 요청하고, 그 데이터의 락은 또 다른 트랜잭션이 보유하고 있는 상황이 맞물려 발생함</p>
+<h4 id="해결-방법">해결 방법
+</h4><p><strong>1. 예방 기법</strong></p>
+<p>트랜잭션을 시작하기 전에 <strong>필요한 모든 데이터의 락을 한 번에 미리 획득</strong>하는 방식<br>
+하나라도 못 얻으면 트랜잭션을 시작하지 않으므로 교착 상태가 원천적으로 발생하지 않음<br>
+단, 락을 오래 보유하게 되어 동시성이 떨어짐</p>
+<p><strong>2. 회피 기법</strong></p>
+<p>트랜잭션이 들어온 순서(타임스탬프)에 따라 교착 상태를 피하는 방식</p>
+<ul>
+<li><strong>wait-die</strong>: 락을 요청하려는 트랜잭션이 락 보유 트랜잭션보다 <strong>오래되었다면</strong> 락을 얻을 때까지 대기<br>
+더 <strong>최신</strong>이라면 락 획득을 포기하고 자신을 종료 (die)</li>
+<li><strong>wound-wait</strong>: 락을 요청하려는 트랜잭션이 락 보유 트랜잭션보다 <strong>오래되었다면</strong> 보유자를 강제로 종료시키고 락을 빼앗음 (wound)<br>
+더 <strong>최신</strong>이라면 락이 풀릴 때까지 대기</li>
+</ul>
+<p>두 방식 모두 &ldquo;오래된 트랜잭션에게 우선권을 준다&quot;는 원칙은 같지만, <strong>양보의 방향</strong>이 반대임</p>
+<h3 id="3-이상anomaly">3. 이상(Anomaly)
+</h3><p>테이블이 잘 정규화되지 않아 속성 간 종속이나 데이터 중복이 있을 때 발생하는 문제<br>
+같은 정보가 여러 곳에 흩어져 있을 때 데이터의 정확성을 해치게 됨</p>
+<ul>
+<li><strong>삽입 이상(Insertion Anomaly)</strong>: 새 데이터를 넣고 싶을 때 의도치 않게 다른 데이터까지 함께 넣어야 하는 문제</li>
+<li><strong>갱신 이상(Update Anomaly)</strong>: 데이터를 수정할 때 중복된 모든 위치를 동시에 갱신하지 못해 데이터 모순이 발생하는 문제</li>
+<li><strong>삭제 이상(Deletion Anomaly)</strong>: 일부 데이터를 삭제하려 했을 때 의도치 않은 다른 정보까지 함께 사라지는 문제</li>
+</ul>
+<h3 id="4-정규화">4. 정규화
+</h3><p>이상 현상을 해결하기 위해 테이블을 <strong>더 작은 테이블로 분해</strong>하는 과정<br>
+분해 단계에 따라 단계별 &ldquo;정규형&quot;이 정의되며, 보통 제3정규형(또는 BCNF)까지 진행하는 것이 일반적임<br>
+정규화 단계가 높아질수록 데이터 중복은 줄지만 조인 비용이 늘기 때문에, 상황에 맞게 적정 수준을 선택해야 함</p>
+<h4 id="정규화-단계">정규화 단계
+</h4><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>   비정규형
+</span></span><span style="display:flex;"><span>      │  ① 모든 속성을 원자 값으로 분해
+</span></span><span style="display:flex;"><span>      ▼
+</span></span><span style="display:flex;"><span>   제1정규형 (1NF)
+</span></span><span style="display:flex;"><span>      │  ② 부분 함수 종속 제거
+</span></span><span style="display:flex;"><span>      ▼
+</span></span><span style="display:flex;"><span>   제2정규형 (2NF)
+</span></span><span style="display:flex;"><span>      │  ③ 이행적 함수 종속 제거
+</span></span><span style="display:flex;"><span>      ▼
+</span></span><span style="display:flex;"><span>   제3정규형 (3NF)
+</span></span><span style="display:flex;"><span>      │  ④ 모든 결정자가 후보 키가 되도록 분해
+</span></span><span style="display:flex;"><span>      ▼
+</span></span><span style="display:flex;"><span>   보이스-코드 정규형 (BCNF)
+</span></span><span style="display:flex;"><span>      │  ⑤ 다치 종속 제거
+</span></span><span style="display:flex;"><span>      ▼
+</span></span><span style="display:flex;"><span>   제4정규형 (4NF)
+</span></span><span style="display:flex;"><span>      │  ⑥ 조인 종속 제거
+</span></span><span style="display:flex;"><span>      ▼
+</span></span><span style="display:flex;"><span>   제5정규형 (5NF)
+</span></span></code></pre></div><h4 id="제1정규형-1nf">제1정규형 (1NF)
+</h4><p>테이블의 모든 속성 값이 더 이상 분해될 수 없는 <strong>원자 값(atomic value)</strong> 으로 구성되어야 함</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>[ 위반 — 한 셀에 여러 값 ]
+</span></span><span style="display:flex;"><span>| 회원ID | 취미              |
+</span></span><span style="display:flex;"><span>| ------ | ----------------- |
+</span></span><span style="display:flex;"><span>| 1      | 독서, 영화, 등산  |
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[ 1NF ]
+</span></span><span style="display:flex;"><span>| 회원ID | 취미   |
+</span></span><span style="display:flex;"><span>| ------ | ------ |
+</span></span><span style="display:flex;"><span>| 1      | 독서   |
+</span></span><span style="display:flex;"><span>| 1      | 영화   |
+</span></span><span style="display:flex;"><span>| 1      | 등산   |
+</span></span></code></pre></div><h4 id="제2정규형-2nf">제2정규형 (2NF)
+</h4><p>1NF를 만족하면서, <strong>부분 함수 종속을 제거</strong>해 모든 일반 속성이 기본 키 전체에 종속되어야 함<br>
+즉, 기본 키의 <strong>진부분집합</strong>이 일반 속성을 결정해서는 안 됨</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>[ 위반 — (학생ID, 과목ID)가 키인데 과목명은 과목ID에만 종속 ]
+</span></span><span style="display:flex;"><span>| 학생ID | 과목ID | 과목명 | 점수 |
+</span></span><span style="display:flex;"><span>| ------ | ------ | ------ | ---- |
+</span></span><span style="display:flex;"><span>| 1      | A01    | 자료구조 | 95 |
+</span></span><span style="display:flex;"><span>| 2      | A01    | 자료구조 | 88 |
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[ 2NF — 테이블 분해 ]
+</span></span><span style="display:flex;"><span>[수강]: 학생ID, 과목ID, 점수
+</span></span><span style="display:flex;"><span>[과목]: 과목ID, 과목명
+</span></span></code></pre></div><blockquote>
+<p><strong>cf) 진부분집합</strong>: 집합 A가 집합 B의 부분집합이면서 B와 같지 않은 경우</p>
+</blockquote>
+<h4 id="제3정규형-3nf">제3정규형 (3NF)
+</h4><p>2NF를 만족하면서, <strong>이행적 함수 종속을 제거</strong>해야 함<br>
+즉, &ldquo;A → B, B → C이면 A → C&quot;처럼 키가 아닌 속성이 다른 일반 속성을 결정하는 관계가 없어야 함</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>[ 위반 — 회원ID → 등급ID → 등급명 (이행적 종속) ]
+</span></span><span style="display:flex;"><span>| 회원ID | 등급ID | 등급명 |
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[ 3NF ]
+</span></span><span style="display:flex;"><span>[회원]: 회원ID, 등급ID
+</span></span><span style="display:flex;"><span>[등급]: 등급ID, 등급명
+</span></span></code></pre></div><h4 id="보이스-코드-정규형-bcnf">보이스-코드 정규형 (BCNF)
+</h4><p>&ldquo;강한 제3정규형&quot;이라고도 함<br>
+3NF를 만족하면서, <strong>모든 결정자가 후보 키</strong>가 되도록 테이블을 분해해야 함<br>
+3NF만으로는 잡히지 않는 일부 이상 현상까지 제거할 수 있음</p>
+<h4 id="제4정규형-4nf">제4정규형 (4NF)
+</h4><p>BCNF를 만족하면서, <strong>다치 종속(multi-valued dependency)</strong> 을 제거해야 함</p>
+<blockquote>
+<p><strong>cf) 다치 종속</strong>: 한 속성이 다른 여러 속성의 <em>값의 집합</em>을 결정하는 관계<br>
+예: 한 학생이 여러 과목을 듣고 여러 동아리에 속할 때, 과목과 동아리가 서로 독립이라면 한 테이블로 묶지 말아야 함</p>
+</blockquote>
+<h4 id="제5정규형-5nf">제5정규형 (5NF)
+</h4><p>4NF를 만족하면서, <strong>조인 종속</strong>이 없어야 함<br>
+테이블을 더 작게 분해한 뒤 다시 조인했을 때 원래 테이블이 손실 없이 복원되도록 분해해야 함</p>
+<h4 id="역정규화-denormalization">역정규화 (Denormalization)
+</h4><p>정규화된 테이블을 의도적으로 낮은 정규화 단계로 되돌리는 작업<br>
+조인 비용을 줄여 <strong>읽기 성능을 끌어올리고 싶을 때</strong> 사용함<br>
+대신 데이터 중복으로 인한 이상 현상의 위험을 다시 떠안게 되므로, 트레이드오프를 신중히 따져야 함</p>
+</div>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Soyeon&#39;s Dev Log
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.748d0acf3bd5d18477b5028b83b70ecfa20eb15aefdff97697a330a2202721bf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
