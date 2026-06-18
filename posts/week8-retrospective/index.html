@@ -320,38 +320,38 @@
 <hr>
 <h2 id="8-결합도와-객체-생성-방식-비교">8. 결합도와 객체 생성 방식 비교
 </h2><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>방식</th>
-          <th>결합도</th>
-          <th>확장/유연성</th>
-          <th>테스트 용이성</th>
-          <th>대표 사례</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>직접 생성</td>
-          <td>강함(Tight)</td>
-          <td>낮음</td>
-          <td>어려움</td>
-          <td><code>new MyObj(...)</code></td>
-      </tr>
-      <tr>
-          <td>팩토리 패턴</td>
-          <td>느슨함(Loose)</td>
-          <td>높음</td>
-          <td>좋음</td>
-          <td><code>new MyObj(factory)</code></td>
-      </tr>
-      <tr>
-          <td>람다/함수식 주입</td>
-          <td>매우 느슨함</td>
-          <td>매우 높음</td>
-          <td>매우 좋음</td>
-          <td>Java 8+ Supplier 등</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>방식</th>
+					<th>결합도</th>
+					<th>확장/유연성</th>
+					<th>테스트 용이성</th>
+					<th>대표 사례</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>직접 생성</td>
+					<td>강함(Tight)</td>
+					<td>낮음</td>
+					<td>어려움</td>
+					<td><code>new MyObj(...)</code></td>
+			</tr>
+			<tr>
+					<td>팩토리 패턴</td>
+					<td>느슨함(Loose)</td>
+					<td>높음</td>
+					<td>좋음</td>
+					<td><code>new MyObj(factory)</code></td>
+			</tr>
+			<tr>
+					<td>람다/함수식 주입</td>
+					<td>매우 느슨함</td>
+					<td>매우 높음</td>
+					<td>매우 좋음</td>
+					<td>Java 8+ Supplier 등</td>
+			</tr>
+	</tbody>
 </table></div>
 <hr>
 <h2 id="9-equals와-hashcode">9. equals와 hashCode
@@ -369,40 +369,40 @@
 <h1 id="디자인-패턴">디자인 패턴
 </h1><h2 id="객체-재사용-패턴">객체 재사용 패턴
 </h2><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>패턴</th>
-          <th>목적</th>
-          <th>특징/주요 역할</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Singleton</td>
-          <td>객체 1개만 생성·재사용</td>
-          <td>전역 인스턴스, 상태 공유</td>
-      </tr>
-      <tr>
-          <td>Flyweight</td>
-          <td>객체 여러 개를 공유해 재사용</td>
-          <td>메모리 절약, 상태 최소화</td>
-      </tr>
-      <tr>
-          <td>Prototype</td>
-          <td>객체 복제(Cloning)</td>
-          <td>clone/factory 기반 효율적 생성</td>
-      </tr>
-      <tr>
-          <td>Builder</td>
-          <td>복잡한 객체 생성</td>
-          <td>선택·필수 매개변수 분리, 조립식 생성</td>
-      </tr>
-      <tr>
-          <td>Iterator</td>
-          <td>컬렉션 순회 책임 분리</td>
-          <td>내부 구조 노출 없이 순회</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>패턴</th>
+					<th>목적</th>
+					<th>특징/주요 역할</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Singleton</td>
+					<td>객체 1개만 생성·재사용</td>
+					<td>전역 인스턴스, 상태 공유</td>
+			</tr>
+			<tr>
+					<td>Flyweight</td>
+					<td>객체 여러 개를 공유해 재사용</td>
+					<td>메모리 절약, 상태 최소화</td>
+			</tr>
+			<tr>
+					<td>Prototype</td>
+					<td>객체 복제(Cloning)</td>
+					<td>clone/factory 기반 효율적 생성</td>
+			</tr>
+			<tr>
+					<td>Builder</td>
+					<td>복잡한 객체 생성</td>
+					<td>선택·필수 매개변수 분리, 조립식 생성</td>
+			</tr>
+			<tr>
+					<td>Iterator</td>
+					<td>컬렉션 순회 책임 분리</td>
+					<td>내부 구조 노출 없이 순회</td>
+			</tr>
+	</tbody>
 </table></div>
 <hr>
 <h2 id="행위--구조-분리-패턴">행위 &amp; 구조 분리 패턴
@@ -424,55 +424,55 @@
 <hr>
 <h2 id="생성구조행위-패턴">생성/구조/행위 패턴
 </h2><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>패턴</th>
-          <th>개념/역할</th>
-          <th>설명·예시</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Factory Method</td>
-          <td>객체 생성 추상화</td>
-          <td>Creator/Factory가 Product 생성 위임</td>
-      </tr>
-      <tr>
-          <td>Abstract Factory</td>
-          <td>객체 집합 생성 팩터리</td>
-          <td>테마별/계열별 제품군 생성, 의존성 교체 용이</td>
-      </tr>
-      <tr>
-          <td>Adapter</td>
-          <td>인터페이스 변환, 호환성 유지</td>
-          <td>구버전 → 신버전 연결</td>
-      </tr>
-      <tr>
-          <td>Proxy</td>
-          <td>대리자 역할, 접근 제어</td>
-          <td>Spring AOP, Lazy Loading</td>
-      </tr>
-      <tr>
-          <td>Composite</td>
-          <td>트리 구조, 전체-부분 계층</td>
-          <td>폴더-파일 구조, UI 구성</td>
-      </tr>
-      <tr>
-          <td>Command</td>
-          <td>요청 캡슐화</td>
-          <td>실행/취소/이력 관리, Runnable, ActionListener</td>
-      </tr>
-      <tr>
-          <td>Observer</td>
-          <td>이벤트 알림</td>
-          <td>MVC 패턴, 이벤트 구독자</td>
-      </tr>
-      <tr>
-          <td>State</td>
-          <td>상태에 따라 행위 변경</td>
-          <td>TCP 연결 상태, 게임 캐릭터 상태 등</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>패턴</th>
+					<th>개념/역할</th>
+					<th>설명·예시</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Factory Method</td>
+					<td>객체 생성 추상화</td>
+					<td>Creator/Factory가 Product 생성 위임</td>
+			</tr>
+			<tr>
+					<td>Abstract Factory</td>
+					<td>객체 집합 생성 팩터리</td>
+					<td>테마별/계열별 제품군 생성, 의존성 교체 용이</td>
+			</tr>
+			<tr>
+					<td>Adapter</td>
+					<td>인터페이스 변환, 호환성 유지</td>
+					<td>구버전 → 신버전 연결</td>
+			</tr>
+			<tr>
+					<td>Proxy</td>
+					<td>대리자 역할, 접근 제어</td>
+					<td>Spring AOP, Lazy Loading</td>
+			</tr>
+			<tr>
+					<td>Composite</td>
+					<td>트리 구조, 전체-부분 계층</td>
+					<td>폴더-파일 구조, UI 구성</td>
+			</tr>
+			<tr>
+					<td>Command</td>
+					<td>요청 캡슐화</td>
+					<td>실행/취소/이력 관리, Runnable, ActionListener</td>
+			</tr>
+			<tr>
+					<td>Observer</td>
+					<td>이벤트 알림</td>
+					<td>MVC 패턴, 이벤트 구독자</td>
+			</tr>
+			<tr>
+					<td>State</td>
+					<td>상태에 따라 행위 변경</td>
+					<td>TCP 연결 상태, 게임 캐릭터 상태 등</td>
+			</tr>
+	</tbody>
 </table></div>
 <hr>
 <h1 id="자료구조">자료구조

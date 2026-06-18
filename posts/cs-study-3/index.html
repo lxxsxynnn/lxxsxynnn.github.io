@@ -303,54 +303,54 @@
 </h3><h4 id="비선점형-스케줄링-non-preemptive"><strong>비선점형 스케줄링 (Non-preemptive)</strong>
 </h4><p>한 프로세스가 CPU를 점유하면 종료되거나 스스로 대기 상태로 전환될 때까지 CPU를 뺏을 수 없는 방식</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: left">알고리즘</th>
-          <th style="text-align: left">특징</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left"><strong>FCFS</strong> (First-Come, First-Served)</td>
-          <td style="text-align: left">먼저 도착한 순서대로 처리. 실행 시간이 긴 프로세스가 앞에 있으면 효율이 떨어지는 <strong>호위 효과(Convoy Effect)</strong> 발생</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>SJF</strong> (Shortest Job First)</td>
-          <td style="text-align: left">실행 시간이 짧은 프로세스 우선 처리. 평균 대기 시간이 가장 짧지만, 긴 작업이 계속 밀리는 <strong>기아 현상</strong> 가능</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>HRRN</strong> (Highest Response Ratio Next)</td>
-          <td style="text-align: left">대기 시간과 실행 시간을 모두 고려하여 우선순위 산정 (SJF의 기아 현상 보완)</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: left">알고리즘</th>
+					<th style="text-align: left">특징</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left"><strong>FCFS</strong> (First-Come, First-Served)</td>
+					<td style="text-align: left">먼저 도착한 순서대로 처리. 실행 시간이 긴 프로세스가 앞에 있으면 효율이 떨어지는 <strong>호위 효과(Convoy Effect)</strong> 발생</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>SJF</strong> (Shortest Job First)</td>
+					<td style="text-align: left">실행 시간이 짧은 프로세스 우선 처리. 평균 대기 시간이 가장 짧지만, 긴 작업이 계속 밀리는 <strong>기아 현상</strong> 가능</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>HRRN</strong> (Highest Response Ratio Next)</td>
+					<td style="text-align: left">대기 시간과 실행 시간을 모두 고려하여 우선순위 산정 (SJF의 기아 현상 보완)</td>
+			</tr>
+	</tbody>
 </table></div>
 <h4 id="선점형-스케줄링-preemptive"><strong>선점형 스케줄링 (Preemptive)</strong>
 </h4><p>운영체제가 강제로 실행 중인 프로세스의 CPU 점유를 중단시키고 다른 프로세스에 할당할 수 있는 방식</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: left">알고리즘</th>
-          <th style="text-align: left">특징</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left"><strong>RR</strong> (Round Robin)</td>
-          <td style="text-align: left">각 프로세스에 동일한 <strong>타임 슬라이스</strong>를 할당. 응답 속도가 빠르지만, 너무 짧으면 문맥 교환 오버헤드가 커짐</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>SRTF</strong> (Shortest Remaining Time First)</td>
-          <td style="text-align: left">잔여 실행 시간이 가장 짧은 프로세스 우선 처리 (SJF의 선점형 버전)</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>MLQ</strong> (Multi-Level Queue)</td>
-          <td style="text-align: left">준비 큐를 여러 개로 나누어 각기 다른 알고리즘 적용 (예: 시스템/대화형/배치 프로세스 분리)</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>MLFQ</strong> (Multi-Level Feedback Queue)</td>
-          <td style="text-align: left">프로세스가 큐 사이를 이동할 수 있게 하여 MLQ의 경직성을 해결하고 유연한 우선순위 부여</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: left">알고리즘</th>
+					<th style="text-align: left">특징</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left"><strong>RR</strong> (Round Robin)</td>
+					<td style="text-align: left">각 프로세스에 동일한 <strong>타임 슬라이스</strong>를 할당. 응답 속도가 빠르지만, 너무 짧으면 문맥 교환 오버헤드가 커짐</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>SRTF</strong> (Shortest Remaining Time First)</td>
+					<td style="text-align: left">잔여 실행 시간이 가장 짧은 프로세스 우선 처리 (SJF의 선점형 버전)</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>MLQ</strong> (Multi-Level Queue)</td>
+					<td style="text-align: left">준비 큐를 여러 개로 나누어 각기 다른 알고리즘 적용 (예: 시스템/대화형/배치 프로세스 분리)</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>MLFQ</strong> (Multi-Level Feedback Queue)</td>
+					<td style="text-align: left">프로세스가 큐 사이를 이동할 수 있게 하여 MLQ의 경직성을 해결하고 유연한 우선순위 부여</td>
+			</tr>
+	</tbody>
 </table></div>
 </div>
 

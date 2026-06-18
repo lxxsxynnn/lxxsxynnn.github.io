@@ -301,68 +301,68 @@
 </ul>
 <h2 id="쓰레드-실행-제어">쓰레드 실행 제어
 </h2><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>메서드</th>
-          <th>설명</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>sleep(long ms)</code></td>
-          <td>지정 시간만큼 쓰레드 일시정지</td>
-      </tr>
-      <tr>
-          <td><code>join()</code></td>
-          <td>지정 쓰레드 작업 완료까지 대기</td>
-      </tr>
-      <tr>
-          <td><code>interrupt()</code></td>
-          <td>일시정지 중인 쓰레드를 깨움</td>
-      </tr>
-      <tr>
-          <td><code>yield()</code></td>
-          <td>CPU를 다른 동등 우선순위 쓰레드에게 양보</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>메서드</th>
+					<th>설명</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>sleep(long ms)</code></td>
+					<td>지정 시간만큼 쓰레드 일시정지</td>
+			</tr>
+			<tr>
+					<td><code>join()</code></td>
+					<td>지정 쓰레드 작업 완료까지 대기</td>
+			</tr>
+			<tr>
+					<td><code>interrupt()</code></td>
+					<td>일시정지 중인 쓰레드를 깨움</td>
+			</tr>
+			<tr>
+					<td><code>yield()</code></td>
+					<td>CPU를 다른 동등 우선순위 쓰레드에게 양보</td>
+			</tr>
+	</tbody>
 </table></div>
 <blockquote>
 <p><code>resume()</code>, <code>suspend()</code>, <code>stop()</code>은 데드락 등 안전 이슈로 사용 불가(Deprecated)[3][5].</p>
 </blockquote>
 <h3 id="쓰레드-상태">쓰레드 상태
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>상태</th>
-          <th>설명</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>NEW</td>
-          <td>쓰레드 생성, 아직 <code>start()</code> 호출 전</td>
-      </tr>
-      <tr>
-          <td>RUNNABLE</td>
-          <td>실행 중 혹은 실행 대기</td>
-      </tr>
-      <tr>
-          <td>BLOCKED</td>
-          <td>락 획득 대기 중</td>
-      </tr>
-      <tr>
-          <td>WAITING</td>
-          <td>무한 대기</td>
-      </tr>
-      <tr>
-          <td>TIMED_WAITING</td>
-          <td>지정된 시간 대기</td>
-      </tr>
-      <tr>
-          <td>TERMINATED</td>
-          <td>실행 종료</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>상태</th>
+					<th>설명</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>NEW</td>
+					<td>쓰레드 생성, 아직 <code>start()</code> 호출 전</td>
+			</tr>
+			<tr>
+					<td>RUNNABLE</td>
+					<td>실행 중 혹은 실행 대기</td>
+			</tr>
+			<tr>
+					<td>BLOCKED</td>
+					<td>락 획득 대기 중</td>
+			</tr>
+			<tr>
+					<td>WAITING</td>
+					<td>무한 대기</td>
+			</tr>
+			<tr>
+					<td>TIMED_WAITING</td>
+					<td>지정된 시간 대기</td>
+			</tr>
+			<tr>
+					<td>TERMINATED</td>
+					<td>실행 종료</td>
+			</tr>
+	</tbody>
 </table></div>
 <h2 id="쓰레드의-동기화">쓰레드의 동기화
 </h2><p>멀티쓰레드 환경에서 <strong>공유 자원</strong> 접근 시 데이터 일관성을 보장하기 위해 동기화 필요</p>
@@ -427,40 +427,40 @@
 <li>ThreadLocal 사용 주의, 풀링 금지</li>
 </ul>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>구분</th>
-          <th>플랫폼 쓰레드</th>
-          <th>가상 쓰레드</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>스케줄러</td>
-          <td>OS</td>
-          <td>JDK</td>
-      </tr>
-      <tr>
-          <td>생성수</td>
-          <td>수십만 개</td>
-          <td>수천만 개</td>
-      </tr>
-      <tr>
-          <td>호출 스택</td>
-          <td>2MB (고정)</td>
-          <td>4KB 이상 (가변)</td>
-      </tr>
-      <tr>
-          <td>생성 시간</td>
-          <td>40us</td>
-          <td>0.4us</td>
-      </tr>
-      <tr>
-          <td>컨텍스트 스위칭</td>
-          <td>10us</td>
-          <td>1us</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>구분</th>
+					<th>플랫폼 쓰레드</th>
+					<th>가상 쓰레드</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>스케줄러</td>
+					<td>OS</td>
+					<td>JDK</td>
+			</tr>
+			<tr>
+					<td>생성수</td>
+					<td>수십만 개</td>
+					<td>수천만 개</td>
+			</tr>
+			<tr>
+					<td>호출 스택</td>
+					<td>2MB (고정)</td>
+					<td>4KB 이상 (가변)</td>
+			</tr>
+			<tr>
+					<td>생성 시간</td>
+					<td>40us</td>
+					<td>0.4us</td>
+			</tr>
+			<tr>
+					<td>컨텍스트 스위칭</td>
+					<td>10us</td>
+					<td>1us</td>
+			</tr>
+	</tbody>
 </table></div>
 <ul>
 <li><strong>컨티뉴에이션, 스택 청크</strong> 기반으로 경량 동작</li>

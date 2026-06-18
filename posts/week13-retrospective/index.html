@@ -323,50 +323,50 @@
 <hr>
 <h2 id="4-용어-및-주요-원리">4. 용어 및 주요 원리
 </h2><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>용어</th>
-          <th>설명</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>커널</td>
-          <td>OS 핵심, 자원·스케줄링·메모리 관리</td>
-      </tr>
-      <tr>
-          <td>셸</td>
-          <td>사용자와 OS간 인터페이스 (명령/그래픽 등)</td>
-      </tr>
-      <tr>
-          <td>프로세스</td>
-          <td>실행중인 프로그램 인스턴스</td>
-      </tr>
-      <tr>
-          <td>스레드</td>
-          <td>프로세스 내 작업 실행 단위</td>
-      </tr>
-      <tr>
-          <td>시스템콜</td>
-          <td>프로그램↔OS 인터페이스용 함수</td>
-      </tr>
-      <tr>
-          <td>드라이버</td>
-          <td>하드웨어↔OS 연동 소프트웨어</td>
-      </tr>
-      <tr>
-          <td>파일 시스템</td>
-          <td>저장·검색·구조화·삭제를 위한 OS 서비스</td>
-      </tr>
-      <tr>
-          <td>가상 메모리</td>
-          <td>실제·논리 메모리 분리, 효율증대</td>
-      </tr>
-      <tr>
-          <td>멀티태스킹</td>
-          <td>여러 앱·프로세스를 동시에 실행</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>용어</th>
+					<th>설명</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>커널</td>
+					<td>OS 핵심, 자원·스케줄링·메모리 관리</td>
+			</tr>
+			<tr>
+					<td>셸</td>
+					<td>사용자와 OS간 인터페이스 (명령/그래픽 등)</td>
+			</tr>
+			<tr>
+					<td>프로세스</td>
+					<td>실행중인 프로그램 인스턴스</td>
+			</tr>
+			<tr>
+					<td>스레드</td>
+					<td>프로세스 내 작업 실행 단위</td>
+			</tr>
+			<tr>
+					<td>시스템콜</td>
+					<td>프로그램↔OS 인터페이스용 함수</td>
+			</tr>
+			<tr>
+					<td>드라이버</td>
+					<td>하드웨어↔OS 연동 소프트웨어</td>
+			</tr>
+			<tr>
+					<td>파일 시스템</td>
+					<td>저장·검색·구조화·삭제를 위한 OS 서비스</td>
+			</tr>
+			<tr>
+					<td>가상 메모리</td>
+					<td>실제·논리 메모리 분리, 효율증대</td>
+			</tr>
+			<tr>
+					<td>멀티태스킹</td>
+					<td>여러 앱·프로세스를 동시에 실행</td>
+			</tr>
+	</tbody>
 </table></div>
 <hr>
 <h2 id="5-os-종류와-특징">5. OS 종류와 특징
@@ -402,46 +402,46 @@
 <hr>
 <h2 id="7-스케줄링-알고리즘">7. 스케줄링 알고리즘
 </h2><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>알고리즘</th>
-          <th>설명</th>
-          <th>장점</th>
-          <th>단점</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>FCFS</td>
-          <td>먼저 온 요청부터 처리</td>
-          <td>구현 단순, 공정함</td>
-          <td>긴 작업이 전체 대기 시간 증가(Convoy 효과)</td>
-      </tr>
-      <tr>
-          <td>SJF</td>
-          <td>실행 시간이 짧은 작업 먼저 처리</td>
-          <td>평균 대기시간 최소화</td>
-          <td>긴 작업이 무한 대기 가능(Starvation)</td>
-      </tr>
-      <tr>
-          <td>Priority</td>
-          <td>우선순위 높은 작업 먼저 처리</td>
-          <td>중요한 작업 우선 수행 가능</td>
-          <td>낮은 우선순위 작업 무한대기 위험</td>
-      </tr>
-      <tr>
-          <td>RR (Round Robin)</td>
-          <td>정해진 시간으로 순환</td>
-          <td>공평한 CPU 시간 분배</td>
-          <td>짧은 시간 할당 시 문맥 전환 과다</td>
-      </tr>
-      <tr>
-          <td>멀티레벨 큐</td>
-          <td>여러 큐로 작업 분리, 각 큐별 스케줄링</td>
-          <td>다양한 우선순위/형태 지원</td>
-          <td>복잡한 관리, 프로세스 이동 정책 필요</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>알고리즘</th>
+					<th>설명</th>
+					<th>장점</th>
+					<th>단점</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>FCFS</td>
+					<td>먼저 온 요청부터 처리</td>
+					<td>구현 단순, 공정함</td>
+					<td>긴 작업이 전체 대기 시간 증가(Convoy 효과)</td>
+			</tr>
+			<tr>
+					<td>SJF</td>
+					<td>실행 시간이 짧은 작업 먼저 처리</td>
+					<td>평균 대기시간 최소화</td>
+					<td>긴 작업이 무한 대기 가능(Starvation)</td>
+			</tr>
+			<tr>
+					<td>Priority</td>
+					<td>우선순위 높은 작업 먼저 처리</td>
+					<td>중요한 작업 우선 수행 가능</td>
+					<td>낮은 우선순위 작업 무한대기 위험</td>
+			</tr>
+			<tr>
+					<td>RR (Round Robin)</td>
+					<td>정해진 시간으로 순환</td>
+					<td>공평한 CPU 시간 분배</td>
+					<td>짧은 시간 할당 시 문맥 전환 과다</td>
+			</tr>
+			<tr>
+					<td>멀티레벨 큐</td>
+					<td>여러 큐로 작업 분리, 각 큐별 스케줄링</td>
+					<td>다양한 우선순위/형태 지원</td>
+					<td>복잡한 관리, 프로세스 이동 정책 필요</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="실무-시스템서버-적용-사례">실무 시스템/서버 적용 사례
 </h3><ul>

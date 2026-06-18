@@ -314,34 +314,34 @@
 </ul>
 <p><strong>Arrays 유틸리티</strong></p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>메서드</th>
-          <th>설명</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>copyOf(), copyOfRange()</td>
-          <td>배열 복사</td>
-      </tr>
-      <tr>
-          <td>fill(), setAll()</td>
-          <td>배열 채우기</td>
-      </tr>
-      <tr>
-          <td>sort(), binarySearch()</td>
-          <td>배열 정렬/검색 (정렬 후 검색해야 정확)</td>
-      </tr>
-      <tr>
-          <td>toString(), equals(), compare(), mismatch()</td>
-          <td>배열 출력/비교/정렬/불일치 인덱스 반환</td>
-      </tr>
-      <tr>
-          <td>asList()</td>
-          <td>배열을 List로 변환</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>메서드</th>
+					<th>설명</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>copyOf(), copyOfRange()</td>
+					<td>배열 복사</td>
+			</tr>
+			<tr>
+					<td>fill(), setAll()</td>
+					<td>배열 채우기</td>
+			</tr>
+			<tr>
+					<td>sort(), binarySearch()</td>
+					<td>배열 정렬/검색 (정렬 후 검색해야 정확)</td>
+			</tr>
+			<tr>
+					<td>toString(), equals(), compare(), mismatch()</td>
+					<td>배열 출력/비교/정렬/불일치 인덱스 반환</td>
+			</tr>
+			<tr>
+					<td>asList()</td>
+					<td>배열을 List로 변환</td>
+			</tr>
+	</tbody>
 </table></div>
 <p><strong>Comparator &amp; Comparable</strong></p>
 <ul>
@@ -448,34 +448,34 @@ Box fruitBox = new Box();
 </ul>
 <p><strong>주요 메서드</strong></p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>메서드</th>
-          <th>설명</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>getDeclaringClass()</td>
-          <td>열거형의 Class 객체 반환</td>
-      </tr>
-      <tr>
-          <td>name()</td>
-          <td>상수 이름 반환</td>
-      </tr>
-      <tr>
-          <td>ordinal()</td>
-          <td>정의 순서(0부터) 반환</td>
-      </tr>
-      <tr>
-          <td>valueOf(Class, String)</td>
-          <td>이름으로 상수 반환</td>
-      </tr>
-      <tr>
-          <td>values()</td>
-          <td>모든 상수 배열 반환</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>메서드</th>
+					<th>설명</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>getDeclaringClass()</td>
+					<td>열거형의 Class 객체 반환</td>
+			</tr>
+			<tr>
+					<td>name()</td>
+					<td>상수 이름 반환</td>
+			</tr>
+			<tr>
+					<td>ordinal()</td>
+					<td>정의 순서(0부터) 반환</td>
+			</tr>
+			<tr>
+					<td>valueOf(Class, String)</td>
+					<td>이름으로 상수 반환</td>
+			</tr>
+			<tr>
+					<td>values()</td>
+					<td>모든 상수 배열 반환</td>
+			</tr>
+	</tbody>
 </table></div>
 <p><strong>멤버 추가</strong></p>
 <pre tabindex="0"><code>enum Direction {
@@ -542,45 +542,45 @@ non-sealed class Rectangle extends Shape {}
 <li><strong>쓰레드</strong>: 프로세스 내에서 실행되는 작업 흐름의 단위</li>
 </ul>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>구분</th>
-          <th>프로세스(Process)</th>
-          <th>쓰레드(Thread)</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>정의</td>
-          <td>실행 중인 프로그램(독립적 작업 단위)</td>
-          <td>프로세스 내 실행 흐름(작업 단위)</td>
-      </tr>
-      <tr>
-          <td>메모리</td>
-          <td>독립적(코드, 데이터, 힙, 스택 모두 별도)</td>
-          <td>코드/데이터/힙 공유, 스택만 독립</td>
-      </tr>
-      <tr>
-          <td>자원</td>
-          <td>자체 소유, 다른 프로세스와 공유 불가</td>
-          <td>같은 프로세스 내에서 자원 공유</td>
-      </tr>
-      <tr>
-          <td>통신</td>
-          <td>IPC 등 별도 방식 필요</td>
-          <td>간단(공유 변수 등)</td>
-      </tr>
-      <tr>
-          <td>오버헤드</td>
-          <td>크고 무거움</td>
-          <td>가볍고 빠름</td>
-      </tr>
-      <tr>
-          <td>안정성</td>
-          <td>하나 종료돼도 다른 프로세스 영향 없음</td>
-          <td>하나 오류 시 전체 프로세스 영향 가능</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>구분</th>
+					<th>프로세스(Process)</th>
+					<th>쓰레드(Thread)</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>정의</td>
+					<td>실행 중인 프로그램(독립적 작업 단위)</td>
+					<td>프로세스 내 실행 흐름(작업 단위)</td>
+			</tr>
+			<tr>
+					<td>메모리</td>
+					<td>독립적(코드, 데이터, 힙, 스택 모두 별도)</td>
+					<td>코드/데이터/힙 공유, 스택만 독립</td>
+			</tr>
+			<tr>
+					<td>자원</td>
+					<td>자체 소유, 다른 프로세스와 공유 불가</td>
+					<td>같은 프로세스 내에서 자원 공유</td>
+			</tr>
+			<tr>
+					<td>통신</td>
+					<td>IPC 등 별도 방식 필요</td>
+					<td>간단(공유 변수 등)</td>
+			</tr>
+			<tr>
+					<td>오버헤드</td>
+					<td>크고 무거움</td>
+					<td>가볍고 빠름</td>
+			</tr>
+			<tr>
+					<td>안정성</td>
+					<td>하나 종료돼도 다른 프로세스 영향 없음</td>
+					<td>하나 오류 시 전체 프로세스 영향 가능</td>
+			</tr>
+	</tbody>
 </table></div>
 <p><strong>멀티태스킹 vs 멀티쓰레딩</strong></p>
 <ul>
@@ -673,68 +673,68 @@ t.start();
 </ul>
 <p><strong>쓰레드 실행 제어</strong></p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>메서드</th>
-          <th>설명</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>static void sleep()</code></td>
-          <td>지정 시간 동안 쓰레드 일시 정지</td>
-      </tr>
-      <tr>
-          <td><code>void join()</code></td>
-          <td>지정 시간 동안 쓰레드가 실행되도록 함</td>
-      </tr>
-      <tr>
-          <td><code>interrupt()</code></td>
-          <td>쓰레드 작업 취소(정지 요청, sleep/join 상태 깨움)</td>
-      </tr>
-      <tr>
-          <td><code>static void yield()</code></td>
-          <td>실행 시간 양보, 실행 대기 상태로 전환</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>메서드</th>
+					<th>설명</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>static void sleep()</code></td>
+					<td>지정 시간 동안 쓰레드 일시 정지</td>
+			</tr>
+			<tr>
+					<td><code>void join()</code></td>
+					<td>지정 시간 동안 쓰레드가 실행되도록 함</td>
+			</tr>
+			<tr>
+					<td><code>interrupt()</code></td>
+					<td>쓰레드 작업 취소(정지 요청, sleep/join 상태 깨움)</td>
+			</tr>
+			<tr>
+					<td><code>static void yield()</code></td>
+					<td>실행 시간 양보, 실행 대기 상태로 전환</td>
+			</tr>
+	</tbody>
 </table></div>
 <blockquote>
 <p>resume(), stop(), suspend()는 데드락 위험으로 deprecated</p>
 </blockquote>
 <p><strong>쓰레드의 상태</strong></p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>상태</th>
-          <th>설명</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>NEW</td>
-          <td>생성, start() 미호출</td>
-      </tr>
-      <tr>
-          <td>RUNNABLE</td>
-          <td>실행 중 또는 실행 가능</td>
-      </tr>
-      <tr>
-          <td>BLOCKED</td>
-          <td>동기화 블록에 의해 일시 정지(lock 대기)</td>
-      </tr>
-      <tr>
-          <td>WAITING</td>
-          <td>실행 가능하지 않은 일시 정지(조건 대기 등)</td>
-      </tr>
-      <tr>
-          <td>TIMED_WAITING</td>
-          <td>지정 시간 동안 일시 정지</td>
-      </tr>
-      <tr>
-          <td>TERMINATED</td>
-          <td>작업 종료</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>상태</th>
+					<th>설명</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>NEW</td>
+					<td>생성, start() 미호출</td>
+			</tr>
+			<tr>
+					<td>RUNNABLE</td>
+					<td>실행 중 또는 실행 가능</td>
+			</tr>
+			<tr>
+					<td>BLOCKED</td>
+					<td>동기화 블록에 의해 일시 정지(lock 대기)</td>
+			</tr>
+			<tr>
+					<td>WAITING</td>
+					<td>실행 가능하지 않은 일시 정지(조건 대기 등)</td>
+			</tr>
+			<tr>
+					<td>TIMED_WAITING</td>
+					<td>지정 시간 동안 일시 정지</td>
+			</tr>
+			<tr>
+					<td>TERMINATED</td>
+					<td>작업 종료</td>
+			</tr>
+	</tbody>
 </table></div>
 <br>
 <h2 id="마무리">마무리

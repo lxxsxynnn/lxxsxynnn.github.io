@@ -267,38 +267,38 @@
 </blockquote>
 <h4 id="주요-플래그flag"><strong>주요 플래그(Flag)</strong>
 </h4><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>플래그</th>
-          <th>의미</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>SYN</strong></td>
-          <td>연결 생성 요청 (Synchronize)</td>
-      </tr>
-      <tr>
-          <td><strong>ACK</strong></td>
-          <td>데이터 수신 확인 (Acknowledge)</td>
-      </tr>
-      <tr>
-          <td><strong>FIN</strong></td>
-          <td>연결 종료 요청 (Finish)</td>
-      </tr>
-      <tr>
-          <td><strong>RST</strong></td>
-          <td>연결 재설정 (Reset)</td>
-      </tr>
-      <tr>
-          <td><strong>PSH</strong></td>
-          <td>빠른 응답이 필요한 데이터 즉시 전송 (Push)</td>
-      </tr>
-      <tr>
-          <td><strong>URG</strong></td>
-          <td>우선순위가 높은 긴급 데이터 전송 (Urgent)</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>플래그</th>
+					<th>의미</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>SYN</strong></td>
+					<td>연결 생성 요청 (Synchronize)</td>
+			</tr>
+			<tr>
+					<td><strong>ACK</strong></td>
+					<td>데이터 수신 확인 (Acknowledge)</td>
+			</tr>
+			<tr>
+					<td><strong>FIN</strong></td>
+					<td>연결 종료 요청 (Finish)</td>
+			</tr>
+			<tr>
+					<td><strong>RST</strong></td>
+					<td>연결 재설정 (Reset)</td>
+			</tr>
+			<tr>
+					<td><strong>PSH</strong></td>
+					<td>빠른 응답이 필요한 데이터 즉시 전송 (Push)</td>
+			</tr>
+			<tr>
+					<td><strong>URG</strong></td>
+					<td>우선순위가 높은 긴급 데이터 전송 (Urgent)</td>
+			</tr>
+	</tbody>
 </table></div>
 <h4 id="3-way-handshake-연결-수립"><strong>3-way Handshake (연결 수립)</strong>
 </h4><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>   [ 송신부 (Client) ]                          [ 수신부 (Server) ]
@@ -496,55 +496,55 @@
 <hr>
 <h3 id="5-tcp-vs-udp-비교">5. TCP vs UDP 비교
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>구분</th>
-          <th>TCP</th>
-          <th>UDP</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>연결 방식</strong></td>
-          <td>연결형 (3-way 핸드셰이크)</td>
-          <td>비연결형</td>
-      </tr>
-      <tr>
-          <td><strong>패킷 교환 방식</strong></td>
-          <td>가상 회선 방식</td>
-          <td>데이터그램 방식</td>
-      </tr>
-      <tr>
-          <td><strong>전송 순서</strong></td>
-          <td>보장</td>
-          <td>보장하지 않음</td>
-      </tr>
-      <tr>
-          <td><strong>수신 여부 확인</strong></td>
-          <td>O</td>
-          <td>X</td>
-      </tr>
-      <tr>
-          <td><strong>통신 방식</strong></td>
-          <td>1:1</td>
-          <td>1:1, 1:N, N:N</td>
-      </tr>
-      <tr>
-          <td><strong>신뢰성</strong></td>
-          <td>높음</td>
-          <td>낮음</td>
-      </tr>
-      <tr>
-          <td><strong>속도</strong></td>
-          <td>느림</td>
-          <td>빠름</td>
-      </tr>
-      <tr>
-          <td><strong>사용 예시</strong></td>
-          <td>웹(HTTP), 이메일, 파일 전송</td>
-          <td>영상 스트리밍, 온라인 게임, DNS</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>구분</th>
+					<th>TCP</th>
+					<th>UDP</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>연결 방식</strong></td>
+					<td>연결형 (3-way 핸드셰이크)</td>
+					<td>비연결형</td>
+			</tr>
+			<tr>
+					<td><strong>패킷 교환 방식</strong></td>
+					<td>가상 회선 방식</td>
+					<td>데이터그램 방식</td>
+			</tr>
+			<tr>
+					<td><strong>전송 순서</strong></td>
+					<td>보장</td>
+					<td>보장하지 않음</td>
+			</tr>
+			<tr>
+					<td><strong>수신 여부 확인</strong></td>
+					<td>O</td>
+					<td>X</td>
+			</tr>
+			<tr>
+					<td><strong>통신 방식</strong></td>
+					<td>1:1</td>
+					<td>1:1, 1:N, N:N</td>
+			</tr>
+			<tr>
+					<td><strong>신뢰성</strong></td>
+					<td>높음</td>
+					<td>낮음</td>
+			</tr>
+			<tr>
+					<td><strong>속도</strong></td>
+					<td>느림</td>
+					<td>빠름</td>
+			</tr>
+			<tr>
+					<td><strong>사용 예시</strong></td>
+					<td>웹(HTTP), 이메일, 파일 전송</td>
+					<td>영상 스트리밍, 온라인 게임, DNS</td>
+			</tr>
+	</tbody>
 </table></div>
 <hr>
 <h3 id="6-udp의-오류-검출-체크섬">6. UDP의 오류 검출 (체크섬)

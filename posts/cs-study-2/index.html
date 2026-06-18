@@ -315,35 +315,35 @@
 <li><strong>병렬성(Parallelism)</strong>: 멀티 코어에서 작업을 동시 처리 (물리적 동시)</li>
 </ul>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th style="text-align: left">구분</th>
-          <th style="text-align: left">멀티 프로세스</th>
-          <th style="text-align: left">멀티 스레드</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left"><strong>안정성</strong></td>
-          <td style="text-align: left">높음 (한 프로세스 고장이 파급되지 않음)</td>
-          <td style="text-align: left">낮음 (한 스레드 오류가 프로세스 전체 영향)</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>자원 효율</strong></td>
-          <td style="text-align: left">낮음 (개별 메모리 할당으로 비용 높음)</td>
-          <td style="text-align: left">높음 (메모리 공유로 자원 절약)</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>콘텍스트 스위칭</strong></td>
-          <td style="text-align: left">무거움 (메모리 영역 교체 오버헤드 큼)</td>
-          <td style="text-align: left">가벼움 (공유 자원이 많아 전환 빠름)</td>
-      </tr>
-      <tr>
-          <td style="text-align: left"><strong>통신(IPC)</strong></td>
-          <td style="text-align: left">복잡함 (별도 통신 메커니즘 필요)</td>
-          <td style="text-align: left">단순함 (공유 메모리 직접 접근)</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: left">구분</th>
+					<th style="text-align: left">멀티 프로세스</th>
+					<th style="text-align: left">멀티 스레드</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left"><strong>안정성</strong></td>
+					<td style="text-align: left">높음 (한 프로세스 고장이 파급되지 않음)</td>
+					<td style="text-align: left">낮음 (한 스레드 오류가 프로세스 전체 영향)</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>자원 효율</strong></td>
+					<td style="text-align: left">낮음 (개별 메모리 할당으로 비용 높음)</td>
+					<td style="text-align: left">높음 (메모리 공유로 자원 절약)</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>콘텍스트 스위칭</strong></td>
+					<td style="text-align: left">무거움 (메모리 영역 교체 오버헤드 큼)</td>
+					<td style="text-align: left">가벼움 (공유 자원이 많아 전환 빠름)</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>통신(IPC)</strong></td>
+					<td style="text-align: left">복잡함 (별도 통신 메커니즘 필요)</td>
+					<td style="text-align: left">단순함 (공유 메모리 직접 접근)</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="6-문맥-교환-context-switching">6. 문맥 교환 (Context Switching)
 </h3><p><strong>문맥 교환</strong>: 인터럽트 발생 시 현재 프로세스 상태를 PCB에 저장하고 새 프로세스의 PCB 정보를 로드하는 과정</p>
