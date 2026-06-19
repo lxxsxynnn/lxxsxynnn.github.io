@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="1. 요약 데이터베이스 여러 사용자와 프로그램이 공유해 사용하기 위해 저장·관리하는 데이터의 집합 구성 요소: 개체(Entity): 데이터로 표현하려는 대상 속성(Attribute): 개체의 특성이나 상태 관계(Relationship): 개체 사이의 관계 관계형 데이터베이스 테이블을 이용해 데이터의 구조와 종속성을 나타내는 데이터베이스 주요 용어: 스키마: 데이터의 구조·표현 방식·제약 조건을 정의한 전체적인 틀 릴레이션: 데이터를 표현하는 개념적 모델 테이블: 릴레이션을 행과 열로 실제 구현한 것 튜플(레코드): 테이블의 행에 해당하는 데이터 묶음 속성(필드): 테이블의 열로, 이름과 타입을 가짐 NoSQL 데이터베이스 비관계형 데이터베이스: 정해진 스키마 없이 다양한 형태의 데이터를 저장 특징: 대용량 데이터 조회가 빠르고 수평적 확장에 유리함 키 키: 튜플을 구분하기 위한 속성 또는 속성의 집합 (유일성·최소성을 기준으로 나뉨) 슈퍼 키: 유일성은 만족하지만 최소성은 따지지 않는 키 후보 키: 유일성과 최소성을 모두 만족하는 키 기본 키: 후보 키 중 대표로 선정한 키 (NULL 값 불가) 대체 키: 기본 키로 선택되지 않은 나머지 후보 키 외래 키: 다른 테이블의 기본 키를 참조하는 키 무결성 무결성: 데이터베이스의 데이터가 현실과 일치하는 정확성과 일관성 개체 무결성: 기본 키는 NULL 값을 가질 수 없음 도메인 무결성: 속성 값은 정해진 도메인(범위) 안에 있어야 함 참조 무결성: 외래 키 값은 참조하는 기본 키 값과 같거나 NULL이어야 함 인덱스 인덱스: 속성 값과 튜플이 저장된 주소를 함께 저장해 검색 성능을 높이는 자료구조 장점: 정렬된 상태를 유지해 데이터 검색 속도가 빠름 단점: 인덱스를 저장할 별도의 공간이 필요함 데이터 추가·수정·삭제 시 인덱스도 갱신해야 해 쓰기가 느림 삭제 시 인덱스에 값이 남아 불필요한 데이터가 쌓일 수 있음 구현 방식: 해시 테이블 인덱스: 등호(=) 연산만 가능 B+ 트리 인덱스: 비교 연산과 범위 검색까지 가능 트랜잭션 트랜잭션: 데이터베이스의 상태를 바꾸기 위해 수행하는 작업의 단위 특성(ACID): 원자성, 일관성, 격리성(독립성), 영속성 TCL: 트랜잭션을 제어하는 명령어 COMMIT: 정상 종료 후 변경 사항을 반영 ROLLBACK: 비정상 종료 시 이전 상태로 되돌림 SAVEPOINT: 롤백할 수 있는 특정 지점을 지정 락 락(Lock): 트랜잭션의 처리 순서를 보장해 무결성을 유지하는 잠금 장치 공유 락(읽기): 여러 공유 락이 동시에 접근 가능 배타 락(쓰기): 하나가 점유 중이면 다른 락은 접근 불가 트랜잭션 교착 상태 교착 상태(Deadlock): 두 트랜잭션이 서로 상대가 점유한 락을 요청하며 무한 대기에 빠진 상태 예방 기법: 필요한 락을 미리 모두 획득 회피 기법: 트랜잭션 순서에 따라 락을 양보·종료 (wait-die, wound-wait) 이상 이상(Anomaly): 속성 간 종속이나 데이터 중복 때문에 발생하는 문제 삽입 이상: 의도하지 않은 데이터가 함께 삽입됨 갱신 이상: 일부 튜플만 갱신되어 데이터 모순 발생 삭제 이상: 의도하지 않은 데이터까지 삭제됨 정규화 정규화: 이상 현상을 해결하기 위해 테이블을 분해하는 과정\n">
+<title>[CS 스터디] 면접 대비 2</title>
+
+<link rel='canonical' href='http://localhost:1313/posts/cs-study-17/'>
+
+<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="[CS 스터디] 면접 대비 2">
+<meta property='og:description' content="1. 요약 데이터베이스 여러 사용자와 프로그램이 공유해 사용하기 위해 저장·관리하는 데이터의 집합 구성 요소: 개체(Entity): 데이터로 표현하려는 대상 속성(Attribute): 개체의 특성이나 상태 관계(Relationship): 개체 사이의 관계 관계형 데이터베이스 테이블을 이용해 데이터의 구조와 종속성을 나타내는 데이터베이스 주요 용어: 스키마: 데이터의 구조·표현 방식·제약 조건을 정의한 전체적인 틀 릴레이션: 데이터를 표현하는 개념적 모델 테이블: 릴레이션을 행과 열로 실제 구현한 것 튜플(레코드): 테이블의 행에 해당하는 데이터 묶음 속성(필드): 테이블의 열로, 이름과 타입을 가짐 NoSQL 데이터베이스 비관계형 데이터베이스: 정해진 스키마 없이 다양한 형태의 데이터를 저장 특징: 대용량 데이터 조회가 빠르고 수평적 확장에 유리함 키 키: 튜플을 구분하기 위한 속성 또는 속성의 집합 (유일성·최소성을 기준으로 나뉨) 슈퍼 키: 유일성은 만족하지만 최소성은 따지지 않는 키 후보 키: 유일성과 최소성을 모두 만족하는 키 기본 키: 후보 키 중 대표로 선정한 키 (NULL 값 불가) 대체 키: 기본 키로 선택되지 않은 나머지 후보 키 외래 키: 다른 테이블의 기본 키를 참조하는 키 무결성 무결성: 데이터베이스의 데이터가 현실과 일치하는 정확성과 일관성 개체 무결성: 기본 키는 NULL 값을 가질 수 없음 도메인 무결성: 속성 값은 정해진 도메인(범위) 안에 있어야 함 참조 무결성: 외래 키 값은 참조하는 기본 키 값과 같거나 NULL이어야 함 인덱스 인덱스: 속성 값과 튜플이 저장된 주소를 함께 저장해 검색 성능을 높이는 자료구조 장점: 정렬된 상태를 유지해 데이터 검색 속도가 빠름 단점: 인덱스를 저장할 별도의 공간이 필요함 데이터 추가·수정·삭제 시 인덱스도 갱신해야 해 쓰기가 느림 삭제 시 인덱스에 값이 남아 불필요한 데이터가 쌓일 수 있음 구현 방식: 해시 테이블 인덱스: 등호(=) 연산만 가능 B+ 트리 인덱스: 비교 연산과 범위 검색까지 가능 트랜잭션 트랜잭션: 데이터베이스의 상태를 바꾸기 위해 수행하는 작업의 단위 특성(ACID): 원자성, 일관성, 격리성(독립성), 영속성 TCL: 트랜잭션을 제어하는 명령어 COMMIT: 정상 종료 후 변경 사항을 반영 ROLLBACK: 비정상 종료 시 이전 상태로 되돌림 SAVEPOINT: 롤백할 수 있는 특정 지점을 지정 락 락(Lock): 트랜잭션의 처리 순서를 보장해 무결성을 유지하는 잠금 장치 공유 락(읽기): 여러 공유 락이 동시에 접근 가능 배타 락(쓰기): 하나가 점유 중이면 다른 락은 접근 불가 트랜잭션 교착 상태 교착 상태(Deadlock): 두 트랜잭션이 서로 상대가 점유한 락을 요청하며 무한 대기에 빠진 상태 예방 기법: 필요한 락을 미리 모두 획득 회피 기법: 트랜잭션 순서에 따라 락을 양보·종료 (wait-die, wound-wait) 이상 이상(Anomaly): 속성 간 종속이나 데이터 중복 때문에 발생하는 문제 삽입 이상: 의도하지 않은 데이터가 함께 삽입됨 갱신 이상: 일부 튜플만 갱신되어 데이터 모순 발생 삭제 이상: 의도하지 않은 데이터까지 삭제됨 정규화 정규화: 이상 현상을 해결하기 위해 테이블을 분해하는 과정\n">
+<meta property='og:url' content='http://localhost:1313/posts/cs-study-17/'>
+<meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2026-06-12T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-06-12T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="[CS 스터디] 면접 대비 2">
+<meta name="twitter:description" content="1. 요약 데이터베이스 여러 사용자와 프로그램이 공유해 사용하기 위해 저장·관리하는 데이터의 집합 구성 요소: 개체(Entity): 데이터로 표현하려는 대상 속성(Attribute): 개체의 특성이나 상태 관계(Relationship): 개체 사이의 관계 관계형 데이터베이스 테이블을 이용해 데이터의 구조와 종속성을 나타내는 데이터베이스 주요 용어: 스키마: 데이터의 구조·표현 방식·제약 조건을 정의한 전체적인 틀 릴레이션: 데이터를 표현하는 개념적 모델 테이블: 릴레이션을 행과 열로 실제 구현한 것 튜플(레코드): 테이블의 행에 해당하는 데이터 묶음 속성(필드): 테이블의 열로, 이름과 타입을 가짐 NoSQL 데이터베이스 비관계형 데이터베이스: 정해진 스키마 없이 다양한 형태의 데이터를 저장 특징: 대용량 데이터 조회가 빠르고 수평적 확장에 유리함 키 키: 튜플을 구분하기 위한 속성 또는 속성의 집합 (유일성·최소성을 기준으로 나뉨) 슈퍼 키: 유일성은 만족하지만 최소성은 따지지 않는 키 후보 키: 유일성과 최소성을 모두 만족하는 키 기본 키: 후보 키 중 대표로 선정한 키 (NULL 값 불가) 대체 키: 기본 키로 선택되지 않은 나머지 후보 키 외래 키: 다른 테이블의 기본 키를 참조하는 키 무결성 무결성: 데이터베이스의 데이터가 현실과 일치하는 정확성과 일관성 개체 무결성: 기본 키는 NULL 값을 가질 수 없음 도메인 무결성: 속성 값은 정해진 도메인(범위) 안에 있어야 함 참조 무결성: 외래 키 값은 참조하는 기본 키 값과 같거나 NULL이어야 함 인덱스 인덱스: 속성 값과 튜플이 저장된 주소를 함께 저장해 검색 성능을 높이는 자료구조 장점: 정렬된 상태를 유지해 데이터 검색 속도가 빠름 단점: 인덱스를 저장할 별도의 공간이 필요함 데이터 추가·수정·삭제 시 인덱스도 갱신해야 해 쓰기가 느림 삭제 시 인덱스에 값이 남아 불필요한 데이터가 쌓일 수 있음 구현 방식: 해시 테이블 인덱스: 등호(=) 연산만 가능 B+ 트리 인덱스: 비교 연산과 범위 검색까지 가능 트랜잭션 트랜잭션: 데이터베이스의 상태를 바꾸기 위해 수행하는 작업의 단위 특성(ACID): 원자성, 일관성, 격리성(독립성), 영속성 TCL: 트랜잭션을 제어하는 명령어 COMMIT: 정상 종료 후 변경 사항을 반영 ROLLBACK: 비정상 종료 시 이전 상태로 되돌림 SAVEPOINT: 롤백할 수 있는 특정 지점을 지정 락 락(Lock): 트랜잭션의 처리 순서를 보장해 무결성을 유지하는 잠금 장치 공유 락(읽기): 여러 공유 락이 동시에 접근 가능 배타 락(쓰기): 하나가 점유 중이면 다른 락은 접근 불가 트랜잭션 교착 상태 교착 상태(Deadlock): 두 트랜잭션이 서로 상대가 점유한 락을 요청하며 무한 대기에 빠진 상태 예방 기법: 필요한 락을 미리 모두 획득 회피 기법: 트랜잭션 순서에 따라 락을 양보·종료 (wait-die, wound-wait) 이상 이상(Anomaly): 속성 간 종속이나 데이터 중복 때문에 발생하는 문제 삽입 이상: 의도하지 않은 데이터가 함께 삽입됨 갱신 이상: 일부 튜플만 갱신되어 데이터 모순 발생 삭제 이상: 의도하지 않은 데이터까지 삭제됨 정규화 정규화: 이상 현상을 해결하기 위해 테이블을 분해하는 과정\n"><link rel="alternate" type="application/json" href="http://localhost:1313/posts/cs-study-17/index.json">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/../assets/avatar_hu_c27af72c615ceedd.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Soyeon&#39;s Dev Log</a></h1>
+            <h2 class="site-description">백엔드 개발자 지망생의 기록</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-code" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="7 8 3 12 7 16" /><polyline points="17 8 21 12 17 16" /><line x1="14" y1="4" x2="10" y2="20" /></svg>
+                
+                <span>코딩테스트</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/cs/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><line x1="3" y1="6" x2="3" y2="19" /><line x1="12" y1="6" x2="12" y2="19" /><line x1="21" y1="6" x2="21" y2="19" /></svg>
+                
+                <span>CS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="4" y="5" width="16" height="16" rx="2" /><line x1="16" y1="3" x2="16" y2="7" /><line x1="8" y1="3" x2="8" y2="7" /><line x1="4" y1="11" x2="20" y2="11" /><rect x="8" y1="15" width="2" height="2" /></svg>
+                
+                <span>주간회고</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>검색</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>다크 모드</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/cs/" style="background-color: #e9c46a; color: #fff;">
+                CS
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/cs-study-17/">[CS 스터디] 면접 대비 2</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-06-12</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="1-요약">1. 요약
+</h3><h4 id="데이터베이스">데이터베이스
+</h4><ul>
+<li>여러 사용자와 프로그램이 공유해 사용하기 위해 저장·관리하는 데이터의 집합</li>
+<li><strong>구성 요소</strong>:
+<ul>
+<li><strong>개체(Entity)</strong>: 데이터로 표현하려는 대상</li>
+<li><strong>속성(Attribute)</strong>: 개체의 특성이나 상태</li>
+<li><strong>관계(Relationship)</strong>: 개체 사이의 관계</li>
+</ul>
+</li>
+</ul>
+<h4 id="관계형-데이터베이스">관계형 데이터베이스
+</h4><ul>
+<li>테이블을 이용해 데이터의 구조와 종속성을 나타내는 데이터베이스</li>
+<li><strong>주요 용어</strong>:
+<ul>
+<li><strong>스키마</strong>: 데이터의 구조·표현 방식·제약 조건을 정의한 전체적인 틀</li>
+<li><strong>릴레이션</strong>: 데이터를 표현하는 개념적 모델</li>
+<li><strong>테이블</strong>: 릴레이션을 행과 열로 실제 구현한 것</li>
+<li><strong>튜플(레코드)</strong>: 테이블의 행에 해당하는 데이터 묶음</li>
+<li><strong>속성(필드)</strong>: 테이블의 열로, 이름과 타입을 가짐</li>
+</ul>
+</li>
+</ul>
+<h4 id="nosql-데이터베이스">NoSQL 데이터베이스
+</h4><ul>
+<li><strong>비관계형 데이터베이스</strong>: 정해진 스키마 없이 다양한 형태의 데이터를 저장</li>
+<li><strong>특징</strong>: 대용량 데이터 조회가 빠르고 수평적 확장에 유리함</li>
+</ul>
+<h4 id="키">키
+</h4><ul>
+<li><strong>키</strong>: 튜플을 구분하기 위한 속성 또는 속성의 집합 (유일성·최소성을 기준으로 나뉨)</li>
+<li><strong>슈퍼 키</strong>: 유일성은 만족하지만 최소성은 따지지 않는 키</li>
+<li><strong>후보 키</strong>: 유일성과 최소성을 모두 만족하는 키</li>
+<li><strong>기본 키</strong>: 후보 키 중 대표로 선정한 키 (NULL 값 불가)</li>
+<li><strong>대체 키</strong>: 기본 키로 선택되지 않은 나머지 후보 키</li>
+<li><strong>외래 키</strong>: 다른 테이블의 기본 키를 참조하는 키</li>
+</ul>
+<h4 id="무결성">무결성
+</h4><ul>
+<li><strong>무결성</strong>: 데이터베이스의 데이터가 현실과 일치하는 정확성과 일관성</li>
+<li><strong>개체 무결성</strong>: 기본 키는 NULL 값을 가질 수 없음</li>
+<li><strong>도메인 무결성</strong>: 속성 값은 정해진 도메인(범위) 안에 있어야 함</li>
+<li><strong>참조 무결성</strong>: 외래 키 값은 참조하는 기본 키 값과 같거나 NULL이어야 함</li>
+</ul>
+<h4 id="인덱스">인덱스
+</h4><ul>
+<li><strong>인덱스</strong>: 속성 값과 튜플이 저장된 주소를 함께 저장해 검색 성능을 높이는 자료구조</li>
+<li><strong>장점</strong>: 정렬된 상태를 유지해 데이터 검색 속도가 빠름</li>
+<li><strong>단점</strong>:
+<ul>
+<li>인덱스를 저장할 별도의 공간이 필요함</li>
+<li>데이터 추가·수정·삭제 시 인덱스도 갱신해야 해 쓰기가 느림</li>
+<li>삭제 시 인덱스에 값이 남아 불필요한 데이터가 쌓일 수 있음</li>
+</ul>
+</li>
+<li><strong>구현 방식</strong>:
+<ul>
+<li><strong>해시 테이블 인덱스</strong>: 등호(<code>=</code>) 연산만 가능</li>
+<li><strong>B+ 트리 인덱스</strong>: 비교 연산과 범위 검색까지 가능</li>
+</ul>
+</li>
+</ul>
+<h4 id="트랜잭션">트랜잭션
+</h4><ul>
+<li><strong>트랜잭션</strong>: 데이터베이스의 상태를 바꾸기 위해 수행하는 작업의 단위</li>
+<li><strong>특성(ACID)</strong>: 원자성, 일관성, 격리성(독립성), 영속성</li>
+<li><strong>TCL</strong>: 트랜잭션을 제어하는 명령어
+<ul>
+<li><strong>COMMIT</strong>: 정상 종료 후 변경 사항을 반영</li>
+<li><strong>ROLLBACK</strong>: 비정상 종료 시 이전 상태로 되돌림</li>
+<li><strong>SAVEPOINT</strong>: 롤백할 수 있는 특정 지점을 지정</li>
+</ul>
+</li>
+</ul>
+<h4 id="락">락
+</h4><ul>
+<li><strong>락(Lock)</strong>: 트랜잭션의 처리 순서를 보장해 무결성을 유지하는 잠금 장치</li>
+<li><strong>공유 락(읽기)</strong>: 여러 공유 락이 동시에 접근 가능</li>
+<li><strong>배타 락(쓰기)</strong>: 하나가 점유 중이면 다른 락은 접근 불가</li>
+</ul>
+<h4 id="트랜잭션-교착-상태">트랜잭션 교착 상태
+</h4><ul>
+<li><strong>교착 상태(Deadlock)</strong>: 두 트랜잭션이 서로 상대가 점유한 락을 요청하며 무한 대기에 빠진 상태</li>
+<li><strong>예방 기법</strong>: 필요한 락을 미리 모두 획득</li>
+<li><strong>회피 기법</strong>: 트랜잭션 순서에 따라 락을 양보·종료 (wait-die, wound-wait)</li>
+</ul>
+<h4 id="이상">이상
+</h4><ul>
+<li><strong>이상(Anomaly)</strong>: 속성 간 종속이나 데이터 중복 때문에 발생하는 문제</li>
+<li><strong>삽입 이상</strong>: 의도하지 않은 데이터가 함께 삽입됨</li>
+<li><strong>갱신 이상</strong>: 일부 튜플만 갱신되어 데이터 모순 발생</li>
+<li><strong>삭제 이상</strong>: 의도하지 않은 데이터까지 삭제됨</li>
+</ul>
+<h4 id="정규화">정규화
+</h4><ul>
+<li>
+<p><strong>정규화</strong>: 이상 현상을 해결하기 위해 테이블을 분해하는 과정</p>
+</li>
+<li>
+<p><strong>주의</strong>: 필요 이상으로 진행하면 테이블이 많아져 조인 연산 비용이 늘 수 있음</p>
+</li>
+<li>
+<p><strong>정규화 단계</strong>: 각 단계는 아래 종속을 제거하며 다음 정규형으로 넘어감</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>변환</th>
+					<th>제거하는 종속·조건</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>비정규형 → <strong>1NF</strong></td>
+					<td>원자 값이 아닌 속성 값 분해</td>
+			</tr>
+			<tr>
+					<td>1NF → <strong>2NF</strong></td>
+					<td>부분 함수 종속 제거</td>
+			</tr>
+			<tr>
+					<td>2NF → <strong>3NF</strong></td>
+					<td>이행적 종속 제거</td>
+			</tr>
+			<tr>
+					<td>3NF → <strong>BCNF</strong></td>
+					<td>결정자이면서 후보 키가 아닌 속성 제거</td>
+			</tr>
+			<tr>
+					<td>BCNF → <strong>4NF</strong></td>
+					<td>다치 종속 제거</td>
+			</tr>
+			<tr>
+					<td>4NF → <strong>5NF</strong></td>
+					<td>조인 종속 제거</td>
+			</tr>
+	</tbody>
+</table></div>
+<blockquote>
+<p>4NF·5NF는 고급 정규형으로, 실무에서는 보통 BCNF까지를 다룸</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="조인">조인
+</h4><ul>
+<li><strong>조인</strong>: 여러 테이블을 합쳐 원하는 데이터를 얻는 작업</li>
+<li><strong>내부 조인(Inner Join)</strong>: 두 테이블에서 공통 속성 값을 가진 데이터만 조회</li>
+<li><strong>외부 조인(Outer Join)</strong>: 조건에 맞지 않는 데이터까지 포함해 조회 (왼쪽·오른쪽·완전 외부 조인)</li>
+</ul>
+<hr>
+<h3 id="2-면접-대비-qa">2. 면접 대비 (Q&amp;A)
+</h3><details>
+<summary><b>데이터베이스를 이용해 개발해 본 경험이 있나요?</b></summary>
+<p>프로젝트를 개발할 때 데이터를 저장하고 관리하기 위해 데이터베이스를 사용했습니다.<br>
+회원, 게시글 등 도메인을 테이블로 설계하고 SQL 또는 ORM을 통해 데이터를 조회·저장했습니다.</p>
+</details>
+<details>
+<summary><b>NoSQL이 무엇인지 관계형 데이터베이스와 비교해 설명해보세요.</b></summary>
+<p>NoSQL은 비관계형 데이터베이스로, 테이블 형태의 정해진 스키마에 얽매이지 않고 다양한 형태의 데이터를 저장할 수 있습니다.<br>
+관계형 데이터베이스는 정해진 스키마와 테이블 구조를 사용해 데이터의 일관성과 무결성을 보장하지만,<br>
+NoSQL은 스키마가 유연하고 수평적 확장성이 좋아 대용량 데이터 조회 시 속도가 빠릅니다.<br>
+정합성이 중요한 경우에는 관계형 데이터베이스를, 대용량·고성능 처리가 중요한 경우에는 NoSQL을 선택합니다.</p>
+</details>
+<details>
+<summary><b>데이터베이스에서 슈퍼 키와 후보 키의 차이점을 설명해보세요.</b></summary>
+<p>둘 다 튜플을 식별하기 위한 키입니다.<br>
+슈퍼 키는 튜플을 유일하게 식별할 수 있는 유일성만 만족하면 되고, 최소성은 만족하지 않아도 됩니다.<br>
+반면 후보 키는 유일성과 함께 식별에 꼭 필요한 속성만으로 구성되는 최소성까지 만족해야 합니다.<br>
+즉, 후보 키는 최소성을 만족하는 슈퍼 키라고 할 수 있습니다.</p>
+</details>
+<details>
+<summary><b>데이터베이스의 무결성에 관해 설명해보세요.</b></summary>
+<p>무결성은 데이터베이스의 데이터가 현실의 데이터와 일치하는 정확성과 일관성을 의미합니다.<br>
+대표적으로 모든 테이블이 NULL이 아닌 기본 키를 가져야 하는 개체 무결성,<br>
+속성 값이 정해진 도메인에 속해야 하는 도메인 무결성,<br>
+외래 키 값이 참조하는 테이블의 기본 키 값과 같거나 NULL이어야 하는 참조 무결성이 있습니다.</p>
+</details>
+<details>
+<summary><b>인덱스가 무엇인가요?</b></summary>
+<p>인덱스는 튜플 검색 성능을 높이기 위해 속성 값과 해당 튜플이 저장된 주소를 함께 저장하는 자료구조입니다.<br>
+정렬된 상태를 유지하기 때문에 데이터 검색 속도가 빨라집니다.<br>
+다만 별도의 저장 공간이 필요하고, 데이터의 추가·수정·삭제 시 인덱스도 갱신해야 하므로 쓰기 성능이 떨어진다는 단점이 있습니다.</p>
+</details>
+<details>
+<summary><b>ORM을 사용해 본 경험이 있는지, 있다면 왜 ORM을 사용했는지 설명해 주세요.</b></summary>
+<p>JPA와 MyBatis를 사용해 본 경험이 있습니다.<br>
+ORM은 객체와 관계형 데이터베이스의 테이블을 매핑해 SQL을 직접 작성하지 않고도 객체 중심으로 데이터를 다룰 수 있게 해줍니다.<br>
+반복적인 CRUD 코드를 줄이고 생산성을 높일 수 있으며, 데이터베이스에 종속되지 않는 코드를 작성할 수 있어 사용했습니다.</p>
+</details>
+<details>
+<summary><b>데이터베이스의 트랜잭션 수행 과정 중 오류가 발생하면 어떻게 처리해야 할까요?</b></summary>
+<p>트랜잭션은 원자성을 가지므로, 수행 도중 오류가 발생하면 ROLLBACK을 통해 트랜잭션을 비정상 종료하고<br>
+데이터베이스를 트랜잭션 시작 이전 상태로 되돌려야 합니다.<br>
+모든 작업이 정상적으로 끝난 경우에만 COMMIT으로 변경 사항을 반영합니다.<br>
+이렇게 해서 작업이 모두 반영되거나 전혀 반영되지 않는 &lsquo;All or Nothing&rsquo;을 보장합니다.</p>
+</details>
+<details>
+<summary><b>데이터베이스에서 락은 무엇인가요?</b></summary>
+<p>락은 여러 트랜잭션이 동시에 같은 데이터에 접근할 때 처리 순서를 보장해 데이터베이스의 무결성을 유지하기 위한 잠금 장치입니다.<br>
+읽기를 위한 공유 락은 여러 트랜잭션이 동시에 접근할 수 있지만, 수정을 위한 배타 락은 하나의 트랜잭션이 처리 중이면 다른 락이 동시에 접근할 수 없습니다.</p>
+</details>
+<details>
+<summary><b>데이터베이스의 교착 상태를 설명해보세요.</b></summary>
+<p>교착 상태는 두 개 이상의 트랜잭션이 서로가 가진 데이터의 락을 요청하면서 무한 대기에 빠지는 현상입니다.<br>
+즉, 각 트랜잭션이 락을 가진 채 상대방이 가진 락을 기다려 어느 쪽도 진행하지 못하는 상태입니다.<br>
+해결 방법으로는 필요한 데이터의 락을 미리 모두 획득하는 예방 기법과<br>
+wait-die·wound-wait처럼 트랜잭션 순서에 따라 락을 양보하거나 종료시키는 회피 기법이 있습니다.</p>
+</details>
+<details>
+<summary><b>데이터베이스의 이상 현상이란 무엇이며 어떻게 해결할 수 있나요?</b></summary>
+<p>이상 현상은 속성 간 종속이나 데이터 중복 때문에 트랜잭션 처리 중 발생하는 문제로<br>
+의도하지 않은 데이터가 삽입되는 삽입 이상, 일부 튜플만 갱신되어 모순이 생기는 갱신 이상,<br>
+의도하지 않은 데이터가 삭제되는 삭제 이상이 있습니다.<br>
+이러한 이상 현상은 테이블을 분해하는 정규화를 통해 해결할 수 있습니다.</p>
+</details>
+<details>
+<summary><b>인덱스를 사용 중일 때 데이터를 삭제하면 발생할 수 있는 문제는 무엇인가요?</b></summary>
+<p>데이터를 삭제해도 인덱스 테이블에는 해당 값이 바로 제거되지 않고 남는 경우가 있어<br>
+불필요한 데이터가 인덱스에 누적될 수 있습니다.<br>
+이로 인해 인덱스의 크기가 커지고 검색 효율이 떨어질 수 있어<br>
+주기적으로 인덱스를 재구성(rebuild)해 정리해 주어야 합니다.</p>
+</details>
+<details>
+<summary><b>인덱스를 구현하는 방식에는 무엇이 있나요?</b></summary>
+<p>대표적으로 해시 테이블 인덱스와 B+ 트리 인덱스가 있습니다.<br>
+해시 테이블 인덱스는 해시 값을 이용하므로 등호(=) 연산에만 사용할 수 있어 정확히 일치하는 값을 찾는 데 빠릅니다.<br>
+B+- 트리 인덱스는 데이터가 정렬되어 있어 부등호 같은 비교 연산이나 범위 검색에 사용할 수 있습니다.</p>
+</details>
+<details>
+<summary><b>데이터베이스의 조인 연산 중 INNER JOIN과 OUTER JOIN의 차이점은 무엇인가요?</b></summary>
+<p>INNER JOIN은 두 개 이상의 테이블에서 조인 조건을 만족하는, 즉 공통되는 속성 값을 가진 데이터만 조회합니다.<br>
+반면 OUTER JOIN은 조인 조건을 만족하지 않아 짝이 없는 데이터까지 포함해 조회하며<br>
+어느 쪽 테이블을 기준으로 하느냐에 따라 왼쪽 외부 조인, 오른쪽 외부 조인, 완전 외부 조인으로 나뉩니다.</p>
+</details>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Soyeon&#39;s Dev Log
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.748d0acf3bd5d18477b5028b83b70ecfa20eb15aefdff97697a330a2202721bf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
