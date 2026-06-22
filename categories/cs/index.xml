@@ -6,7 +6,350 @@
         <description>Recent content in CS on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Thu, 18 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/cs/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 22 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/cs/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[CS 스터디] 복잡도</title>
+        <link>http://localhost:1313/posts/cs-study-18/</link>
+        <pubDate>Mon, 22 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/cs-study-18/</guid>
+        <description>&lt;h3 id=&#34;1-복잡도와-빅오-표기법&#34;&gt;1. 복잡도와 빅오 표기법
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;알고리즘을 수행할 때 자원을 낭비하지 않으려면 효율적으로 짜야 함&lt;/li&gt;
+&lt;li&gt;이때 &lt;strong&gt;얼마나 효율적인지 정량화&lt;/strong&gt;하는 데 시간 복잡도와 공간 복잡도를 사용함
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;시간 복잡도&lt;/strong&gt;: 알고리즘의 실행 시간을 정량화&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;공간 복잡도&lt;/strong&gt;: 실행하는 데 필요한 메모리 사용량을 정량화&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;빅오big-o-표기법&#34;&gt;빅오(Big-O) 표기법
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;입력 값(n)에 대한 수식에서 &lt;strong&gt;최고차항을 기준&lt;/strong&gt;으로 표현한 &lt;strong&gt;최악의 시간 복잡도&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;계수와 상수항은 무시하고 최고차항만으로 표현
+&lt;ul&gt;
+&lt;li&gt;예) &lt;code&gt;2n² + 3n + 1&lt;/code&gt; → &lt;strong&gt;O(n²)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;점근적-표기법&#34;&gt;점근적 표기법
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;입력 크기가 충분히 클 때의 증가율을 기준으로 복잡도를 표현하는 방법&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;표기법&lt;/th&gt;
+					&lt;th&gt;의미&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;빅오(O)&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;최악의 경우&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;빅세타(Θ)&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;평균의 경우&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;빅오메가(Ω)&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;최선의 경우&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;대표적인-시간-복잡도-빠른-순&#34;&gt;대표적인 시간 복잡도 (빠른 순)
+&lt;/h4&gt;&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;복잡도&lt;/th&gt;
+					&lt;th&gt;명칭&lt;/th&gt;
+					&lt;th&gt;예시&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;O(1)&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;상수&lt;/td&gt;
+					&lt;td&gt;배열 인덱스 접근&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;O(log n)&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;로그&lt;/td&gt;
+					&lt;td&gt;이진 탐색&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;O(n)&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;선형&lt;/td&gt;
+					&lt;td&gt;단순 반복문 순회&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;O(n log n)&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;선형 로그&lt;/td&gt;
+					&lt;td&gt;병합 정렬, 퀵 정렬(평균)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;O(n²)&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;이차&lt;/td&gt;
+					&lt;td&gt;이중 반복문&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;O(2ⁿ)&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;지수&lt;/td&gt;
+					&lt;td&gt;부분집합 완전탐색&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;O(n!)&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;팩토리얼&lt;/td&gt;
+					&lt;td&gt;순열 완전탐색&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
+        <title>[CS 스터디] 면접 대비 2</title>
+        <link>http://localhost:1313/posts/cs-study-17/</link>
+        <pubDate>Fri, 19 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/cs-study-17/</guid>
+        <description>&lt;h3 id=&#34;1-요약&#34;&gt;1. 요약
+&lt;/h3&gt;&lt;h4 id=&#34;데이터베이스&#34;&gt;데이터베이스
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;여러 사용자와 프로그램이 공유해 사용하기 위해 저장·관리하는 데이터의 집합&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;구성 요소&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;개체(Entity)&lt;/strong&gt;: 데이터로 표현하려는 대상&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;속성(Attribute)&lt;/strong&gt;: 개체의 특성이나 상태&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;관계(Relationship)&lt;/strong&gt;: 개체 사이의 관계&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;관계형-데이터베이스&#34;&gt;관계형 데이터베이스
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;테이블을 이용해 데이터의 구조와 종속성을 나타내는 데이터베이스&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;주요 용어&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;스키마&lt;/strong&gt;: 데이터의 구조·표현 방식·제약 조건을 정의한 전체적인 틀&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;릴레이션&lt;/strong&gt;: 데이터를 표현하는 개념적 모델&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;테이블&lt;/strong&gt;: 릴레이션을 행과 열로 실제 구현한 것&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;튜플(레코드)&lt;/strong&gt;: 테이블의 행에 해당하는 데이터 묶음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;속성(필드)&lt;/strong&gt;: 테이블의 열로, 이름과 타입을 가짐&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;nosql-데이터베이스&#34;&gt;NoSQL 데이터베이스
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;비관계형 데이터베이스&lt;/strong&gt;: 정해진 스키마 없이 다양한 형태의 데이터를 저장&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;특징&lt;/strong&gt;: 대용량 데이터 조회가 빠르고 수평적 확장에 유리함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;키&#34;&gt;키
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;키&lt;/strong&gt;: 튜플을 구분하기 위한 속성 또는 속성의 집합 (유일성·최소성을 기준으로 나뉨)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;슈퍼 키&lt;/strong&gt;: 유일성은 만족하지만 최소성은 따지지 않는 키&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;후보 키&lt;/strong&gt;: 유일성과 최소성을 모두 만족하는 키&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;기본 키&lt;/strong&gt;: 후보 키 중 대표로 선정한 키 (NULL 값 불가)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;대체 키&lt;/strong&gt;: 기본 키로 선택되지 않은 나머지 후보 키&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;외래 키&lt;/strong&gt;: 다른 테이블의 기본 키를 참조하는 키&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;무결성&#34;&gt;무결성
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;무결성&lt;/strong&gt;: 데이터베이스의 데이터가 현실과 일치하는 정확성과 일관성&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;개체 무결성&lt;/strong&gt;: 기본 키는 NULL 값을 가질 수 없음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;도메인 무결성&lt;/strong&gt;: 속성 값은 정해진 도메인(범위) 안에 있어야 함&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;참조 무결성&lt;/strong&gt;: 외래 키 값은 참조하는 기본 키 값과 같거나 NULL이어야 함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;인덱스&#34;&gt;인덱스
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;인덱스&lt;/strong&gt;: 속성 값과 튜플이 저장된 주소를 함께 저장해 검색 성능을 높이는 자료구조&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;장점&lt;/strong&gt;: 정렬된 상태를 유지해 데이터 검색 속도가 빠름&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;단점&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;인덱스를 저장할 별도의 공간이 필요함&lt;/li&gt;
+&lt;li&gt;데이터 추가·수정·삭제 시 인덱스도 갱신해야 해 쓰기가 느림&lt;/li&gt;
+&lt;li&gt;삭제 시 인덱스에 값이 남아 불필요한 데이터가 쌓일 수 있음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;구현 방식&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;해시 테이블 인덱스&lt;/strong&gt;: 등호(&lt;code&gt;=&lt;/code&gt;) 연산만 가능&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;B+ 트리 인덱스&lt;/strong&gt;: 비교 연산과 범위 검색까지 가능&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;트랜잭션&#34;&gt;트랜잭션
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;트랜잭션&lt;/strong&gt;: 데이터베이스의 상태를 바꾸기 위해 수행하는 작업의 단위&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;특성(ACID)&lt;/strong&gt;: 원자성, 일관성, 격리성(독립성), 영속성&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;TCL&lt;/strong&gt;: 트랜잭션을 제어하는 명령어
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;COMMIT&lt;/strong&gt;: 정상 종료 후 변경 사항을 반영&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ROLLBACK&lt;/strong&gt;: 비정상 종료 시 이전 상태로 되돌림&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SAVEPOINT&lt;/strong&gt;: 롤백할 수 있는 특정 지점을 지정&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;락&#34;&gt;락
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;락(Lock)&lt;/strong&gt;: 트랜잭션의 처리 순서를 보장해 무결성을 유지하는 잠금 장치&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;공유 락(읽기)&lt;/strong&gt;: 여러 공유 락이 동시에 접근 가능&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;배타 락(쓰기)&lt;/strong&gt;: 하나가 점유 중이면 다른 락은 접근 불가&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;트랜잭션-교착-상태&#34;&gt;트랜잭션 교착 상태
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;교착 상태(Deadlock)&lt;/strong&gt;: 두 트랜잭션이 서로 상대가 점유한 락을 요청하며 무한 대기에 빠진 상태&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;예방 기법&lt;/strong&gt;: 필요한 락을 미리 모두 획득&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;회피 기법&lt;/strong&gt;: 트랜잭션 순서에 따라 락을 양보·종료 (wait-die, wound-wait)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;이상&#34;&gt;이상
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;이상(Anomaly)&lt;/strong&gt;: 속성 간 종속이나 데이터 중복 때문에 발생하는 문제&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;삽입 이상&lt;/strong&gt;: 의도하지 않은 데이터가 함께 삽입됨&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;갱신 이상&lt;/strong&gt;: 일부 튜플만 갱신되어 데이터 모순 발생&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;삭제 이상&lt;/strong&gt;: 의도하지 않은 데이터까지 삭제됨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;정규화&#34;&gt;정규화
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;정규화&lt;/strong&gt;: 이상 현상을 해결하기 위해 테이블을 분해하는 과정&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;주의&lt;/strong&gt;: 필요 이상으로 진행하면 테이블이 많아져 조인 연산 비용이 늘 수 있음&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;정규화 단계&lt;/strong&gt;: 각 단계는 아래 종속을 제거하며 다음 정규형으로 넘어감&lt;/p&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;변환&lt;/th&gt;
+					&lt;th&gt;제거하는 종속·조건&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;비정규형 → &lt;strong&gt;1NF&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;원자 값이 아닌 속성 값 분해&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;1NF → &lt;strong&gt;2NF&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;부분 함수 종속 제거&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;2NF → &lt;strong&gt;3NF&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;이행적 종속 제거&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;3NF → &lt;strong&gt;BCNF&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;결정자이면서 후보 키가 아닌 속성 제거&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;BCNF → &lt;strong&gt;4NF&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;다치 종속 제거&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;4NF → &lt;strong&gt;5NF&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;조인 종속 제거&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;4NF·5NF는 고급 정규형으로, 실무에서는 보통 BCNF까지를 다룸&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;조인&#34;&gt;조인
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;조인&lt;/strong&gt;: 여러 테이블을 합쳐 원하는 데이터를 얻는 작업&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;내부 조인(Inner Join)&lt;/strong&gt;: 두 테이블에서 공통 속성 값을 가진 데이터만 조회&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;외부 조인(Outer Join)&lt;/strong&gt;: 조건에 맞지 않는 데이터까지 포함해 조회 (왼쪽·오른쪽·완전 외부 조인)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;2-면접-대비-qa&#34;&gt;2. 면접 대비 (Q&amp;amp;A)
+&lt;/h3&gt;&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;데이터베이스를 이용해 개발해 본 경험이 있나요?&lt;/b&gt;&lt;/summary&gt;
+&lt;p&gt;프로젝트를 개발할 때 데이터를 저장하고 관리하기 위해 데이터베이스를 사용했습니다.&lt;br&gt;
+회원, 게시글 등 도메인을 테이블로 설계하고 SQL 또는 ORM을 통해 데이터를 조회·저장했습니다.&lt;/p&gt;
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;NoSQL이 무엇인지 관계형 데이터베이스와 비교해 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+&lt;p&gt;NoSQL은 비관계형 데이터베이스로, 테이블 형태의 정해진 스키마에 얽매이지 않고 다양한 형태의 데이터를 저장할 수 있습니다.&lt;br&gt;
+관계형 데이터베이스는 정해진 스키마와 테이블 구조를 사용해 데이터의 일관성과 무결성을 보장하지만,&lt;br&gt;
+NoSQL은 스키마가 유연하고 수평적 확장성이 좋아 대용량 데이터 조회 시 속도가 빠릅니다.&lt;br&gt;
+정합성이 중요한 경우에는 관계형 데이터베이스를, 대용량·고성능 처리가 중요한 경우에는 NoSQL을 선택합니다.&lt;/p&gt;
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;데이터베이스에서 슈퍼 키와 후보 키의 차이점을 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+&lt;p&gt;둘 다 튜플을 식별하기 위한 키입니다.&lt;br&gt;
+슈퍼 키는 튜플을 유일하게 식별할 수 있는 유일성만 만족하면 되고, 최소성은 만족하지 않아도 됩니다.&lt;br&gt;
+반면 후보 키는 유일성과 함께 식별에 꼭 필요한 속성만으로 구성되는 최소성까지 만족해야 합니다.&lt;br&gt;
+즉, 후보 키는 최소성을 만족하는 슈퍼 키라고 할 수 있습니다.&lt;/p&gt;
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;데이터베이스의 무결성에 관해 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+&lt;p&gt;무결성은 데이터베이스의 데이터가 현실의 데이터와 일치하는 정확성과 일관성을 의미합니다.&lt;br&gt;
+대표적으로 모든 테이블이 NULL이 아닌 기본 키를 가져야 하는 개체 무결성,&lt;br&gt;
+속성 값이 정해진 도메인에 속해야 하는 도메인 무결성,&lt;br&gt;
+외래 키 값이 참조하는 테이블의 기본 키 값과 같거나 NULL이어야 하는 참조 무결성이 있습니다.&lt;/p&gt;
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;인덱스가 무엇인가요?&lt;/b&gt;&lt;/summary&gt;
+&lt;p&gt;인덱스는 튜플 검색 성능을 높이기 위해 속성 값과 해당 튜플이 저장된 주소를 함께 저장하는 자료구조입니다.&lt;br&gt;
+정렬된 상태를 유지하기 때문에 데이터 검색 속도가 빨라집니다.&lt;br&gt;
+다만 별도의 저장 공간이 필요하고, 데이터의 추가·수정·삭제 시 인덱스도 갱신해야 하므로 쓰기 성능이 떨어진다는 단점이 있습니다.&lt;/p&gt;
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;ORM을 사용해 본 경험이 있는지, 있다면 왜 ORM을 사용했는지 설명해 주세요.&lt;/b&gt;&lt;/summary&gt;
+&lt;p&gt;JPA와 MyBatis를 사용해 본 경험이 있습니다.&lt;br&gt;
+ORM은 객체와 관계형 데이터베이스의 테이블을 매핑해 SQL을 직접 작성하지 않고도 객체 중심으로 데이터를 다룰 수 있게 해줍니다.&lt;br&gt;
+반복적인 CRUD 코드를 줄이고 생산성을 높일 수 있으며, 데이터베이스에 종속되지 않는 코드를 작성할 수 있어 사용했습니다.&lt;/p&gt;
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;데이터베이스의 트랜잭션 수행 과정 중 오류가 발생하면 어떻게 처리해야 할까요?&lt;/b&gt;&lt;/summary&gt;
+&lt;p&gt;트랜잭션은 원자성을 가지므로, 수행 도중 오류가 발생하면 ROLLBACK을 통해 트랜잭션을 비정상 종료하고&lt;br&gt;
+데이터베이스를 트랜잭션 시작 이전 상태로 되돌려야 합니다.&lt;br&gt;
+모든 작업이 정상적으로 끝난 경우에만 COMMIT으로 변경 사항을 반영합니다.&lt;br&gt;
+이렇게 해서 작업이 모두 반영되거나 전혀 반영되지 않는 &amp;lsquo;All or Nothing&amp;rsquo;을 보장합니다.&lt;/p&gt;
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;데이터베이스에서 락은 무엇인가요?&lt;/b&gt;&lt;/summary&gt;
+&lt;p&gt;락은 여러 트랜잭션이 동시에 같은 데이터에 접근할 때 처리 순서를 보장해 데이터베이스의 무결성을 유지하기 위한 잠금 장치입니다.&lt;br&gt;
+읽기를 위한 공유 락은 여러 트랜잭션이 동시에 접근할 수 있지만, 수정을 위한 배타 락은 하나의 트랜잭션이 처리 중이면 다른 락이 동시에 접근할 수 없습니다.&lt;/p&gt;
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;데이터베이스의 교착 상태를 설명해보세요.&lt;/b&gt;&lt;/summary&gt;
+&lt;p&gt;교착 상태는 두 개 이상의 트랜잭션이 서로가 가진 데이터의 락을 요청하면서 무한 대기에 빠지는 현상입니다.&lt;br&gt;
+즉, 각 트랜잭션이 락을 가진 채 상대방이 가진 락을 기다려 어느 쪽도 진행하지 못하는 상태입니다.&lt;br&gt;
+해결 방법으로는 필요한 데이터의 락을 미리 모두 획득하는 예방 기법과&lt;br&gt;
+wait-die·wound-wait처럼 트랜잭션 순서에 따라 락을 양보하거나 종료시키는 회피 기법이 있습니다.&lt;/p&gt;
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;데이터베이스의 이상 현상이란 무엇이며 어떻게 해결할 수 있나요?&lt;/b&gt;&lt;/summary&gt;
+&lt;p&gt;이상 현상은 속성 간 종속이나 데이터 중복 때문에 트랜잭션 처리 중 발생하는 문제로&lt;br&gt;
+의도하지 않은 데이터가 삽입되는 삽입 이상, 일부 튜플만 갱신되어 모순이 생기는 갱신 이상,&lt;br&gt;
+의도하지 않은 데이터가 삭제되는 삭제 이상이 있습니다.&lt;br&gt;
+이러한 이상 현상은 테이블을 분해하는 정규화를 통해 해결할 수 있습니다.&lt;/p&gt;
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;인덱스를 사용 중일 때 데이터를 삭제하면 발생할 수 있는 문제는 무엇인가요?&lt;/b&gt;&lt;/summary&gt;
+&lt;p&gt;데이터를 삭제해도 인덱스 테이블에는 해당 값이 바로 제거되지 않고 남는 경우가 있어&lt;br&gt;
+불필요한 데이터가 인덱스에 누적될 수 있습니다.&lt;br&gt;
+이로 인해 인덱스의 크기가 커지고 검색 효율이 떨어질 수 있어&lt;br&gt;
+주기적으로 인덱스를 재구성(rebuild)해 정리해 주어야 합니다.&lt;/p&gt;
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;인덱스를 구현하는 방식에는 무엇이 있나요?&lt;/b&gt;&lt;/summary&gt;
+&lt;p&gt;대표적으로 해시 테이블 인덱스와 B+ 트리 인덱스가 있습니다.&lt;br&gt;
+해시 테이블 인덱스는 해시 값을 이용하므로 등호(=) 연산에만 사용할 수 있어 정확히 일치하는 값을 찾는 데 빠릅니다.&lt;br&gt;
+B+- 트리 인덱스는 데이터가 정렬되어 있어 부등호 같은 비교 연산이나 범위 검색에 사용할 수 있습니다.&lt;/p&gt;
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;데이터베이스의 조인 연산 중 INNER JOIN과 OUTER JOIN의 차이점은 무엇인가요?&lt;/b&gt;&lt;/summary&gt;
+&lt;p&gt;INNER JOIN은 두 개 이상의 테이블에서 조인 조건을 만족하는, 즉 공통되는 속성 값을 가진 데이터만 조회합니다.&lt;br&gt;
+반면 OUTER JOIN은 조인 조건을 만족하지 않아 짝이 없는 데이터까지 포함해 조회하며&lt;br&gt;
+어느 쪽 테이블을 기준으로 하느냐에 따라 왼쪽 외부 조인, 오른쪽 외부 조인, 완전 외부 조인으로 나뉩니다.&lt;/p&gt;
+&lt;/details&gt;
+</description>
+        </item>
+        <item>
         <title>[CS 스터디] 조인</title>
         <link>http://localhost:1313/posts/cs-study-16/</link>
         <pubDate>Thu, 18 Jun 2026 00:00:00 +0000</pubDate>
@@ -18,8 +361,10 @@
 결과에 포함되는 테이블의 범주에 따라 내부 조인(Inner Join)과 외부 조인(Outer Join) 등으로 나뉨&lt;/p&gt;
 &lt;h4 id=&#34;조인-연산자&#34;&gt;조인 연산자
 &lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;ON&lt;/strong&gt;: 조인 연산에 대한 조건절을 작성할 때 사용하는 연산자로, 각 테이블에서 어떠한 속성을 사용해 연산을 수행할지 나타냄&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;USING&lt;/strong&gt;: 조인 연산을 하려는 테이블에서 속성명이 동일할 때 USING 연산자 뒤에 공통되는 속성명만 작성해 조건을 간단하게 적을 수 있음&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ON&lt;/strong&gt;: 조인 연산에 대한 조건절을 작성할 때 사용하는 연산자&lt;br&gt;
+각 테이블에서 어떠한 속성을 사용해 연산을 수행할지 나타냄&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;USING&lt;/strong&gt;: 조인 연산을 하려는 테이블에서 속성명이 동일할 때 USING 연산자 뒤에&lt;br&gt;
+공통되는 속성명만 작성해 조건을 간단하게 적을 수 있음&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;WHERE&lt;/strong&gt;: 테이블에서 원하는 데이터를 조회하기 위한 조건절을 작성할 때 사용하는 연산자&lt;br&gt;
 조건절에 비교 연산자, IN 연산자, BETWEEN 연산자 등을 사용해 원하는 데이터를 필터링할 수 있음&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;IN&lt;/strong&gt;: WHERE 절과 함께 사용하며, IN 연산자 뒤에 나오는 조건에 하나라도 해당하는 값을 검색함&lt;/li&gt;

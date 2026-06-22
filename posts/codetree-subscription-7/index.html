@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="코드트리 청약통장 7회차: 갭체크부터 트레일 학습, 1일 1코테 루틴까지 7주동안 완주한 후기">
+<title>[코딩테스트] 포기하지 않고 달린 7주, 코드트리 챌린지 완주 후기</title>
+
+<link rel='canonical' href='http://localhost:1313/posts/codetree-subscription-7/'>
+
+<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="[코딩테스트] 포기하지 않고 달린 7주, 코드트리 챌린지 완주 후기">
+<meta property='og:description' content="코드트리 청약통장 7회차: 갭체크부터 트레일 학습, 1일 1코테 루틴까지 7주동안 완주한 후기">
+<meta property='og:url' content='http://localhost:1313/posts/codetree-subscription-7/'>
+<meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:tag' content='코드트리' /><meta property='article:tag' content='코딩테스트' /><meta property='article:tag' content='코테공부' /><meta property='article:tag' content='코딩테스트사이트추천' /><meta property='article:tag' content='공채합격' /><meta property='article:published_time' content='2026-06-22T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-06-22T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="[코딩테스트] 포기하지 않고 달린 7주, 코드트리 챌린지 완주 후기">
+<meta name="twitter:description" content="코드트리 청약통장 7회차: 갭체크부터 트레일 학습, 1일 1코테 루틴까지 7주동안 완주한 후기"><link rel="alternate" type="application/json" href="http://localhost:1313/posts/codetree-subscription-7/index.json">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/../assets/avatar_hu_c27af72c615ceedd.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Soyeon&#39;s Dev Log</a></h1>
+            <h2 class="site-description">백엔드 개발자 지망생의 기록</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-code" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="7 8 3 12 7 16" /><polyline points="17 8 21 12 17 16" /><line x1="14" y1="4" x2="10" y2="20" /></svg>
+                
+                <span>코딩테스트</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/cs/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><line x1="3" y1="6" x2="3" y2="19" /><line x1="12" y1="6" x2="12" y2="19" /><line x1="21" y1="6" x2="21" y2="19" /></svg>
+                
+                <span>CS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="4" y="5" width="16" height="16" rx="2" /><line x1="16" y1="3" x2="16" y2="7" /><line x1="8" y1="3" x2="8" y2="7" /><line x1="4" y1="11" x2="20" y2="11" /><rect x="8" y1="15" width="2" height="2" /></svg>
+                
+                <span>주간회고</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>검색</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>다크 모드</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/" style="background-color: #2a9d8f; color: #fff;">
+                코딩테스트
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/codetree-subscription-7/">[코딩테스트] 포기하지 않고 달린 7주, 코드트리 챌린지 완주 후기</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            코드트리 청약통장 7회차: 갭체크부터 트레일 학습, 1일 1코테 루틴까지 7주동안 완주한 후기
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-06-22</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <blockquote>
+<p><strong>👉 코드트리 바로가기</strong><br>
+<a class="link" href="https://www.codetree.ai"  target="_blank" rel="noopener"
+    >코드트리(Codetree)</a></p>
+</blockquote>
+<hr>
+<h2 id="1-7주를-완주한-나에게">1. 7주를 완주한 나에게
+</h2><p>솔직히 시작할 때만 해도 끝까지 갈 수 있을지 자신이 없었습니다.<br>
+독학으로 하다보니 어려운 부분이 많아질수록 중간에 포기하는 경우가 많았었기 때문이에요.</p>
+<p>하지만 처음 갭체크를 했을 때와 비교하면 많이 성장했다는 게 눈에 보이고<br>
+무엇보다 <strong>하루도 빠지지 않고 잔디를 채웠다</strong>는 게 가장 뿌듯합니다.</p>
+<hr>
+<h2 id="2-시작할-때와-가장-달라진-점">2. 시작할 때와 가장 달라진 점
+</h2><p>가장 크게 달라진 건 <strong>공부하는 방식 자체</strong>였습니다.</p>
+<p>예전에 혼자 코테를 준비할 때는 문제를 풀다 막히면 &ldquo;이게 대체 무슨 유형이지?&rdquo;,<br>
+&ldquo;나는 왜 여기서 막힌 거지?&ldquo;를 <strong>직접 검색해가며 찾아내야</strong> 했습니다.<br>
+유형을 모르니 접근법도 헤매고, 그러다 보면 문제 하나에 반나절을 쓴 적도 있었습니다.</p>
+<p>그런데 코드트리는 <strong>유형과 접근법, 그 밑에 깔린 이론을 먼저 짚어준 뒤</strong> 문제로 넘어갑니다.<br>
+&ldquo;이 문제는 왜 이렇게 접근해야 하는지&quot;를 알고 시작하니 이해가 훨씬 쉬웠고,<br>
+머릿속에 방향이 잡힌 상태에서 코드를 짜니 <strong>구현도 원활했습니다.</strong></p>
+<p>그렇게 유형별 사고가 쌓이니 이제는 문제를 읽으면 &ldquo;이건 시뮬레이션 패턴이네&rdquo;, &ldquo;이건 격자 DFS겠다&rdquo; 하고 <strong>유형이 먼저 보이게 되었습니다.</strong></p>
+<p>수치로도 변화가 보였습니다. 1차 갭체크에서 &lsquo;불안정&rsquo;이던 시뮬레이션 I이 2차에서는 약점 목록에서 아예 사라졌고,<br>
+1차 때 4분 42초가 걸리던 원형 배열 문제를 2차에선 <strong>33초</strong> 만에 풀어냈을 때는 정말 신기했습니다.</p>
+<h3 id="가장-뿌듯했던-순간">가장 뿌듯했던 순간
+</h3><p>5회차 2차 갭체크의 5번 문제였습니다.<br>
+1차 때 20분을 쏟고도 못 풀었던 그 유형을, 이번엔 느려도 <strong>끝까지 풀어냈습니다.</strong><br>
+문제를 보고 막연해하다가 포기했었는데 몇주만에 같은 문제를 보고 손이 먼저 움직이게 됐습니다.</p>
+<hr>
+<h2 id="3-그만두고-싶었던-고비-그리고-넘긴-비결">3. 그만두고 싶었던 고비, 그리고 넘긴 비결
+</h2><p>입사 지원 일정이랑 기존에 하고 있던 CS 스터디 분량이 겹치는 주에는 코테 풀 시간이 도저히 안 났고<br>
+테스트에 통과해서 문제를 제출했는데 엣지케이스에서 틀리는 날이면 제자리에 멈춰있다는 생각이 들어 답답했습니다.</p>
+<p>그 고비를 넘긴 저만의 비결은 두 가지였습니다.</p>
+<ol>
+<li><strong>루틴에 기대기</strong> — 코드트리에서 보내주는 알림톡과 깃허브 잔디심기로 고민할 틈 자체를 없앴습니다.</li>
+<li><strong>&lsquo;한 문제만&rsquo;의 법칙</strong> — 도저히 하기 싫은 날엔 딱 한 문제만 풀고 자자고 타협했습니다. 잔디가 끊기는 게 아까워서라도 마저 풀게 되더라고요.</li>
+</ol>
+<p>코드트리에서 통과한 문제가 자동으로 커밋되어 채워지는 잔디밭 — 비어 있지 않은 이 그래프를 보는 재미가 7주를 버티게 해준 가장 큰 힘이었습니다.</p>
+<hr>
+<h2 id="4-앞으로의-코테-학습-계획과-다짐">4. 앞으로의 코테 학습 계획과 다짐
+</h2><p>완주가 끝이 아니라 이제 진짜 시작이라고 생각합니다.</p>
+<ul>
+<li><strong>단기</strong>: 완전탐색 I 안정화 + 완전탐색 II(백트래킹·조합/순열) 손에 붙이기</li>
+<li><strong>중기</strong>: DP 트레일 진입, 코드트리 트레일을 끝까지 따라가 빈 칸 메우기</li>
+<li><strong>최종</strong>: 갭체크 전 영역 &lsquo;안정&rsquo; 달성 → 실전 코딩테스트 합격</li>
+</ul>
+<p>이번 7주로 증명된 게 하나 있습니다. <strong>방향이 맞으면, 꾸준함이 실력이 된다는 것.</strong><br>
+앞으로도 1일 1코테 루틴은 그대로 가져가면서, 3차·4차 갭체크로 비포 &amp; 애프터를 계속 확인해볼 생각입니다.</p>
+<hr>
+<h2 id="5-코드트리에-바라는-점--운영진에게">5. 코드트리에 바라는 점 &amp; 운영진에게
+</h2><p>7주 동안 가장 고마웠던 건 <strong>&ldquo;무엇을 모르는지&quot;를 짚어준 갭체크</strong>와, 약점에 맞춰 바로 이어지는 트레일 학습 경로였습니다.<br>
+혼자였다면 절대 못 짰을 커리큘럼을 따라가기만 하면 됐다는 게 독학자 입장에서 정말 든든했습니다.</p>
+<p>바라는 점이 있다면, 갭체크 재진단 시점을 알림톡으로 살짝 리마인드해 주면 좋겠다는 것 정도입니다.<br>
+공부에 몰입하다 보면 &ldquo;내가 얼마나 늘었나&quot;를 점검할 타이밍을 놓치기 쉬운데, 한 번씩 콕 찍어주면 동기부여가 더 될 것 같아요.</p>
+<p>좋은 학습 환경 만들어주신 운영진분들께 진심으로 감사드립니다. 덕분에 7주동안 꾸준히 공부할 수 있었습니다!</p>
+<hr>
+<h2 id="6-ai-시대에도-알고리즘을-공부해야-하는-이유">6. AI 시대에도 알고리즘을 공부해야 하는 이유
+</h2><p>요즘은 AI에게 물어보면 코드를 뚝딱 만들어주는 시대입니다.<br>
+그래서 &ldquo;알고리즘을 굳이 공부해야 하나?&ldquo;라는 생각이 들 법도 한데, 7주를 보내며 제 결론은 분명해졌습니다.</p>
+<blockquote>
+<p><strong>AI가 짜준 코드의 옳고 그름을 판단하는 건 결국 사람입니다.</strong></p>
+</blockquote>
+<p>4회차 북마크 복습에서 뼈저리게 느낀 게, AI 힌트로 푼 문제는 분명 설명을 들을 땐 이해했는데<br>
+며칠 뒤 빈 화면에서 다시 짜려니 똑같은 곳에서 막혔다는 겁니다.<br>
+<strong>숨은 반례를 의심하고, 시간복잡도를 가늠하고, &ldquo;이게 정말 맞는 풀이인가&quot;를 검증하는 사고력</strong>은<br>
+문제를 직접 손으로 풀어본 사람만 가질 수 있습니다.</p>
+<p>AI는 답을 빠르게 주지만, 그 답을 <strong>읽고 고치고 책임지는</strong> 건 개발자의 몫입니다.<br>
+알고리즘 공부는 코드를 외우는 게 아니라, 문제를 구조로 분해하는 사고의 근육을 키우는 일이라고 생각합니다.<br>
+그 근육은 AI가 대신 길러줄 수 없더라고요.</p>
+<p>#코드트리 #코딩테스트 #코테공부 #완주후기 #개발자취업 #알고리즘공부 #회고 #1일1코테</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%EC%BD%94%EB%93%9C%ED%8A%B8%EB%A6%AC/">코드트리</a>
+        
+            <a href="/tags/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/">코딩테스트</a>
+        
+            <a href="/tags/%EC%BD%94%ED%85%8C%EA%B3%B5%EB%B6%80/">코테공부</a>
+        
+            <a href="/tags/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%EC%82%AC%EC%9D%B4%ED%8A%B8%EC%B6%94%EC%B2%9C/">코딩테스트사이트추천</a>
+        
+            <a href="/tags/%EA%B3%B5%EC%B1%84%ED%95%A9%EA%B2%A9/">공채합격</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">관련 글</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/posts/codetree-subscription-6/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[코드트리] DFS / 백트래킹 알고리즘 쉽게 이해하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/codetree-subscription-5/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[코드트리] 갭체크로 한 달 만에 약점 유형 극복한 후기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/codetree-subscription-4/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[코드트리] 북마크 기능으로 나만의 복습 루틴 &amp; 오답노트 만들기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/codetree-subscription-3/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[코드트리] 깃허브 연동과 알림톡으로 완성하는 코드트리 학습 루틴</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/posts/codetree-subscription-2/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[코드트리] 시뮬레이션 알고리즘 약점 극복 공부 후기</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Soyeon&#39;s Dev Log
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.748d0acf3bd5d18477b5028b83b70ecfa20eb15aefdff97697a330a2202721bf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

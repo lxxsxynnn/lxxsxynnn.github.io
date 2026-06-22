@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="1. 복잡도와 빅오 표기법 알고리즘을 수행할 때 자원을 낭비하지 않으려면 효율적으로 짜야 함 이때 얼마나 효율적인지 정량화하는 데 시간 복잡도와 공간 복잡도를 사용함 시간 복잡도: 알고리즘의 실행 시간을 정량화 공간 복잡도: 실행하는 데 필요한 메모리 사용량을 정량화 빅오(Big-O) 표기법 입력 값(n)에 대한 수식에서 최고차항을 기준으로 표현한 최악의 시간 복잡도 계수와 상수항은 무시하고 최고차항만으로 표현 예) 2n² + 3n + 1 → O(n²) 점근적 표기법 입력 크기가 충분히 클 때의 증가율을 기준으로 복잡도를 표현하는 방법 표기법 의미 빅오(O) 최악의 경우 빅세타(Θ) 평균의 경우 빅오메가(Ω) 최선의 경우 대표적인 시간 복잡도 (빠른 순) 복잡도 명칭 예시 O(1) 상수 배열 인덱스 접근 O(log n) 로그 이진 탐색 O(n) 선형 단순 반복문 순회 O(n log n) 선형 로그 병합 정렬, 퀵 정렬(평균) O(n²) 이차 이중 반복문 O(2ⁿ) 지수 부분집합 완전탐색 O(n!) 팩토리얼 순열 완전탐색 ">
+<title>[CS 스터디] 복잡도</title>
+
+<link rel='canonical' href='http://localhost:1313/posts/cs-study-18/'>
+
+<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="[CS 스터디] 복잡도">
+<meta property='og:description' content="1. 복잡도와 빅오 표기법 알고리즘을 수행할 때 자원을 낭비하지 않으려면 효율적으로 짜야 함 이때 얼마나 효율적인지 정량화하는 데 시간 복잡도와 공간 복잡도를 사용함 시간 복잡도: 알고리즘의 실행 시간을 정량화 공간 복잡도: 실행하는 데 필요한 메모리 사용량을 정량화 빅오(Big-O) 표기법 입력 값(n)에 대한 수식에서 최고차항을 기준으로 표현한 최악의 시간 복잡도 계수와 상수항은 무시하고 최고차항만으로 표현 예) 2n² + 3n + 1 → O(n²) 점근적 표기법 입력 크기가 충분히 클 때의 증가율을 기준으로 복잡도를 표현하는 방법 표기법 의미 빅오(O) 최악의 경우 빅세타(Θ) 평균의 경우 빅오메가(Ω) 최선의 경우 대표적인 시간 복잡도 (빠른 순) 복잡도 명칭 예시 O(1) 상수 배열 인덱스 접근 O(log n) 로그 이진 탐색 O(n) 선형 단순 반복문 순회 O(n log n) 선형 로그 병합 정렬, 퀵 정렬(평균) O(n²) 이차 이중 반복문 O(2ⁿ) 지수 부분집합 완전탐색 O(n!) 팩토리얼 순열 완전탐색 ">
+<meta property='og:url' content='http://localhost:1313/posts/cs-study-18/'>
+<meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2026-06-22T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-06-22T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="[CS 스터디] 복잡도">
+<meta name="twitter:description" content="1. 복잡도와 빅오 표기법 알고리즘을 수행할 때 자원을 낭비하지 않으려면 효율적으로 짜야 함 이때 얼마나 효율적인지 정량화하는 데 시간 복잡도와 공간 복잡도를 사용함 시간 복잡도: 알고리즘의 실행 시간을 정량화 공간 복잡도: 실행하는 데 필요한 메모리 사용량을 정량화 빅오(Big-O) 표기법 입력 값(n)에 대한 수식에서 최고차항을 기준으로 표현한 최악의 시간 복잡도 계수와 상수항은 무시하고 최고차항만으로 표현 예) 2n² + 3n + 1 → O(n²) 점근적 표기법 입력 크기가 충분히 클 때의 증가율을 기준으로 복잡도를 표현하는 방법 표기법 의미 빅오(O) 최악의 경우 빅세타(Θ) 평균의 경우 빅오메가(Ω) 최선의 경우 대표적인 시간 복잡도 (빠른 순) 복잡도 명칭 예시 O(1) 상수 배열 인덱스 접근 O(log n) 로그 이진 탐색 O(n) 선형 단순 반복문 순회 O(n log n) 선형 로그 병합 정렬, 퀵 정렬(평균) O(n²) 이차 이중 반복문 O(2ⁿ) 지수 부분집합 완전탐색 O(n!) 팩토리얼 순열 완전탐색 "><link rel="alternate" type="application/json" href="http://localhost:1313/posts/cs-study-18/index.json">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/../assets/avatar_hu_c27af72c615ceedd.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Soyeon&#39;s Dev Log</a></h1>
+            <h2 class="site-description">백엔드 개발자 지망생의 기록</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-code" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="7 8 3 12 7 16" /><polyline points="17 8 21 12 17 16" /><line x1="14" y1="4" x2="10" y2="20" /></svg>
+                
+                <span>코딩테스트</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/cs/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><line x1="3" y1="6" x2="3" y2="19" /><line x1="12" y1="6" x2="12" y2="19" /><line x1="21" y1="6" x2="21" y2="19" /></svg>
+                
+                <span>CS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="4" y="5" width="16" height="16" rx="2" /><line x1="16" y1="3" x2="16" y2="7" /><line x1="8" y1="3" x2="8" y2="7" /><line x1="4" y1="11" x2="20" y2="11" /><rect x="8" y1="15" width="2" height="2" /></svg>
+                
+                <span>주간회고</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>검색</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>다크 모드</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/cs/" style="background-color: #e9c46a; color: #fff;">
+                CS
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/cs-study-18/">[CS 스터디] 복잡도</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-06-22</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="1-복잡도와-빅오-표기법">1. 복잡도와 빅오 표기법
+</h3><ul>
+<li>알고리즘을 수행할 때 자원을 낭비하지 않으려면 효율적으로 짜야 함</li>
+<li>이때 <strong>얼마나 효율적인지 정량화</strong>하는 데 시간 복잡도와 공간 복잡도를 사용함
+<ul>
+<li><strong>시간 복잡도</strong>: 알고리즘의 실행 시간을 정량화</li>
+<li><strong>공간 복잡도</strong>: 실행하는 데 필요한 메모리 사용량을 정량화</li>
+</ul>
+</li>
+</ul>
+<h4 id="빅오big-o-표기법">빅오(Big-O) 표기법
+</h4><ul>
+<li>입력 값(n)에 대한 수식에서 <strong>최고차항을 기준</strong>으로 표현한 <strong>최악의 시간 복잡도</strong></li>
+<li>계수와 상수항은 무시하고 최고차항만으로 표현
+<ul>
+<li>예) <code>2n² + 3n + 1</code> → <strong>O(n²)</strong></li>
+</ul>
+</li>
+</ul>
+<h4 id="점근적-표기법">점근적 표기법
+</h4><ul>
+<li>입력 크기가 충분히 클 때의 증가율을 기준으로 복잡도를 표현하는 방법</li>
+</ul>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>표기법</th>
+					<th>의미</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>빅오(O)</strong></td>
+					<td>최악의 경우</td>
+			</tr>
+			<tr>
+					<td><strong>빅세타(Θ)</strong></td>
+					<td>평균의 경우</td>
+			</tr>
+			<tr>
+					<td><strong>빅오메가(Ω)</strong></td>
+					<td>최선의 경우</td>
+			</tr>
+	</tbody>
+</table></div>
+<h4 id="대표적인-시간-복잡도-빠른-순">대표적인 시간 복잡도 (빠른 순)
+</h4><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>복잡도</th>
+					<th>명칭</th>
+					<th>예시</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>O(1)</strong></td>
+					<td>상수</td>
+					<td>배열 인덱스 접근</td>
+			</tr>
+			<tr>
+					<td><strong>O(log n)</strong></td>
+					<td>로그</td>
+					<td>이진 탐색</td>
+			</tr>
+			<tr>
+					<td><strong>O(n)</strong></td>
+					<td>선형</td>
+					<td>단순 반복문 순회</td>
+			</tr>
+			<tr>
+					<td><strong>O(n log n)</strong></td>
+					<td>선형 로그</td>
+					<td>병합 정렬, 퀵 정렬(평균)</td>
+			</tr>
+			<tr>
+					<td><strong>O(n²)</strong></td>
+					<td>이차</td>
+					<td>이중 반복문</td>
+			</tr>
+			<tr>
+					<td><strong>O(2ⁿ)</strong></td>
+					<td>지수</td>
+					<td>부분집합 완전탐색</td>
+			</tr>
+			<tr>
+					<td><strong>O(n!)</strong></td>
+					<td>팩토리얼</td>
+					<td>순열 완전탐색</td>
+			</tr>
+	</tbody>
+</table></div>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Soyeon&#39;s Dev Log
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.748d0acf3bd5d18477b5028b83b70ecfa20eb15aefdff97697a330a2202721bf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
