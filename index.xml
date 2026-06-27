@@ -6,7 +6,150 @@
         <description>Recent content on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Thu, 25 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 26 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[CS 스터디] 정렬 알고리즘 1</title>
+        <link>http://localhost:1313/posts/cs-study-22/</link>
+        <pubDate>Fri, 26 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/cs-study-22/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h3 id=&#34;1-버블-정렬-bubble-sort&#34;&gt;1. 버블 정렬 (Bubble Sort)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;이웃한 &lt;strong&gt;두 값을 비교&lt;/strong&gt;하며 크기 순으로 정렬하는 방식&lt;/li&gt;
+&lt;li&gt;한 번 순회할 때마다 가장 큰 값이 &lt;strong&gt;배열의 뒤로&lt;/strong&gt; 밀려나며 정렬됨&lt;/li&gt;
+&lt;li&gt;연속된 두 값을 차례대로 &lt;code&gt;a&lt;/code&gt;(왼쪽), &lt;code&gt;b&lt;/code&gt;(오른쪽)라 할 때
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;b ≥ a&lt;/code&gt; 이면 이미 정렬된 상태로 판단&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;b &amp;lt; a&lt;/code&gt; 이면 두 값의 위치를 &lt;strong&gt;교환&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;이 과정을 정렬이 완료될 때까지 반복&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;정렬 과정&lt;/strong&gt; (배열 &lt;code&gt;[5, 1, 4, 2]&lt;/code&gt;)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1회전: 가장 큰 값(5)을 맨 뒤로
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [5, 1, 4, 2] → 5&amp;gt;1 교환 → [1, 5, 4, 2]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [1, 5, 4, 2] → 5&amp;gt;4 교환 → [1, 4, 5, 2]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [1, 4, 5, 2] → 5&amp;gt;2 교환 → [1, 4, 2, |5]   ← 5 확정
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2회전:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [1, 4, 2] → 1&amp;lt;4 유지 → [1, 4, 2]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [1, 4, 2] → 4&amp;gt;2 교환 → [1, 2, |4, 5]      ← 4 확정
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;3회전:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [1, 2] → 1&amp;lt;2 유지 → [1, |2, 4, 5]          ← 정렬 완료
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;n번째 요소를 정렬하는 데 &lt;code&gt;n-1&lt;/code&gt;번 비교 → 전체적으로 &lt;code&gt;n(n-1)/2&lt;/code&gt;번 연산&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;시간 복잡도 O(n²)&lt;/strong&gt; — 비교적 느리지만 &lt;strong&gt;별도의 메모리 공간이 필요 없음&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-선택-정렬-selection-sort&#34;&gt;2. 선택 정렬 (Selection Sort)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;배열을 순회하며 &lt;strong&gt;앞에서부터 각 자리에 들어갈 값을 선택&lt;/strong&gt;해 위치시키는 방식&lt;/li&gt;
+&lt;li&gt;첫 번째 자리에는 최솟값, 두 번째 자리에는 그다음으로 작은 값을 차례로 배치&lt;/li&gt;
+&lt;li&gt;인덱스 &lt;code&gt;i&lt;/code&gt;에 넣을 값을 고를 때 &lt;code&gt;0 ~ i-1&lt;/code&gt;은 이미 정렬이 끝난 상태&lt;/li&gt;
+&lt;li&gt;남은 구간에서 찾은 &lt;strong&gt;최솟값을 인덱스 &lt;code&gt;i&lt;/code&gt;의 값과 교환&lt;/strong&gt;하며 마지막까지 반복&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;정렬 과정&lt;/strong&gt; (배열 &lt;code&gt;[5, 1, 4, 2]&lt;/code&gt;)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [5, 1, 4, 2]   남은 구간 최솟값 1 ↔ 5 교환 → [1, | 5, 4, 2]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [1, 5, 4, 2]   남은 구간 최솟값 2 ↔ 5 교환 → [1, 2, | 4, 5]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [1, 2, 4, 5]   남은 구간 최솟값 4 (제자리)  → [1, 2, 4, | 5]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [1, 2, 4, 5]   정렬 완료
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;인덱스 &lt;code&gt;i&lt;/code&gt;의 값을 찾기 위해 &lt;code&gt;n-i&lt;/code&gt;개를 비교 → &lt;code&gt;(n-1) + (n-2) + … + 1 = n(n-1)/2&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;시간 복잡도 O(n²)&lt;/strong&gt; — 느린 편이지만 &lt;strong&gt;추가 메모리가 필요 없고 구현이 간단함&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-삽입-정렬-insertion-sort&#34;&gt;3. 삽입 정렬 (Insertion Sort)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;배열을 앞에서부터 순회하며 &lt;strong&gt;정렬된 부분의 알맞은 위치에 값을 삽입&lt;/strong&gt;하는 방식&lt;/li&gt;
+&lt;li&gt;인덱스 &lt;code&gt;i&lt;/code&gt;의 값 &lt;code&gt;a&lt;/code&gt;를 정렬할 차례일 때 &lt;code&gt;0 ~ i-1&lt;/code&gt;은 이미 정렬된 상태&lt;/li&gt;
+&lt;li&gt;정렬된 구간에서 &lt;code&gt;a&lt;/code&gt;보다 &lt;strong&gt;작거나 같은 수와 큰 수 사이&lt;/strong&gt;에 &lt;code&gt;a&lt;/code&gt;를 삽입&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;정렬 과정&lt;/strong&gt; (배열 &lt;code&gt;[5, 1, 4, 2]&lt;/code&gt;)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [5 | 1, 4, 2]   1을 [5] 앞에 삽입       → [1, 5 | 4, 2]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [1, 5 | 4, 2]   4를 1과 5 사이에 삽입    → [1, 4, 5 | 2]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [1, 4, 5 | 2]   2를 1과 4 사이에 삽입    → [1, 2, 4, 5]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   정렬 완료
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;각 순회에서 인덱스 &lt;code&gt;i&lt;/code&gt;의 값을 알맞은 위치에 넣기 위해 최대 &lt;code&gt;n-i&lt;/code&gt;번 탐색&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;1 + 2 + … + (n-1) = n(n-1)/2&lt;/code&gt;번 연산 → &lt;strong&gt;시간 복잡도 O(n²)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;거의 정렬된 배열에서는 비교가 적게 일어나 &lt;strong&gt;최선의 경우 O(n)&lt;/strong&gt; 으로 빠름&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4-합병-정렬-merge-sort&#34;&gt;4. 합병 정렬 (Merge Sort)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;재귀를 이용하는 &lt;strong&gt;분할 정복(Divide and Conquer)&lt;/strong&gt; 알고리즘
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;분할&lt;/strong&gt;: 배열을 절반씩 쪼갬&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;정복&lt;/strong&gt;: 분할한 배열을 정렬하면서 하나로 합병&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;크기가 &lt;strong&gt;0 또는 1이 될 때까지&lt;/strong&gt; 절반씩 분할한 뒤, 다시 합치며 정렬 수행&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;정렬 과정&lt;/strong&gt; (배열 &lt;code&gt;[5, 1, 4, 2]&lt;/code&gt;)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   분할                         합병(정렬하며 합침)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [5, 1, 4, 2]                    [1, 2, 4, 5]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       ├── [5, 1]      ──▶         [1, 5]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       │     ├── [5]                 ▲
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       │     └── [1]                 │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       └── [4, 2]      ──▶         [2, 4]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;             ├── [4]                 ▲
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;             └── [2]                 │
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;합병할 때는 두 배열과, 둘을 합칠 크기의 &lt;strong&gt;빈 배열&lt;/strong&gt;이 필요함&lt;/li&gt;
+&lt;li&gt;두 배열의 앞 요소부터 비교해 작은 값을 차례로 빈 배열에 채워 정렬&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;cf) 분할 정복&lt;/strong&gt;: 해결하기 어려운 문제를 작은 문제로 나눠 해결하는 방식&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;분할에 &lt;strong&gt;O(log n)&lt;/strong&gt;, 각 단계의 합병에 &lt;strong&gt;O(n)&lt;/strong&gt; → &lt;strong&gt;시간 복잡도 O(n log n)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;빠르지만 합병용 &lt;strong&gt;추가 배열이 필요&lt;/strong&gt;해 별도의 메모리 공간을 사용함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;정렬-알고리즘-비교&#34;&gt;정렬 알고리즘 비교
+&lt;/h3&gt;&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;알고리즘&lt;/th&gt;
+					&lt;th&gt;평균 시간 복잡도&lt;/th&gt;
+					&lt;th&gt;최악 시간 복잡도&lt;/th&gt;
+					&lt;th&gt;추가 메모리&lt;/th&gt;
+					&lt;th&gt;특징&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;버블 정렬&lt;/td&gt;
+					&lt;td&gt;O(n²)&lt;/td&gt;
+					&lt;td&gt;O(n²)&lt;/td&gt;
+					&lt;td&gt;O(1)&lt;/td&gt;
+					&lt;td&gt;구현이 단순하나 느림&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;선택 정렬&lt;/td&gt;
+					&lt;td&gt;O(n²)&lt;/td&gt;
+					&lt;td&gt;O(n²)&lt;/td&gt;
+					&lt;td&gt;O(1)&lt;/td&gt;
+					&lt;td&gt;교환 횟수가 적음&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;삽입 정렬&lt;/td&gt;
+					&lt;td&gt;O(n²)&lt;/td&gt;
+					&lt;td&gt;O(n²)&lt;/td&gt;
+					&lt;td&gt;O(1)&lt;/td&gt;
+					&lt;td&gt;거의 정렬된 데이터에 강함&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;합병 정렬&lt;/td&gt;
+					&lt;td&gt;O(n log n)&lt;/td&gt;
+					&lt;td&gt;O(n log n)&lt;/td&gt;
+					&lt;td&gt;O(n)&lt;/td&gt;
+					&lt;td&gt;안정적이나 추가 공간이 필요함&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+</description>
+        </item>
+        <item>
         <title>[CS 스터디] 면접 대비 4</title>
         <link>http://localhost:1313/posts/cs-study-21/</link>
         <pubDate>Thu, 25 Jun 2026 00:00:00 +0000</pubDate>
