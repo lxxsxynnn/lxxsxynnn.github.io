@@ -6,7 +6,156 @@
         <description>Recent content on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Fri, 26 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 29 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[CS 스터디] 정렬 알고리즘 2</title>
+        <link>http://localhost:1313/posts/cs-study-23/</link>
+        <pubDate>Mon, 29 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/cs-study-23/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h3 id=&#34;1-퀵-정렬-quick-sort&#34;&gt;1. 퀵 정렬 (Quick Sort)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;비교 기반의 &lt;strong&gt;분할 정복&lt;/strong&gt; 알고리즘&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;피봇(pivot)&lt;/strong&gt; 이라는 기준 값을 정해, 피봇보다 &lt;strong&gt;작은 값&lt;/strong&gt; 과 &lt;strong&gt;큰 값&lt;/strong&gt; 으로 배열을 분할하며 정렬&lt;/li&gt;
+&lt;li&gt;피봇은 보통 배열의 &lt;strong&gt;첫 번째 또는 마지막 요소&lt;/strong&gt; 를 선택&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;분할 과정&lt;/strong&gt; — &lt;code&gt;low&lt;/code&gt;·&lt;code&gt;high&lt;/code&gt; 두 포인터로 작은 값과 큰 값을 분리&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;low&lt;/strong&gt;: 첫 요소에서 시작해 오른쪽으로 이동, 피봇보다 &lt;strong&gt;큰 값&lt;/strong&gt; 을 만나면 멈춤&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;high&lt;/strong&gt;: 마지막 요소에서 시작해 왼쪽으로 이동, 피봇보다 &lt;strong&gt;작은 값&lt;/strong&gt; 을 만나면 멈춤&lt;/li&gt;
+&lt;li&gt;둘 다 멈추면 두 값을 &lt;strong&gt;교환&lt;/strong&gt; → 왼쪽엔 작은 값, 오른쪽엔 큰 값이 모임&lt;/li&gt;
+&lt;li&gt;배열 크기가 &lt;strong&gt;1 이하&lt;/strong&gt; 가 될 때까지 각 부분에 대해 반복&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   피봇 = 5 (첫 요소)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [5, 3, 8, 4, 1, 9, 2, 7, 6]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │  피봇 기준으로 분할
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   [3, 4, 1, 2]   (5)   [8, 9, 7, 6]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    피봇보다 작음     │     피봇보다 큼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                   ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   각 부분 배열에 같은 과정을 재귀적으로 반복
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   → [1, 2, 3, 4, 5, 6, 7, 8, 9]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;평균 시간 복잡도 O(n log n)&lt;/strong&gt; — 피봇을 기준으로 배열이 &lt;strong&gt;균등하게 분할&lt;/strong&gt; 될 때 성립&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;최악 시간 복잡도 O(n²)&lt;/strong&gt; — 한쪽으로만 분할되는 경우
+&lt;ul&gt;
+&lt;li&gt;예) 역순 배열 &lt;code&gt;[5, 4, 3, 2, 1]&lt;/code&gt;에서 첫 요소 &lt;code&gt;5&lt;/code&gt;를 피봇으로 잡으면 더 큰 값이 없어 분할이 안 됨&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;결국 &lt;strong&gt;피봇 선택이 성능을 좌우&lt;/strong&gt; → 중앙값이나 무작위 피봇으로 최악을 완화&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-힙-정렬-heap-sort&#34;&gt;2. 힙 정렬 (Heap Sort)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;최대 힙 / 최소 힙&lt;/strong&gt; 자료구조를 이용하는 정렬&lt;/li&gt;
+&lt;li&gt;두 단계로 나뉨
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;힙 생성&lt;/strong&gt;: 배열을 힙으로 만듦&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;정렬&lt;/strong&gt;: 힙에서 요소를 하나씩 꺼내며 정렬&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;힙 생성 알고리즘&lt;/strong&gt;: 특정 노드를 두 자식 중 &lt;strong&gt;우선순위가 높은 자식&lt;/strong&gt; 과 비교·교환하며 힙 조건을 맞춤&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ① 배열 [1, 3, 2, 4]를 최대 힙으로 구성
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            (4)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           /   \
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         (3)    (2)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         /
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       (1)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ② 루트(최댓값)를 맨 뒤로 보내고 힙에서 제외 → 다시 힙 정렬(down-heap)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      4 추출 → 3 추출 → 2 추출 → 1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   → [1, 2, 3, 4]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;힙 생성(down-heap)에 &lt;strong&gt;O(log n)&lt;/strong&gt; , n개 요소를 꺼내며 정렬해 &lt;strong&gt;O(n)&lt;/strong&gt; → 전체 &lt;strong&gt;O(n log n)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;추가 배열 없이 &lt;strong&gt;제자리(in-place)&lt;/strong&gt; 정렬이 가능함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-기수-정렬-radix-sort&#34;&gt;3. 기수 정렬 (Radix Sort)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;값을 &lt;strong&gt;비교하지 않는&lt;/strong&gt; 정렬 알고리즘&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;낮은 자릿수부터&lt;/strong&gt; 차례로 정렬을 수행&lt;/li&gt;
+&lt;li&gt;각 자릿수(0~9)에 해당하는 &lt;strong&gt;버킷(큐)&lt;/strong&gt; 를 만들어, 자릿수 숫자에 맞게 데이터를 분배·수집하며 자릿수만큼 반복&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   배열 [41, 12, 34, 25, 9]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ① 1의 자리로 분배 → 수집
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      1:[41] 2:[12] 4:[34] 5:[25] 9:[09]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      → [41, 12, 34, 25, 9]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ② 10의 자리로 분배 → 수집
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      0:[09] 1:[12] 2:[25] 3:[34] 4:[41]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      → [9, 12, 25, 34, 41]   ← 정렬 완료
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;데이터 개수 &lt;code&gt;n&lt;/code&gt;, 최대 자릿수 &lt;code&gt;d&lt;/code&gt;일 때 &lt;strong&gt;시간 복잡도 O(dn)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;단점: 버킷용 &lt;strong&gt;추가 메모리&lt;/strong&gt;가 필요하고, 정렬 가능한 &lt;strong&gt;데이터 타입이 한정적&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4-계수-정렬-counting-sort&#34;&gt;4. 계수 정렬 (Counting Sort)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;데이터의 &lt;strong&gt;개수를 세서&lt;/strong&gt; 정렬하는 방식&lt;/li&gt;
+&lt;li&gt;데이터 범위를 인덱스로 갖는 빈 배열을 만들고, 원본을 순회하며 &lt;strong&gt;해당 인덱스 값을 1씩 증가&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;데이터 범위가 &lt;strong&gt;0 또는 양의 정수&lt;/strong&gt;여야 한다는 제약이 있음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   배열 [2, 5, 3, 0, 2, 3, 0, 3]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   값 :   0   1   2   3   4   5
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   개수:  2   0   2   3   0   1   ← 각 값의 등장 횟수
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   개수만큼 순서대로 나열
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   → [0, 0, 2, 2, 3, 3, 3, 5]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;데이터 개수 &lt;code&gt;n&lt;/code&gt;, 최댓값 &lt;code&gt;k&lt;/code&gt;일 때 &lt;strong&gt;시간 복잡도 O(n + k)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;최댓값 &lt;code&gt;k&lt;/code&gt;가 커질수록 시간·공간이 함께 늘어남 → &lt;strong&gt;데이터 범위만 한 배열&lt;/strong&gt; 이 필요해 추가 메모리를 사용&lt;/li&gt;
+&lt;li&gt;데이터 범위가 좁을 때 매우 빠름&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;정렬-알고리즘-비교&#34;&gt;정렬 알고리즘 비교
+&lt;/h3&gt;&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;알고리즘&lt;/th&gt;
+					&lt;th&gt;평균 시간 복잡도&lt;/th&gt;
+					&lt;th&gt;최악 시간 복잡도&lt;/th&gt;
+					&lt;th&gt;추가 메모리&lt;/th&gt;
+					&lt;th&gt;특징&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;퀵 정렬&lt;/td&gt;
+					&lt;td&gt;O(n log n)&lt;/td&gt;
+					&lt;td&gt;O(n²)&lt;/td&gt;
+					&lt;td&gt;O(log n)&lt;/td&gt;
+					&lt;td&gt;피봇 선택이 성능을 좌우&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;힙 정렬&lt;/td&gt;
+					&lt;td&gt;O(n log n)&lt;/td&gt;
+					&lt;td&gt;O(n log n)&lt;/td&gt;
+					&lt;td&gt;O(1)&lt;/td&gt;
+					&lt;td&gt;제자리 정렬, 항상 O(n log n)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;기수 정렬&lt;/td&gt;
+					&lt;td&gt;O(dn)&lt;/td&gt;
+					&lt;td&gt;O(dn)&lt;/td&gt;
+					&lt;td&gt;O(n + 버킷)&lt;/td&gt;
+					&lt;td&gt;비교 없이 자릿수로 정렬&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;계수 정렬&lt;/td&gt;
+					&lt;td&gt;O(n + k)&lt;/td&gt;
+					&lt;td&gt;O(n + k)&lt;/td&gt;
+					&lt;td&gt;O(k)&lt;/td&gt;
+					&lt;td&gt;데이터 범위가 좁을 때 빠름&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;퀵·힙 정렬은 &lt;strong&gt;비교 기반&lt;/strong&gt; , 기수·계수 정렬은 &lt;strong&gt;비교하지 않는&lt;/strong&gt; 정렬이라 특정 조건에서 O(n log n)보다 빠를 수 있음&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+</description>
+        </item>
+        <item>
         <title>[CS 스터디] 정렬 알고리즘 1</title>
         <link>http://localhost:1313/posts/cs-study-22/</link>
         <pubDate>Fri, 26 Jun 2026 00:00:00 +0000</pubDate>

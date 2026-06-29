@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 1. 퀵 정렬 (Quick Sort) 비교 기반의 분할 정복 알고리즘 피봇(pivot) 이라는 기준 값을 정해, 피봇보다 작은 값 과 큰 값 으로 배열을 분할하며 정렬 피봇은 보통 배열의 첫 번째 또는 마지막 요소 를 선택 분할 과정 — low·high 두 포인터로 작은 값과 큰 값을 분리\nlow: 첫 요소에서 시작해 오른쪽으로 이동, 피봇보다 큰 값 을 만나면 멈춤 high: 마지막 요소에서 시작해 왼쪽으로 이동, 피봇보다 작은 값 을 만나면 멈춤 둘 다 멈추면 두 값을 교환 → 왼쪽엔 작은 값, 오른쪽엔 큰 값이 모임 배열 크기가 1 이하 가 될 때까지 각 부분에 대해 반복 피봇 = 5 (첫 요소) [5, 3, 8, 4, 1, 9, 2, 7, 6] │ 피봇 기준으로 분할 ▼ [3, 4, 1, 2] (5) [8, 9, 7, 6] 피봇보다 작음 │ 피봇보다 큼 ▼ 각 부분 배열에 같은 과정을 재귀적으로 반복 → [1, 2, 3, 4, 5, 6, 7, 8, 9] 평균 시간 복잡도 O(n log n) — 피봇을 기준으로 배열이 균등하게 분할 될 때 성립 최악 시간 복잡도 O(n²) — 한쪽으로만 분할되는 경우 예) 역순 배열 [5, 4, 3, 2, 1]에서 첫 요소 5를 피봇으로 잡으면 더 큰 값이 없어 분할이 안 됨 결국 피봇 선택이 성능을 좌우 → 중앙값이나 무작위 피봇으로 최악을 완화 2. 힙 정렬 (Heap Sort) 최대 힙 / 최소 힙 자료구조를 이용하는 정렬 두 단계로 나뉨 힙 생성: 배열을 힙으로 만듦 정렬: 힙에서 요소를 하나씩 꺼내며 정렬 힙 생성 알고리즘: 특정 노드를 두 자식 중 우선순위가 높은 자식 과 비교·교환하며 힙 조건을 맞춤 ① 배열 [1, 3, 2, 4]를 최대 힙으로 구성 (4) / \\ (3) (2) / (1) ② 루트(최댓값)를 맨 뒤로 보내고 힙에서 제외 → 다시 힙 정렬(down-heap) 4 추출 → 3 추출 → 2 추출 → 1 → [1, 2, 3, 4] 힙 생성(down-heap)에 O(log n) , n개 요소를 꺼내며 정렬해 O(n) → 전체 O(n log n) 추가 배열 없이 제자리(in-place) 정렬이 가능함 3. 기수 정렬 (Radix Sort) 값을 비교하지 않는 정렬 알고리즘 낮은 자릿수부터 차례로 정렬을 수행 각 자릿수(0~9)에 해당하는 버킷(큐) 를 만들어, 자릿수 숫자에 맞게 데이터를 분배·수집하며 자릿수만큼 반복 배열 [41, 12, 34, 25, 9] ① 1의 자리로 분배 → 수집 1:[41] 2:[12] 4:[34] 5:[25] 9:[09] → [41, 12, 34, 25, 9] ② 10의 자리로 분배 → 수집 0:[09] 1:[12] 2:[25] 3:[34] 4:[41] → [9, 12, 25, 34, 41] ← 정렬 완료 데이터 개수 n, 최대 자릿수 d일 때 시간 복잡도 O(dn) 단점: 버킷용 추가 메모리가 필요하고, 정렬 가능한 데이터 타입이 한정적 4. 계수 정렬 (Counting Sort) 데이터의 개수를 세서 정렬하는 방식 데이터 범위를 인덱스로 갖는 빈 배열을 만들고, 원본을 순회하며 해당 인덱스 값을 1씩 증가 데이터 범위가 0 또는 양의 정수여야 한다는 제약이 있음 배열 [2, 5, 3, 0, 2, 3, 0, 3] 값 : 0 1 2 3 4 5 개수: 2 0 2 3 0 1 ← 각 값의 등장 횟수 개수만큼 순서대로 나열 → [0, 0, 2, 2, 3, 3, 3, 5] 데이터 개수 n, 최댓값 k일 때 시간 복잡도 O(n + k) 최댓값 k가 커질수록 시간·공간이 함께 늘어남 → 데이터 범위만 한 배열 이 필요해 추가 메모리를 사용 데이터 범위가 좁을 때 매우 빠름 정렬 알고리즘 비교 알고리즘 평균 시간 복잡도 최악 시간 복잡도 추가 메모리 특징 퀵 정렬 O(n log n) O(n²) O(log n) 피봇 선택이 성능을 좌우 힙 정렬 O(n log n) O(n log n) O(1) 제자리 정렬, 항상 O(n log n) 기수 정렬 O(dn) O(dn) O(n + 버킷) 비교 없이 자릿수로 정렬 계수 정렬 O(n + k) O(n + k) O(k) 데이터 범위가 좁을 때 빠름 퀵·힙 정렬은 비교 기반 , 기수·계수 정렬은 비교하지 않는 정렬이라 특정 조건에서 O(n log n)보다 빠를 수 있음\n">
+<title>[CS 스터디] 정렬 알고리즘 2</title>
+
+<link rel='canonical' href='http://localhost:1313/posts/cs-study-23/'>
+
+<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="[CS 스터디] 정렬 알고리즘 2">
+<meta property='og:description' content=" 1. 퀵 정렬 (Quick Sort) 비교 기반의 분할 정복 알고리즘 피봇(pivot) 이라는 기준 값을 정해, 피봇보다 작은 값 과 큰 값 으로 배열을 분할하며 정렬 피봇은 보통 배열의 첫 번째 또는 마지막 요소 를 선택 분할 과정 — low·high 두 포인터로 작은 값과 큰 값을 분리\nlow: 첫 요소에서 시작해 오른쪽으로 이동, 피봇보다 큰 값 을 만나면 멈춤 high: 마지막 요소에서 시작해 왼쪽으로 이동, 피봇보다 작은 값 을 만나면 멈춤 둘 다 멈추면 두 값을 교환 → 왼쪽엔 작은 값, 오른쪽엔 큰 값이 모임 배열 크기가 1 이하 가 될 때까지 각 부분에 대해 반복 피봇 = 5 (첫 요소) [5, 3, 8, 4, 1, 9, 2, 7, 6] │ 피봇 기준으로 분할 ▼ [3, 4, 1, 2] (5) [8, 9, 7, 6] 피봇보다 작음 │ 피봇보다 큼 ▼ 각 부분 배열에 같은 과정을 재귀적으로 반복 → [1, 2, 3, 4, 5, 6, 7, 8, 9] 평균 시간 복잡도 O(n log n) — 피봇을 기준으로 배열이 균등하게 분할 될 때 성립 최악 시간 복잡도 O(n²) — 한쪽으로만 분할되는 경우 예) 역순 배열 [5, 4, 3, 2, 1]에서 첫 요소 5를 피봇으로 잡으면 더 큰 값이 없어 분할이 안 됨 결국 피봇 선택이 성능을 좌우 → 중앙값이나 무작위 피봇으로 최악을 완화 2. 힙 정렬 (Heap Sort) 최대 힙 / 최소 힙 자료구조를 이용하는 정렬 두 단계로 나뉨 힙 생성: 배열을 힙으로 만듦 정렬: 힙에서 요소를 하나씩 꺼내며 정렬 힙 생성 알고리즘: 특정 노드를 두 자식 중 우선순위가 높은 자식 과 비교·교환하며 힙 조건을 맞춤 ① 배열 [1, 3, 2, 4]를 최대 힙으로 구성 (4) / \\ (3) (2) / (1) ② 루트(최댓값)를 맨 뒤로 보내고 힙에서 제외 → 다시 힙 정렬(down-heap) 4 추출 → 3 추출 → 2 추출 → 1 → [1, 2, 3, 4] 힙 생성(down-heap)에 O(log n) , n개 요소를 꺼내며 정렬해 O(n) → 전체 O(n log n) 추가 배열 없이 제자리(in-place) 정렬이 가능함 3. 기수 정렬 (Radix Sort) 값을 비교하지 않는 정렬 알고리즘 낮은 자릿수부터 차례로 정렬을 수행 각 자릿수(0~9)에 해당하는 버킷(큐) 를 만들어, 자릿수 숫자에 맞게 데이터를 분배·수집하며 자릿수만큼 반복 배열 [41, 12, 34, 25, 9] ① 1의 자리로 분배 → 수집 1:[41] 2:[12] 4:[34] 5:[25] 9:[09] → [41, 12, 34, 25, 9] ② 10의 자리로 분배 → 수집 0:[09] 1:[12] 2:[25] 3:[34] 4:[41] → [9, 12, 25, 34, 41] ← 정렬 완료 데이터 개수 n, 최대 자릿수 d일 때 시간 복잡도 O(dn) 단점: 버킷용 추가 메모리가 필요하고, 정렬 가능한 데이터 타입이 한정적 4. 계수 정렬 (Counting Sort) 데이터의 개수를 세서 정렬하는 방식 데이터 범위를 인덱스로 갖는 빈 배열을 만들고, 원본을 순회하며 해당 인덱스 값을 1씩 증가 데이터 범위가 0 또는 양의 정수여야 한다는 제약이 있음 배열 [2, 5, 3, 0, 2, 3, 0, 3] 값 : 0 1 2 3 4 5 개수: 2 0 2 3 0 1 ← 각 값의 등장 횟수 개수만큼 순서대로 나열 → [0, 0, 2, 2, 3, 3, 3, 5] 데이터 개수 n, 최댓값 k일 때 시간 복잡도 O(n + k) 최댓값 k가 커질수록 시간·공간이 함께 늘어남 → 데이터 범위만 한 배열 이 필요해 추가 메모리를 사용 데이터 범위가 좁을 때 매우 빠름 정렬 알고리즘 비교 알고리즘 평균 시간 복잡도 최악 시간 복잡도 추가 메모리 특징 퀵 정렬 O(n log n) O(n²) O(log n) 피봇 선택이 성능을 좌우 힙 정렬 O(n log n) O(n log n) O(1) 제자리 정렬, 항상 O(n log n) 기수 정렬 O(dn) O(dn) O(n + 버킷) 비교 없이 자릿수로 정렬 계수 정렬 O(n + k) O(n + k) O(k) 데이터 범위가 좁을 때 빠름 퀵·힙 정렬은 비교 기반 , 기수·계수 정렬은 비교하지 않는 정렬이라 특정 조건에서 O(n log n)보다 빠를 수 있음\n">
+<meta property='og:url' content='http://localhost:1313/posts/cs-study-23/'>
+<meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2026-06-29T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-06-29T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="[CS 스터디] 정렬 알고리즘 2">
+<meta name="twitter:description" content=" 1. 퀵 정렬 (Quick Sort) 비교 기반의 분할 정복 알고리즘 피봇(pivot) 이라는 기준 값을 정해, 피봇보다 작은 값 과 큰 값 으로 배열을 분할하며 정렬 피봇은 보통 배열의 첫 번째 또는 마지막 요소 를 선택 분할 과정 — low·high 두 포인터로 작은 값과 큰 값을 분리\nlow: 첫 요소에서 시작해 오른쪽으로 이동, 피봇보다 큰 값 을 만나면 멈춤 high: 마지막 요소에서 시작해 왼쪽으로 이동, 피봇보다 작은 값 을 만나면 멈춤 둘 다 멈추면 두 값을 교환 → 왼쪽엔 작은 값, 오른쪽엔 큰 값이 모임 배열 크기가 1 이하 가 될 때까지 각 부분에 대해 반복 피봇 = 5 (첫 요소) [5, 3, 8, 4, 1, 9, 2, 7, 6] │ 피봇 기준으로 분할 ▼ [3, 4, 1, 2] (5) [8, 9, 7, 6] 피봇보다 작음 │ 피봇보다 큼 ▼ 각 부분 배열에 같은 과정을 재귀적으로 반복 → [1, 2, 3, 4, 5, 6, 7, 8, 9] 평균 시간 복잡도 O(n log n) — 피봇을 기준으로 배열이 균등하게 분할 될 때 성립 최악 시간 복잡도 O(n²) — 한쪽으로만 분할되는 경우 예) 역순 배열 [5, 4, 3, 2, 1]에서 첫 요소 5를 피봇으로 잡으면 더 큰 값이 없어 분할이 안 됨 결국 피봇 선택이 성능을 좌우 → 중앙값이나 무작위 피봇으로 최악을 완화 2. 힙 정렬 (Heap Sort) 최대 힙 / 최소 힙 자료구조를 이용하는 정렬 두 단계로 나뉨 힙 생성: 배열을 힙으로 만듦 정렬: 힙에서 요소를 하나씩 꺼내며 정렬 힙 생성 알고리즘: 특정 노드를 두 자식 중 우선순위가 높은 자식 과 비교·교환하며 힙 조건을 맞춤 ① 배열 [1, 3, 2, 4]를 최대 힙으로 구성 (4) / \\ (3) (2) / (1) ② 루트(최댓값)를 맨 뒤로 보내고 힙에서 제외 → 다시 힙 정렬(down-heap) 4 추출 → 3 추출 → 2 추출 → 1 → [1, 2, 3, 4] 힙 생성(down-heap)에 O(log n) , n개 요소를 꺼내며 정렬해 O(n) → 전체 O(n log n) 추가 배열 없이 제자리(in-place) 정렬이 가능함 3. 기수 정렬 (Radix Sort) 값을 비교하지 않는 정렬 알고리즘 낮은 자릿수부터 차례로 정렬을 수행 각 자릿수(0~9)에 해당하는 버킷(큐) 를 만들어, 자릿수 숫자에 맞게 데이터를 분배·수집하며 자릿수만큼 반복 배열 [41, 12, 34, 25, 9] ① 1의 자리로 분배 → 수집 1:[41] 2:[12] 4:[34] 5:[25] 9:[09] → [41, 12, 34, 25, 9] ② 10의 자리로 분배 → 수집 0:[09] 1:[12] 2:[25] 3:[34] 4:[41] → [9, 12, 25, 34, 41] ← 정렬 완료 데이터 개수 n, 최대 자릿수 d일 때 시간 복잡도 O(dn) 단점: 버킷용 추가 메모리가 필요하고, 정렬 가능한 데이터 타입이 한정적 4. 계수 정렬 (Counting Sort) 데이터의 개수를 세서 정렬하는 방식 데이터 범위를 인덱스로 갖는 빈 배열을 만들고, 원본을 순회하며 해당 인덱스 값을 1씩 증가 데이터 범위가 0 또는 양의 정수여야 한다는 제약이 있음 배열 [2, 5, 3, 0, 2, 3, 0, 3] 값 : 0 1 2 3 4 5 개수: 2 0 2 3 0 1 ← 각 값의 등장 횟수 개수만큼 순서대로 나열 → [0, 0, 2, 2, 3, 3, 3, 5] 데이터 개수 n, 최댓값 k일 때 시간 복잡도 O(n + k) 최댓값 k가 커질수록 시간·공간이 함께 늘어남 → 데이터 범위만 한 배열 이 필요해 추가 메모리를 사용 데이터 범위가 좁을 때 매우 빠름 정렬 알고리즘 비교 알고리즘 평균 시간 복잡도 최악 시간 복잡도 추가 메모리 특징 퀵 정렬 O(n log n) O(n²) O(log n) 피봇 선택이 성능을 좌우 힙 정렬 O(n log n) O(n log n) O(1) 제자리 정렬, 항상 O(n log n) 기수 정렬 O(dn) O(dn) O(n + 버킷) 비교 없이 자릿수로 정렬 계수 정렬 O(n + k) O(n + k) O(k) 데이터 범위가 좁을 때 빠름 퀵·힙 정렬은 비교 기반 , 기수·계수 정렬은 비교하지 않는 정렬이라 특정 조건에서 O(n log n)보다 빠를 수 있음\n"><link rel="alternate" type="application/json" href="http://localhost:1313/posts/cs-study-23/index.json">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/../assets/avatar_hu_c27af72c615ceedd.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Soyeon&#39;s Dev Log</a></h1>
+            <h2 class="site-description">백엔드 개발자 지망생의 기록</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-code" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="7 8 3 12 7 16" /><polyline points="17 8 21 12 17 16" /><line x1="14" y1="4" x2="10" y2="20" /></svg>
+                
+                <span>코딩테스트</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/cs/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><line x1="3" y1="6" x2="3" y2="19" /><line x1="12" y1="6" x2="12" y2="19" /><line x1="21" y1="6" x2="21" y2="19" /></svg>
+                
+                <span>CS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="4" y="5" width="16" height="16" rx="2" /><line x1="16" y1="3" x2="16" y2="7" /><line x1="8" y1="3" x2="8" y2="7" /><line x1="4" y1="11" x2="20" y2="11" /><rect x="8" y1="15" width="2" height="2" /></svg>
+                
+                <span>주간회고</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>검색</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>다크 모드</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/cs/" style="background-color: #e9c46a; color: #fff;">
+                CS
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/cs-study-23/">[CS 스터디] 정렬 알고리즘 2</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-06-29</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <div style="margin: 0 40px;">
+<h3 id="1-퀵-정렬-quick-sort">1. 퀵 정렬 (Quick Sort)
+</h3><ul>
+<li>비교 기반의 <strong>분할 정복</strong> 알고리즘</li>
+<li><strong>피봇(pivot)</strong> 이라는 기준 값을 정해, 피봇보다 <strong>작은 값</strong> 과 <strong>큰 값</strong> 으로 배열을 분할하며 정렬</li>
+<li>피봇은 보통 배열의 <strong>첫 번째 또는 마지막 요소</strong> 를 선택</li>
+</ul>
+<p><strong>분할 과정</strong> — <code>low</code>·<code>high</code> 두 포인터로 작은 값과 큰 값을 분리</p>
+<ul>
+<li><strong>low</strong>: 첫 요소에서 시작해 오른쪽으로 이동, 피봇보다 <strong>큰 값</strong> 을 만나면 멈춤</li>
+<li><strong>high</strong>: 마지막 요소에서 시작해 왼쪽으로 이동, 피봇보다 <strong>작은 값</strong> 을 만나면 멈춤</li>
+<li>둘 다 멈추면 두 값을 <strong>교환</strong> → 왼쪽엔 작은 값, 오른쪽엔 큰 값이 모임</li>
+<li>배열 크기가 <strong>1 이하</strong> 가 될 때까지 각 부분에 대해 반복</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>   피봇 = 5 (첫 요소)
+</span></span><span style="display:flex;"><span>   [5, 3, 8, 4, 1, 9, 2, 7, 6]
+</span></span><span style="display:flex;"><span>        │  피봇 기준으로 분할
+</span></span><span style="display:flex;"><span>        ▼
+</span></span><span style="display:flex;"><span>   [3, 4, 1, 2]   (5)   [8, 9, 7, 6]
+</span></span><span style="display:flex;"><span>    피봇보다 작음     │     피봇보다 큼
+</span></span><span style="display:flex;"><span>                   ▼
+</span></span><span style="display:flex;"><span>   각 부분 배열에 같은 과정을 재귀적으로 반복
+</span></span><span style="display:flex;"><span>   → [1, 2, 3, 4, 5, 6, 7, 8, 9]
+</span></span></code></pre></div><ul>
+<li><strong>평균 시간 복잡도 O(n log n)</strong> — 피봇을 기준으로 배열이 <strong>균등하게 분할</strong> 될 때 성립</li>
+<li><strong>최악 시간 복잡도 O(n²)</strong> — 한쪽으로만 분할되는 경우
+<ul>
+<li>예) 역순 배열 <code>[5, 4, 3, 2, 1]</code>에서 첫 요소 <code>5</code>를 피봇으로 잡으면 더 큰 값이 없어 분할이 안 됨</li>
+</ul>
+</li>
+<li>결국 <strong>피봇 선택이 성능을 좌우</strong> → 중앙값이나 무작위 피봇으로 최악을 완화</li>
+</ul>
+<h3 id="2-힙-정렬-heap-sort">2. 힙 정렬 (Heap Sort)
+</h3><ul>
+<li><strong>최대 힙 / 최소 힙</strong> 자료구조를 이용하는 정렬</li>
+<li>두 단계로 나뉨
+<ol>
+<li><strong>힙 생성</strong>: 배열을 힙으로 만듦</li>
+<li><strong>정렬</strong>: 힙에서 요소를 하나씩 꺼내며 정렬</li>
+</ol>
+</li>
+<li><strong>힙 생성 알고리즘</strong>: 특정 노드를 두 자식 중 <strong>우선순위가 높은 자식</strong> 과 비교·교환하며 힙 조건을 맞춤</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>   ① 배열 [1, 3, 2, 4]를 최대 힙으로 구성
+</span></span><span style="display:flex;"><span>            (4)
+</span></span><span style="display:flex;"><span>           /   \
+</span></span><span style="display:flex;"><span>         (3)    (2)
+</span></span><span style="display:flex;"><span>         /
+</span></span><span style="display:flex;"><span>       (1)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   ② 루트(최댓값)를 맨 뒤로 보내고 힙에서 제외 → 다시 힙 정렬(down-heap)
+</span></span><span style="display:flex;"><span>      4 추출 → 3 추출 → 2 추출 → 1
+</span></span><span style="display:flex;"><span>   → [1, 2, 3, 4]
+</span></span></code></pre></div><ul>
+<li>힙 생성(down-heap)에 <strong>O(log n)</strong> , n개 요소를 꺼내며 정렬해 <strong>O(n)</strong> → 전체 <strong>O(n log n)</strong></li>
+<li>추가 배열 없이 <strong>제자리(in-place)</strong> 정렬이 가능함</li>
+</ul>
+<h3 id="3-기수-정렬-radix-sort">3. 기수 정렬 (Radix Sort)
+</h3><ul>
+<li>값을 <strong>비교하지 않는</strong> 정렬 알고리즘</li>
+<li><strong>낮은 자릿수부터</strong> 차례로 정렬을 수행</li>
+<li>각 자릿수(0~9)에 해당하는 <strong>버킷(큐)</strong> 를 만들어, 자릿수 숫자에 맞게 데이터를 분배·수집하며 자릿수만큼 반복</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>   배열 [41, 12, 34, 25, 9]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   ① 1의 자리로 분배 → 수집
+</span></span><span style="display:flex;"><span>      1:[41] 2:[12] 4:[34] 5:[25] 9:[09]
+</span></span><span style="display:flex;"><span>      → [41, 12, 34, 25, 9]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   ② 10의 자리로 분배 → 수집
+</span></span><span style="display:flex;"><span>      0:[09] 1:[12] 2:[25] 3:[34] 4:[41]
+</span></span><span style="display:flex;"><span>      → [9, 12, 25, 34, 41]   ← 정렬 완료
+</span></span></code></pre></div><ul>
+<li>데이터 개수 <code>n</code>, 최대 자릿수 <code>d</code>일 때 <strong>시간 복잡도 O(dn)</strong></li>
+<li>단점: 버킷용 <strong>추가 메모리</strong>가 필요하고, 정렬 가능한 <strong>데이터 타입이 한정적</strong></li>
+</ul>
+<h3 id="4-계수-정렬-counting-sort">4. 계수 정렬 (Counting Sort)
+</h3><ul>
+<li>데이터의 <strong>개수를 세서</strong> 정렬하는 방식</li>
+<li>데이터 범위를 인덱스로 갖는 빈 배열을 만들고, 원본을 순회하며 <strong>해당 인덱스 값을 1씩 증가</strong></li>
+<li>데이터 범위가 <strong>0 또는 양의 정수</strong>여야 한다는 제약이 있음</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>   배열 [2, 5, 3, 0, 2, 3, 0, 3]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   값 :   0   1   2   3   4   5
+</span></span><span style="display:flex;"><span>   개수:  2   0   2   3   0   1   ← 각 값의 등장 횟수
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   개수만큼 순서대로 나열
+</span></span><span style="display:flex;"><span>   → [0, 0, 2, 2, 3, 3, 3, 5]
+</span></span></code></pre></div><ul>
+<li>데이터 개수 <code>n</code>, 최댓값 <code>k</code>일 때 <strong>시간 복잡도 O(n + k)</strong></li>
+<li>최댓값 <code>k</code>가 커질수록 시간·공간이 함께 늘어남 → <strong>데이터 범위만 한 배열</strong> 이 필요해 추가 메모리를 사용</li>
+<li>데이터 범위가 좁을 때 매우 빠름</li>
+</ul>
+<hr>
+<h3 id="정렬-알고리즘-비교">정렬 알고리즘 비교
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>알고리즘</th>
+					<th>평균 시간 복잡도</th>
+					<th>최악 시간 복잡도</th>
+					<th>추가 메모리</th>
+					<th>특징</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>퀵 정렬</td>
+					<td>O(n log n)</td>
+					<td>O(n²)</td>
+					<td>O(log n)</td>
+					<td>피봇 선택이 성능을 좌우</td>
+			</tr>
+			<tr>
+					<td>힙 정렬</td>
+					<td>O(n log n)</td>
+					<td>O(n log n)</td>
+					<td>O(1)</td>
+					<td>제자리 정렬, 항상 O(n log n)</td>
+			</tr>
+			<tr>
+					<td>기수 정렬</td>
+					<td>O(dn)</td>
+					<td>O(dn)</td>
+					<td>O(n + 버킷)</td>
+					<td>비교 없이 자릿수로 정렬</td>
+			</tr>
+			<tr>
+					<td>계수 정렬</td>
+					<td>O(n + k)</td>
+					<td>O(n + k)</td>
+					<td>O(k)</td>
+					<td>데이터 범위가 좁을 때 빠름</td>
+			</tr>
+	</tbody>
+</table></div>
+<blockquote>
+<p>퀵·힙 정렬은 <strong>비교 기반</strong> , 기수·계수 정렬은 <strong>비교하지 않는</strong> 정렬이라 특정 조건에서 O(n log n)보다 빠를 수 있음</p>
+</blockquote>
+</div>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Soyeon&#39;s Dev Log
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.748d0acf3bd5d18477b5028b83b70ecfa20eb15aefdff97697a330a2202721bf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
