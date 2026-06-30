@@ -6,7 +6,177 @@
         <description>Recent content on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Mon, 29 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 30 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[CS 스터디] 최소 신장 트리</title>
+        <link>http://localhost:1313/posts/cs-study-24/</link>
+        <pubDate>Tue, 30 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/cs-study-24/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;신장 트리(Spanning Tree)&lt;/strong&gt;: 그래프의 &lt;strong&gt;모든 정점&lt;/strong&gt;을 포함하는 트리 (사이클이 없음)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;최소 신장 트리(MST, Minimum Spanning Tree)&lt;/strong&gt;: 가중치 그래프에서 간선의 &lt;strong&gt;가중치 총합이 가장 작은&lt;/strong&gt; 신장 트리&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;아래 두 알고리즘은 동일한 예시 그래프를 사용합니다. (정점 4개, MST 가중치 합 = &lt;strong&gt;7&lt;/strong&gt;)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         1
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (A)─────(B)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     │      / │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    3│   2/   │4
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     │  /     │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (C)─────(D)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         5
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/blockquote&gt;
+&lt;h3 id=&#34;1-프림-알고리즘-prims-algorithm&#34;&gt;1. 프림 알고리즘 (Prim&amp;rsquo;s Algorithm)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;임의의 &lt;strong&gt;정점을 시작점&lt;/strong&gt;으로 트리를 확장하며 MST를 만드는 방식&lt;/li&gt;
+&lt;li&gt;현재 트리에 연결된 간선 중 &lt;strong&gt;가중치가 가장 작은 간선&lt;/strong&gt;의 정점을 선택하는 과정을 반복&lt;/li&gt;
+&lt;li&gt;모든 정점이 포함될 때까지 트리를 확장&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;cf) 그리디 알고리즘&lt;/strong&gt;
+각 단계의 최선의 선택이 모여 전역 최적해를 찾는 방식&lt;br&gt;
+앞의 선택이 이후 선택에 영향을 주지 않아야 하고, 지역적 최선이 전역적 최적이 되어야 함&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;정렬 과정&lt;/strong&gt; (정점 &lt;code&gt;A&lt;/code&gt;에서 시작)&lt;/p&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;단계&lt;/th&gt;
+					&lt;th&gt;트리에 포함된 정점&lt;/th&gt;
+					&lt;th&gt;선택 가능한 간선&lt;/th&gt;
+					&lt;th&gt;선택&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;①&lt;/td&gt;
+					&lt;td&gt;{A}&lt;/td&gt;
+					&lt;td&gt;A-B(1), A-C(3)&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;A-B (1)&lt;/strong&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;②&lt;/td&gt;
+					&lt;td&gt;{A, B}&lt;/td&gt;
+					&lt;td&gt;A-C(3), B-C(2), B-D(4)&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;B-C (2)&lt;/strong&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;③&lt;/td&gt;
+					&lt;td&gt;{A, B, C}&lt;/td&gt;
+					&lt;td&gt;B-D(4), C-D(5)&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;B-D (4)&lt;/strong&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;④&lt;/td&gt;
+					&lt;td&gt;{A, B, C, D}&lt;/td&gt;
+					&lt;td&gt;모든 정점 포함 → 종료&lt;/td&gt;
+					&lt;td&gt;—&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ①        ②          ③
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   (A)      (A)─(B)     (A)─(B)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            1           1   │4
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                   2        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;              (C)         (C)   (D)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   → 선택 간선: A-B(1) + B-C(2) + B-D(4) = 7
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-크루스칼-알고리즘-kruskals-algorithm&#34;&gt;2. 크루스칼 알고리즘 (Kruskal&amp;rsquo;s Algorithm)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;간선을 기준&lt;/strong&gt;으로 트리를 만드는 그리디 알고리즘&lt;/li&gt;
+&lt;li&gt;간선을 &lt;strong&gt;가중치 오름차순&lt;/strong&gt;으로 정렬한 뒤, 작은 간선부터 차례로 선택&lt;/li&gt;
+&lt;li&gt;단, 간선을 선택했을 때 &lt;strong&gt;사이클이 생기면 제외&lt;/strong&gt;하고 다음 간선을 확인&lt;/li&gt;
+&lt;li&gt;모든 정점이 연결되면 종료&lt;/li&gt;
+&lt;li&gt;흩어진 여러 트리를 작은 간선으로 연결해 하나의 MST로 합침&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;정렬 과정&lt;/strong&gt; (간선 오름차순: A-B(1), B-C(2), A-C(3), B-D(4), C-D(5))&lt;/p&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;단계&lt;/th&gt;
+					&lt;th&gt;확인 간선&lt;/th&gt;
+					&lt;th&gt;사이클 여부&lt;/th&gt;
+					&lt;th&gt;선택 여부&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;①&lt;/td&gt;
+					&lt;td&gt;A-B (1)&lt;/td&gt;
+					&lt;td&gt;없음&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;선택&lt;/strong&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;②&lt;/td&gt;
+					&lt;td&gt;B-C (2)&lt;/td&gt;
+					&lt;td&gt;없음&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;선택&lt;/strong&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;③&lt;/td&gt;
+					&lt;td&gt;A-C (3)&lt;/td&gt;
+					&lt;td&gt;A·C 이미 연결됨&lt;/td&gt;
+					&lt;td&gt;제외&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;④&lt;/td&gt;
+					&lt;td&gt;B-D (4)&lt;/td&gt;
+					&lt;td&gt;없음 → 전부 연결&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;선택&lt;/strong&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   ①        ②          ④
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   A─B      A─B         A─B
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   1        1 │2        1 │2 │4
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;              C           C  D
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   → 선택 간선: A-B(1) + B-C(2) + B-D(4) = 7
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;cf) 유니온 파인드(Union-Find) 알고리즘&lt;/strong&gt;
+두 원소가 &lt;strong&gt;같은 집합에 속하는지&lt;/strong&gt; 판단하는 알고리즘. 그래프에 루트가 없으므로 &lt;strong&gt;대표 노드&lt;/strong&gt;를 정해 집합을 구분한다.&lt;br&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;union&lt;/strong&gt;: 두 노드를 하나의 집합으로 합치는 연산&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;find&lt;/strong&gt;: 특정 노드가 속한 집합의 대표 노드를 찾는 연산&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;크루스칼에서는 사이클 방지를 위해 사용 — 두 정점이 &lt;strong&gt;다른 집합&lt;/strong&gt;이면 연결(union)하고, &lt;strong&gt;같은 집합&lt;/strong&gt;이면 사이클이 생기므로 연결하지 않는다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;프림-vs-크루스칼&#34;&gt;프림 vs 크루스칼
+&lt;/h3&gt;&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;구분&lt;/th&gt;
+					&lt;th&gt;프림 알고리즘&lt;/th&gt;
+					&lt;th&gt;크루스칼 알고리즘&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;기준&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;정점&lt;/strong&gt; 중심 트리 확장&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;간선&lt;/strong&gt; 중심 트리 병합&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;핵심 자료&lt;/td&gt;
+					&lt;td&gt;우선순위 큐(힙)&lt;/td&gt;
+					&lt;td&gt;간선 정렬 + 유니온 파인드&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;시간 복잡도&lt;/td&gt;
+					&lt;td&gt;O(E log V)&lt;/td&gt;
+					&lt;td&gt;O(E log E)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;유리한 경우&lt;/td&gt;
+					&lt;td&gt;간선이 많은 &lt;strong&gt;밀집 그래프&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;간선이 적은 &lt;strong&gt;희소 그래프&lt;/strong&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+</description>
+        </item>
+        <item>
         <title>[CS 스터디] 정렬 알고리즘 2</title>
         <link>http://localhost:1313/posts/cs-study-23/</link>
         <pubDate>Mon, 29 Jun 2026 00:00:00 +0000</pubDate>
