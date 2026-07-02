@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 1. 요약 정렬 알고리즘 비교 기반 정렬 알고리즘 종류 특징 평균 시간 복잡도 버블 정렬 인접한 두 수를 비교해 정렬 O(n^2) 선택 정렬 정렬되지 않은 배열에서 최솟값을 선택해 정렬 O(n^2) 삽입 정렬 정렬된 배열에 탐색 중인 요소 삽입 O(n^2) 합병 정렬 분할 정복 기반 알고리즘 배열을 1이하 크기로 분할한 뒤 합병 과정에서 정렬 O(n log n) 퀵 정렬 분할 정복 기반 알고리즘 피봇을 선택해 피봇보다 작은 수의 배열과 피봇보다 큰 수의 배열로 분할하며 정렬 피봇에 따라 시간 복잡도가 달라질 수 있음 O(n log n) 힙 정렬 힙 기반 정렬 알고리즘 최대 힙을 이용해 오름차순 정렬, 최소 힙을 이용해 내림차순 정렬 O(n log n) 비교 기반이 아닌 정렬 알고리즘 종류 특징 기수 정렬 낮은 자릿수부터 높은 자릿수까지 정렬 자릿수에 올 수 있는 숫자별로 각각 큐를 생성해 각 자릿수에 해당하는 큐에 숫자를 넣으며 정렬 시간 복잡도 면에서 효율적이지만 메모리 소비가 큼 계수 정렬 데이터 범위를 인덱스로 갖는 배열을 생성해 각 인덱스에 해당하는 데이터 개수를 세서 정렬 수행 최소 신장 트리 간선의 가중치의 총합이 가장 작은 신장 트리 프림 알고리즘 시작 정점을 정한 후 트리를 확장해 최소 신장 트리를 생성하는 방식 방문 가능한 정점 중 비용이 적게 드는 정점을 선택해 트리 확장 크루스칼 알고리즘 여러 트리를 합쳐 하나의 최소 신장 트리를 생성하는 방식 간선을 가중치에 따라 정렬한 뒤 낮은 가중치를 갖는 간선을 선택하며 여러 트리를 하나로 합쳐 나감 최단 거리 알고리즘 그래프의 특정 정점에서 다른 정점까지의 최단 거리를 구하는 알고리즘 다익스트라 알고리즘 간선의 가중치가 음수가 아닌 경우 최단 거리를 구하는 알고리즘 방문 가능한 정점 중 비용이 가장 적은 정점을 방문 방문한 정점과 연결된 다른 정점의 비용 갱신이 가능한 경우 갱신 수행 벨만-포드 알고리즘 간선의 가중치가 음수인 경우 최단 거리를 구하는 알고리즘 음의 사이클이 있으면 알고리즘 적용 불가 2. 면접 대비 (Q&amp;A) 합병 정렬 알고리즘과 퀵 정렬 알고리즘을 비교해서 설명해 주세요. 두 알고리즘 모두 분할 정복 기반이며 평균 시간 복잡도는 O(n log n)입니다.\n합병 정렬은 배열을 절반씩 분할한 뒤 합치면서 정렬합니다.\n항상 O(n log n)을 보장하는 안정 정렬이지만, 합치는 과정에서 O(n)의 추가 메모리가 필요합니다.\n">
+<title>[CS 스터디] 면접 대비 5</title>
+
+<link rel='canonical' href='http://localhost:1313/posts/cs-study-26/'>
+
+<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="[CS 스터디] 면접 대비 5">
+<meta property='og:description' content=" 1. 요약 정렬 알고리즘 비교 기반 정렬 알고리즘 종류 특징 평균 시간 복잡도 버블 정렬 인접한 두 수를 비교해 정렬 O(n^2) 선택 정렬 정렬되지 않은 배열에서 최솟값을 선택해 정렬 O(n^2) 삽입 정렬 정렬된 배열에 탐색 중인 요소 삽입 O(n^2) 합병 정렬 분할 정복 기반 알고리즘 배열을 1이하 크기로 분할한 뒤 합병 과정에서 정렬 O(n log n) 퀵 정렬 분할 정복 기반 알고리즘 피봇을 선택해 피봇보다 작은 수의 배열과 피봇보다 큰 수의 배열로 분할하며 정렬 피봇에 따라 시간 복잡도가 달라질 수 있음 O(n log n) 힙 정렬 힙 기반 정렬 알고리즘 최대 힙을 이용해 오름차순 정렬, 최소 힙을 이용해 내림차순 정렬 O(n log n) 비교 기반이 아닌 정렬 알고리즘 종류 특징 기수 정렬 낮은 자릿수부터 높은 자릿수까지 정렬 자릿수에 올 수 있는 숫자별로 각각 큐를 생성해 각 자릿수에 해당하는 큐에 숫자를 넣으며 정렬 시간 복잡도 면에서 효율적이지만 메모리 소비가 큼 계수 정렬 데이터 범위를 인덱스로 갖는 배열을 생성해 각 인덱스에 해당하는 데이터 개수를 세서 정렬 수행 최소 신장 트리 간선의 가중치의 총합이 가장 작은 신장 트리 프림 알고리즘 시작 정점을 정한 후 트리를 확장해 최소 신장 트리를 생성하는 방식 방문 가능한 정점 중 비용이 적게 드는 정점을 선택해 트리 확장 크루스칼 알고리즘 여러 트리를 합쳐 하나의 최소 신장 트리를 생성하는 방식 간선을 가중치에 따라 정렬한 뒤 낮은 가중치를 갖는 간선을 선택하며 여러 트리를 하나로 합쳐 나감 최단 거리 알고리즘 그래프의 특정 정점에서 다른 정점까지의 최단 거리를 구하는 알고리즘 다익스트라 알고리즘 간선의 가중치가 음수가 아닌 경우 최단 거리를 구하는 알고리즘 방문 가능한 정점 중 비용이 가장 적은 정점을 방문 방문한 정점과 연결된 다른 정점의 비용 갱신이 가능한 경우 갱신 수행 벨만-포드 알고리즘 간선의 가중치가 음수인 경우 최단 거리를 구하는 알고리즘 음의 사이클이 있으면 알고리즘 적용 불가 2. 면접 대비 (Q&amp;A) 합병 정렬 알고리즘과 퀵 정렬 알고리즘을 비교해서 설명해 주세요. 두 알고리즘 모두 분할 정복 기반이며 평균 시간 복잡도는 O(n log n)입니다.\n합병 정렬은 배열을 절반씩 분할한 뒤 합치면서 정렬합니다.\n항상 O(n log n)을 보장하는 안정 정렬이지만, 합치는 과정에서 O(n)의 추가 메모리가 필요합니다.\n">
+<meta property='og:url' content='http://localhost:1313/posts/cs-study-26/'>
+<meta property='og:site_name' content='Soyeon&#39;s Dev Log'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts' /><meta property='article:published_time' content='2026-07-02T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-07-02T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="[CS 스터디] 면접 대비 5">
+<meta name="twitter:description" content=" 1. 요약 정렬 알고리즘 비교 기반 정렬 알고리즘 종류 특징 평균 시간 복잡도 버블 정렬 인접한 두 수를 비교해 정렬 O(n^2) 선택 정렬 정렬되지 않은 배열에서 최솟값을 선택해 정렬 O(n^2) 삽입 정렬 정렬된 배열에 탐색 중인 요소 삽입 O(n^2) 합병 정렬 분할 정복 기반 알고리즘 배열을 1이하 크기로 분할한 뒤 합병 과정에서 정렬 O(n log n) 퀵 정렬 분할 정복 기반 알고리즘 피봇을 선택해 피봇보다 작은 수의 배열과 피봇보다 큰 수의 배열로 분할하며 정렬 피봇에 따라 시간 복잡도가 달라질 수 있음 O(n log n) 힙 정렬 힙 기반 정렬 알고리즘 최대 힙을 이용해 오름차순 정렬, 최소 힙을 이용해 내림차순 정렬 O(n log n) 비교 기반이 아닌 정렬 알고리즘 종류 특징 기수 정렬 낮은 자릿수부터 높은 자릿수까지 정렬 자릿수에 올 수 있는 숫자별로 각각 큐를 생성해 각 자릿수에 해당하는 큐에 숫자를 넣으며 정렬 시간 복잡도 면에서 효율적이지만 메모리 소비가 큼 계수 정렬 데이터 범위를 인덱스로 갖는 배열을 생성해 각 인덱스에 해당하는 데이터 개수를 세서 정렬 수행 최소 신장 트리 간선의 가중치의 총합이 가장 작은 신장 트리 프림 알고리즘 시작 정점을 정한 후 트리를 확장해 최소 신장 트리를 생성하는 방식 방문 가능한 정점 중 비용이 적게 드는 정점을 선택해 트리 확장 크루스칼 알고리즘 여러 트리를 합쳐 하나의 최소 신장 트리를 생성하는 방식 간선을 가중치에 따라 정렬한 뒤 낮은 가중치를 갖는 간선을 선택하며 여러 트리를 하나로 합쳐 나감 최단 거리 알고리즘 그래프의 특정 정점에서 다른 정점까지의 최단 거리를 구하는 알고리즘 다익스트라 알고리즘 간선의 가중치가 음수가 아닌 경우 최단 거리를 구하는 알고리즘 방문 가능한 정점 중 비용이 가장 적은 정점을 방문 방문한 정점과 연결된 다른 정점의 비용 갱신이 가능한 경우 갱신 수행 벨만-포드 알고리즘 간선의 가중치가 음수인 경우 최단 거리를 구하는 알고리즘 음의 사이클이 있으면 알고리즘 적용 불가 2. 면접 대비 (Q&amp;A) 합병 정렬 알고리즘과 퀵 정렬 알고리즘을 비교해서 설명해 주세요. 두 알고리즘 모두 분할 정복 기반이며 평균 시간 복잡도는 O(n log n)입니다.\n합병 정렬은 배열을 절반씩 분할한 뒤 합치면서 정렬합니다.\n항상 O(n log n)을 보장하는 안정 정렬이지만, 합치는 과정에서 O(n)의 추가 메모리가 필요합니다.\n"><link rel="alternate" type="application/json" href="http://localhost:1313/posts/cs-study-26/index.json">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/../assets/avatar_hu_c27af72c615ceedd.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Soyeon&#39;s Dev Log</a></h1>
+            <h2 class="site-description">백엔드 개발자 지망생의 기록</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-code" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="7 8 3 12 7 16" /><polyline points="17 8 21 12 17 16" /><line x1="14" y1="4" x2="10" y2="20" /></svg>
+                
+                <span>코딩테스트</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/cs/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" /><line x1="3" y1="6" x2="3" y2="19" /><line x1="12" y1="6" x2="12" y2="19" /><line x1="21" y1="6" x2="21" y2="19" /></svg>
+                
+                <span>CS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/%EC%A3%BC%EA%B0%84%ED%9A%8C%EA%B3%A0/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="4" y="5" width="16" height="16" rx="2" /><line x1="16" y1="3" x2="16" y2="7" /><line x1="8" y1="3" x2="8" y2="7" /><line x1="4" y1="11" x2="20" y2="11" /><rect x="8" y1="15" width="2" height="2" /></svg>
+                
+                <span>주간회고</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>검색</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>다크 모드</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/cs/" style="background-color: #e9c46a; color: #fff;">
+                CS
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/posts/cs-study-26/">[CS 스터디] 면접 대비 5</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-07-02</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <div style="margin: 0 40px;">
+<h3 id="1-요약">1. 요약
+</h3><h4 id="정렬-알고리즘">정렬 알고리즘
+</h4><ol>
+<li>비교 기반 정렬 알고리즘</li>
+</ol>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>종류</th>
+					<th>특징</th>
+					<th>평균 시간 복잡도</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>버블 정렬</td>
+					<td>인접한 두 수를 비교해 정렬</td>
+					<td>O(n^2)</td>
+			</tr>
+			<tr>
+					<td>선택 정렬</td>
+					<td>정렬되지 않은 배열에서 최솟값을 선택해 정렬</td>
+					<td>O(n^2)</td>
+			</tr>
+			<tr>
+					<td>삽입 정렬</td>
+					<td>정렬된 배열에 탐색 중인 요소 삽입</td>
+					<td>O(n^2)</td>
+			</tr>
+			<tr>
+					<td>합병 정렬</td>
+					<td>분할 정복 기반 알고리즘 <br> 배열을 1이하 크기로 분할한 뒤 합병 과정에서 정렬</td>
+					<td>O(n log n)</td>
+			</tr>
+			<tr>
+					<td>퀵 정렬</td>
+					<td>분할 정복 기반 알고리즘 <br> 피봇을 선택해 피봇보다 작은 수의 배열과 피봇보다 큰 수의 배열로 분할하며 정렬 <br> 피봇에 따라 시간 복잡도가 달라질 수 있음</td>
+					<td>O(n log n)</td>
+			</tr>
+			<tr>
+					<td>힙 정렬</td>
+					<td>힙 기반 정렬 알고리즘 <br> 최대 힙을 이용해 오름차순 정렬, 최소 힙을 이용해 내림차순 정렬</td>
+					<td>O(n log n)</td>
+			</tr>
+	</tbody>
+</table></div>
+<ol start="2">
+<li>비교 기반이 아닌 정렬 알고리즘</li>
+</ol>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>종류</th>
+					<th>특징</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>기수 정렬</td>
+					<td>낮은 자릿수부터 높은 자릿수까지 정렬 <br> 자릿수에 올 수 있는 숫자별로 각각 큐를 생성해 각 자릿수에 해당하는 큐에 숫자를 넣으며 정렬 <br> 시간 복잡도 면에서 효율적이지만 메모리 소비가 큼</td>
+			</tr>
+			<tr>
+					<td>계수 정렬</td>
+					<td>데이터 범위를 인덱스로 갖는 배열을 생성해 각 인덱스에 해당하는 데이터 개수를 세서 정렬 수행</td>
+			</tr>
+	</tbody>
+</table></div>
+<h4 id="최소-신장-트리">최소 신장 트리
+</h4><ul>
+<li>간선의 가중치의 총합이 가장 작은 신장 트리</li>
+<li>프림 알고리즘
+<ul>
+<li>시작 정점을 정한 후 트리를 확장해 최소 신장 트리를 생성하는 방식</li>
+<li>방문 가능한 정점 중 비용이 적게 드는 정점을 선택해 트리 확장</li>
+</ul>
+</li>
+<li>크루스칼 알고리즘
+<ul>
+<li>여러 트리를 합쳐 하나의 최소 신장 트리를 생성하는 방식</li>
+<li>간선을 가중치에 따라 정렬한 뒤 낮은 가중치를 갖는 간선을 선택하며 여러 트리를 하나로 합쳐 나감</li>
+</ul>
+</li>
+</ul>
+<h4 id="최단-거리-알고리즘">최단 거리 알고리즘
+</h4><ul>
+<li>그래프의 특정 정점에서 다른 정점까지의 최단 거리를 구하는 알고리즘</li>
+<li>다익스트라 알고리즘
+<ul>
+<li>간선의 가중치가 음수가 아닌 경우 최단 거리를 구하는 알고리즘</li>
+<li>방문 가능한 정점 중 비용이 가장 적은 정점을 방문</li>
+<li>방문한 정점과 연결된 다른 정점의 비용 갱신이 가능한 경우 갱신 수행</li>
+</ul>
+</li>
+<li>벨만-포드 알고리즘
+<ul>
+<li>간선의 가중치가 음수인 경우 최단 거리를 구하는 알고리즘</li>
+<li>음의 사이클이 있으면 알고리즘 적용 불가</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-면접-대비-qa">2. 면접 대비 (Q&amp;A)
+</h3><details>
+<summary><b>합병 정렬 알고리즘과 퀵 정렬 알고리즘을 비교해서 설명해 주세요.</b></summary>
+<p>두 알고리즘 모두 분할 정복 기반이며 평균 시간 복잡도는 O(n log n)입니다.<br>
+합병 정렬은 배열을 절반씩 분할한 뒤 합치면서 정렬합니다.<br>
+항상 O(n log n)을 보장하는 안정 정렬이지만, 합치는 과정에서 O(n)의 추가 메모리가 필요합니다.</p>
+<p>퀵 정렬은 피봇을 기준으로 작은 값과 큰 값으로 분할하며 정렬합니다.<br>
+추가 메모리가 거의 필요 없고 실제 성능이 빠르지만<br>
+피봇 선택에 따라 최악의 경우 O(n²)이 될 수 있으며 불안정 정렬입니다.</p>
+</details>
+<details>
+<summary><b>퀵 정렬 알고리즘에서 발생 가능한 문제점은 어떤 것이 있으며 이를 개선하는 방법은 무엇인가요?</b></summary>
+<p>피봇이 항상 최솟값이나 최댓값으로 선택되면 배열이 균등하게 나뉘지 않아 시간 복잡도가 O(n²)으로 악화됩니다.</p>
+<p>개선 방법으로는
+피봇을 무작위로 선택해 최악의 경우 발생 확률을 낮추거나(<strong>랜덤 피봇 선택</strong>)<br>
+첫 번째, 중간, 마지막 원소 중 중앙값을 피봇으로 선택하거나(<strong>Median of Three</strong>)<br>
+부분 배열이 일정 크기 이하로 작아지면 삽입 정렬로 전환합니다.(<strong>삽입 정렬 혼합</strong>)</p>
+</details>
+<details>
+<summary><b>비교하지 않고 배열을 정렬할 수 있는 방법은 무엇인가요?</b></summary>
+<p>대표적으로 기수 정렬(Radix Sort)과 계수 정렬(Counting Sort)이 있습니다.</p>
+<p><strong>기수 정렬</strong>은 낮은 자릿수부터 높은 자릿수 순으로 정렬을 반복합니다.<br>
+자릿수별 큐에 원소를 분류하며 정렬하고, 시간 복잡도는 O(d × n)입니다.<br>
+비교 기반 정렬보다 빠를 수 있지만 메모리 소비가 큽니다.</p>
+<p><strong>계수 정렬</strong>은 데이터 범위를 인덱스로 갖는 배열을 만들어 각 값의 등장 횟수를 세어 정렬합니다.<br>
+시간 복잡도는 O(n + k)(k: 데이터 최대값)로 빠르지만, 범위가 클수록 메모리 낭비가 심해집니다.</p>
+</details>
+<details>
+<summary><b>최소 신장 트리란 무엇이고 이를 구할 수 있는 방법에는 어떤 것이 있나요?</b></summary>
+<p>최소 신장 트리(MST)는 그래프의 모든 정점을 사이클 없이 연결하면서 간선 가중치 합이 최소인 트리입니다.</p>
+<p><strong>프림 알고리즘</strong>은 시작 정점에서 출발해 트리를 확장합니다.<br>
+현재 트리와 연결 가능한 정점 중 비용이 가장 적은 정점을 선택하며 확장하고<br>
+시간 복잡도는 O(E log V)입니다.</p>
+<p><strong>크루스칼 알고리즘</strong>은 모든 간선을 가중치 오름차순으로 정렬한 뒤<br>
+사이클을 형성하지 않는 간선을 순서대로 선택합니다.<br>
+사이클 여부는 유니온-파인드(Union-Find)로 판단하며 시간 복잡도는 O(E log E)입니다.</p>
+</details>
+<details>
+<summary><b>그래프의 특정 정점에서 다른 정점까지 최단 거리를 구하는 방법을 설명해 주세요</b></summary>
+<p><strong>다익스트라 알고리즘</strong>은 간선 가중치가 음수가 아닐 때 사용합니다.<br>
+우선순위 큐로 비용이 가장 적은 정점을 선택하고, 해당 정점과 연결된 다른 정점의 비용을 갱신합니다.<br>
+시간 복잡도는 O((V + E) log V)입니다.</p>
+<p><strong>벨만-포드 알고리즘</strong>은 음수 가중치 간선이 있는 그래프에도 사용할 수 있습니다.<br>
+모든 간선에 대해 비용 갱신을 V-1번 반복하며 최단 거리를 구합니다.<br>
+시간 복잡도는 O(V × E)로 다익스트라보다 느리지만, 음의 사이클 감지가 가능합니다.<br>
+음의 사이클이 있으면 적용할 수 없습니다.</p>
+</details>
+</div>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2025 - 
+        
+        2026 Soyeon&#39;s Dev Log
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.748d0acf3bd5d18477b5028b83b70ecfa20eb15aefdff97697a330a2202721bf.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

@@ -6,7 +6,165 @@
         <description>Recent content on Soyeon&#39;s Dev Log</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ko</language>
-        <lastBuildDate>Wed, 01 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 02 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[CS 스터디] 면접 대비 5</title>
+        <link>http://localhost:1313/posts/cs-study-26/</link>
+        <pubDate>Thu, 02 Jul 2026 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/posts/cs-study-26/</guid>
+        <description>&lt;div style=&#34;margin: 0 40px;&#34;&gt;
+&lt;h3 id=&#34;1-요약&#34;&gt;1. 요약
+&lt;/h3&gt;&lt;h4 id=&#34;정렬-알고리즘&#34;&gt;정렬 알고리즘
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;비교 기반 정렬 알고리즘&lt;/li&gt;
+&lt;/ol&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;종류&lt;/th&gt;
+					&lt;th&gt;특징&lt;/th&gt;
+					&lt;th&gt;평균 시간 복잡도&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;버블 정렬&lt;/td&gt;
+					&lt;td&gt;인접한 두 수를 비교해 정렬&lt;/td&gt;
+					&lt;td&gt;O(n^2)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;선택 정렬&lt;/td&gt;
+					&lt;td&gt;정렬되지 않은 배열에서 최솟값을 선택해 정렬&lt;/td&gt;
+					&lt;td&gt;O(n^2)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;삽입 정렬&lt;/td&gt;
+					&lt;td&gt;정렬된 배열에 탐색 중인 요소 삽입&lt;/td&gt;
+					&lt;td&gt;O(n^2)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;합병 정렬&lt;/td&gt;
+					&lt;td&gt;분할 정복 기반 알고리즘 &lt;br&gt; 배열을 1이하 크기로 분할한 뒤 합병 과정에서 정렬&lt;/td&gt;
+					&lt;td&gt;O(n log n)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;퀵 정렬&lt;/td&gt;
+					&lt;td&gt;분할 정복 기반 알고리즘 &lt;br&gt; 피봇을 선택해 피봇보다 작은 수의 배열과 피봇보다 큰 수의 배열로 분할하며 정렬 &lt;br&gt; 피봇에 따라 시간 복잡도가 달라질 수 있음&lt;/td&gt;
+					&lt;td&gt;O(n log n)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;힙 정렬&lt;/td&gt;
+					&lt;td&gt;힙 기반 정렬 알고리즘 &lt;br&gt; 최대 힙을 이용해 오름차순 정렬, 최소 힙을 이용해 내림차순 정렬&lt;/td&gt;
+					&lt;td&gt;O(n log n)&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;비교 기반이 아닌 정렬 알고리즘&lt;/li&gt;
+&lt;/ol&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;종류&lt;/th&gt;
+					&lt;th&gt;특징&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;기수 정렬&lt;/td&gt;
+					&lt;td&gt;낮은 자릿수부터 높은 자릿수까지 정렬 &lt;br&gt; 자릿수에 올 수 있는 숫자별로 각각 큐를 생성해 각 자릿수에 해당하는 큐에 숫자를 넣으며 정렬 &lt;br&gt; 시간 복잡도 면에서 효율적이지만 메모리 소비가 큼&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;계수 정렬&lt;/td&gt;
+					&lt;td&gt;데이터 범위를 인덱스로 갖는 배열을 생성해 각 인덱스에 해당하는 데이터 개수를 세서 정렬 수행&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;최소-신장-트리&#34;&gt;최소 신장 트리
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;간선의 가중치의 총합이 가장 작은 신장 트리&lt;/li&gt;
+&lt;li&gt;프림 알고리즘
+&lt;ul&gt;
+&lt;li&gt;시작 정점을 정한 후 트리를 확장해 최소 신장 트리를 생성하는 방식&lt;/li&gt;
+&lt;li&gt;방문 가능한 정점 중 비용이 적게 드는 정점을 선택해 트리 확장&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;크루스칼 알고리즘
+&lt;ul&gt;
+&lt;li&gt;여러 트리를 합쳐 하나의 최소 신장 트리를 생성하는 방식&lt;/li&gt;
+&lt;li&gt;간선을 가중치에 따라 정렬한 뒤 낮은 가중치를 갖는 간선을 선택하며 여러 트리를 하나로 합쳐 나감&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;최단-거리-알고리즘&#34;&gt;최단 거리 알고리즘
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;그래프의 특정 정점에서 다른 정점까지의 최단 거리를 구하는 알고리즘&lt;/li&gt;
+&lt;li&gt;다익스트라 알고리즘
+&lt;ul&gt;
+&lt;li&gt;간선의 가중치가 음수가 아닌 경우 최단 거리를 구하는 알고리즘&lt;/li&gt;
+&lt;li&gt;방문 가능한 정점 중 비용이 가장 적은 정점을 방문&lt;/li&gt;
+&lt;li&gt;방문한 정점과 연결된 다른 정점의 비용 갱신이 가능한 경우 갱신 수행&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;벨만-포드 알고리즘
+&lt;ul&gt;
+&lt;li&gt;간선의 가중치가 음수인 경우 최단 거리를 구하는 알고리즘&lt;/li&gt;
+&lt;li&gt;음의 사이클이 있으면 알고리즘 적용 불가&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;2-면접-대비-qa&#34;&gt;2. 면접 대비 (Q&amp;amp;A)
+&lt;/h3&gt;&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;합병 정렬 알고리즘과 퀵 정렬 알고리즘을 비교해서 설명해 주세요.&lt;/b&gt;&lt;/summary&gt;
+&lt;p&gt;두 알고리즘 모두 분할 정복 기반이며 평균 시간 복잡도는 O(n log n)입니다.&lt;br&gt;
+합병 정렬은 배열을 절반씩 분할한 뒤 합치면서 정렬합니다.&lt;br&gt;
+항상 O(n log n)을 보장하는 안정 정렬이지만, 합치는 과정에서 O(n)의 추가 메모리가 필요합니다.&lt;/p&gt;
+&lt;p&gt;퀵 정렬은 피봇을 기준으로 작은 값과 큰 값으로 분할하며 정렬합니다.&lt;br&gt;
+추가 메모리가 거의 필요 없고 실제 성능이 빠르지만&lt;br&gt;
+피봇 선택에 따라 최악의 경우 O(n²)이 될 수 있으며 불안정 정렬입니다.&lt;/p&gt;
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;퀵 정렬 알고리즘에서 발생 가능한 문제점은 어떤 것이 있으며 이를 개선하는 방법은 무엇인가요?&lt;/b&gt;&lt;/summary&gt;
+&lt;p&gt;피봇이 항상 최솟값이나 최댓값으로 선택되면 배열이 균등하게 나뉘지 않아 시간 복잡도가 O(n²)으로 악화됩니다.&lt;/p&gt;
+&lt;p&gt;개선 방법으로는
+피봇을 무작위로 선택해 최악의 경우 발생 확률을 낮추거나(&lt;strong&gt;랜덤 피봇 선택&lt;/strong&gt;)&lt;br&gt;
+첫 번째, 중간, 마지막 원소 중 중앙값을 피봇으로 선택하거나(&lt;strong&gt;Median of Three&lt;/strong&gt;)&lt;br&gt;
+부분 배열이 일정 크기 이하로 작아지면 삽입 정렬로 전환합니다.(&lt;strong&gt;삽입 정렬 혼합&lt;/strong&gt;)&lt;/p&gt;
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;비교하지 않고 배열을 정렬할 수 있는 방법은 무엇인가요?&lt;/b&gt;&lt;/summary&gt;
+&lt;p&gt;대표적으로 기수 정렬(Radix Sort)과 계수 정렬(Counting Sort)이 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;기수 정렬&lt;/strong&gt;은 낮은 자릿수부터 높은 자릿수 순으로 정렬을 반복합니다.&lt;br&gt;
+자릿수별 큐에 원소를 분류하며 정렬하고, 시간 복잡도는 O(d × n)입니다.&lt;br&gt;
+비교 기반 정렬보다 빠를 수 있지만 메모리 소비가 큽니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;계수 정렬&lt;/strong&gt;은 데이터 범위를 인덱스로 갖는 배열을 만들어 각 값의 등장 횟수를 세어 정렬합니다.&lt;br&gt;
+시간 복잡도는 O(n + k)(k: 데이터 최대값)로 빠르지만, 범위가 클수록 메모리 낭비가 심해집니다.&lt;/p&gt;
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;최소 신장 트리란 무엇이고 이를 구할 수 있는 방법에는 어떤 것이 있나요?&lt;/b&gt;&lt;/summary&gt;
+&lt;p&gt;최소 신장 트리(MST)는 그래프의 모든 정점을 사이클 없이 연결하면서 간선 가중치 합이 최소인 트리입니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;프림 알고리즘&lt;/strong&gt;은 시작 정점에서 출발해 트리를 확장합니다.&lt;br&gt;
+현재 트리와 연결 가능한 정점 중 비용이 가장 적은 정점을 선택하며 확장하고&lt;br&gt;
+시간 복잡도는 O(E log V)입니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;크루스칼 알고리즘&lt;/strong&gt;은 모든 간선을 가중치 오름차순으로 정렬한 뒤&lt;br&gt;
+사이클을 형성하지 않는 간선을 순서대로 선택합니다.&lt;br&gt;
+사이클 여부는 유니온-파인드(Union-Find)로 판단하며 시간 복잡도는 O(E log E)입니다.&lt;/p&gt;
+&lt;/details&gt;
+&lt;details&gt;
+&lt;summary&gt;&lt;b&gt;그래프의 특정 정점에서 다른 정점까지 최단 거리를 구하는 방법을 설명해 주세요&lt;/b&gt;&lt;/summary&gt;
+&lt;p&gt;&lt;strong&gt;다익스트라 알고리즘&lt;/strong&gt;은 간선 가중치가 음수가 아닐 때 사용합니다.&lt;br&gt;
+우선순위 큐로 비용이 가장 적은 정점을 선택하고, 해당 정점과 연결된 다른 정점의 비용을 갱신합니다.&lt;br&gt;
+시간 복잡도는 O((V + E) log V)입니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;벨만-포드 알고리즘&lt;/strong&gt;은 음수 가중치 간선이 있는 그래프에도 사용할 수 있습니다.&lt;br&gt;
+모든 간선에 대해 비용 갱신을 V-1번 반복하며 최단 거리를 구합니다.&lt;br&gt;
+시간 복잡도는 O(V × E)로 다익스트라보다 느리지만, 음의 사이클 감지가 가능합니다.&lt;br&gt;
+음의 사이클이 있으면 적용할 수 없습니다.&lt;/p&gt;
+&lt;/details&gt;
+&lt;/div&gt;
+</description>
+        </item>
+        <item>
         <title>[CS 스터디] 최단 거리 알고리즘</title>
         <link>http://localhost:1313/posts/cs-study-25/</link>
         <pubDate>Wed, 01 Jul 2026 00:00:00 +0000</pubDate>
